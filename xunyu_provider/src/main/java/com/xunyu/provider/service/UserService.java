@@ -1,6 +1,6 @@
 package com.xunyu.provider.service;
 
-import com.xunyu.entity.User;
+import com.xunyu.provider.pojo.User;
 
 import java.util.List;
 import java.util.Map;

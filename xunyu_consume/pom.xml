@@ -41,12 +41,6 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.xunyu</groupId>
-            <artifactId>xunyu_commons_entity</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
 
         <!-- 使用Apache HttpClient替换Feign原生httpclient
         防止该status":405,"error":"Method Not Allowed","message":"Request method 'POST' not supported","path":"/pro/listUser

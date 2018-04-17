@@ -2,8 +2,8 @@ package com.xunyu.provider.controller;
 
 import com.commons.core.message.Result;
 import com.commons.core.message.ResultTypeEnum;
-import com.xunyu.entity.User;
 import com.xunyu.model.user.UserModel;
+import com.xunyu.provider.pojo.User;
 import com.xunyu.provider.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

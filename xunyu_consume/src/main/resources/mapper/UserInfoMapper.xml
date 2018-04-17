@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xunyu.entity.UserInfo">
+<mapper namespace="com.xunyu.consume.pojo.UserInfo">
 
     <!-- 根据条件查询用户信息-->
     <select id="queryByUserId" resultType="DataRecord" parameterType="HashMap">
@@ -12,11 +12,11 @@
         select count(1) from user
     </select>
 
-    <select id="listUser" parameterType="HashMap" resultType="com.xunyu.entity.UserInfo">
+    <select id="listUser" parameterType="HashMap" resultType="com.xunyu.consume.pojo.UserInfo">
         select u.id,u.name from  user u where 1=1 limit #{startRow},#{endRow}
     </select>
 
-    <insert id="insertUserInfo" parameterType="com.xunyu.entity.UserInfo" useGeneratedKeys="true" keyColumn="id"
+    <insert id="insertUserInfo" parameterType="com.xunyu.consume.pojo.UserInfo" useGeneratedKeys="true" keyColumn="id"
             keyProperty="id">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -38,7 +38,7 @@
         </foreach>
     </delete>
 
-    <update id="updateUserInfo" parameterType="com.xunyu.entity.UserInfo">
+    <update id="updateUserInfo" parameterType="com.xunyu.consume.pojo.UserInfo">
         update user
         <set>
             <if test='name != null and name != ""'>

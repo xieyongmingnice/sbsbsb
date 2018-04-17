@@ -1,12 +1,5 @@
 package com.xunyu.consume.service;
-
-import com.commons.core.message.Result;
-import com.xunyu.entity.User;
-import com.xunyu.entity.UserInfo;
-import com.xunyu.model.user.UserModel;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import com.xunyu.consume.pojo.UserInfo;
 
 import java.util.List;
 import java.util.Map;

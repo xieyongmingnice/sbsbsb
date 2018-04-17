@@ -1,9 +1,8 @@
 package com.xunyu.consume.dao.User;
 
 import com.commons.core.dao.IBaseDao;
-import com.xunyu.entity.UserInfo;
+import com.xunyu.consume.pojo.UserInfo;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.Map;
 

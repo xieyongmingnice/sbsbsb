@@ -1,7 +1,7 @@
 package com.xunyu.consume.service;
 
 import com.commons.core.message.Result;
-import com.xunyu.entity.User;
+import com.xunyu.consume.pojo.User;
 import com.xunyu.model.user.UserModel;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;

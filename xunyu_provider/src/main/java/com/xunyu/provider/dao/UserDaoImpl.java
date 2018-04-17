@@ -1,7 +1,7 @@
 package com.xunyu.provider.dao;
 
 import com.commons.core.dao.impl.BaseDao;
-import com.xunyu.entity.User;
+import com.xunyu.provider.pojo.User;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 

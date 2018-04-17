@@ -1,7 +1,7 @@
 package com.xunyu.provider.service;
 
-import com.xunyu.entity.User;
 import com.xunyu.provider.dao.UserDaoImpl;
+import com.xunyu.provider.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -7,27 +7,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="xunyu_commons-core" />
-        <module name="xunyu_commons_entity" />
         <module name="xunyu_commons_model" />
         <module name="xunyu_config" />
         <module name="xunyu_consume" />
-        <module name="xunyu_eurake" />
+        <module name="xunyu_eureka" />
         <module name="xunyu_provider" />
         <module name="xunyu_sgip" />
         <module name="xunyu_zuul" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="xunyu_all" target="1.8" />
-      <module name="xunyu_commons-core" target="1.8" />
       <module name="xunyu_commons_entity" target="1.8" />
-      <module name="xunyu_commons_model" target="1.8" />
-      <module name="xunyu_config" target="1.8" />
-      <module name="xunyu_consume" target="1.8" />
-      <module name="xunyu_eurake" target="1.8" />
-      <module name="xunyu_provider" target="1.8" />
-      <module name="xunyu_sgip" target="1.8" />
-      <module name="xunyu_zuul" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

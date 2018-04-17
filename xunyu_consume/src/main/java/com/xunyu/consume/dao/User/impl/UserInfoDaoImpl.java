@@ -4,11 +4,10 @@ import com.commons.core.dao.impl.BaseDao;
 import com.commons.core.sql.dto.DataRecord;
 import com.commons.core.util.JavaBeanMap;
 import com.xunyu.consume.dao.User.UserInfoDao;
-import com.xunyu.entity.UserInfo;
+import com.xunyu.consume.pojo.UserInfo;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
