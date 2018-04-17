@@ -15,6 +15,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 public class ServerEurekaStarter {
     public static void main(String[] args) {
         SpringApplication.run(ServerEurekaStarter.class, args);
+
         System.out.println("启动discovery ServerDiscoveryStarter 成功！");
     }
 }
