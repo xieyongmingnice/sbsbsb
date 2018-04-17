@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/xunyu_all.iml" filepath="$PROJECT_DIR$/xunyu_all.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xunyu_commons-core/xunyu_commons-core.iml" filepath="$PROJECT_DIR$/xunyu_commons-core/xunyu_commons-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xunyu_commons_entity/xunyu_commons_entity.iml" filepath="$PROJECT_DIR$/xunyu_commons_entity/xunyu_commons_entity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xunyu_commons_model/xunyu_commons_model.iml" filepath="$PROJECT_DIR$/xunyu_commons_model/xunyu_commons_model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xunyu_config/xunyu_config.iml" filepath="$PROJECT_DIR$/xunyu_config/xunyu_config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xunyu_consume/xunyu_consume.iml" filepath="$PROJECT_DIR$/xunyu_consume/xunyu_consume.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xunyu_eurake/xunyu_eurake.iml" filepath="$PROJECT_DIR$/xunyu_eurake/xunyu_eurake.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xunyu_provider/xunyu_provider.iml" filepath="$PROJECT_DIR$/xunyu_provider/xunyu_provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xunyu_sgip/xunyu_sgip.iml" filepath="$PROJECT_DIR$/xunyu_sgip/xunyu_sgip.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xunyu_zuul/xunyu_zuul.iml" filepath="$PROJECT_DIR$/xunyu_zuul/xunyu_zuul.iml" />
+    </modules>
+  </component>
+</project>

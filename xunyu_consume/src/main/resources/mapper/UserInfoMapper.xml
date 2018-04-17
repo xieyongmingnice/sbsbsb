@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.entity.UserInfo">
+
+    <!-- 根据条件查询用户信息-->
+    <select id="queryByUserId" resultType="DataRecord" parameterType="HashMap">
+        select id,name
+        from user where id = #{userId}
+    </select>
+
+    <select id="countUserInfo" parameterType="HashMap" resultType="long">
+        select count(1) from user
+    </select>
+
+    <select id="listUser" parameterType="HashMap" resultType="com.xunyu.entity.UserInfo">
+        select u.id,u.name from  user u where 1=1 limit #{startRow},#{endRow}
+    </select>
+
+    <insert id="insertUserInfo" parameterType="com.xunyu.entity.UserInfo" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null and name != ''.toString()">name,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null and name != ''.toString()">#{name},</if>
+        </trim>
+
+    </insert>
+
+    <delete id="deleteUserInfo" parameterType="Long">
+        delete from user where id in
+        <foreach item="ids" collection="list" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <update id="updateUserInfo" parameterType="com.xunyu.entity.UserInfo">
+        update user
+        <set>
+            <if test='name != null and name != ""'>
+                <![CDATA[	name = #{name}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+        </where>
+    </update>
+</mapper>

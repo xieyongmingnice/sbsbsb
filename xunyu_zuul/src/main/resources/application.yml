@@ -1,0 +1,29 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:17081/eureka/
+    registry-fetch-interval-seconds: 30 #拉取服务注册信息时间间隔,默认为30秒
+  instance:
+    lease-renewal-interval-in-seconds: 5 #心跳时间,默认为30秒
+    lease-expiration-duration-in-seconds: 10 #若eureka server在这时间内没收到心跳则移除该instance,默认为90秒
+spring:
+  application:
+    name: xunyu-zuul
+  #profiles:
+    #active: core//不需要加载xunyu_config中的配置文件
+server:
+  port: 17083
+#配置zuul  服务网关
+zuul:
+  add-host-header: true #表示API网关在进行请求路由转发前为请求设置Host头信息。
+  routes:
+    api-provider:
+      path: /provider/**
+      service-id: xunyu-provider
+    api-consume:
+      path: /consume/**
+      service-id: xunyu-consume
+    api-kafka:
+          path: /kafkato/**
+          service-id: xunyu-kafka
+  

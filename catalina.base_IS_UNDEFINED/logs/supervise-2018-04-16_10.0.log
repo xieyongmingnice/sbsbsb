@@ -1,0 +1,564 @@
+2018-04-16 10:03:46,834 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-04-16 10:04:34,874 INFO [org.springframework.boot.SpringApplication:597] The following profiles are active: core
+2018-04-16 10:04:34,893 INFO [org.springframework.context.support.AbstractApplicationContext:583] Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@281f23f2: startup date [Mon Apr 16 10:04:34 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@20ca951f
+2018-04-16 10:04:35,663 WARN [org.mybatis.spring.mapper.ClassPathMapperScanner:167] No MyBatis mapper was found in '[com.xunyu.consume]' package. Please check your configuration.
+2018-04-16 10:04:35,745 INFO [org.springframework.beans.factory.support.DefaultListableBeanFactory:828] Overriding bean definition for bean 'feignClient' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.cloud.netflix.feign.ribbon.FeignRibbonClientAutoConfiguration$HttpClientFeignLoadBalancedConfiguration; factoryMethodName=feignClient; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/cloud/netflix/feign/ribbon/FeignRibbonClientAutoConfiguration$HttpClientFeignLoadBalancedConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.cloud.netflix.feign.ribbon.FeignRibbonClientAutoConfiguration; factoryMethodName=feignClient; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/cloud/netflix/feign/ribbon/FeignRibbonClientAutoConfiguration.class]]
+2018-04-16 10:04:35,776 ERROR [org.springframework.boot.SpringApplication:771] Application startup failed
+java.lang.NoClassDefFoundError: org/springframework/retry/support/RetryTemplate
+	at java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.lang.Class.privateGetDeclaredMethods(Class.java:2701)
+	at java.lang.Class.getDeclaredMethods(Class.java:1975)
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:613)
+	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:524)
+	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:510)
+	at org.springframework.util.ReflectionUtils.getUniqueDeclaredMethods(ReflectionUtils.java:570)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getTypeForFactoryMethod(AbstractAutowireCapableBeanFactory.java:697)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:640)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:609)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1484)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doGetBeanNamesForType(DefaultListableBeanFactory.java:425)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanNamesForType(DefaultListableBeanFactory.java:395)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:96)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:687)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:525)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+Caused by: java.lang.ClassNotFoundException: org.springframework.retry.support.RetryTemplate
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	... 23 common frames omitted
+2018-04-16 10:04:35,778 INFO [org.springframework.context.support.AbstractApplicationContext:984] Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@281f23f2: startup date [Mon Apr 16 10:04:34 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@20ca951f
+2018-04-16 10:04:35,778 WARN [org.springframework.context.support.AbstractApplicationContext:1002] Exception thrown from LifecycleProcessor on context close
+java.lang.IllegalStateException: LifecycleProcessor not initialized - call 'refresh' before invoking lifecycle methods via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@281f23f2: startup date [Mon Apr 16 10:04:34 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@20ca951f
+	at org.springframework.context.support.AbstractApplicationContext.getLifecycleProcessor(AbstractApplicationContext.java:427)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:999)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958)
+	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+2018-04-16 10:04:35,780 ERROR [org.springframework.beans.factory.support.DefaultSingletonBeanRegistry:581] Destroy method on bean with name 'org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory' threw an exception
+java.lang.IllegalStateException: ApplicationEventMulticaster not initialized - call 'refresh' before multicasting events via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@281f23f2: startup date [Mon Apr 16 10:04:34 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@20ca951f
+	at org.springframework.context.support.AbstractApplicationContext.getApplicationEventMulticaster(AbstractApplicationContext.java:414)
+	at org.springframework.context.support.ApplicationListenerDetector.postProcessBeforeDestruction(ApplicationListenerDetector.java:97)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:961)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523)
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.destroySingletons(FactoryBeanRegistrySupport.java:230)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:968)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1030)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1006)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958)
+	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+2018-04-16 10:08:37,162 INFO [org.springframework.boot.SpringApplication:597] The following profiles are active: core
+2018-04-16 10:08:37,181 INFO [org.springframework.context.support.AbstractApplicationContext:583] Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@656d10a4: startup date [Mon Apr 16 10:08:37 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@20ca951f
+2018-04-16 10:08:37,945 WARN [org.mybatis.spring.mapper.ClassPathMapperScanner:167] No MyBatis mapper was found in '[com.xunyu.consume]' package. Please check your configuration.
+2018-04-16 10:08:38,015 INFO [org.springframework.beans.factory.support.DefaultListableBeanFactory:828] Overriding bean definition for bean 'feignClient' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.cloud.netflix.feign.ribbon.FeignRibbonClientAutoConfiguration$HttpClientFeignLoadBalancedConfiguration; factoryMethodName=feignClient; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/cloud/netflix/feign/ribbon/FeignRibbonClientAutoConfiguration$HttpClientFeignLoadBalancedConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.cloud.netflix.feign.ribbon.FeignRibbonClientAutoConfiguration; factoryMethodName=feignClient; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/cloud/netflix/feign/ribbon/FeignRibbonClientAutoConfiguration.class]]
+2018-04-16 10:08:38,045 ERROR [org.springframework.boot.SpringApplication:771] Application startup failed
+java.lang.NoClassDefFoundError: org/springframework/retry/support/RetryTemplate
+	at java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.lang.Class.privateGetDeclaredMethods(Class.java:2701)
+	at java.lang.Class.getDeclaredMethods(Class.java:1975)
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:613)
+	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:524)
+	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:510)
+	at org.springframework.util.ReflectionUtils.getUniqueDeclaredMethods(ReflectionUtils.java:570)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getTypeForFactoryMethod(AbstractAutowireCapableBeanFactory.java:697)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:640)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:609)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1484)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doGetBeanNamesForType(DefaultListableBeanFactory.java:425)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanNamesForType(DefaultListableBeanFactory.java:395)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:96)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:687)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:525)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+Caused by: java.lang.ClassNotFoundException: org.springframework.retry.support.RetryTemplate
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	... 23 common frames omitted
+2018-04-16 10:08:38,047 INFO [org.springframework.context.support.AbstractApplicationContext:984] Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@656d10a4: startup date [Mon Apr 16 10:08:37 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@20ca951f
+2018-04-16 10:08:38,048 WARN [org.springframework.context.support.AbstractApplicationContext:1002] Exception thrown from LifecycleProcessor on context close
+java.lang.IllegalStateException: LifecycleProcessor not initialized - call 'refresh' before invoking lifecycle methods via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@656d10a4: startup date [Mon Apr 16 10:08:37 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@20ca951f
+	at org.springframework.context.support.AbstractApplicationContext.getLifecycleProcessor(AbstractApplicationContext.java:427)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:999)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958)
+	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+2018-04-16 10:08:38,049 ERROR [org.springframework.beans.factory.support.DefaultSingletonBeanRegistry:581] Destroy method on bean with name 'org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory' threw an exception
+java.lang.IllegalStateException: ApplicationEventMulticaster not initialized - call 'refresh' before multicasting events via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@656d10a4: startup date [Mon Apr 16 10:08:37 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@20ca951f
+	at org.springframework.context.support.AbstractApplicationContext.getApplicationEventMulticaster(AbstractApplicationContext.java:414)
+	at org.springframework.context.support.ApplicationListenerDetector.postProcessBeforeDestruction(ApplicationListenerDetector.java:97)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:961)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523)
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.destroySingletons(FactoryBeanRegistrySupport.java:230)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:968)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1030)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1006)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958)
+	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+2018-04-16 10:08:46,848 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-04-16 10:09:03,822 INFO [org.springframework.boot.SpringApplication:597] The following profiles are active: core
+2018-04-16 10:09:03,840 INFO [org.springframework.context.support.AbstractApplicationContext:583] Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@68ba310d: startup date [Mon Apr 16 10:09:03 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@63611043
+2018-04-16 10:09:04,589 WARN [org.mybatis.spring.mapper.ClassPathMapperScanner:167] No MyBatis mapper was found in '[com.xunyu.consume]' package. Please check your configuration.
+2018-04-16 10:09:04,666 INFO [org.springframework.beans.factory.support.DefaultListableBeanFactory:828] Overriding bean definition for bean 'feignClient' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.cloud.netflix.feign.ribbon.FeignRibbonClientAutoConfiguration$HttpClientFeignLoadBalancedConfiguration; factoryMethodName=feignClient; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/cloud/netflix/feign/ribbon/FeignRibbonClientAutoConfiguration$HttpClientFeignLoadBalancedConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.cloud.netflix.feign.ribbon.FeignRibbonClientAutoConfiguration; factoryMethodName=feignClient; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/cloud/netflix/feign/ribbon/FeignRibbonClientAutoConfiguration.class]]
+2018-04-16 10:09:04,697 ERROR [org.springframework.boot.SpringApplication:771] Application startup failed
+java.lang.NoClassDefFoundError: org/springframework/retry/support/RetryTemplate
+	at java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.lang.Class.privateGetDeclaredMethods(Class.java:2701)
+	at java.lang.Class.getDeclaredMethods(Class.java:1975)
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:613)
+	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:524)
+	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:510)
+	at org.springframework.util.ReflectionUtils.getUniqueDeclaredMethods(ReflectionUtils.java:570)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getTypeForFactoryMethod(AbstractAutowireCapableBeanFactory.java:697)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:640)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:609)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1484)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doGetBeanNamesForType(DefaultListableBeanFactory.java:425)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanNamesForType(DefaultListableBeanFactory.java:395)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:96)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:687)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:525)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+Caused by: java.lang.ClassNotFoundException: org.springframework.retry.support.RetryTemplate
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	... 23 common frames omitted
+2018-04-16 10:09:04,699 INFO [org.springframework.context.support.AbstractApplicationContext:984] Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@68ba310d: startup date [Mon Apr 16 10:09:03 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@63611043
+2018-04-16 10:09:04,701 WARN [org.springframework.context.support.AbstractApplicationContext:1002] Exception thrown from LifecycleProcessor on context close
+java.lang.IllegalStateException: LifecycleProcessor not initialized - call 'refresh' before invoking lifecycle methods via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@68ba310d: startup date [Mon Apr 16 10:09:03 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@63611043
+	at org.springframework.context.support.AbstractApplicationContext.getLifecycleProcessor(AbstractApplicationContext.java:427)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:999)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958)
+	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+2018-04-16 10:09:04,702 ERROR [org.springframework.beans.factory.support.DefaultSingletonBeanRegistry:581] Destroy method on bean with name 'org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory' threw an exception
+java.lang.IllegalStateException: ApplicationEventMulticaster not initialized - call 'refresh' before multicasting events via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@68ba310d: startup date [Mon Apr 16 10:09:03 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@63611043
+	at org.springframework.context.support.AbstractApplicationContext.getApplicationEventMulticaster(AbstractApplicationContext.java:414)
+	at org.springframework.context.support.ApplicationListenerDetector.postProcessBeforeDestruction(ApplicationListenerDetector.java:97)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:961)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523)
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.destroySingletons(FactoryBeanRegistrySupport.java:230)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:968)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1030)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1006)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958)
+	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+2018-04-16 10:09:26,072 INFO [org.springframework.boot.SpringApplication:597] The following profiles are active: core
+2018-04-16 10:09:26,090 INFO [org.springframework.context.support.AbstractApplicationContext:583] Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@37fdfb05: startup date [Mon Apr 16 10:09:26 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@1e44b638
+2018-04-16 10:09:26,866 WARN [org.mybatis.spring.mapper.ClassPathMapperScanner:167] No MyBatis mapper was found in '[com.xunyu.consume]' package. Please check your configuration.
+2018-04-16 10:09:26,938 INFO [org.springframework.beans.factory.support.DefaultListableBeanFactory:828] Overriding bean definition for bean 'feignClient' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.cloud.netflix.feign.ribbon.FeignRibbonClientAutoConfiguration$HttpClientFeignLoadBalancedConfiguration; factoryMethodName=feignClient; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/cloud/netflix/feign/ribbon/FeignRibbonClientAutoConfiguration$HttpClientFeignLoadBalancedConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.cloud.netflix.feign.ribbon.FeignRibbonClientAutoConfiguration; factoryMethodName=feignClient; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/cloud/netflix/feign/ribbon/FeignRibbonClientAutoConfiguration.class]]
+2018-04-16 10:09:26,966 ERROR [org.springframework.boot.SpringApplication:771] Application startup failed
+java.lang.NoClassDefFoundError: org/springframework/retry/support/RetryTemplate
+	at java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.lang.Class.privateGetDeclaredMethods(Class.java:2701)
+	at java.lang.Class.getDeclaredMethods(Class.java:1975)
+	at org.springframework.util.ReflectionUtils.getDeclaredMethods(ReflectionUtils.java:613)
+	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:524)
+	at org.springframework.util.ReflectionUtils.doWithMethods(ReflectionUtils.java:510)
+	at org.springframework.util.ReflectionUtils.getUniqueDeclaredMethods(ReflectionUtils.java:570)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getTypeForFactoryMethod(AbstractAutowireCapableBeanFactory.java:697)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:640)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:609)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1484)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doGetBeanNamesForType(DefaultListableBeanFactory.java:425)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanNamesForType(DefaultListableBeanFactory.java:395)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:96)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:687)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:525)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+Caused by: java.lang.ClassNotFoundException: org.springframework.retry.support.RetryTemplate
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	... 23 common frames omitted
+2018-04-16 10:09:26,968 INFO [org.springframework.context.support.AbstractApplicationContext:984] Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@37fdfb05: startup date [Mon Apr 16 10:09:26 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@1e44b638
+2018-04-16 10:09:26,969 WARN [org.springframework.context.support.AbstractApplicationContext:1002] Exception thrown from LifecycleProcessor on context close
+java.lang.IllegalStateException: LifecycleProcessor not initialized - call 'refresh' before invoking lifecycle methods via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@37fdfb05: startup date [Mon Apr 16 10:09:26 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@1e44b638
+	at org.springframework.context.support.AbstractApplicationContext.getLifecycleProcessor(AbstractApplicationContext.java:427)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:999)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958)
+	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+2018-04-16 10:09:26,970 ERROR [org.springframework.beans.factory.support.DefaultSingletonBeanRegistry:581] Destroy method on bean with name 'org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory' threw an exception
+java.lang.IllegalStateException: ApplicationEventMulticaster not initialized - call 'refresh' before multicasting events via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@37fdfb05: startup date [Mon Apr 16 10:09:26 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@1e44b638
+	at org.springframework.context.support.AbstractApplicationContext.getApplicationEventMulticaster(AbstractApplicationContext.java:414)
+	at org.springframework.context.support.ApplicationListenerDetector.postProcessBeforeDestruction(ApplicationListenerDetector.java:97)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:961)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523)
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.destroySingletons(FactoryBeanRegistrySupport.java:230)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:968)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1030)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1006)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958)
+	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+2018-04-16 10:13:46,850 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-04-16 10:17:03,182 INFO [org.springframework.boot.SpringApplication:597] The following profiles are active: core
+2018-04-16 10:17:03,200 INFO [org.springframework.context.support.AbstractApplicationContext:583] Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@38548b19: startup date [Mon Apr 16 10:17:03 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@6d7fc27
+2018-04-16 10:17:03,993 WARN [org.mybatis.spring.mapper.ClassPathMapperScanner:167] No MyBatis mapper was found in '[com.xunyu.consume]' package. Please check your configuration.
+2018-04-16 10:17:04,209 INFO [org.springframework.cloud.context.scope.GenericScope:263] BeanFactory id=513c22ea-ee96-38be-8eb1-d09146af5ae2
+2018-04-16 10:17:04,225 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor:155] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-04-16 10:17:04,344 INFO [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:325] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$eb703860] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-16 10:17:04,374 INFO [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:325] Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$78a3b5d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-16 10:17:04,675 INFO [org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer:89] Tomcat initialized with port(s): 17092 (http)
+2018-04-16 10:17:04,686 INFO [org.apache.juli.logging.DirectJDKLog:179] Starting service [Tomcat]
+2018-04-16 10:17:04,687 INFO [org.apache.juli.logging.DirectJDKLog:179] Starting Servlet Engine: Apache Tomcat/8.5.20
+2018-04-16 10:17:04,895 INFO [org.apache.juli.logging.DirectJDKLog:179] Initializing Spring embedded WebApplicationContext
+2018-04-16 10:17:04,895 INFO [org.springframework.boot.context.embedded.EmbeddedWebApplicationContext:276] Root WebApplicationContext: initialization completed in 1695 ms
+2018-04-16 10:17:05,075 INFO [org.springframework.boot.web.servlet.ServletRegistrationBean:190] Mapping servlet: 'dispatcherServlet' to [/]
+2018-04-16 10:17:05,081 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-04-16 10:17:05,082 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-04-16 10:17:05,082 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-04-16 10:17:05,082 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'requestContextFilter' to: [/*]
+2018-04-16 10:17:05,263 INFO [com.xunyu.config.DruidConfiguration$Druid:60] DruidConfiguration init completed................
+2018-04-16 10:17:05,914 WARN [com.netflix.config.sources.URLConfigurationSource:121] No URLs will be polled as dynamic configuration sources.
+2018-04-16 10:17:05,915 INFO [com.netflix.config.sources.URLConfigurationSource:122] To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2018-04-16 10:17:05,921 WARN [com.netflix.config.sources.URLConfigurationSource:121] No URLs will be polled as dynamic configuration sources.
+2018-04-16 10:17:05,921 INFO [com.netflix.config.sources.URLConfigurationSource:122] To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2018-04-16 10:17:06,106 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter:534] Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@38548b19: startup date [Mon Apr 16 10:17:03 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@6d7fc27
+2018-04-16 10:17:06,186 INFO [org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry:543] Mapped "{[/user/get],methods=[GET],produces=[application/json;charset=UTF-8]}" onto public com.xunyu.entity.UserInfo com.xunyu.consume.controller.UserController.getUserInfo(java.lang.Long)
+2018-04-16 10:17:06,188 INFO [org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry:543] Mapped "{[/user/],methods=[GET]}" onto public java.lang.String com.xunyu.consume.controller.UserController.test()
+2018-04-16 10:17:06,189 INFO [org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry:543] Mapped "{[/user/listUserInfo],methods=[GET]}" onto public com.commons.core.message.Result<java.util.List<com.xunyu.entity.UserInfo>> com.xunyu.consume.controller.UserController.listUserInfoData(com.xunyu.model.user.UserModel)
+2018-04-16 10:17:06,189 INFO [org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry:543] Mapped "{[/user/addUserInfo],methods=[GET]}" onto public com.commons.core.message.Result<com.xunyu.entity.UserInfo> com.xunyu.consume.controller.UserController.addUserInfoData(com.xunyu.entity.UserInfo)
+2018-04-16 10:17:06,190 INFO [org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry:543] Mapped "{[/user/listUserOther],methods=[GET]}" onto public com.commons.core.message.Result<java.util.List<com.xunyu.entity.User>> com.xunyu.consume.controller.UserController.listUserOther(com.xunyu.model.user.UserModel)
+2018-04-16 10:17:06,190 INFO [org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry:543] Mapped "{[/user/delUserInfoByIds],methods=[GET]}" onto public com.commons.core.message.Result<com.xunyu.entity.UserInfo> com.xunyu.consume.controller.UserController.deleteUserInfoByIdsData(java.lang.String)
+2018-04-16 10:17:06,193 INFO [org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry:543] Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-04-16 10:17:06,194 INFO [org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry:543] Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-04-16 10:17:06,241 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-16 10:17:06,241 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-16 10:17:06,286 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-16 10:17:07,066 WARN [org.springframework.cloud.starter.eureka.EurekaStarterDeprecationWarningAutoConfiguration:19] spring-cloud-starter-eureka is deprecated as of Spring Cloud Netflix 1.4.0, please migrate to spring-cloud-starter-netflix-eureka
+2018-04-16 10:17:07,204 INFO [org.springframework.jmx.export.MBeanExporter:431] Registering beans for JMX exposure on startup
+2018-04-16 10:17:07,206 INFO [org.springframework.jmx.export.MBeanExporter:916] Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-04-16 10:17:07,213 INFO [org.springframework.jmx.export.MBeanExporter:916] Bean with name 'environmentManager' has been autodetected for JMX exposure
+2018-04-16 10:17:07,215 INFO [org.springframework.jmx.export.MBeanExporter:916] Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2018-04-16 10:17:07,216 INFO [org.springframework.jmx.export.MBeanExporter:916] Bean with name 'refreshScope' has been autodetected for JMX exposure
+2018-04-16 10:17:07,219 INFO [org.springframework.jmx.export.MBeanExporter:678] Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2018-04-16 10:17:07,231 INFO [org.springframework.jmx.export.MBeanExporter:678] Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2018-04-16 10:17:07,246 INFO [org.springframework.jmx.export.MBeanExporter:678] Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=38548b19,type=ConfigurationPropertiesRebinder]
+2018-04-16 10:17:07,253 INFO [org.springframework.jmx.export.MBeanExporter:671] Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2018-04-16 10:17:07,416 INFO [org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup:343] Starting beans in phase 0
+2018-04-16 10:17:07,425 INFO [org.springframework.cloud.netflix.eureka.InstanceInfoFactory:70] Setting initial instance status as: STARTING
+2018-04-16 10:17:07,469 INFO [com.netflix.discovery.DiscoveryClient:344] Initializing Eureka in region us-east-1
+2018-04-16 10:17:07,530 INFO [com.netflix.discovery.provider.DiscoveryJerseyProvider:70] Using JSON encoding codec LegacyJacksonJson
+2018-04-16 10:17:07,530 INFO [com.netflix.discovery.provider.DiscoveryJerseyProvider:71] Using JSON decoding codec LegacyJacksonJson
+2018-04-16 10:17:07,614 INFO [com.netflix.discovery.provider.DiscoveryJerseyProvider:80] Using XML encoding codec XStreamXml
+2018-04-16 10:17:07,614 INFO [com.netflix.discovery.provider.DiscoveryJerseyProvider:81] Using XML decoding codec XStreamXml
+2018-04-16 10:17:08,003 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-04-16 10:17:08,099 INFO [com.netflix.discovery.DiscoveryClient:920] Disable delta property : false
+2018-04-16 10:17:08,101 INFO [com.netflix.discovery.DiscoveryClient:921] Single vip registry refresh property : null
+2018-04-16 10:17:08,101 INFO [com.netflix.discovery.DiscoveryClient:922] Force full registry fetch : false
+2018-04-16 10:17:08,101 INFO [com.netflix.discovery.DiscoveryClient:923] Application is null : false
+2018-04-16 10:17:08,101 INFO [com.netflix.discovery.DiscoveryClient:924] Registered Applications size is zero : true
+2018-04-16 10:17:08,101 INFO [com.netflix.discovery.DiscoveryClient:926] Application version is -1: true
+2018-04-16 10:17:08,101 INFO [com.netflix.discovery.DiscoveryClient:1009] Getting all instance registry info from the eureka server
+2018-04-16 10:17:08,294 INFO [com.netflix.discovery.DiscoveryClient:1018] The response status is 200
+2018-04-16 10:17:08,297 INFO [com.netflix.discovery.DiscoveryClient:1244] Starting heartbeat executor: renew interval is: 5
+2018-04-16 10:17:08,300 INFO [com.netflix.discovery.InstanceInfoReplicator:59] InstanceInfoReplicator onDemand update allowed rate per min is 4
+2018-04-16 10:17:08,305 INFO [com.netflix.discovery.DiscoveryClient:425] Discovery Client initialized at timestamp 1523845028305 with initial instances count: 2
+2018-04-16 10:17:08,325 INFO [org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry:40] Registering application xunyu-consume with eureka with status UP
+2018-04-16 10:17:08,326 INFO [com.netflix.discovery.DiscoveryClient$3:1279] Saw local status change event StatusChangeEvent [timestamp=1523845028326, current=UP, previous=STARTING]
+2018-04-16 10:17:08,328 INFO [com.netflix.discovery.DiscoveryClient:795] DiscoveryClient_XUNYU-CONSUME/DESKTOP-BLNIGML:xunyu-consume:17092: registering service...
+2018-04-16 10:17:08,372 INFO [com.netflix.discovery.DiscoveryClient:804] DiscoveryClient_XUNYU-CONSUME/DESKTOP-BLNIGML:xunyu-consume:17092 - registration status: 204
+2018-04-16 10:17:08,407 INFO [org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer:201] Tomcat started on port(s): 17092 (http)
+2018-04-16 10:17:08,408 INFO [org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration:117] Updating port to 17092
+2018-04-16 10:17:08,411 INFO [org.springframework.boot.StartupInfoLogger:57] Started ConsumeApplication in 6.642 seconds (JVM running for 8.264)
+2018-04-16 10:18:46,851 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-04-16 10:19:01,982 INFO [org.apache.juli.logging.DirectJDKLog:179] Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-04-16 10:19:01,983 INFO [org.springframework.web.servlet.FrameworkServlet:489] FrameworkServlet 'dispatcherServlet': initialization started
+2018-04-16 10:19:02,018 INFO [org.springframework.web.servlet.FrameworkServlet:508] FrameworkServlet 'dispatcherServlet': initialization completed in 34 ms
+2018-04-16 10:22:08,104 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-04-16 10:23:46,852 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-04-16 10:28:46,853 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-04-16 10:30:04,345 INFO [org.springframework.boot.SpringApplication:597] The following profiles are active: core
+2018-04-16 10:30:04,365 INFO [org.springframework.context.support.AbstractApplicationContext:583] Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@29c5ee1d: startup date [Mon Apr 16 10:30:04 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@6c2ed0cd
+2018-04-16 10:30:05,108 WARN [org.mybatis.spring.mapper.ClassPathMapperScanner:167] No MyBatis mapper was found in '[com.xunyu.consume]' package. Please check your configuration.
+2018-04-16 10:30:05,294 INFO [org.springframework.cloud.context.scope.GenericScope:263] BeanFactory id=4c2a2635-2fb3-3f4a-ae4e-a90ba98af384
+2018-04-16 10:30:05,312 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor:155] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-04-16 10:30:05,345 INFO [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:325] Bean 'com.xunyu.consume.service.UserInfoService' of type [org.springframework.cloud.netflix.feign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-16 10:30:05,447 INFO [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:325] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$68ce0934] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-16 10:30:05,478 INFO [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:325] Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$84e80c31] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-16 10:30:05,790 INFO [org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer:89] Tomcat initialized with port(s): 17092 (http)
+2018-04-16 10:30:05,802 INFO [org.apache.juli.logging.DirectJDKLog:179] Starting service [Tomcat]
+2018-04-16 10:30:05,803 INFO [org.apache.juli.logging.DirectJDKLog:179] Starting Servlet Engine: Apache Tomcat/8.5.20
+2018-04-16 10:30:06,024 INFO [org.apache.juli.logging.DirectJDKLog:179] Initializing Spring embedded WebApplicationContext
+2018-04-16 10:30:06,024 INFO [org.springframework.boot.context.embedded.EmbeddedWebApplicationContext:276] Root WebApplicationContext: initialization completed in 1659 ms
+2018-04-16 10:30:06,200 INFO [org.springframework.boot.web.servlet.ServletRegistrationBean:190] Mapping servlet: 'dispatcherServlet' to [/]
+2018-04-16 10:30:06,206 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-04-16 10:30:06,207 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-04-16 10:30:06,207 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-04-16 10:30:06,207 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'requestContextFilter' to: [/*]
+2018-04-16 10:30:06,301 INFO [org.springframework.context.support.AbstractApplicationContext:583] Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@1280682: startup date [Mon Apr 16 10:30:06 CST 2018]; parent: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@29c5ee1d
+2018-04-16 10:30:06,324 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor:155] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-04-16 10:30:06,730 WARN [org.springframework.context.support.AbstractApplicationContext:551] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.xunyu.consume.service.UserInfoService': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalStateException: Method queryByUserId not annotated with HTTP method type (ex. GET, POST)
+2018-04-16 10:30:06,731 INFO [org.springframework.context.support.AbstractApplicationContext:984] Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@1280682: startup date [Mon Apr 16 10:30:06 CST 2018]; parent: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@29c5ee1d
+2018-04-16 10:30:06,732 INFO [org.apache.juli.logging.DirectJDKLog:179] Stopping service [Tomcat]
+2018-04-16 10:30:06,755 INFO [org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer:101] 
+
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+2018-04-16 10:30:06,765 ERROR [org.springframework.boot.SpringApplication:771] Application startup failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.xunyu.consume.service.UserInfoService': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalStateException: Method queryByUserId not annotated with HTTP method type (ex. GET, POST)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:321)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1264)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:553)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:543)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.xunyu.consume.service.UserInfoService': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalStateException: Method queryByUserId not annotated with HTTP method type (ex. GET, POST)
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:175)
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:103)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1634)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:254)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.addCandidateEntry(DefaultListableBeanFactory.java:1316)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1282)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1101)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1066)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:518)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:496)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:627)
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:318)
+	... 17 common frames omitted
+Caused by: java.lang.IllegalStateException: Method queryByUserId not annotated with HTTP method type (ex. GET, POST)
+	at feign.Util.checkState(Util.java:128)
+	at feign.Contract$BaseContract.parseAndValidateMetadata(Contract.java:97)
+	at org.springframework.cloud.netflix.feign.support.SpringMvcContract.parseAndValidateMetadata(SpringMvcContract.java:133)
+	at feign.Contract$BaseContract.parseAndValidatateMetadata(Contract.java:64)
+	at feign.ReflectiveFeign$ParseHandlersByName.apply(ReflectiveFeign.java:146)
+	at feign.ReflectiveFeign.newInstance(ReflectiveFeign.java:53)
+	at feign.Feign$Builder.target(Feign.java:198)
+	at org.springframework.cloud.netflix.feign.HystrixTargeter.target(HystrixTargeter.java:39)
+	at org.springframework.cloud.netflix.feign.FeignClientFactoryBean.loadBalance(FeignClientFactoryBean.java:145)
+	at org.springframework.cloud.netflix.feign.FeignClientFactoryBean.getObject(FeignClientFactoryBean.java:166)
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:168)
+	... 32 common frames omitted
+2018-04-16 10:33:46,854 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-04-16 10:39:06,967 INFO [org.springframework.boot.SpringApplication:597] The following profiles are active: core
+2018-04-16 10:39:06,981 INFO [org.springframework.context.support.AbstractApplicationContext:583] Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@248deced: startup date [Mon Apr 16 10:39:06 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@3081f72c
+2018-04-16 10:39:07,734 WARN [org.mybatis.spring.mapper.ClassPathMapperScanner:167] No MyBatis mapper was found in '[com.xunyu.provider]' package. Please check your configuration.
+2018-04-16 10:39:07,910 INFO [org.springframework.cloud.context.scope.GenericScope:263] BeanFactory id=68aca70e-03ce-3176-979a-1a8f89a8f965
+2018-04-16 10:39:07,928 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor:155] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-04-16 10:39:08,054 INFO [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:325] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$1573bb51] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-16 10:39:08,087 INFO [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:325] Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$318dbe4e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-16 10:39:08,490 INFO [org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer:89] Tomcat initialized with port(s): 17093 (http)
+2018-04-16 10:39:08,503 INFO [org.apache.juli.logging.DirectJDKLog:179] Starting service [Tomcat]
+2018-04-16 10:39:08,505 INFO [org.apache.juli.logging.DirectJDKLog:179] Starting Servlet Engine: Apache Tomcat/8.5.20
+2018-04-16 10:39:08,769 INFO [org.apache.juli.logging.DirectJDKLog:179] Initializing Spring embedded WebApplicationContext
+2018-04-16 10:39:08,770 INFO [org.springframework.boot.context.embedded.EmbeddedWebApplicationContext:276] Root WebApplicationContext: initialization completed in 1789 ms
+2018-04-16 10:39:08,992 INFO [org.springframework.boot.web.servlet.ServletRegistrationBean:190] Mapping servlet: 'dispatcherServlet' to [/]
+2018-04-16 10:39:09,003 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-04-16 10:39:09,003 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-04-16 10:39:09,004 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-04-16 10:39:09,004 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'requestContextFilter' to: [/*]
+2018-04-16 10:39:09,263 INFO [com.xunyu.config.DruidConfiguration$Druid:60] DruidConfiguration init completed................
+2018-04-16 10:39:09,986 WARN [com.netflix.config.sources.URLConfigurationSource:121] No URLs will be polled as dynamic configuration sources.
+2018-04-16 10:39:09,987 INFO [com.netflix.config.sources.URLConfigurationSource:122] To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2018-04-16 10:39:09,994 WARN [com.netflix.config.sources.URLConfigurationSource:121] No URLs will be polled as dynamic configuration sources.
+2018-04-16 10:39:09,994 INFO [com.netflix.config.sources.URLConfigurationSource:122] To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2018-04-16 10:39:10,221 INFO [org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter:534] Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@248deced: startup date [Mon Apr 16 10:39:06 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@3081f72c
+2018-04-16 10:39:10,293 INFO [org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry:543] Mapped "{[/pro/listUser],methods=[POST]}" onto public com.commons.core.message.Result<java.util.List<com.xunyu.entity.User>> com.xunyu.provider.controller.UserController.listUserData(com.xunyu.model.user.UserModel)
+2018-04-16 10:39:10,296 INFO [org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry:543] Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-04-16 10:39:10,296 INFO [org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry:543] Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-04-16 10:39:10,338 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-16 10:39:10,338 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-16 10:39:10,389 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-16 10:39:10,972 WARN [org.springframework.cloud.starter.eureka.EurekaStarterDeprecationWarningAutoConfiguration:19] spring-cloud-starter-eureka is deprecated as of Spring Cloud Netflix 1.4.0, please migrate to spring-cloud-starter-netflix-eureka
+2018-04-16 10:39:11,103 INFO [org.springframework.jmx.export.MBeanExporter:431] Registering beans for JMX exposure on startup
+2018-04-16 10:39:11,105 INFO [org.springframework.jmx.export.MBeanExporter:916] Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-04-16 10:39:11,112 INFO [org.springframework.jmx.export.MBeanExporter:916] Bean with name 'environmentManager' has been autodetected for JMX exposure
+2018-04-16 10:39:11,116 INFO [org.springframework.jmx.export.MBeanExporter:916] Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2018-04-16 10:39:11,117 INFO [org.springframework.jmx.export.MBeanExporter:916] Bean with name 'refreshScope' has been autodetected for JMX exposure
+2018-04-16 10:39:11,119 INFO [org.springframework.jmx.export.MBeanExporter:678] Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2018-04-16 10:39:11,134 INFO [org.springframework.jmx.export.MBeanExporter:678] Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2018-04-16 10:39:11,147 INFO [org.springframework.jmx.export.MBeanExporter:678] Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=248deced,type=ConfigurationPropertiesRebinder]
+2018-04-16 10:39:11,153 INFO [org.springframework.jmx.export.MBeanExporter:671] Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2018-04-16 10:39:11,306 INFO [org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup:343] Starting beans in phase 0
+2018-04-16 10:39:11,314 INFO [org.springframework.cloud.netflix.eureka.InstanceInfoFactory:70] Setting initial instance status as: STARTING
+2018-04-16 10:39:11,363 INFO [com.netflix.discovery.DiscoveryClient:344] Initializing Eureka in region us-east-1
+2018-04-16 10:39:11,612 INFO [com.netflix.discovery.provider.DiscoveryJerseyProvider:70] Using JSON encoding codec LegacyJacksonJson
+2018-04-16 10:39:11,612 INFO [com.netflix.discovery.provider.DiscoveryJerseyProvider:71] Using JSON decoding codec LegacyJacksonJson
+2018-04-16 10:39:11,750 INFO [com.netflix.discovery.provider.DiscoveryJerseyProvider:80] Using XML encoding codec XStreamXml
+2018-04-16 10:39:11,750 INFO [com.netflix.discovery.provider.DiscoveryJerseyProvider:81] Using XML decoding codec XStreamXml
+2018-04-16 10:39:12,177 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-04-16 10:39:12,284 INFO [com.netflix.discovery.DiscoveryClient:920] Disable delta property : false
+2018-04-16 10:39:12,285 INFO [com.netflix.discovery.DiscoveryClient:921] Single vip registry refresh property : null
+2018-04-16 10:39:12,285 INFO [com.netflix.discovery.DiscoveryClient:922] Force full registry fetch : false
+2018-04-16 10:39:12,285 INFO [com.netflix.discovery.DiscoveryClient:923] Application is null : false
+2018-04-16 10:39:12,285 INFO [com.netflix.discovery.DiscoveryClient:924] Registered Applications size is zero : true
+2018-04-16 10:39:12,285 INFO [com.netflix.discovery.DiscoveryClient:926] Application version is -1: true
+2018-04-16 10:39:12,285 INFO [com.netflix.discovery.DiscoveryClient:1009] Getting all instance registry info from the eureka server
+2018-04-16 10:39:12,510 INFO [com.netflix.discovery.DiscoveryClient:1018] The response status is 200
+2018-04-16 10:39:12,512 INFO [com.netflix.discovery.DiscoveryClient:1244] Starting heartbeat executor: renew interval is: 5
+2018-04-16 10:39:12,515 INFO [com.netflix.discovery.InstanceInfoReplicator:59] InstanceInfoReplicator onDemand update allowed rate per min is 4
+2018-04-16 10:39:12,518 INFO [com.netflix.discovery.DiscoveryClient:425] Discovery Client initialized at timestamp 1523846352518 with initial instances count: 1
+2018-04-16 10:39:12,536 INFO [org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry:40] Registering application xunyu-provider with eureka with status UP
+2018-04-16 10:39:12,537 INFO [com.netflix.discovery.DiscoveryClient$3:1279] Saw local status change event StatusChangeEvent [timestamp=1523846352537, current=UP, previous=STARTING]
+2018-04-16 10:39:12,539 INFO [com.netflix.discovery.DiscoveryClient:795] DiscoveryClient_XUNYU-PROVIDER/DESKTOP-BLNIGML:xunyu-provider:17093: registering service...
+2018-04-16 10:39:12,584 INFO [com.netflix.discovery.DiscoveryClient:804] DiscoveryClient_XUNYU-PROVIDER/DESKTOP-BLNIGML:xunyu-provider:17093 - registration status: 204
+2018-04-16 10:39:12,611 INFO [org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer:201] Tomcat started on port(s): 17093 (http)
+2018-04-16 10:39:12,611 INFO [org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration:117] Updating port to 17093
+2018-04-16 10:39:12,615 INFO [org.springframework.boot.StartupInfoLogger:57] Started ProviderApplication in 7.26 seconds (JVM running for 9.099)
+2018-04-16 10:44:12,288 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-04-16 10:49:12,291 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-04-16 10:54:03,469 INFO [org.springframework.boot.SpringApplication:597] The following profiles are active: core
+2018-04-16 10:54:03,492 INFO [org.springframework.context.support.AbstractApplicationContext:583] Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@31ee96f4: startup date [Mon Apr 16 10:54:03 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@6c2ed0cd
+2018-04-16 10:54:04,461 WARN [org.mybatis.spring.mapper.ClassPathMapperScanner:167] No MyBatis mapper was found in '[com.xunyu.consume]' package. Please check your configuration.
+2018-04-16 10:54:04,660 INFO [org.springframework.cloud.context.scope.GenericScope:263] BeanFactory id=4c2a2635-2fb3-3f4a-ae4e-a90ba98af384
+2018-04-16 10:54:04,680 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor:155] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-04-16 10:54:04,721 INFO [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:325] Bean 'com.xunyu.consume.service.UserInfoService' of type [org.springframework.cloud.netflix.feign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-16 10:54:04,818 INFO [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:325] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$d7e165af] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-16 10:54:04,851 INFO [org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:325] Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$f3fb68ac] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-16 10:54:05,240 INFO [org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer:89] Tomcat initialized with port(s): 17092 (http)
+2018-04-16 10:54:05,254 INFO [org.apache.juli.logging.DirectJDKLog:179] Starting service [Tomcat]
+2018-04-16 10:54:05,255 INFO [org.apache.juli.logging.DirectJDKLog:179] Starting Servlet Engine: Apache Tomcat/8.5.20
+2018-04-16 10:54:05,500 INFO [org.apache.juli.logging.DirectJDKLog:179] Initializing Spring embedded WebApplicationContext
+2018-04-16 10:54:05,500 INFO [org.springframework.boot.context.embedded.EmbeddedWebApplicationContext:276] Root WebApplicationContext: initialization completed in 2008 ms
+2018-04-16 10:54:05,682 INFO [org.springframework.boot.web.servlet.ServletRegistrationBean:190] Mapping servlet: 'dispatcherServlet' to [/]
+2018-04-16 10:54:05,688 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-04-16 10:54:05,689 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-04-16 10:54:05,689 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-04-16 10:54:05,689 INFO [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean:258] Mapping filter: 'requestContextFilter' to: [/*]
+2018-04-16 10:54:05,801 INFO [org.springframework.context.support.AbstractApplicationContext:583] Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@294aba23: startup date [Mon Apr 16 10:54:05 CST 2018]; parent: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@31ee96f4
+2018-04-16 10:54:05,824 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor:155] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-04-16 10:54:06,316 WARN [org.springframework.context.support.AbstractApplicationContext:551] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.xunyu.consume.service.UserInfoService': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalStateException: Method listUser not annotated with HTTP method type (ex. GET, POST)
+2018-04-16 10:54:06,316 INFO [org.springframework.context.support.AbstractApplicationContext:984] Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@294aba23: startup date [Mon Apr 16 10:54:05 CST 2018]; parent: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@31ee96f4
+2018-04-16 10:54:06,318 INFO [org.apache.juli.logging.DirectJDKLog:179] Stopping service [Tomcat]
+2018-04-16 10:54:06,358 INFO [org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer:101] 
+
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+2018-04-16 10:54:06,368 ERROR [org.springframework.boot.SpringApplication:771] Application startup failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.xunyu.consume.service.UserInfoService': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalStateException: Method listUser not annotated with HTTP method type (ex. GET, POST)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:321)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1264)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:553)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:543)
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107)
+	at com.xunyu.consume.ConsumeApplication.main(ConsumeApplication.java:36)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.xunyu.consume.service.UserInfoService': FactoryBean threw exception on object creation; nested exception is java.lang.IllegalStateException: Method listUser not annotated with HTTP method type (ex. GET, POST)
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:175)
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:103)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1634)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:254)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.addCandidateEntry(DefaultListableBeanFactory.java:1316)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1282)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1101)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1066)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:518)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:496)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:627)
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:318)
+	... 17 common frames omitted
+Caused by: java.lang.IllegalStateException: Method listUser not annotated with HTTP method type (ex. GET, POST)
+	at feign.Util.checkState(Util.java:128)
+	at feign.Contract$BaseContract.parseAndValidateMetadata(Contract.java:97)
+	at org.springframework.cloud.netflix.feign.support.SpringMvcContract.parseAndValidateMetadata(SpringMvcContract.java:133)
+	at feign.Contract$BaseContract.parseAndValidatateMetadata(Contract.java:64)
+	at feign.ReflectiveFeign$ParseHandlersByName.apply(ReflectiveFeign.java:146)
+	at feign.ReflectiveFeign.newInstance(ReflectiveFeign.java:53)
+	at feign.Feign$Builder.target(Feign.java:198)
+	at org.springframework.cloud.netflix.feign.HystrixTargeter.target(HystrixTargeter.java:39)
+	at org.springframework.cloud.netflix.feign.FeignClientFactoryBean.loadBalance(FeignClientFactoryBean.java:145)
+	at org.springframework.cloud.netflix.feign.FeignClientFactoryBean.getObject(FeignClientFactoryBean.java:166)
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:168)
+	... 32 common frames omitted
+2018-04-16 10:54:12,292 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-04-16 10:59:12,293 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
