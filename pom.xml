@@ -16,6 +16,7 @@
         <module>xunyu_commons_entity</module>
         <module>xunyu_commons_model</module>
         <module>xunyu_sgip</module>
+        <module>xunyu-eureka</module>
     </modules>
     <packaging>pom</packaging>
 
