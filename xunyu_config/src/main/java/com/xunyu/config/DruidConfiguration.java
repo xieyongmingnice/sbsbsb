@@ -80,7 +80,6 @@ public class DruidConfiguration {
             datasource.setUsername(username);
             datasource.setPassword(password);
             datasource.setDriverClassName(driverClassName);
-            System.err.println("驱动。。。。。。。。"+driverClassName);
             datasource.setInitialSize(initialSize);
             datasource.setMinIdle(minIdle);
             datasource.setMaxActive(maxActive);

@@ -1,6 +1,5 @@
 package com.xunyu.consume.service;
 import com.xunyu.consume.pojo.UserInfo;
-
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public interface UserInfoService {
     /**
      * 获取用户集合
      */
-    public long countUserInfo(Map<String, Object> map);
+    long countUserInfo(Map<String, Object> map);
 
     List<UserInfo> listUser(Map<String, Object> map);
 

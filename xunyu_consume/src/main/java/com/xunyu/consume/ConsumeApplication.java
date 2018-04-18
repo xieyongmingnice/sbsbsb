@@ -34,7 +34,8 @@ public class ConsumeApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         LOGGER.info("SpringApplicationBuilder run .... ");
-        SpringApplication.run(ConsumeApplication.class, "--debug");
+        //SpringApplication.run(ConsumeApplication.class, "--debug");//开启Spring boot 的debug模式
+        SpringApplication.run(ConsumeApplication.class, args);
     }
 
 

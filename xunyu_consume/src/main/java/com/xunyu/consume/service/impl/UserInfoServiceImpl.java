@@ -1,12 +1,9 @@
 package com.xunyu.consume.service.impl;
 
-import com.commons.core.message.Result;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.xunyu.consume.dao.User.UserInfoDao;
-import com.xunyu.consume.pojo.User;
 import com.xunyu.consume.pojo.UserInfo;
 import com.xunyu.consume.service.UserInfoService;
-import com.xunyu.model.user.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +16,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Autowired
     private UserInfoDao userInfoDao;
-
-    /**
-     * 跨服务获取数据
-     */
-    public Result<List<User>> listUserOther(UserModel userModel) {
-
-        System.out.println("我进来了。。。");
-        return listUserOther(userModel);
-    }
 
     @Override
     public UserInfo queryByUserId(Long userId) {

@@ -33,21 +33,21 @@ public class UserInfoDaoImpl extends BaseDao<UserInfo, Long> implements UserInfo
     public UserInfo queryByUserId(Long userId) {
         Map<String, Object> map = new HashMap<>();
         map.put("userId", userId);
-        DataRecord dataRecord = super.selectForDataRecord("com.xunyu.entity.UserInfo.queryByUserId", map);
+        DataRecord dataRecord = super.selectForDataRecord("com.xunyu.consume.pojo.UserInfo.queryByUserId", map);
         UserInfo userInfo = (UserInfo) JavaBeanMap.convertMap2JavaBean(dataRecord, UserInfo.class);
         return userInfo;
     }
 
     @Override
     public long countUserInfo(Map<String, Object> map) {
-        long total = super.selectForObject("com.xunyu.entity.UserInfo.countUserInfo", map);
+        long total = super.selectForObject("com.xunyu.consume.pojo.UserInfo.countUserInfo", map);
 
         return total;
     }
 
     @Override
     public List<UserInfo> listUser(Map<String, Object> map) {
-        List<UserInfo> listInfo = super.selectForListObject("com.xunyu.entity.UserInfo.listUser", map);
+        List<UserInfo> listInfo = super.selectForListObject("com.xunyu.consume.pojo.UserInfo.listUser", map);
         if (listInfo != null) {
             return listInfo;
         } else {
@@ -57,17 +57,17 @@ public class UserInfoDaoImpl extends BaseDao<UserInfo, Long> implements UserInfo
 
     @Override
     public long insertUserInfo(UserInfo info) {
-        return super.insert("com.xunyu.entity.UserInfo.insertUserInfo", info);
+        return super.insert("com.xunyu.consume.pojo.UserInfo.insertUserInfo", info);
     }
 
     @Override
     public long updateUserInfo(UserInfo info) {
-        return super.update("com.xunyu.entity.UserInfo.updateUserInfo", info);
+        return super.update("com.xunyu.consume.pojo.UserInfo.updateUserInfo", info);
     }
 
     @Override
     public int deleteUserInfo(List<Long> ids) {
-        return super.delete("com.xunyu.entity.UserInfo.deleteUserInfo", ids);
+        return super.delete("com.xunyu.consume.pojo.UserInfo.deleteUserInfo", ids);
     }
 
 }

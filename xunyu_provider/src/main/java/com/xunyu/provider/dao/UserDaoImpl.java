@@ -20,7 +20,7 @@ public class UserDaoImpl extends BaseDao<User, Long> {
      * 获取用户列表
      */
     public List<User> listUser(Map<String, Object> map) {
-        return super.selectForListObject("com.xunyu.entity.User.listUser", map);
+        return super.selectForListObject("com.xunyu.provider.pojo.User.listUser", map);
     }
 
     /**

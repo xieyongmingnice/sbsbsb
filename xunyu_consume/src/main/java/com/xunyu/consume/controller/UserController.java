@@ -141,7 +141,6 @@ public class UserController {
         return res;
     }
 
-
     /**
      * 调用其它服务获取数据
      */
