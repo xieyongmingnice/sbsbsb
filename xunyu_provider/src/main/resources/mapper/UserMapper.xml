@@ -6,7 +6,6 @@
         <id column="id" property="userId"></id>
         <result column="name" property="userName"></result>
     </resultMap>
-
     <select id="listUser" parameterType="HashMap" resultMap="user_ResultMap">
         select u.id ,u.name from  user u where 1=1 order by u.id desc
             limit #{startRow},#{endRow}
