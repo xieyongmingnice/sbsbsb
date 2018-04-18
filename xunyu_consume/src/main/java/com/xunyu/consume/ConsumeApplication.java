@@ -1,6 +1,5 @@
 package com.xunyu.consume;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
 /**
  * @author dth
  */
-@MapperScan(basePackages = "com.xunyu.**.mapper", sqlSessionTemplateRef = "sqlSessionTemplate")
+//@MapperScan(basePackages = "com.xunyu.**.mapper", sqlSessionTemplateRef = "sqlSessionTemplate")
 //@ServletComponentScan(basePackages = {"com.xunyu.**"})
 @RefreshScope  //热部署
 @ComponentScan(basePackages = {"com.xunyu",})
@@ -35,7 +34,7 @@ public class ConsumeApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         LOGGER.info("SpringApplicationBuilder run .... ");
-        SpringApplication.run(ConsumeApplication.class, args);
+        SpringApplication.run(ConsumeApplication.class, "--debug");
     }
 
 

@@ -25,7 +25,7 @@ db:
 #数据源配置
 spring:
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     username: xunyu_db
     password: XunYu@DEV-DB

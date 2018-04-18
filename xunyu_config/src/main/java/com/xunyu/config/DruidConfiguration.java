@@ -25,20 +25,17 @@ public class DruidConfiguration {
 
     @Value("${db.host}")
     private String ip;
-
     @Value("${db.port}")
     private String port;
-
     @Value("${db.name}")
     private String dbName;
-
     @Value("${db.public-key}")
     private String publicKey;
     @Value("${spring.datasource.type}")
     private String type;
     @Value("${spring.datasource.url}")
     private String url;
-    @Value("${spring.datasource.driverClassName}")
+    @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
     @Value("${spring.datasource.username}")
     private String username;
@@ -83,7 +80,7 @@ public class DruidConfiguration {
             datasource.setUsername(username);
             datasource.setPassword(password);
             datasource.setDriverClassName(driverClassName);
-            //configuration
+            System.err.println("驱动。。。。。。。。"+driverClassName);
             datasource.setInitialSize(initialSize);
             datasource.setMinIdle(minIdle);
             datasource.setMaxActive(maxActive);
