@@ -1,7 +1,7 @@
 package com.xunyu.shiro.config;
 
 import com.commons.core.util.RandomUtils;
-import com.xunyu.shiro.ehcache.CacheManager;
+import com.xunyu.shiro.ehcache.MyCacheManager;
 import com.xunyu.shiro.pojo.UserInfo;
 import com.xunyu.shiro.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -64,7 +64,7 @@ public class MyRealm extends AuthorizingRealm {
         /**
          * 通过userName在缓存中查找一遍，否则直接查数据库
          */
-        CacheManager<String,UserInfo> cache = new CacheManager<String,UserInfo>();
+        MyCacheManager<String,UserInfo> cache = new MyCacheManager<String,UserInfo>();
         userInfo = cache.get(username+pwd);
         if (userInfo == null) {
             //查询数据库

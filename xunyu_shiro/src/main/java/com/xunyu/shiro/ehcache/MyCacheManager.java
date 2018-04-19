@@ -5,7 +5,6 @@ import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.session.Session;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +13,7 @@ import java.util.Set;
  * @version 1,0 2018/04/19
  * 
  */
-public class CacheManager<K, V> implements Cache<K, V> {
+public class MyCacheManager<K, V> implements Cache<K, V> {
 
 	private EhCacheManager shiroEhcacheManager = (EhCacheManager)SpringContextHolder.getBean("shiroEhcacheManager");
 	private Cache<K, V> cache = null;
