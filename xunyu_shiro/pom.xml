@@ -86,7 +86,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.xunyu.provider.ProviderApplication</mainClass>
+                    <mainClass>com.xunyu.shiro.ShiroApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
