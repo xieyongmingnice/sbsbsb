@@ -4,12 +4,12 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xunyu-eureka" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xunyu_commons-core" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/xunyu_commons_entity" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xunyu_commons_model" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xunyu_config" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xunyu_consume" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xunyu_provider" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xunyu_sgip" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xunyu_shiro" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xunyu_zuul" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>

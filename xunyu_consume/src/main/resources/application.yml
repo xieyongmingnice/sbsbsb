@@ -14,7 +14,6 @@ server:
   port: 17092
 
 logging:
-  config: classpath:logback-medicare.xml
   level:
      com.gwolf.service: DEBUG
 

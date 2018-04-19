@@ -23,7 +23,7 @@ zuul:
     api-consume:
       path: /consume/**
       service-id: xunyu-consume
-    api-kafka:
-          path: /kafkato/**
-          service-id: xunyu-kafka
+    api-shiro:
+          path: /shiro/**
+          service-id: xunyu-shiro
   

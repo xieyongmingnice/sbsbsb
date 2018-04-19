@@ -13,6 +13,7 @@
         <module name="xunyu_eureka" />
         <module name="xunyu_provider" />
         <module name="xunyu_sgip" />
+        <module name="xunyu_shiro" />
         <module name="xunyu_zuul" />
       </profile>
     </annotationProcessing>

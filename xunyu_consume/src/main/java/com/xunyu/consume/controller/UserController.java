@@ -10,17 +10,14 @@ import com.xunyu.consume.service.UserInfoService;
 import com.xunyu.model.user.UserModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 @RestController
 @RequestMapping("/user")
@@ -39,23 +36,13 @@ public class UserController {
         return " self-diagnosis 启动成功";
     }
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public UserInfo getUserInfo(Long userId) {
-        System.out.println("invoke test");
-        UserInfo user = null;
-        try {
-            user = userInfoService.queryByUserId(userId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
-
     /**
      * 获取用户集合
      */
-    @RequestMapping(value = "/listUserInfo", method = RequestMethod.GET)
-    public Result<List<UserInfo>> listUserInfoData(UserModel userModel) {
+    @RequestMapping(value = "/listUserInfo", method = RequestMethod.POST)
+    public Result<List<UserInfo>> listUserInfoData(UserModel userModel, HttpServletResponse response) {
+        //response.addHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String, Object> map = new HashMap<String, Object>();
         Result<List<UserInfo>> res = new Result<List<UserInfo>>();
         long total = 0L;

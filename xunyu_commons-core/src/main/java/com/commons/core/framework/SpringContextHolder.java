@@ -1,63 +1,44 @@
 package com.commons.core.framework;
 
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-
-import java.util.Locale;
 
 /**
  * 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候中取出ApplicaitonContext.
  */
 //public class SpringContextHolder implements ApplicationContextAware {
 public class SpringContextHolder {
-    private static ApplicationContext applicationContext;
+    private static ApplicationContext applicationContext = null;
+// 非@import显式注入，@Component是必须的，且该类必须与main同包或子包
+    // 若非同包或子包，则需手动import 注入，有没有@Component都一样
+    // 可复制到Test同包测试
 
-    /**
-     * 实现ApplicationContextAware接口的context注入函数, 将其存入静态变量.
-     */
-    public static void setApplicationContext(ApplicationContext applicationContext) {
-        SpringContextHolder.applicationContext = applicationContext; // NOSONAR
+    public static void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        if(SpringContextHolder.applicationContext == null){
+            SpringContextHolder.applicationContext  = applicationContext;
+        }
+
     }
 
-    /**
-     * 取得存储在静态变量中的ApplicationContext.
-     */
+    //获取applicationContext
     public static ApplicationContext getApplicationContext() {
-        checkApplicationContext();
         return applicationContext;
     }
 
-    /**
-     * 从静态变量ApplicationContext中取得Bean, 自动转型为所赋值对象的类型.
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> T getBean(String name) {
-        checkApplicationContext();
-        return (T) applicationContext.getBean(name);
+    //通过name获取 Bean.
+    public static Object getBean(String name){
+        return getApplicationContext().getBean(name);
+
     }
 
-    /**
-     * 从静态变量ApplicationContext中取得Bean, 自动转型为所赋值对象的类型.
-     */
-    public static <T> T getBean(Class<T> clazz) {
-        checkApplicationContext();
-        return applicationContext.getBean(clazz);
+    //通过class获取Bean.
+    public static <T> T getBean(Class<T> clazz){
+        return getApplicationContext().getBean(clazz);
     }
 
-    public static String getMessage(String title, Locale locale, Object... args) {
-        checkApplicationContext();
-        return applicationContext.getMessage(title, args, locale);
+    //通过name,以及Clazz返回指定的Bean
+    public static <T> T getBean(String name,Class<T> clazz){
+        return getApplicationContext().getBean(name, clazz);
     }
 
-    /**
-     * 清除applicationContext静态变量.
-     */
-    public static void cleanApplicationContext() {
-        applicationContext = null;
-    }
-
-    private static void checkApplicationContext() {
-        if (applicationContext == null) {
-            throw new IllegalStateException("applicaitonContext未注入,请在spring-core.xml中定义SpringContextHolder");
-        }
-    }
 }
