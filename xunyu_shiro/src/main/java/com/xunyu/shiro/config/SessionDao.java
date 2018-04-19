@@ -1,5 +1,6 @@
 package com.xunyu.shiro.config;
 
+import com.xunyu.shiro.ehcache.CacheManager;
 import com.xunyu.shiro.redis.RedisUtil;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SimpleSession;
@@ -26,6 +27,9 @@ public class SessionDao extends EnterpriseCacheSessionDAO {
     protected Serializable doCreate(Session session) {  
         Serializable sessionId = super.doCreate(session);  
         redisUtil.set(sessionId.toString(), sessionToByte(session),1*60L);
+        //把session放入缓存中
+        CacheManager<Serializable,Session> cacheManager = new CacheManager<Serializable,Session>();
+        cacheManager.put(sessionId,session);
         return sessionId;  
     }  
   
@@ -36,7 +40,9 @@ public class SessionDao extends EnterpriseCacheSessionDAO {
          *   先从缓存中获取session，如果没有再去数据库中获取
          *  没有开启缓存所以一直为null，若让其不等于null需重写doReadSession()
          *  */
-        Session session = super.doReadSession(sessionId);
+        //Session session = super.doReadSession(sessionId);
+        CacheManager<Serializable,Session> cacheManager = new CacheManager<Serializable,Session>();
+        Session session = cacheManager.get(sessionId);
         if(session == null){  
             byte[] bytes = (byte[]) redisUtil.get(sessionId.toString());  
             if(bytes != null && bytes.length > 0){  
