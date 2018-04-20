@@ -34,7 +34,7 @@ public class CloneUtil {
     }
 
     /**
-     * list 对象克隆
+     * 对象克隆
      *
      * @param obj
      * @return

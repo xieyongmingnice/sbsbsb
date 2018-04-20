@@ -25,7 +25,7 @@ public class SGIPUtils {
 
     private static final String CURRENT_DATE_FILL_SIGN = "0";
     public static final String NODEID = "97000";
-    public static String host = "47.104.190.41";
+    public static String host = "localhost";
     public static int port = 8081;
 
     /*将int转为低字节在后，高字节在前的byte数组

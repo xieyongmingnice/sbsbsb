@@ -16,22 +16,22 @@ public interface IBaseMapper {
      */
     @Insert("${sql}")
     @SelectKey(before = false, keyProperty = "id", resultType = Long.class, statementType = StatementType.STATEMENT, statement = "SELECT LAST_INSERT_ID() AS id")
-    public Integer insert(Map<String, Object> params);
+    Integer insert(Map<String, Object> params);
 
     @Update("${sql}")
-    public int update(Map<String, Object> params);
+    int update(Map<String, Object> params);
 
     @Delete("${sql}")
-    public int delete(Map<String, Object> params);
+    int delete(Map<String, Object> params);
 
     @Select("${sql}")
-    public List<DataRecord> select(Map<String, Object> params);
+    List<DataRecord> select(Map<String, Object> params);
 
     @Select("${sql}")
-    public <T> T selectOne(Map<String, Object> params);
+    <T> T selectOne(Map<String, Object> params);
 
     @Select("${sql}")
-    public DataRecord selectObject(Map<String, Object> params);
+    DataRecord selectObject(Map<String, Object> params);
 
     /**
      * 批量插入
@@ -40,6 +40,6 @@ public interface IBaseMapper {
      * @return
      */
     @Insert("${sql}")
-    public int insertBatch(Map<String, Object> params);
+    int insertBatch(Map<String, Object> params);
 
 }

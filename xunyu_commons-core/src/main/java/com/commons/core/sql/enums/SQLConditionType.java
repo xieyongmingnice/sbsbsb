@@ -4,7 +4,9 @@ public enum SQLConditionType {
     EQUAL("="),
     IN("in"),
     LIKE("like"),
-    //MySQL 5.5 以上 如果搜索關鍵字是日期 需要加上 like binary
+    /**
+     * MySQL 5.5 以上 如果搜索关键字是日期 需要加上 like binary
+     */
     LIKE_BINARY("like binary"),
     NOT_IN("not in"),
     GREATER_THAN(">"),

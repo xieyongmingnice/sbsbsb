@@ -22,16 +22,23 @@ public class DecodeAndEncoder extends MessageToMessageCodec<SGIPCommend, SGIPCom
          */
         try {
             Bind b = null;
-            if (obj.getCommandID() == SGIPCommend.SGIP_BIND) {//bind
+            //bind
+            if (obj.getCommandID() == SGIPCommend.SGIP_BIND) {
                 //转码
                 //b = (Bind)obj;
-                b = (Bind) getSGIPCommendEncode(obj);//强制转换
-                b.setLoginTypeByte(SGIPUtils.IntToByteArray2(b.getLoginType()));  //登录类型
-                out.add(b);//放到缓存通道中
+                //强制转换
+                b = (Bind) getSGIPCommendEncode(obj);
+                //登录类型
+                b.setLoginTypeByte(SGIPUtils.IntToByteArray2(b.getLoginType()));
+                //放到缓存通道中
+                out.add(b);
             } else if (obj.getCommandID() == SGIPCommend.SGIP_BIND_RESP) {//BindResp
-                BindResp br = (BindResp) getSGIPCommendEncode(obj);//强制转换
-                br.setResultByte(SGIPUtils.IntToByteArray2(br.getResult()));//响应状态
-                out.add(br);//放到缓存通道中
+                //强制转换
+                BindResp br = (BindResp) getSGIPCommendEncode(obj);
+                //响应状态
+                br.setResultByte(SGIPUtils.IntToByteArray2(br.getResult()));
+                //放到缓存通道中
+                out.add(br);
             }
 
 
@@ -59,13 +66,14 @@ public class DecodeAndEncoder extends MessageToMessageCodec<SGIPCommend, SGIPCom
                 //转码
                 b = (Bind) getSGIPCommendDecode(msg);
                 b.setLoginType(SGIPUtils.ByteArrayToInt2(b.getLoginTypeByte()));
-
-                out.add(b);//放到缓存通道中
+                //放到缓存通道中
+                out.add(b);
             } else if (msg.getCommandID() == SGIPCommend.SGIP_BIND_RESP) {
 
                 BindResp br = (BindResp) getSGIPCommendDecode(msg);
                 br.setResult(SGIPUtils.ByteArrayToInt2(br.getResultByte()));
-                out.add(br);//放到缓存通道中
+                //放到缓存通道中
+                out.add(br);
             }
 
         } catch (Exception e) {
@@ -81,17 +89,23 @@ public class DecodeAndEncoder extends MessageToMessageCodec<SGIPCommend, SGIPCom
      * @author dth
      */
     private SGIPCommend getSGIPCommendEncode(SGIPCommend obj) {
-        obj.setNodeIdByte(SGIPUtils.IntToByteArray2(obj.getNodeId()));//第一部分序列号s
-        obj.setCommandNodeIdDateByte(SGIPUtils.IntToByteArray2(obj.getCommandNodeIdDate()));//第二部分序列号
-        obj.setCommandNumberByte(SGIPUtils.IntToByteArray2(obj.getCommandNumber()));//第三部分序列号
+        //第一部分序列号s
+        obj.setNodeIdByte(SGIPUtils.IntToByteArray2(obj.getNodeId()));
+        //第二部分序列号
+        obj.setCommandNodeIdDateByte(SGIPUtils.IntToByteArray2(obj.getCommandNodeIdDate()));
+        //第三部分序列号
+        obj.setCommandNumberByte(SGIPUtils.IntToByteArray2(obj.getCommandNumber()));
 
         return obj;
     }
 
     private SGIPCommend getSGIPCommendDecode(SGIPCommend obj) {
-        obj.setNodeId(SGIPUtils.ByteArrayToInt2(obj.getNodeIdByte()));//第一部分序列号s
-        obj.setCommandNodeIdDate(SGIPUtils.ByteArrayToInt2(obj.getCommandNodeIdDateByte()));//第二部分序列号
-        obj.setCommandNumber(SGIPUtils.ByteArrayToInt2(obj.getCommandNumberByte()));//第三部分序列号
+        //第一部分序列号s
+        obj.setNodeId(SGIPUtils.ByteArrayToInt2(obj.getNodeIdByte()));
+        //第二部分序列号
+        obj.setCommandNodeIdDate(SGIPUtils.ByteArrayToInt2(obj.getCommandNodeIdDateByte()));
+        //第三部分序列号
+        obj.setCommandNumber(SGIPUtils.ByteArrayToInt2(obj.getCommandNumberByte()));
 
         return obj;
     }

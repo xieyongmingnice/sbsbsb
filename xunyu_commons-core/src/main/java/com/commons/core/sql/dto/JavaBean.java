@@ -27,9 +27,11 @@ public class JavaBean {
     private Class<?> clz;
 
     private List<String> fieldsName;
+
     private Map<String, String> columnsName = new HashMap<String, String>();
 
     private String pkName;
+
     private Class<?> pkType;
 
     public JavaBean(Class<?> clz) {
