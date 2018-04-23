@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.shiro.pojo.user.User">
+
+    <resultMap id="user_ResultMap" type="com.xunyu.shiro.pojo.user.User">
+        <id column="user_id" property="userId"></id>
+        <result column="account" property="account"></result>
+        <result column="password" property="passWord"></result>
+        <result column="user_type" property="userType"></result>
+        <result column="isabled" property="isabled"></result>
+        <result column="create_time" property="createTime"></result>
+    </resultMap>
+
+    <resultMap id="userDetail_Map" type="com.xunyu.shiro.pojo.user.User">
+        <id column="user_id" property="userId"></id>
+        <result column="account" property="account"></result>
+        <result column="password" property="passWord"></result>
+        <result column="user_type" property="userType"></result>
+        <result column="isabled" property="isabled"></result>
+       <!-- <result column="create_time" property="userCreateTime"></result>-->
+        <collection property="rolesUsersRList" ofType="com.xunyu.shiro.pojo.roles.RolesUsersR" column="user_id">
+            <id column="role_user_r_id" property="roleUserRId"></id>
+            <result column="role_id" property="userId"></result>
+            <result column="user_id" property="roleId"></result>
+            <association property="roles" column="role_id" javaType="com.xunyu.shiro.pojo.roles.Roles">
+                <id column="role_id" property="roleId"></id>
+                <result column="role_name" property="roleName"></result>
+                <result column="isabled" property="isabled"></result>
+                <result column="remark" property="remark"></result>
+                <result column="create_time" property="rolesCreateTime" ></result>
+                <collection property="rolesPermissionsRList" ofType="com.xunyu.shiro.pojo.permission.RolesPermissionsR" column="role_id">
+                    <id column="roles_permission_r_id" property="rolesPermissionRId"></id>
+                    <result column="role_id" property="roleId"></result>
+                    <result column="permission_id" property="permissionId"></result>
+                    <association property="permissions" column="permission_id" javaType="com.xunyu.shiro.pojo.permission.Permissions">
+                        <id column="permission_id" property="permissionId"></id>
+                        <result column="permission_name" property="permissionName"></result>
+                        <result column="permission_group_id" property="permissionGroupId"></result>
+                        <result column="permission_domain" property="permissionDomain"></result>
+                        <result column="permission_type" property="permissionType"></result>
+                        <result column="permission_uri" property="permissionUri"></result>
+                        <result column="isabled" property="isabled"></result>
+                        <result column="remark" property="remark"></result>
+                        <!--<result column="create_time" property="permissionCreateTime"></result>-->
+                        <association property="permissionGroup" javaType="com.xunyu.shiro.pojo.permission.PermissionGroup" column="permission_group_id">
+                            <id column="permission_group_id" property="permissionGroupId"></id>
+                            <result column="permission_group_name" property="permissionGroupName"></result>
+                            <result column="remark" property="remark"></result>
+                            <result column="isabled" property="isabled"></result>
+                            <!--<result column="create_time" property="permisGroupCreateTime"></result>-->
+                        </association>
+                     </association>
+                </collection>
+            </association>
+        </collection>
+    </resultMap>
+
+    <sql id="user_column">
+        user_id,account,password,user_type,isabled,create_time
+    </sql>
+
+    <select id = "getUserInfo" parameterType="map" resultMap="user_ResultMap">
+        select <include refid = "user_column" /> from tbl_users
+        where 1=1
+        <if test = "userId != null">
+            and user_id = #{userId}
+        </if>
+        <if test = 'account != null and account !=""'>
+            and account = #{account}
+        </if>
+        <if test = 'passWord != null and passWord !=""'>
+            and password = #{passWord}
+        </if>
+    </select>
+
+    <select id = "getUserDetail" parameterType="map" resultMap="userDetail_Map">
+        select
+        u.user_id,u.account,u.password,u.create_time as userCreateTime,u.isabled,u.user_type,
+        ru.role_user_r_id,
+        r.role_id,r.role_name,r.isabled,r.create_time,r.remark,
+        rp.roles_permission_r_id,
+        p.permission_id,p.permission_name,p.permission_type,p.permission_uri,p.remark,
+        p.permission_group_id,p.permission_domain,p.isabled,p.create_time as permissionCreateTime,
+        pg.permission_group_id,pg.permission_group_name,pg.remark,pg.isabled,pg.create_time as permisGroupCreateTime
+         from tbl_users u
+            left join tbl_roles_users_r ru on ru.user_id = u.user_id
+            left join tbl_roles r on r.role_id = ru.role_id
+            left join tbl_roles_permissions_r rp on rp.role_id = r.role_id
+            left join tbl_permissions p on p.permission_id = rp.permission_id
+            left join tbl_permission_group pg on pg.permission_group_id = p.permission_group_id
+            where 1=1
+            <include refid="userDetail_where" />
+    </select>
+
+    <sql id = "userDetail_where">
+        <if test = "userId != null">
+            and u.user_id = #{userId}
+        </if>
+        <if test = 'account != null and account !=""'>
+            and u.account = #{account}
+        </if>
+        <if test = 'passWord != null and passWord !=""'>
+            and u.password = #{passWord}
+        </if>
+    </sql>
+</mapper>

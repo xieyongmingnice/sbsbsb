@@ -40,20 +40,25 @@ public class UserController {
     public Map<String,Object> ajaxLogin(User user, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String,Object> map = new HashMap<String,Object>();
+        System.out.println(user.getAccount() + "      "+user.getPassWord());
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getAccount(), user.getPassWord());
         try {
             subject.login(token);
             map.put("sessionId", subject.getSession().getId());
             user = (User)subject.getSession().getAttribute("user");
+            map.put("code","200");
             map.put("message", "登录成功");
             map.put("user",user);
         } catch (IncorrectCredentialsException e) {
+            map.put("code","413");
             map.put("message", "密码错误");
             e.printStackTrace();
         } catch (LockedAccountException e) {
+            map.put("code","412");
             map.put("message", "登录失败，该用户已被冻结");
         } catch (AuthenticationException e) {
+            map.put("code","404");
             map.put("message", "该用户不存在");
         } catch (Exception e) {
             e.printStackTrace();
