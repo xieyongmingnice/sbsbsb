@@ -23,4 +23,6 @@ public interface RPCService {
     //指定服务中的哪个方法
     @RequestMapping(value = "/pro/listUser", method = RequestMethod.POST, consumes = "application/json")
     Result<List<User>> listUserOther(@RequestBody UserModel userModel);
+
+
 }
