@@ -1,6 +1,8 @@
 package com.xunyu.shiro;
 
 import com.commons.core.framework.SpringContextHolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -21,10 +23,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableFeignClients  //Feign 本身集成了断路游
 @EnableScheduling
 public class ShiroApplication {
-
+    private static final Logger log = LoggerFactory.getLogger(ShiroApplication.class);
     public static void main(String[] args) {
         ApplicationContext app =  SpringApplication.run(ShiroApplication.class, args);
         //设置全局环境
         SpringContextHolder.setApplicationContext(app);
+        log.info("权限模块启动成功...");
     }
 }

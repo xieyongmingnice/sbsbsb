@@ -18,7 +18,7 @@ db:
   host: rm-m5e03vwf88v7vufn9ho.mysql.rds.aliyuncs.com
   #host: 118.190.192.244  和上面的是一个host
   port: 3306
-  name: test
+  name: xunyu_db
   public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJZcCjn1viAr1f4994+1Do1i1xQnqDD3OupuyqG1Yq2EI+OV/enBB9ETdztE1ptXuU2lGq3eDHV22oat2BZXVIMCAwEAAQ==
 #  public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIeMfolobgSenbQUUeSDQ/jvyjjJnBvu+v96HjaQma55SuDPMQxVI3GrtDcWmtKyj6RxvrPntQfblqWhCTn1p+kCAwEAAQ==
 

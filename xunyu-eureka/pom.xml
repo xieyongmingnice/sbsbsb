@@ -24,7 +24,7 @@
     </dependencies>
 
     <build>
-        <finalName>xunyu_eureka_server</finalName>
+        <finalName>eureka-xunyu</finalName>
         <resources>
             <resource>
                 <targetPath>${project.build.directory}/classes</targetPath>
@@ -78,7 +78,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <fork>true</fork>
+                    <mainClass>com.xunyu.xunyueureka.XunyuEurekaApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

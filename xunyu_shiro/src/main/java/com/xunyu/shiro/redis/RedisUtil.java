@@ -113,7 +113,7 @@ public class RedisUtil {
             ValueOperations<String, Object> operations = redisTemplate  
                     .opsForValue();  
             operations.set(key, value);  
-            redisTemplate.expire(key, expireTime, TimeUnit.DAYS);  
+            redisTemplate.expire(key, expireTime, TimeUnit.MINUTES); //设置过期时间 expireTime * MINUTES(分钟)
             result = true;  
         } catch (Exception e) {  
             e.printStackTrace();  

@@ -4,13 +4,14 @@ spring:
   profiles:
     active: core #加载xunyu_config项目中 的application-core.yml文件
   redis:
-    hostName: 127.0.0.1
+    hostName: 47.104.135.244
     port: 6379
-    timeOut: 1000
+    timeOut: 100000
     maxIdle: 10
     maxWaitMillis: 15000
     testOnBorrow: true
     testWhileIdle: false
+    redisPassWord: XunYuDEVRedis2018
 
 eureka:
   client:
@@ -31,7 +32,7 @@ hystrix:
       execution:
         isolation:
          thread:
-          timeoutInMilliseconds: 4000  #设置超时时间
+          timeoutInMilliseconds: 40000  #设置超时时间
 
 
 

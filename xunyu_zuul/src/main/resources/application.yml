@@ -1,4 +1,5 @@
 eureka:
+  enabled: true
   client:
     serviceUrl:
       defaultZone: http://localhost:17081/eureka/
@@ -15,6 +16,9 @@ server:
   port: 17083
 #配置zuul  服务网关
 zuul:
+  host:
+      socket-timeout-millis: 60000
+      connect-timeout-millis: 60000
   add-host-header: true #表示API网关在进行请求路由转发前为请求设置Host头信息。
   routes:
     api-provider:
@@ -26,4 +30,17 @@ zuul:
     api-shiro:
           path: /shiro/**
           service-id: xunyu-shiro
-  
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000 #断路器的超时时间需要大于ribbon的超时时间，不然不会触发重试。
+
+ribbon:
+  ReadTimeout: 10000 #获取或设置读取操作未完成时发生超时之前的毫秒数。
+  ConnectTimeout: 10000 #客户端等待与服务器建立连接的时间（以毫秒计）
+  MaxAutoRetries: 0 #在同一台服务器上重试的最大次数
+  MaxAutoRetriesNextServer: 1 #要重试的下一个服务器的最大数量

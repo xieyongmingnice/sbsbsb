@@ -80,7 +80,7 @@
     </dependencies>
 
     <build>
-        <finalName>xunyu_shiro</finalName>
+        <finalName>shiro-xunyu</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

@@ -1,5 +1,6 @@
 package com.xunyu.shiro.redis;
 
+import com.commons.core.util.StringUtils2;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,7 +36,9 @@ public class RedisConfig extends CachingConfigurerSupport {
     private boolean testOnBorrow;// 在获取连接的时候检查有效性, 默认false  
     @Value("${spring.redis.testWhileIdle}")  
     private boolean testWhileIdle;// 空闲是否检查是否有效，默认为false  
-  
+    @Value("${spring.redis.redisPassWord}")
+    private String redisPassWord;
+
     @Bean("jedisPoolConfig")  
     public JedisPoolConfig jedisPoolConfig() {  
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();  
@@ -54,7 +57,9 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisConnectionFactory.setHostName(hostName);  
         redisConnectionFactory.setPort(port);  
         redisConnectionFactory.setTimeout(timeOut);
-        //redisConnectionFactory.setPassword();
+        if(StringUtils2.isNotEmpty(redisPassWord)) {
+            redisConnectionFactory.setPassword(redisPassWord);
+        }
         //redisConnectionFactory.getConnection().select(15);//设置链接哪个库默认是0
         return redisConnectionFactory;  
     }  

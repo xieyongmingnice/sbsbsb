@@ -16,6 +16,7 @@
         <module>xunyu_sgip</module>
         <module>xunyu-eureka</module>
         <module>xunyu_cmpp</module>
+        <module>xunyu_shiro</module>
     </modules>
     <packaging>pom</packaging>
 

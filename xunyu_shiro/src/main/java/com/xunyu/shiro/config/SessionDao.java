@@ -26,11 +26,11 @@ public class SessionDao extends EnterpriseCacheSessionDAO {
     @Override  
     protected Serializable doCreate(Session session) {  
         Serializable sessionId = super.doCreate(session);  
-        redisUtil.set(sessionId.toString(), sessionToByte(session),1*60L);
+        redisUtil.set(sessionId.toString(), sessionToByte(session),1*30L);//设置过期时间
         //把session放入缓存中
-        MyCacheManager<Serializable,Session> myCacheManager = new MyCacheManager<Serializable,Session>();
-        myCacheManager.put(sessionId,session);
-        return sessionId;  
+       /* MyCacheManager<Serializable,Session> myCacheManager = new MyCacheManager<Serializable,Session>();
+        myCacheManager.put(sessionId,session);*/
+        return sessionId;
     }  
   
     // 获取session  
@@ -40,9 +40,9 @@ public class SessionDao extends EnterpriseCacheSessionDAO {
          *   先从缓存中获取session，如果没有再去数据库中获取
          *  没有开启缓存所以一直为null，若让其不等于null需重写doReadSession()
          *  */
-        //Session session = super.doReadSession(sessionId);
-        MyCacheManager<Serializable,Session> myCacheManager = new MyCacheManager<Serializable,Session>();
-        Session session = myCacheManager.get(sessionId);
+        Session session = super.doReadSession(sessionId);
+        /*MyCacheManager<Serializable,Session> myCacheManager = new MyCacheManager<Serializable,Session>();
+        Session session = myCacheManager.get(sessionId);*/
         if(session == null){  
             byte[] bytes = (byte[]) redisUtil.get(sessionId.toString());  
             if(bytes != null && bytes.length > 0){  

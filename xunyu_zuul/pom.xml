@@ -26,12 +26,13 @@
     </dependencies>
 
     <build>
+        <finalName>zuul-xunyu</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <fork>true</fork>
+                    <mainClass>com.xunyu.zuul.ZuulApiGatewayStarter</mainClass>
                 </configuration>
             </plugin>
         </plugins>
