@@ -23,11 +23,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableFeignClients  //Feign 本身集成了断路游
 @EnableScheduling
 public class ShiroApplication {
-    private static final Logger log = LoggerFactory.getLogger(ShiroApplication.class);
     public static void main(String[] args) {
         ApplicationContext app =  SpringApplication.run(ShiroApplication.class, args);
         //设置全局环境
         SpringContextHolder.setApplicationContext(app);
-        log.info("权限模块启动成功...");
+
     }
 }
