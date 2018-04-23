@@ -198,8 +198,8 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setFilters(filters);
         Map<String, String> filterChainDefinitionManager = new LinkedHashMap<String, String>();
         filterChainDefinitionManager.put("/logout", "anon");
-        filterChainDefinitionManager.put("/user/**", "authc,roles[ROLE_USER]");//用户为ROLE_USER 角色可以访问。由用户角色控制用户行为。
-        filterChainDefinitionManager.put("/events/**", "authc,roles[ROLE_ADMIN]");
+        //filterChainDefinitionManager.put("/user/**", "authc,roles[ROLE_USER]");//用户为ROLE_USER 角色可以访问。由用户角色控制用户行为。
+        //filterChainDefinitionManager.put("/events/**", "authc,roles[ROLE_ADMIN]");
         //filterChainDefinitionManager.put("/user/edit/**", "authc,perms[user:edit]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取，此处是用权限控制
         filterChainDefinitionManager.put("/**", "anon");
 

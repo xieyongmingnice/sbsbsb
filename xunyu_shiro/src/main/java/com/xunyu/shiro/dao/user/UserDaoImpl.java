@@ -16,6 +16,22 @@ import java.util.Map;
 public class UserDaoImpl extends BaseDao<User, Long> {
 
     /**
+     * 修改用户信息
+     */
+    public int updateUser(User user){
+
+        return super.update("com.xunyu.shiro.pojo.user.User.updateUser", user);
+    }
+
+    /**
+     * 添加用户信息
+     */
+    public int addUser(User user){
+
+       return super.insert("com.xunyu.shiro.pojo.user.User.updateUser", user);
+    }
+
+    /**
      * 获取用户详情
      */
     public User getUserDetail(Map<String, Object> map){

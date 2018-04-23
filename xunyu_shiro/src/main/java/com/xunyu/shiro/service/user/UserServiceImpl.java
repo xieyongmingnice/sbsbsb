@@ -26,4 +26,14 @@ public class UserServiceImpl implements UserService {
     public User getUserDetail(Map<String, Object> map) {
         return userDaoImpl.getUserDetail(map);
     }
+
+    @Override
+    public int updateUser(User user) {
+        return userDaoImpl.updateUser(user);
+    }
+
+    @Override
+    public int addUser(User user) {
+        return userDaoImpl.addUser(user);
+    }
 }

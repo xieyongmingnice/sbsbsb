@@ -11,7 +11,6 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +39,6 @@ public class UserController {
     public Map<String,Object> ajaxLogin(User user, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String,Object> map = new HashMap<String,Object>();
-        System.out.println(user.getAccount() + "      "+user.getPassWord());
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getAccount(), user.getPassWord());
         try {

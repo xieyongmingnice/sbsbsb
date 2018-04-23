@@ -103,4 +103,52 @@
             and u.password = #{passWord}
         </if>
     </sql>
+
+    <insert id = "addUser" parameterType="com.xunyu.shiro.pojo.user.User"
+            useGeneratedKeys="true" keyColumn="user_id" keyProperty="userId">
+        insert into tbl_users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test='account != null and account != ""'>account,</if>
+            <if test='passWord != null and passWord != ""'>password,</if>
+            <if test='userType != null and userType != ""'>user_type,</if>
+            <if test='isabled != null and isabled != ""'>isabled,</if>
+            <if test='userCreateTime != null'>create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test='account != null and account != ""'>#{account},</if>
+            <if test='passWord != null and passWord != ""'>#{passWord},</if>
+            <if test='userType != null and userType != ""'>#{userType},</if>
+            <if test='isabled != null and isabled != ""'>#{isabled},</if>
+            <if test='userCreateTime != null'>#{userCreateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateUser" parameterType="com.xunyu.shiro.pojo.user.User">
+        update tbl_users
+        <set>
+            <if test='account != null and account != ""'>
+                <![CDATA[	account = #{account}, ]]>
+            </if>
+            <if test='passWord != null and passWord != ""'>
+                <![CDATA[	password = #{passWord}, ]]>
+            </if>
+            <if test='userType != null and userType != ""'>
+                <![CDATA[	user_type = #{userType}, ]]>
+            </if>
+            <if test='isabled != null and isabled != ""'>
+                <![CDATA[	isabled = #{isabled}, ]]>
+            </if>
+            <if test='userCreateTime != null and userCreateTime != ""'>
+                <![CDATA[	create_time = #{userCreateTime}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+        </where>
+    </update>
 </mapper>

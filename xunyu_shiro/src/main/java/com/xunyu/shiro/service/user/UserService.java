@@ -21,4 +21,14 @@ public interface UserService {
      * 获取用户详情
      */
     User getUserDetail(Map<String,Object> map);
+
+    /**
+     * 修改用户信息
+     */
+    int updateUser(User user);
+
+    /**
+     * 添加用户信息
+     */
+    int addUser(User user);
 }
