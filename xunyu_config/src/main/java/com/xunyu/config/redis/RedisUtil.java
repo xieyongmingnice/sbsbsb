@@ -134,4 +134,17 @@ public class RedisUtil {
         Session se = new SessionDao().byteToSession(session);
         return se;
     }
+
+    /**
+     * 通过sessionId判断当前会话是否有效
+     */
+    public boolean sessionStatus(String sessionId){
+        boolean flag = false;
+        Session session = getSession(sessionId);
+        if(session != null){
+            flag = true;
+        }
+        return flag;
+    }
+
 }  
