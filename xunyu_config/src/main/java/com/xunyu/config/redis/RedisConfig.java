@@ -92,6 +92,20 @@ public class RedisConfig extends CachingConfigurerSupport {
         // Number of seconds before expiration. Defaults to unlimited (0)  
         // cacheManager.setDefaultExpiration(10); //设置key-value超时时间  
         return cacheManager;  
-    }  
+    }
+
+    @Bean
+    public SessionDao sessionDao(RedisUtil redisUtil) {
+        SessionDao sessionDao = new SessionDao();
+        sessionDao.setRedisUtil(redisUtil);
+        return sessionDao;
+    }
+
+    @Bean
+    public RedisUtil redisUtil(RedisTemplate<String,Object> redisTemplate) {
+        RedisUtil redisUtil = new RedisUtil();
+        redisUtil.setRedisTemplate(redisTemplate);
+        return redisUtil;
+    }
   
 }  
