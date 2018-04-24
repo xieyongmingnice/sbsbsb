@@ -1,0 +1,40 @@
+package com.xunyu.model.customer;
+
+import com.xunyu.model.user.UserModel;
+import java.io.Serializable;
+
+/**
+ * @author dth
+ * @date 2018/4/24 15:13
+ **/
+public class CustomerGroupModel extends UserModel implements Serializable {
+    private static final long serialVersionUID = 1054679497927963049L;
+
+    private Long customerGroupId;//主键
+    private String customerName;//名称
+    private String remark;//备注
+
+    public Long getCustomerGroupId() {
+        return customerGroupId;
+    }
+
+    public void setCustomerGroupId(Long customerGroupId) {
+        this.customerGroupId = customerGroupId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+}

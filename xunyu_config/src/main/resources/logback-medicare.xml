@@ -9,8 +9,8 @@
             <charset>GBK</charset>
         </encoder>
     </appender>
-    <appender name="xunyu_rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.dir}/logs/supervise.log</file>
+    <!--<appender name="xunyu_rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.dir}/logs/xunyu-all.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.dir}/logs/supervise-%d{yyyy-MM-dd_HH}.%i.log
             </fileNamePattern>
@@ -23,11 +23,11 @@
         <encoder>
             <pattern>%date %level [%class:%line] %msg%n</pattern>
         </encoder>
-    </appender>
+    </appender>-->
 
     <root level="info">
         <appender-ref ref="console"/>
-        <appender-ref ref="xunyu_rolling"/>
+        <!--<appender-ref ref="xunyu_rolling"/>-->
     </root>
 
 </configuration>

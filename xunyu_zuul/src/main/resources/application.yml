@@ -30,6 +30,10 @@ zuul:
     api-shiro:
           path: /shiro/**
           service-id: xunyu-shiro
+    api-crm:
+              path: /crm/**
+              service-id: xunyu-crm
+
 
 hystrix:
   command:

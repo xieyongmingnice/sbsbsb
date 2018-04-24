@@ -120,6 +120,7 @@ public class UserController {
         response.setHeader("Access-Control-Allow-Origin", "*");
         //退出删除当前会话中的用户信息
         Result<String> res = new Result<String>();
+
         try {
             redisUtil.remove(sessionId);
             byte[] session = (byte[])redisUtil.get(sessionId);
@@ -143,6 +144,12 @@ public class UserController {
         response.setHeader("Access-Control-Allow-Origin", "*");
         Result<User> res = new  Result<User>();
         int flag = 0;
+        boolean status = redisUtil.sessionStatus(user.getSessionId());
+        if(!status){
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
         if(StringUtils2.isNotEmpty(user.getAccount()) && StringUtils2.isNotEmpty(user.getPassWord())) {
             try {
                 user.setIsabled(1);//显示状态
@@ -181,6 +188,12 @@ public class UserController {
 
         Result<User> res = new Result<User>();
         int flag = 0;
+        boolean status = redisUtil.sessionStatus(user.getSessionId());
+        if(!status){
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
         if(user.getUserId() != null) {
             try {
                 if(StringUtils2.isNotEmpty(user.getPassWord())){
@@ -209,4 +222,5 @@ public class UserController {
         }
         return res;
     }
+
 }

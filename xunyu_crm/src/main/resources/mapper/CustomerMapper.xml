@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.crm.pojo.customer.CustomerTab">
+
+    <resultMap id="customer_ResultMap" type="com.xunyu.crm.pojo.customer.CustomerTab">
+        <id column="customer_id" property="customerId"></id>
+        <result column="customer_group_id" property="customerGroupId"></result>
+        <result column="address" property="address"></result>
+        <result column="customer_name" property="customerName"></result>
+        <result column="telphone" property="telphone"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="customer_account" property="customerAccount"></result>
+        <result column="customer_psw" property="customerPsw"></result>
+        <result column="enter_contact" property="enterContact"></result>
+        <result column="mophone" property="mophone"></result>
+        <result column="qq" property="qq"></result>
+        <result column="email" property="email"></result>
+        <result column="business" property="business"></result>
+        <result column="finance" property="finance"></result>
+        <result column="customer_service" property="customerService"></result>
+        <result column="manager" property="manager"></result>
+        <result column="price" property="price"></result>
+        <result column="remark" property="remark"></result>
+        <result column="contract_num" property="contractNum"></result>
+        <result column="deposit" property="deposit"></result>
+        <result column="file_path" property="filePath"></result>
+        <result column="isabled" property="isabled"></result>
+    </resultMap>
+
+    <sql id = "customer_column">
+        customer_id,customer_group_id,customer_name,address,telphone
+        ,customer_account,customer_psw,enter_contact,mophone,qq,email,business
+        ,finance,customer_service,manager,price,remark,contract_num,deposit
+        ,file_path,create_time,isabled
+    </sql>
+    <select id = "customerTabCount" parameterType="map" resultType="int">
+        select count(1) from tbl_customer where isabled = 1 <include refid = "customer_where"/>
+    </select>
+
+    <select id = "customerTabList" parameterType="map" resultMap="customer_ResultMap">
+        select <include refid = "customer_column" /> from tbl_customer
+        where isabled = 1 <include refid = "customer_where"/> order by customer_id desc
+        limit #{startRow},#{endRow}
+    </select>
+
+    <select id = "getCustomerTabDetail" parameterType="map" resultMap="customer_ResultMap">
+        select <include refid = "customer_column" /> from tbl_customer
+        where isabled = 1 <include refid = "customer_where"/>
+    </select>
+
+    <sql id = "customer_where">
+        <if test = 'customerId != null'>
+            and customer_id = #{customerId}
+        </if>
+        <if test = 'customerName != null and customerName !=""'>
+           and customer_name like concat(#{customerName},"%")
+        </if>
+        <if test = 'customerAccount != null and customerAccount !=""'>
+            and customer_account = #{customerAccount}
+        </if>
+        <if test = 'enterContact != null and enterContact !=""'>
+            and enter_contact = #{enterContact}
+        </if>
+        <if test = 'business != null and business !=""'>
+            and business = #{business}
+        </if>
+    </sql>
+    <insert id = "addCustomer" parameterType="com.xunyu.crm.pojo.customer.CustomerTab" useGeneratedKeys="true" keyColumn="customer_id"
+            keyProperty="customerId">
+        insert into tbl_customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerId != null">customer_id,</if>
+            <if test="customerGroupId != null">customer_group_id,</if>
+            <if test='address != null and address != ""'>address,</if>
+            <if test='customerName != null and customerName != ""'>customer_name,</if>
+            <if test='telphone != null and telphone != ""'>telphone,</if>
+            <if test='createTime != null'>create_time,</if>
+            <if test='customerAccount != null and customerAccount != ""'>customer_account,</if>
+            <if test='customerPsw != null and customerPsw != ""'>customer_psw,</if>
+            <if test='enterContact != null and enterContact != ""'>enter_contact,</if>
+            <if test='mophone != null and mophone != ""'>mophone,</if>
+            <if test='qq != null and qq != ""'>qq,</if>
+            <if test='email != null and email != ""'>email,</if>
+            <if test='business != null and business != ""'>business,</if>
+            <if test='finance != null and finance != ""'>finance,</if>
+            <if test='customerService != null and customerService != ""'>customer_service,</if>
+            <if test='manager != null and manager != ""'>manager,</if>
+            <if test='price != null'>price,</if>
+            <if test='remark != null and remark != ""'>remark,</if>
+            <if test='contractNum != null and contractNum != ""'>contract_num,</if>
+            <if test='deposit != null'>deposit,</if>
+            <if test='filePath != null and filePath != ""'>file_path,</if>
+            <if test='isabled != null'>isabled,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerId != null">#{customerId},</if>
+            <if test="customerGroupId != null">#{customerGroupId},</if>
+            <if test='address != null and address != ""'>#{address},</if>
+            <if test='customerName != null and customerName != ""'>#{customerName},</if>
+            <if test='telphone != null and telphone != ""'>#{telphone},</if>
+            <if test='createTime != null'>#{createTime},</if>
+            <if test='customerAccount != null and customerAccount != ""'>#{customerAccount},</if>
+            <if test='customerPsw != null and customerPsw != ""'>#{customerPsw},</if>
+            <if test='enterContact != null and enterContact != ""'>#{enterContact},</if>
+            <if test='mophone != null and mophone != ""'>#{mophone},</if>
+            <if test='qq != null and qq != ""'>#{qq},</if>
+            <if test='email != null and email != ""'>#{email},</if>
+            <if test='business != null and business != ""'>#{business},</if>
+            <if test='finance != null and finance != ""'>#{finance},</if>
+            <if test='customerService != null and customerService != ""'>#{customerService},</if>
+            <if test='manager != null and manager != ""'>#{manager},</if>
+            <if test='price != null'>#{price},</if>
+            <if test='remark != null and remark != ""'>#{remark},</if>
+            <if test='contractNum != null and contractNum != ""'>#{contractNum},</if>
+            <if test='deposit != null'>#{deposit},</if>
+            <if test='filePath != null and filePath != ""'>#{filePath},</if>
+            <if test='isabled != null'>#{isabled},</if>
+        </trim>
+    </insert>
+
+    <update id="updateCustomer" parameterType="com.xunyu.crm.pojo.customer.CustomerTab">
+        update tbl_customer
+        <set>
+            <if test='customerGroupId != null'>
+                <![CDATA[	customer_group_id = #{customerGroupId}, ]]>
+            </if>
+            <if test='address != null and address != ""'>
+                <![CDATA[	address = #{address}, ]]>
+            </if>
+            <if test='customerName != null and customerName != ""'>
+                <![CDATA[	customer_name = #{customerName}, ]]>
+            </if>
+            <if test='telphone != null and telphone != ""'>
+                <![CDATA[	telphone = #{telphone}, ]]>
+            </if>
+            <if test='createTime != null and createTime != ""'>
+                <![CDATA[	create_time = #{createTime}, ]]>
+            </if>
+            <if test='customerAccount != null and customerAccount != ""'>
+                <![CDATA[	customer_account = #{customerAccount}, ]]>
+            </if>
+            <if test='customerPsw != null and customerPsw != ""'>
+                <![CDATA[	customer_psw = #{customerPsw}, ]]>
+            </if>
+            <if test='enterContact != null and enterContact != ""'>
+                <![CDATA[	enter_contact = #{enterContact}, ]]>
+            </if>
+            <if test='mophone != null and mophone != ""'>
+                <![CDATA[	mophone = #{mophone}, ]]>
+            </if>
+            <if test='qq != null and qq != ""'>
+                <![CDATA[	qq = #{qq}, ]]>
+            </if>
+            <if test='email != null and email != ""'>
+                <![CDATA[	email = #{email}, ]]>
+            </if>
+            <if test='business != null and business != ""'>
+                <![CDATA[	business = #{business}, ]]>
+            </if>
+            <if test='finance != null and finance != ""'>
+                <![CDATA[	finance = #{finance}, ]]>
+            </if>
+            <if test='customerService != null and customerService != ""'>
+                <![CDATA[	customer_service = #{customerService}, ]]>
+            </if>
+            <if test='manager != null and manager != ""'>
+                <![CDATA[	manager = #{manager}, ]]>
+            </if>
+            <if test='price != null'>
+                <![CDATA[	price = #{price}, ]]>
+            </if>
+            <if test='remark != null and remark != ""'>
+                <![CDATA[	remark = #{remark}, ]]>
+            </if>
+            <if test='contractNum != null and contractNum != ""'>
+                <![CDATA[	contract_num = #{contractNum}, ]]>
+            </if>
+            <if test='deposit != null'>
+                <![CDATA[	deposit = #{deposit}, ]]>
+            </if>
+            <if test='filePath != null and filePath != ""'>
+                <![CDATA[	file_path = #{filePath}, ]]>
+            </if>
+            <if test='isabled != null'>
+                <![CDATA[	isabled = #{isabled}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="customerId != null">
+                customer_id = #{customerId}
+            </if>
+        </where>
+    </update>
+
+</mapper>

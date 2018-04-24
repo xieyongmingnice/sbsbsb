@@ -1,0 +1,175 @@
+package com.xunyu.crm.controller.custom;
+
+import com.commons.core.message.Result;
+import com.xunyu.config.redis.RedisUtil;
+import com.xunyu.crm.pojo.customer.CustomerGroup;
+import com.xunyu.crm.pojo.customer.CustomerTab;
+import com.xunyu.crm.service.customer.CustomerService;
+import com.xunyu.model.customer.CustomerGroupModel;
+import com.xunyu.model.customer.CustomerModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @author dth
+ * @date 2018/4/24 14:36
+ **/
+@RestController
+@RequestMapping("/customer")
+public class CustomerController {
+
+    @Autowired
+    private RedisUtil redisUtil;
+    @Autowired
+    private CustomerService customerService;
+
+    /**
+     * 添加客户信息
+     */
+    @RequestMapping(value = "addCustomer",method = RequestMethod.POST)
+    public Result<CustomerTab> addCustomerData(HttpServletResponse response,CustomerTab ct){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        //验证session是否失效
+        Result<CustomerTab> res = new Result<CustomerTab>();
+        boolean status = redisUtil.sessionStatus(ct.getSessionId());
+        if(!status){
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        int flag = 0;
+        try{
+            ct.setCreateTime(new Date());
+            ct.setIsabled(1);//默认有效
+            flag = customerService.addCustomer(ct);
+            if(flag > 0){
+                res.setCode("200");
+                res.setMessage("success");
+                res.setRes(ct);
+            }
+        }catch (Exception e){
+            res.setCode("500");
+            res.setMessage("系统异常");
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    /**
+     * 修改客户分组
+     */
+    @RequestMapping(value = "updateCustomer",method = RequestMethod.POST)
+    public Result<CustomerTab> updateCustomerData(HttpServletResponse response,CustomerTab ct){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        Result<CustomerTab> res = new Result<CustomerTab>();
+        boolean status = redisUtil.sessionStatus(ct.getSessionId());
+        if(!status) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        try{
+            int flag = 0;
+            if(ct.getCustomerId() != null){
+                flag = customerService.updateCustomer(ct);
+                res.setCode("200");
+                res.setMessage("success");
+                res.setRes(ct);
+            }else{
+                res.setCode("413");
+                res.setMessage("CustomerId 不能为空");
+                res.setRes(ct);
+            }
+        }catch (Exception e){
+            res.setCode("500");
+            res.setMessage("系统异常");
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    /**
+     * 获取分组详情
+     */
+    @RequestMapping(value = "getCustomerGroupDetail",method = RequestMethod.POST)
+    public Result<CustomerTab> getCustomerGroupDetailData(HttpServletResponse response, CustomerModel cm){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        Result<CustomerTab> res = new Result<CustomerTab>();
+        boolean status = redisUtil.sessionStatus(cm.getSessionId());
+        if(!status) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        if(cm.getCustomerId() != null){
+            try{
+                Map<String,Object> map = new HashMap<String,Object>();
+                map.put("customerId",cm.getCustomerId());
+                CustomerTab cg = customerService.getCustomerTabDetail(map);
+                res.setCode("200");
+                res.setMessage("success");
+                res.setRes(cg);
+            }catch (Exception e){
+                res.setCode("500");
+                res.setMessage("系统异常");
+                e.printStackTrace();
+            }
+        }else{
+            res.setCode("413");
+            res.setMessage("CustomerGroupId 不能为空");
+        }
+        return res;
+    }
+
+    /**
+     * 获取分组列表
+     */
+    @RequestMapping(value = "customerGroupList",method = RequestMethod.POST)
+    public Result<List<CustomerTab>> customerGroupListData(HttpServletResponse response, CustomerModel cm){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        Result<List<CustomerTab>> res = new Result<List<CustomerTab>>();
+        boolean status = redisUtil.sessionStatus(cm.getSessionId());
+        if(!status) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        try{
+            if(cm.getCurrPage() != 0){
+                int total = 0;
+                Map<String,Object> map = new HashMap<String,Object>();
+                map.put("startRow", cm.getStartRows());
+                map.put("endRow", cm.getEndRows());
+                map.put("customerName",cm.getCustomerName());
+                map.put("customerAccount",cm.getCustomerAccount());
+                map.put("enterContact",cm.getEnterContact());//联系人
+                map.put("business",cm.getBusiness());
+                total = customerService.customerTabCount(map);
+                if(total > 0){
+                    List<CustomerTab> list = customerService.customerTabList(map);
+                    res.setCode("200");
+                    res.setMessage("success");
+                    res.setRes(list);
+                    res.setTotalRows(total);
+                }
+            }else{
+                res.setCode("413");
+                res.setMessage("currPage不能为空或0");
+            }
+        }catch (Exception e){
+            res.setCode("500");
+            res.setMessage("系统异常");
+            e.printStackTrace();
+        }
+       return res;
+    }
+
+}

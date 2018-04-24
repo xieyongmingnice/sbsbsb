@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.crm.pojo.customer.CustomerGroup">
+
+    <resultMap id="cg_ResultMap" type="com.xunyu.crm.pojo.customer.CustomerGroup">
+        <id column="customer_group_id" property="customerGroupId"></id>
+        <result column="customer_name" property="customerName"></result>
+        <result column="isabled" property="isabled"></result>
+        <result column="remark" property="remark"></result>
+        <result column="create_time" property="createTime"></result>
+    </resultMap>
+
+    <sql id = "cg_column">
+        customer_group_id,customer_name,isabled,remark,create_time
+    </sql>
+
+    <select id = "customerGroupCount" parameterType="map" resultType="int">
+        select count(1) from tbl_customer_group
+        where isabled = 1 <include refid = "cg_where" />
+    </select>
+
+    <select id = "customerGroupList" parameterType="map" resultMap="cg_ResultMap">
+        select <include refid = "cg_column" /> from tbl_customer_group
+        where isabled = 1 <include refid = "cg_where" /> order by customer_group_id desc
+        limit #{startRow},#{endRow}
+    </select>
+
+    <select id = "getCustomerGroup" parameterType="map" resultMap="cg_ResultMap">
+        select <include refid = "cg_column" /> from tbl_customer_group
+        where isabled = 1 <include refid = "cg_where" />
+    </select>
+
+    <sql id = "cg_where">
+        <if test = "customerGroupId != null">
+            and customer_group_id = #{customerGroupId}
+        </if>
+        <if test = 'customerName != null and customerName !=""'>
+            and customer_name like concat(#{customerName},"%")
+        </if>
+        <if test = 'remark != null and remark !=""'>
+            and remark like concat("%",concat(#{remark},"%"))
+        </if>
+    </sql>
+
+    <insert id = "addCustomerGroup" parameterType="com.xunyu.crm.pojo.customer.CustomerGroup"
+            useGeneratedKeys="true" keyColumn="customer_group_id" keyProperty="customerGroupId">
+        insert into tbl_customer_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerGroupId != null">customer_group_id,</if>
+            <if test='customerName != null and customerName != ""'>customer_name,</if>
+            <if test='isabled != null'>isabled,</if>
+            <if test='remark != null and remark != ""'>remark,</if>
+            <if test='createTime != null'>create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerGroupId != null">#{customerGroupId},</if>
+            <if test='customerName != null and customerName != ""'>#{customerName},</if>
+            <if test='isabled != null'>#{isabled},</if>
+            <if test='remark != null and remark != ""'>#{remark},</if>
+            <if test='createTime != null'>#{createTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateCustomerGroup" parameterType="com.xunyu.crm.pojo.customer.CustomerGroup">
+        update tbl_customer_group
+        <set>
+            <if test='customerName != null and customerName != ""'>
+                <![CDATA[	customer_name = #{customerName}, ]]>
+            </if>
+            <if test='isabled != null'>
+                <![CDATA[	isabled = #{isabled}, ]]>
+            </if>
+            <if test='remark != null and remark != ""'>
+                <![CDATA[	remark = #{remark}, ]]>
+            </if>
+            <if test='createTime != null'>
+                <![CDATA[	create_time = #{createTime}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="customerGroupId != null">
+                customer_group_id = #{customerGroupId}
+            </if>
+        </where>
+    </update>
+
+</mapper>
