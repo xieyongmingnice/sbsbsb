@@ -1,10 +1,10 @@
-package com.xunyu.shiro.redis;
+package com.xunyu.config.redis;
 
+import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -124,5 +124,14 @@ public class RedisUtil {
     public void setRedisTemplate(  
             RedisTemplate<String, Object> redisTemplate) {  
         this.redisTemplate = redisTemplate;  
-    }  
+    }
+
+    /**
+     * 根据sessionId获取当前会话
+     */
+    public Session getSession(String sessionId) {
+        byte[] session = (byte[]) get(sessionId);
+        Session se = new SessionDao().byteToSession(session);
+        return se;
+    }
 }  

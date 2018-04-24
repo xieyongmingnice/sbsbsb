@@ -11,13 +11,13 @@ import java.io.Serializable;
 public class UserModel extends MysqlPage implements Serializable {
     private static final long serialVersionUID = 1233577594582916728L;
 
-    private Long userId;
+   private String sessionId;
 
-    public Long getUserId() {
-        return userId;
+    public String getSessionId() {
+        return sessionId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 }

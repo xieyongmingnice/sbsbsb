@@ -1,11 +1,8 @@
-package com.xunyu.shiro.config;
+package com.xunyu.config.redis;
 
-import com.xunyu.shiro.ehcache.MyCacheManager;
-import com.xunyu.shiro.redis.RedisUtil;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SimpleSession;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
-
 import java.io.*;
 
 /**
@@ -92,8 +89,7 @@ public class SessionDao extends EnterpriseCacheSessionDAO {
             e.printStackTrace();  
         } catch (IOException e) {  
             e.printStackTrace();  
-        }  
-      
+        }
         return session;  
     }  
 }  

@@ -1,5 +1,6 @@
 package com.xunyu.shiro.pojo.user;
 
+import com.xunyu.model.user.UserModel;
 import com.xunyu.shiro.pojo.roles.RolesUsersR;
 
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.List;
  * @Author  dth
  * 账号信息
  */
-public class User implements Serializable {
+public class User extends UserModel implements Serializable {
 
     private static final long serialVersionUID = -3267918083809259248L;
 

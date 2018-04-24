@@ -1,6 +1,5 @@
-package com.xunyu.shiro.redis;
+package com.xunyu.config.redis;
 
-import com.commons.core.util.StringUtils2;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,8 +15,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.util.StringUtils;
 import redis.clients.jedis.JedisPoolConfig;
-  
+
 @Configuration  
 @EnableCaching  
 public class RedisConfig extends CachingConfigurerSupport {  
@@ -57,7 +57,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisConnectionFactory.setHostName(hostName);  
         redisConnectionFactory.setPort(port);  
         redisConnectionFactory.setTimeout(timeOut);
-        if(StringUtils2.isNotEmpty(redisPassWord)) {
+        if(!StringUtils.isEmpty(redisPassWord)) {
             redisConnectionFactory.setPassword(redisPassWord);
         }
         //redisConnectionFactory.getConnection().select(15);//设置链接哪个库默认是0

@@ -28,7 +28,7 @@ public class UserDaoImpl extends BaseDao<User, Long> {
      */
     public int addUser(User user){
 
-       return super.insert("com.xunyu.shiro.pojo.user.User.updateUser", user);
+       return super.insert("com.xunyu.shiro.pojo.user.User.addUser", user);
     }
 
     /**

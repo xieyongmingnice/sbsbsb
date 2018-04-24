@@ -141,7 +141,7 @@
             <if test='isabled != null and isabled != ""'>
                 <![CDATA[	isabled = #{isabled}, ]]>
             </if>
-            <if test='userCreateTime != null and userCreateTime != ""'>
+            <if test='userCreateTime != null'>
                 <![CDATA[	create_time = #{userCreateTime}, ]]>
             </if>
         </set>

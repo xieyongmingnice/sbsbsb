@@ -2,10 +2,12 @@ package com.xunyu.shiro.controller;
 
 import com.commons.core.message.Result;
 import com.commons.core.message.ResultTypeEnum;
+import com.commons.core.util.MD5Utils;
 import com.commons.core.util.StringUtils2;
-import com.xunyu.shiro.config.SessionDao;
+import com.xunyu.config.redis.RedisUtil;
+import com.xunyu.config.redis.SessionDao;
 import com.xunyu.shiro.pojo.user.User;
-import com.xunyu.shiro.redis.RedisUtil;
+import com.xunyu.shiro.service.user.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +33,8 @@ public class UserController {
 
     @Autowired
     RedisUtil redisUtil;
+    @Autowired
+    UserService userService;
     /**
      * 登录方法
      * @param user
@@ -71,8 +76,8 @@ public class UserController {
     @RequestMapping(value = "/unauth")
     public Map<String,Object> unauth() {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("code", "413");
-        map.put("msg", "未登录");
+        map.put("code", "404");
+        map.put("message", "未登录");
         return map;
     }
 
@@ -126,6 +131,81 @@ public class UserController {
             res.setMessage(String.valueOf(ResultTypeEnum.SUCCESS));
         }catch (Exception e){
             e.printStackTrace();
+        }
+        return res;
+    }
+
+    /**
+     * 添加用户信息
+     */
+    @RequestMapping(value = "addUser",method = RequestMethod.POST)
+    public Result<User> addUserData(User user, HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        Result<User> res = new  Result<User>();
+        int flag = 0;
+        if(StringUtils2.isNotEmpty(user.getAccount()) && StringUtils2.isNotEmpty(user.getPassWord())) {
+            try {
+                user.setIsabled(1);//显示状态
+                user.setUserCreateTime(new Date());
+                user.setPassWord(MD5Utils.getMD5(user.getPassWord()));
+                flag = userService.addUser(user);
+                if (flag > 0) {
+                    res.setCode("200");
+                    res.setMessage("success");
+                    res.setRes(user);
+                } else {
+                    res.setCode("412");
+                    res.setMessage("系统正忙，请稍后再试");
+                    res.setRes(user);
+                }
+            } catch (Exception e) {
+                res.setCode("500");
+                res.setMessage("添加失败,请仔细检查提交的数据！");
+                e.printStackTrace();
+            }
+        }else{
+            res.setCode("413");
+            res.setMessage("账号或密码不能为空");
+            res.setRes(user);
+        }
+
+        return res;
+    }
+
+    /**
+     * 修改用户信息
+     */
+    @RequestMapping(value = "updateUser",method = RequestMethod.POST)
+    public Result<User> updateUserData(HttpServletResponse response,User user){
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        Result<User> res = new Result<User>();
+        int flag = 0;
+        if(user.getUserId() != null) {
+            try {
+                if(StringUtils2.isNotEmpty(user.getPassWord())){
+                    user.setPassWord(MD5Utils.getMD5(user.getPassWord()));
+                }
+                flag = userService.updateUser(user);
+                if (flag > 0) {
+                    res.setCode("200");
+                    res.setMessage("success");
+                    res.setRes(user);
+                } else {
+                    res.setCode("412");
+                    res.setMessage("系统正忙~，请稍后再试");
+                    res.setRes(user);
+                }
+            } catch (Exception e) {
+                res.setCode("500");
+                res.setMessage("修改失败,请仔细检查提交的数据！");
+                e.printStackTrace();
+                e.printStackTrace();
+            }
+        }else{
+            res.setCode("413");
+            res.setMessage("用户id(userId)不能为空");
+            res.setRes(user);
         }
         return res;
     }

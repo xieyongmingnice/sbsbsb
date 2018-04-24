@@ -1,6 +1,7 @@
 package com.xunyu.shiro.config;
 
-import com.xunyu.shiro.redis.RedisUtil;
+import com.xunyu.config.redis.RedisUtil;
+import com.xunyu.config.redis.SessionDao;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler;
@@ -20,7 +21,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.filter.DelegatingFilterProxy;
-
 import javax.servlet.Filter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -128,7 +128,7 @@ public class ShiroConfig {
 
 
     @Bean(name = "sessionManager")
-    public DefaultWebSessionManager defaultWebSessionManager(com.xunyu.shiro.config.SessionDao sessionDao) {
+    public DefaultWebSessionManager defaultWebSessionManager(SessionDao sessionDao) {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         //定义的是全局的session会话超时时间
         sessionManager.setGlobalSessionTimeout(100000);
@@ -156,8 +156,8 @@ public class ShiroConfig {
     }
 
     @Bean
-    public com.xunyu.shiro.config.SessionDao sessionDao(RedisUtil redisUtil) {
-        com.xunyu.shiro.config.SessionDao sessionDao = new com.xunyu.shiro.config.SessionDao();
+    public SessionDao sessionDao(RedisUtil redisUtil) {
+        SessionDao sessionDao = new SessionDao();
         sessionDao.setRedisUtil(redisUtil);
         return sessionDao;
     }
@@ -194,13 +194,11 @@ public class ShiroConfig {
         Map<String, Filter> filters = new LinkedHashMap<>();
         LogoutFilter logoutFilter = new LogoutFilter();
         logoutFilter.setRedirectUrl("/login");
-//        filters.put("logout",null);
         shiroFilterFactoryBean.setFilters(filters);
         Map<String, String> filterChainDefinitionManager = new LinkedHashMap<String, String>();
         filterChainDefinitionManager.put("/logout", "anon");
         //filterChainDefinitionManager.put("/user/**", "authc,roles[ROLE_USER]");//用户为ROLE_USER 角色可以访问。由用户角色控制用户行为。
-        //filterChainDefinitionManager.put("/events/**", "authc,roles[ROLE_ADMIN]");
-        //filterChainDefinitionManager.put("/user/edit/**", "authc,perms[user:edit]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取，此处是用权限控制
+        //filterChainDefinitionManager.put("/api/**", "authc");
         filterChainDefinitionManager.put("/**", "anon");
 
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");

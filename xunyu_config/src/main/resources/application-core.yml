@@ -30,7 +30,15 @@ spring:
     transaction-query-timeout: 60000
     #关闭空闲连接超时时间
     remove-abandoned-timeout: 1800
-
+  redis:
+      hostName: 47.104.135.244
+      port: 6379
+      timeOut: 100000
+      maxIdle: 10
+      maxWaitMillis: 15000
+      testOnBorrow: true
+      testWhileIdle: false
+      redisPassWord: XunYuDEVRedis2018
 
 #mybatis配置
 mybatis:

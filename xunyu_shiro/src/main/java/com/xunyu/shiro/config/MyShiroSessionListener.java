@@ -1,7 +1,7 @@
 package com.xunyu.shiro.config;
 
 import com.commons.core.framework.SpringContextHolder;
-import com.xunyu.shiro.redis.RedisUtil;
+import com.xunyu.config.redis.RedisUtil;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.SessionListener;
 

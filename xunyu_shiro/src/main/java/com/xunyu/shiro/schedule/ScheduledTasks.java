@@ -1,7 +1,6 @@
 package com.xunyu.shiro.schedule;
 
-import com.netflix.discovery.converters.Auto;
-import com.xunyu.shiro.redis.RedisUtil;
+import com.xunyu.config.redis.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
