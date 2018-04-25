@@ -149,6 +149,9 @@
             <if test="userId != null">
                 user_id = #{userId}
             </if>
+            <if test = 'account != null and account != ""'>
+                account = #{account}
+            </if>
         </where>
     </update>
 </mapper>

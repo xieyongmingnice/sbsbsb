@@ -145,6 +145,7 @@ public class UserController {
         Result<User> res = new  Result<User>();
         int flag = 0;
         boolean status = redisUtil.sessionStatus(user.getSessionId());
+        Map<String,Object> map = new HashMap<String,Object>();
         if(!status){
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
@@ -152,18 +153,26 @@ public class UserController {
         }
         if(StringUtils2.isNotEmpty(user.getAccount()) && StringUtils2.isNotEmpty(user.getPassWord())) {
             try {
-                user.setIsabled(1);//显示状态
-                user.setUserCreateTime(new Date());
-                user.setPassWord(MD5Utils.getMD5(user.getPassWord()));
-                flag = userService.addUser(user);
-                if (flag > 0) {
-                    res.setCode("200");
-                    res.setMessage("success");
-                    res.setRes(user);
-                } else {
-                    res.setCode("412");
-                    res.setMessage("系统正忙，请稍后再试");
-                    res.setRes(user);
+                //先判断账号是否存在
+                map.put("account",user.getAccount());
+                User user2 = userService.getUserDetail(map);
+                if(user2 == null) { //说明该账号不存在，可以添加
+                    user.setIsabled(1);//显示状态
+                    user.setUserCreateTime(new Date());
+                    user.setPassWord(MD5Utils.getMD5(user.getPassWord()));
+                    flag = userService.addUser(user);
+                    if (flag > 0) {
+                        res.setCode("200");
+                        res.setMessage("success");
+                        res.setRes(user);
+                    } else {
+                        res.setCode("412");
+                        res.setMessage("系统正忙，请稍后再试");
+                        res.setRes(user);
+                    }
+                }else{
+                    res.setCode("413");
+                    res.setMessage("该账号已存在");
                 }
             } catch (Exception e) {
                 res.setCode("500");
@@ -194,7 +203,6 @@ public class UserController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        if(user.getUserId() != null) {
             try {
                 if(StringUtils2.isNotEmpty(user.getPassWord())){
                     user.setPassWord(MD5Utils.getMD5(user.getPassWord()));
@@ -215,11 +223,7 @@ public class UserController {
                 e.printStackTrace();
                 e.printStackTrace();
             }
-        }else{
-            res.setCode("413");
-            res.setMessage("用户id(userId)不能为空");
-            res.setRes(user);
-        }
+
         return res;
     }
 

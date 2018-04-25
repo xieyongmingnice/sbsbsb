@@ -17,6 +17,7 @@
         <module>xunyu-eureka</module>
         <module>xunyu_cmpp</module>
         <module>xunyu_shiro</module>
+        <module>xunyu_crm</module>
     </modules>
     <packaging>pom</packaging>
 

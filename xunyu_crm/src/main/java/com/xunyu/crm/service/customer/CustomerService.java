@@ -39,6 +39,7 @@ public interface CustomerService {
      * 修改客户信息
      */
     int updateCustomer(CustomerTab customerTab);
+    int updateCustomerAll(String customerIds);
 
     /**
      * 获取客户列表
@@ -50,4 +51,5 @@ public interface CustomerService {
      * 获取客户详情
      */
     CustomerTab getCustomerTabDetail(Map<String,Object> map);
+
 }

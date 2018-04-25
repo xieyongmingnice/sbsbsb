@@ -1,6 +1,7 @@
 package com.xunyu.crm.controller.custom;
 
 import com.commons.core.message.Result;
+import com.commons.core.util.StringUtils2;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.crm.pojo.customer.CustomerGroup;
 import com.xunyu.crm.pojo.customer.CustomerTab;
@@ -64,7 +65,7 @@ public class CustomerController {
     }
 
     /**
-     * 修改客户分组
+     * 修改客户信息
      */
     @RequestMapping(value = "updateCustomer",method = RequestMethod.POST)
     public Result<CustomerTab> updateCustomerData(HttpServletResponse response,CustomerTab ct){
@@ -97,9 +98,9 @@ public class CustomerController {
     }
 
     /**
-     * 获取分组详情
+     * 获取客户详情
      */
-    @RequestMapping(value = "getCustomerGroupDetail",method = RequestMethod.POST)
+    @RequestMapping(value = "getCustomerDetail",method = RequestMethod.POST)
     public Result<CustomerTab> getCustomerGroupDetailData(HttpServletResponse response, CustomerModel cm){
         response.setHeader("Access-Control-Allow-Origin", "*");
         Result<CustomerTab> res = new Result<CustomerTab>();
@@ -124,13 +125,13 @@ public class CustomerController {
             }
         }else{
             res.setCode("413");
-            res.setMessage("CustomerGroupId 不能为空");
+            res.setMessage("CustomerId 不能为空");
         }
         return res;
     }
 
     /**
-     * 获取分组列表
+     * 获取客户信息列表
      */
     @RequestMapping(value = "customerGroupList",method = RequestMethod.POST)
     public Result<List<CustomerTab>> customerGroupListData(HttpServletResponse response, CustomerModel cm){
@@ -172,4 +173,33 @@ public class CustomerController {
        return res;
     }
 
+    /**
+     * 删除客户信息
+     */
+    @RequestMapping(value = "delCustomer",method = RequestMethod.POST)
+    public Result<CustomerTab> delCustomerData(HttpServletResponse response, CustomerModel cm) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        Result<CustomerTab> res = new Result<CustomerTab>();
+        boolean status = redisUtil.sessionStatus(cm.getSessionId());
+        if (!status) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        try{
+            if(StringUtils2.isNotEmpty(cm.getCustomerIds())){
+                customerService.updateCustomerAll(cm.getCustomerIds());
+                res.setCode("200");
+                res.setMessage("success");
+            }else{
+                res.setCode("413");
+                res.setMessage("CustomerIds 不能为空");
+            }
+        }catch (Exception e){
+            res.setCode("500");
+            res.setMessage("系统异常");
+            e.printStackTrace();
+        }
+        return res;
+    }
 }

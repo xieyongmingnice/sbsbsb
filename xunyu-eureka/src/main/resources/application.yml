@@ -1,7 +1,8 @@
 server:
-  port: 17081
+  port: 8001
 eureka:
   instance:
+    #hostname: 47.104.190.174
     hostname: localhost
   client:
     register-with-eureka: false #是否将自已注册为客户端
@@ -10,4 +11,4 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server:
     enable-self-preservation: false #自我保护模式,默认为开启
-    eviction-interval-timer-in-ms: 5000 #扫描失效服务的时间间隔,默认60秒
+    eviction-interval-timer-in-ms: 10000 #扫描失效服务的时间间隔,默认60秒
