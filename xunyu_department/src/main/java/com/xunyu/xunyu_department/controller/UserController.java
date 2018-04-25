@@ -3,11 +3,22 @@ package com.xunyu.xunyu_department.controller;
 import com.commons.core.message.Result;
 import com.commons.core.message.ResultMessage;
 import com.xunyu.config.redis.RedisUtil;
+import com.xunyu.model.user.UserModel;
+import com.xunyu.model.users.UsersModel;
+import com.xunyu.xunyu_department.pojo.Users;
+import com.xunyu.xunyu_department.service.UserService;
+import com.xunyu.xunyu_department.vo.UserGroupVO;
+import com.xunyu.xunyu_department.vo.UsersVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
 /**
  * @author xym
  * @description
@@ -20,7 +31,142 @@ public class UserController {
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     RedisUtil redisUtil;
+
+    /**
+     * 新增员工
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/addemployee",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<String> addEmployee(UsersModel model){
+//        Result result = checkLogin(new Result(),model.getSessionId());
+//        if (result.getCode() != null){
+//            return result;
+//        }
+        Result result = new Result();
+        try{
+            List<Users> users = userService.selectUserListByAccount(model);
+            if (users != null && users.size()>0){
+                result.setMessage("用户名已存在，请重新输入用户名");
+                result.setCode(ResultMessage.Code.USER_EXIST);
+                return result;
+            }
+            int count = userService.addUser(model);
+            if (count > 0){
+                operationSuccess(result);
+                result.setRes("SUCCESS");
+            }
+        }catch (Exception e){
+            catchExcpetion(e,result);
+        }
+        return result;
+    }
+
+    /**
+     * 修改员工信息
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/editemployeeinfo",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<String> editEmployeeInfo(UsersModel model){
+//        Result result = checkLogin(new Result(),model.getSessionId());
+//        if (result.getCode() != null){
+//            return result;
+//        }
+        Result result = new Result();
+        try {
+            int count = userService.updateUserInfo(model);
+            if (count>0){
+                operationSuccess(result);
+                result.setRes("SUCCESS");
+            }
+        }catch (Exception e){
+            catchExcpetion(e,result);
+        }
+        return result;
+    }
+
+    /**
+     * 删除员工
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/delemployee",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<String> deleteEmployee(UsersModel model){
+//        Result result = checkLogin(new Result(),model.getSessionId());
+//        if (result.getCode() != null){
+//            return result;
+//        }
+        Result result = new Result();
+        try {
+            int success = userService.deleteUser(model);
+            if (success>0){
+                operationSuccess(result);
+                result.setRes("SUCCESS");
+            }
+        }catch (Exception e){
+            catchExcpetion(e,result);
+        }
+        return result;
+    }
+
+    /**
+     * 获得员工信息列表
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "getemployeelist",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<List<UsersVO>> getEmployeeList(UsersModel model){
+//        Result result = checkLogin(new Result(),model.getSessionId());
+//        if (result.getCode() != null){
+//            return result;
+//        }
+        Result result = new Result();
+        try {
+            List<UsersVO> list = userService.selectUserList(model);
+            operationSuccess(result);
+            if (list != null && list.size()>0) {
+                result.setRes(list);
+                result.setTotalRows(list.size());
+            }
+        }catch (Exception e){
+            catchExcpetion(e,result);
+        }
+        return result;
+    }
+
+    /**
+     * 批量删除员工信息
+     * @return
+     */
+    @RequestMapping(value = "/batchdelemployee",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<String> batchDeleteEmployee(UsersModel model){
+//        Result result = checkLogin(new Result(),model.getSessionId());
+//        if (result.getCode() != null){
+//            return result;
+//        }
+        Result result = new Result();
+        List<Long> list = model.getIdList();
+        try{
+            int count = userService.batchDeleteUser(list);
+            if(list !=null && count == list.size()){
+                operationSuccess(result);
+                result.setRes("SUCCESS");
+            }
+        }catch (Exception e){
+            catchExcpetion(e,result);
+        }
+        return result;
+    }
 
     private Result checkLogin(Result r, String sessionId){
         boolean flag = redisUtil.sessionStatus(sessionId);

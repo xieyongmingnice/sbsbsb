@@ -264,4 +264,126 @@
     where r.department_id = #{departmentId,jdbcType=VARCHAR}
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
+
+  <!--增加员工-->
+  <insert id="addUser" parameterType="com.xunyu.model.users.UsersModel">
+    insert into tbl_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="user_type != null">
+        user_type,
+      </if>
+      <if test="isabled != null">
+        isabled,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+        1,
+      <if test="isabled != null">
+        #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+<!--修改员工信息-->
+  <update id="updateUserInfo" parameterType="com.xunyu.model.users.UsersModel">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update tbl_users
+    <set>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="user_type != null">
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="isabled != null">
+        isabled = #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <!--删除员工-->
+  <update id="deleteUser" parameterType="com.xunyu.model.users.UsersModel">
+    update tbl_users
+    set isabled = 0
+    where 1=0
+    <if test="userId != null">
+      or user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    limit 1
+  </update>
+
+  <!-- 查询员工信息列表 -->
+  <select id="selectUserList" parameterType="com.xunyu.model.users.UsersModel" resultMap="ResultVOMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from tbl_users
+    where isabled = 1
+    <if test="userId != null">
+      and user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="account != null and account != '' ">
+      and account like concat('%',#{account,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="password != null and password != '' ">
+      and password = #{password,jdbcType=VARCHAR}
+    </if>
+    <if test="userType != null">
+      and user_type = #{userType,jdbcType=INTEGER}
+    </if>
+    limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+  </select>
+
+  <!-- 批量删除员工 -->
+  <update id="batchDeleteUser" parameterType="java.util.List">
+    update tbl_users
+    set  isabled = 0
+    where user_id in
+    <foreach collection="list" index="index" item="item"
+             separator="," open="(" close=")">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+  </update>
+
+  <!-- 通过account来查询员工列表 -->
+  <select id="selectUserByAccount" resultMap="BaseResultMap" parameterType="com.xunyu.model.users.UsersModel">
+    select *
+    from tbl_users
+    where isabled = 1
+    <if test="account != null and account != '' ">
+      and account = #{account,jdbcType=VARCHAR}
+    </if>
+  </select>
 </mapper>

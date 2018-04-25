@@ -237,8 +237,41 @@
 
   <!--增-->
   <insert id="addUserGroup" parameterType="com.xunyu.model.usergroup.UserGroupModel">
-    insert into tbl_user_group ( user_group_name,  remark)
-    values (#{userGroupName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+    insert into tbl_user_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userGroupId != null">
+        user_group_id,
+      </if>
+      <if test="userGroupName != null">
+        user_group_name,
+      </if>
+      <if test="isabled != null">
+        isabled,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userGroupId != null">
+        #{userGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="userGroupName != null">
+        #{userGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="isabled != null">
+        #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
   </insert>
   <!--删-->
   <update id="deleteUserGroup" parameterType="com.xunyu.model.usergroup.UserGroupModel">

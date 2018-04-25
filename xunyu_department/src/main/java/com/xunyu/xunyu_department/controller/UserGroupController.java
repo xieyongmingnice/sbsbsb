@@ -42,11 +42,10 @@ public class UserGroupController {
     @RequestMapping(value = "/addusergroup",method = RequestMethod.POST)
     @ResponseBody
     public Result<String> addUserGroup(UserGroupModel model){
-//        Result result = checkLogin(new Result(),model.getSessionId());
-//        if (result.getCode() != null){
-//            return result;
-//        }
-        Result result = new Result();
+        Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
         try {
             int success = userGroupService.addUserGroup(model);
             if (success>0){
@@ -64,11 +63,10 @@ public class UserGroupController {
     @RequestMapping(value = "/getusergrouplist",method = RequestMethod.POST)
     @ResponseBody
     public Result<List<UserGroupVO>> selectUserGroupList(UserGroupModel model){
-        //        Result result = checkLogin(new Result(),model.getSessionId());
-//        if (result.getCode() != null){
-//            return result;
-//        }
-        Result result = new Result();
+                Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
         try {
             List<UserGroupVO> list = userGroupService.selectUserGroupList(model);
             operationSuccess(result);
@@ -87,11 +85,10 @@ public class UserGroupController {
     @RequestMapping(value = "/delusergroup",method = RequestMethod.POST)
     @ResponseBody
     public Result<String> deleteUserGroup(UserGroupModel model){
-//        Result result = checkLogin(new Result(),model.getSessionId());
-//        if (result.getCode() != null){
-//            return result;
-//        }
-        Result result = new Result();
+        Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
         try {
             int success = userGroupService.deleteUserGroup(model);
             if (success>0){
@@ -109,11 +106,10 @@ public class UserGroupController {
     @RequestMapping(value = "/batchdelusergroup",method = RequestMethod.POST)
     @ResponseBody
     public Result<String> bathchDeleteUserGroup(UserGroupModel model){
-//        Result result = checkLogin(new Result(),model.getSessionId());
-//        if (result.getCode() != null){
-//            return result;
-//        }
-        Result result = new Result();
+        Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
         List<Long> list = model.getIdList();
         try{
             int count = userGroupService.batchDeleteUserGroup(list);
@@ -133,11 +129,10 @@ public class UserGroupController {
     @RequestMapping(value = "/editusergroup",method = RequestMethod.POST)
     @ResponseBody
     public Result<String> updateUserGroup(UserGroupModel model){
-//        Result result = checkLogin(new Result(),model.getSessionId());
-//        if (result.getCode() != null){
-//            return result;
-//        }
-        Result result = new Result();
+        Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
         try {
             int success = userGroupService.updateUserGroupInfo(model);
             if (success>0){

@@ -63,10 +63,47 @@
   </update>
   <!--新增企业部门-->
   <insert id="addDepartment" parameterType="com.xunyu.xunyu_department.pojo.Department">
-    insert into tbl_department (department_id, department_name, department_linkman,
-    department_phone,  remark)
-    values (#{departmentId,jdbcType=INTEGER}, #{departmentName,jdbcType=VARCHAR}, #{departmentLinkman,jdbcType=VARCHAR},
-    #{departmentPhone,jdbcType=VARCHAR},  #{remark,jdbcType=VARCHAR})
+    insert into tbl_department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="departmentName != null">
+        department_name,
+      </if>
+      <if test="departmentLinkman != null">
+        department_linkman,
+      </if>
+      <if test="departmentPhone != null">
+        department_phone,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentName != null">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentLinkman != null">
+        #{departmentLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentPhone != null">
+        #{departmentPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
   </insert>
   <!--修改企业部门信息-->
   <update id="updateDepartmentInfo" parameterType="com.xunyu.xunyu_department.pojo.Department">
@@ -123,5 +160,6 @@
       #{item,jdbcType=INTEGER}
     </foreach>
   </update>
+
 
 </mapper>
