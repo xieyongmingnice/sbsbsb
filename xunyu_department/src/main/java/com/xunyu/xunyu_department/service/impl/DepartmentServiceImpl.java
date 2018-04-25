@@ -1,6 +1,5 @@
 package com.xunyu.xunyu_department.service.impl;
 
-import com.xunyu.model.user.DepartmentModel;
 import com.xunyu.xunyu_department.dao.DepartmentDaoImpl;
 import com.xunyu.xunyu_department.pojo.Department;
 import com.xunyu.xunyu_department.service.DepartmentService;

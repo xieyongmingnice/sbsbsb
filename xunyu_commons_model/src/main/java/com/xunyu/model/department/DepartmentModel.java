@@ -1,4 +1,6 @@
-package com.xunyu.model.user;
+package com.xunyu.model.department;
+
+import com.xunyu.model.user.UserModel;
 
 import java.util.List;
 

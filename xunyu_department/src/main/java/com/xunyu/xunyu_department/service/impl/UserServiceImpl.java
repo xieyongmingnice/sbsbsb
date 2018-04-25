@@ -1,8 +1,7 @@
 package com.xunyu.xunyu_department.service.impl;
 
-import com.xunyu.model.user.DepartmentModel;
+import com.xunyu.model.department.DepartmentModel;
 import com.xunyu.xunyu_department.dao.UserDaoImpl;
-import com.xunyu.xunyu_department.pojo.Users;
 import com.xunyu.xunyu_department.service.UserService;
 import com.xunyu.xunyu_department.vo.UsersVO;
 import org.springframework.beans.factory.annotation.Autowired;

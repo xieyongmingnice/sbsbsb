@@ -252,7 +252,7 @@
   <!-- 以下为自定义方法 -->
 
   <!-- 通过部门查询员工 -->
-  <select id="selectUserListByDepartmentId" parameterType="com.xunyu.model.user.DepartmentModel" resultMap="ResultVOMap">
+  <select id="selectUserListByDepartmentId" parameterType="com.xunyu.model.department.DepartmentModel" resultMap="ResultVOMap">
     select u.user_id,u.account,u.create_time,u.isabled,
     case when u.user_type = 1 then '员工'
          when u.user_type = 2 then '用户'

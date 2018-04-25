@@ -1,6 +1,5 @@
 package com.xunyu.xunyu_department.service;
 
-import com.xunyu.model.user.DepartmentModel;
 import com.xunyu.xunyu_department.pojo.Department;
 
 import java.util.List;

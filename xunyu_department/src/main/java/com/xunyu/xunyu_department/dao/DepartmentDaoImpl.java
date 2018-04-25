@@ -1,7 +1,6 @@
 package com.xunyu.xunyu_department.dao;
 
 import com.commons.core.dao.impl.BaseDao;
-import com.xunyu.model.user.DepartmentModel;
 import com.xunyu.xunyu_department.pojo.Department;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;

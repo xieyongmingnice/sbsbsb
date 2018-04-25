@@ -5,7 +5,7 @@ import com.commons.core.message.Result;
 import com.commons.core.message.ResultMessage;
 import com.google.common.collect.Maps;
 import com.xunyu.config.redis.RedisUtil;
-import com.xunyu.model.user.DepartmentModel;
+import com.xunyu.model.department.DepartmentModel;
 import com.xunyu.xunyu_department.pojo.Department;
 import com.xunyu.xunyu_department.pojo.Users;
 import com.xunyu.xunyu_department.service.DepartmentService;
@@ -218,9 +218,6 @@ public class DepartmentController {
     /**
      * 导出企业部门
      */
-
-
-
 
     private Result checkLogin(Result r,String sessionId){
         boolean flag = redisUtil.sessionStatus(sessionId);

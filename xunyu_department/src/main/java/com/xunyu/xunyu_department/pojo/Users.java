@@ -1,5 +1,6 @@
 package com.xunyu.xunyu_department.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,8 @@ import java.util.Date;
  * @description 员工用户
  * @date 2018/4/20 18:02
  */
-public class Users {
+public class Users implements Serializable{
+    private static final long serialVersionUID = 8471439465791691291L;
     /**
      * 流水id
      */
