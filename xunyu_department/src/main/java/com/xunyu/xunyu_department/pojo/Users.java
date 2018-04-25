@@ -7,7 +7,7 @@ import java.util.Date;
  * @description 员工用户
  * @date 2018/4/20 18:02
  */
-public class User {
+public class Users {
     /**
      * 流水id
      */
@@ -27,7 +27,7 @@ public class User {
     /**
      *
      */
-    private int isAbled;
+    private int isabled;
     /**
      *
      */
@@ -65,12 +65,12 @@ public class User {
         this.userType = userType;
     }
 
-    public int getIsAbled() {
-        return isAbled;
+    public int getIsabled() {
+        return isabled;
     }
 
-    public void setIsAbled(int isAbled) {
-        this.isAbled = isAbled;
+    public void setIsabled(int isAbled) {
+        this.isabled = isAbled;
     }
 
     public Date getCreateTime() {

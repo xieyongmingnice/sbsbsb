@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: xunyu-department
+  profiles:
+    active: core #加载xunyu_config项目中 的application-core.yml文件
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:17081/eureka/
+#  instance:
+#      status-page-url: http://doctorppe.zhyaoshi.com/info
+server:
+  port: 17096
+
+logging:
+  level:
+    src.main.java.com.xunyu.xunyu_department.dao: debug
+    src.main.resources.mapper: debug
+
+feign:
+   httpclient:
+      enabled: true
+   hystrix:
+      enabled: false  #禁用feign的熔断机制
+   compression:
+       request:
+         mime-types:
+         - text/xml
+         - application/xml
+         - application/json
+         min-request-size: 2048  #超过2048的字节进行压缩
+
+hystrix:
+   command:
+    default:
+      execution:
+        isolation:
+         thread:
+          timeoutInMilliseconds: 40000  #设置超时时间

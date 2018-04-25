@@ -19,7 +19,7 @@ public class RedisUtil {
      *  
      * @param keys 
      */  
-    public void remove(final String... keys) {  
+    public void remove(final String... keys) {
         for (String key : keys) {  
             remove(key);  
         }  
@@ -30,7 +30,7 @@ public class RedisUtil {
      *  
      * @param pattern 
      */  
-    public void removePattern(final String pattern) {  
+    public void removePattern(final String pattern) {
         Set<String> keys = redisTemplate.keys(pattern);  
         if (keys.size() > 0)  
             redisTemplate.delete(keys);  
@@ -41,7 +41,7 @@ public class RedisUtil {
      *  
      * @param key 
      */  
-    public void remove(final String key) {  
+    public void remove(final String key) {
         if (exists(key)) {  
             redisTemplate.delete(key);  
         }  
@@ -140,6 +140,9 @@ public class RedisUtil {
      */
     public boolean sessionStatus(String sessionId){
         boolean flag = false;
+        if (sessionId == null){
+            return flag;
+        }
         Session session = getSession(sessionId);
         if(session != null){
             flag = true;

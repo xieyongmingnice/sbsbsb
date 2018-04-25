@@ -1,16 +1,11 @@
-package com.xunyu.xunyu_department.pojo;
+package com.xunyu.xunyu_department.vo;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author xym
- * @description 部门  实体类
- * @date 2018/4/20 17:38
- */
-public class Department implements Serializable{
-    private static final long serialVersionUID = 5895836573558705657L;
+public class DepartmentVO implements Serializable{
 
+    private static final long serialVersionUID = -1249975456918550208L;
     /**
      * 部门ID
      */
@@ -42,6 +37,12 @@ public class Department implements Serializable{
      * 创建时间
      */
     private Date createTime;
+
+    /**
+     * 部门员工数
+     */
+    private Integer employeeNum;
+
 
     public Long getDepartmentId() {
         return departmentId;
@@ -75,13 +76,12 @@ public class Department implements Serializable{
         this.departmentPhone = departmentPhone;
     }
 
-
     public int getIsabled() {
         return isabled;
     }
 
-    public void setIsabled(int isAbled) {
-        this.isabled = isAbled;
+    public void setIsabled(int isabled) {
+        this.isabled = isabled;
     }
 
     public String getRemark() {
@@ -98,5 +98,13 @@ public class Department implements Serializable{
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getEmployeeNum() {
+        return employeeNum;
+    }
+
+    public void setEmployeeNum(Integer employeeNum) {
+        this.employeeNum = employeeNum;
     }
 }

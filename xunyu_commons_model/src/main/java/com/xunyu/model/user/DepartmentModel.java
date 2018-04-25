@@ -1,16 +1,15 @@
-package com.xunyu.xunyu_department.pojo;
+package com.xunyu.model.user;
 
-import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 /**
  * @author xym
- * @description 部门  实体类
- * @date 2018/4/20 17:38
+ * @description 企业部门 参数实体类
+ * @date 2018/4/24 10:16
  */
-public class Department implements Serializable{
-    private static final long serialVersionUID = 5895836573558705657L;
+public class DepartmentModel extends UserModel {
 
+    private static final long serialVersionUID = -1134319541431865755L;
     /**
      * 部门ID
      */
@@ -28,20 +27,25 @@ public class Department implements Serializable{
      * 部门电话
      */
     private String departmentPhone;
-    /**
-     * 可用状态标志
-     */
-    private int isabled;
 
     /**
      * 备注
+     * @return
      */
     private String remark;
 
     /**
-     * 创建时间
+     * 批量操作时用到的Id列表
      */
-    private Date createTime;
+    private List<Long> idList;
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public Long getDepartmentId() {
         return departmentId;
@@ -75,28 +79,11 @@ public class Department implements Serializable{
         this.departmentPhone = departmentPhone;
     }
 
-
-    public int getIsabled() {
-        return isabled;
+    public List<Long> getIdList() {
+        return idList;
     }
 
-    public void setIsabled(int isAbled) {
-        this.isabled = isAbled;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setIdList(List<Long> idList) {
+        this.idList = idList;
     }
 }

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.xunyu_department.pojo.Department">
+  <resultMap id="BaseResultMap" type="com.xunyu.xunyu_department.pojo.Department">
+    <id column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="department_linkman" jdbcType="VARCHAR" property="departmentLinkman" />
+    <result column="department_phone" jdbcType="VARCHAR" property="departmentPhone" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <resultMap id="selectListResultMap" type="com.xunyu.xunyu_department.vo.DepartmentVO">
+    <id column="department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="department_linkman" jdbcType="VARCHAR" property="departmentLinkman" />
+    <result column="department_phone" jdbcType="VARCHAR" property="departmentPhone" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="employee_num" jdbcType="INTEGER" property="employeeNum" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    department_id, department_name, department_linkman, department_phone, isabled, remark, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_department
+    where department_id = #{departmentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_department
+    where department_id = #{departmentId,jdbcType=INTEGER}
+  </delete>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyu.xunyu_department.pojo.Department">
+    update tbl_department
+    <set>
+      <if test="departmentName != null">
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentLinkman != null">
+        department_linkman = #{departmentLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentPhone != null">
+        department_phone = #{departmentPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="isabled != null">
+        isabled = #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where department_id = #{departmentId,jdbcType=INTEGER}
+  </update>
+  <!--新增企业部门-->
+  <insert id="addDepartment" parameterType="com.xunyu.xunyu_department.pojo.Department">
+    insert into tbl_department (department_id, department_name, department_linkman,
+    department_phone,  remark)
+    values (#{departmentId,jdbcType=INTEGER}, #{departmentName,jdbcType=VARCHAR}, #{departmentLinkman,jdbcType=VARCHAR},
+    #{departmentPhone,jdbcType=VARCHAR},  #{remark,jdbcType=VARCHAR})
+  </insert>
+  <!--修改企业部门信息-->
+  <update id="updateDepartmentInfo" parameterType="com.xunyu.xunyu_department.pojo.Department">
+    update tbl_department
+    <set>
+      <if test="departmentName != null">
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentLinkman != null">
+        department_linkman = #{departmentLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentPhone != null">
+        department_phone = #{departmentPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where department_id = #{departmentId,jdbcType=INTEGER}
+    limit 1
+  </update>
+
+  <!--查询企业部门列表-->
+  <select id="selectDepartmentList" parameterType="java.util.Map" resultMap="selectListResultMap">
+      select d.department_id, d.department_name, d.department_linkman,department_phone,
+              d.remark,  d.create_time ,count(r.user_id) employee_num
+      from tbl_department d
+      LEFT JOIN tbl_department_user_r r
+      ON  d.department_id = r.department_id
+      where d.isabled = 1
+      <if test="model.departmentName != '' and model.departmentName != null">
+        and d.department_name like CONCAT('%',#{model.departmentName,jdbcType=VARCHAR},'%')
+      </if>
+      GROUP BY d.department_id
+      limit #{model.offset,jdbcType=INTEGER},#{model.limit,jdbcType=INTEGER}
+  </select>
+
+  <!--删除企业部门（逻辑删除）-->
+  <update id="deleteDepartment" parameterType="com.xunyu.xunyu_department.pojo.Department">
+    update tbl_department
+    set
+      isabled = 0
+    where department_id = #{departmentId,jdbcType=INTEGER}
+    limit 1
+  </update>
+
+  <!--批量删除企业部门-->
+  <update id="batchDeleteDepartment" parameterType="java.util.List">
+    update tbl_department
+    set  isabled = 0
+    where department_id in
+    <foreach collection="list" index="index" item="item"
+             separator="," open="(" close=")">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+  </update>
+
+</mapper>
