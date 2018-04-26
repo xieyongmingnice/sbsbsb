@@ -2,12 +2,12 @@ package com.xunyu.xunyu_department.controller;
 
 import com.commons.core.message.Result;
 import com.commons.core.message.ResultMessage;
+import com.commons.core.util.MD5Utils;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.user.UserModel;
 import com.xunyu.model.users.UsersModel;
 import com.xunyu.xunyu_department.pojo.Users;
 import com.xunyu.xunyu_department.service.UserService;
-import com.xunyu.xunyu_department.vo.UserGroupVO;
 import com.xunyu.xunyu_department.vo.UsersVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +29,8 @@ import java.util.List;
 public class UserController {
 
     private Logger logger = LoggerFactory.getLogger(UserController.class);
+
+    private static final String success = "SUCCESS";
 
     @Autowired
     UserService userService;
@@ -56,10 +58,11 @@ public class UserController {
                 result.setCode(ResultMessage.Code.USER_EXIST);
                 return result;
             }
+            model.setPassword(MD5Utils.getMD5(model.getPassword()));
             int count = userService.addUser(model);
             if (count > 0){
                 operationSuccess(result);
-                result.setRes("SUCCESS");
+                result.setRes(success);
             }
         }catch (Exception e){
             catchExcpetion(e,result);
@@ -81,10 +84,13 @@ public class UserController {
 //        }
         Result result = new Result();
         try {
+            if (model.getPassword() != null){
+                model.setPassword(MD5Utils.getMD5(model.getPassword()));
+            }
             int count = userService.updateUserInfo(model);
             if (count>0){
                 operationSuccess(result);
-                result.setRes("SUCCESS");
+                result.setRes(success);
             }
         }catch (Exception e){
             catchExcpetion(e,result);
@@ -109,7 +115,7 @@ public class UserController {
             int success = userService.deleteUser(model);
             if (success>0){
                 operationSuccess(result);
-                result.setRes("SUCCESS");
+                result.setRes(success);
             }
         }catch (Exception e){
             catchExcpetion(e,result);
@@ -160,7 +166,7 @@ public class UserController {
             int count = userService.batchDeleteUser(list);
             if(list !=null && count == list.size()){
                 operationSuccess(result);
-                result.setRes("SUCCESS");
+                result.setRes(success);
             }
         }catch (Exception e){
             catchExcpetion(e,result);

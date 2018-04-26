@@ -290,7 +290,14 @@
     <if test="remark != null and remark != '' ">
       remark = #{remark,jdbcType=VARCHAR}
     </if>
-    where user_group_id = #{userGroupId,jdbcType=INTEGER}
+    where
+    <if test="userGroupId != null">
+      user_group_id = #{userGroupId,jdbcType=INTEGER}
+    </if>
+    <if test="userGroupId == null">
+      1 = 0
+    </if>
+    limit 1
   </update>
   <!--查-->
   <select id="selectUserGroupList" parameterType="com.xunyu.model.usergroup.UserGroupModel" resultMap="selectListResultMap">

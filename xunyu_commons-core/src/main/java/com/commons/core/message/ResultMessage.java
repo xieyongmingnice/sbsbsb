@@ -30,7 +30,7 @@ public interface ResultMessage {
 
         String ERROR = "500";
 
-        String USER_EXIST = "412";
+        String USER_EXIST = "413";
 
     }
 
