@@ -9,7 +9,6 @@ import com.aliyun.oss.model.PutObjectResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.IOException;
@@ -27,7 +26,6 @@ import java.util.Map;
  *
  * @version1.0
  */
-@Configuration
 public class AliyunOssUtil {
 
     private static Logger logger = LoggerFactory.getLogger(AliyunOssUtil.class);
@@ -61,7 +59,7 @@ public class AliyunOssUtil {
      Map<String, Object> resultMap = new HashMap<String, Object>();
 
     /**
-     * 构造器，初始化参数。并实例化ossClient对象
+     * 静态代码块，初始化参数。并实例化ossClient对象
      */
    static {
         try {
@@ -206,16 +204,14 @@ public class AliyunOssUtil {
 
         if (file == null) {
             resultMap.put("status", false);
-            resultMap.put("msg", "未选择文件!");
+            resultMap.put("msg", "未选择文件");
             destory();
             return resultMap;
         }
-
         long limitSizeBytes = limitSize * 1024 * 1024;// 把单位M转换为bytes
-
         if (file.getSize() > limitSizeBytes) {
             resultMap.put("status", false);
-            resultMap.put("msg", "您上传的文件超出限制大小" + limitSize + "M");
+            resultMap.put("msg", "您上传的文件超出限制大小。" + limitSize + "M");
             destory();
             return resultMap;
         }
@@ -241,7 +237,7 @@ public class AliyunOssUtil {
 
         if (file == null) {
             resultMap.put("status", false);
-            resultMap.put("msg", "未选择文件!");
+            resultMap.put("msg", "未选择文件。");
             destory();
             return resultMap;
         }
@@ -365,6 +361,21 @@ public class AliyunOssUtil {
                 iputstream.close();
             }
         }
+    }
+
+    /**
+     * 做内部类的单利模式
+     * 1/构造器私有化
+     */
+    private AliyunOssUtil(){}
+
+    private static class OssUtilSigen{
+        //静态初始化器，由JVM来保证线程安全
+        private static AliyunOssUtil instance=new AliyunOssUtil();
+    }
+
+    public static AliyunOssUtil getInstance(){
+        return OssUtilSigen.instance;
     }
 
 }

@@ -1,7 +1,7 @@
 package com.xunyu.crm.controller.upload;
 
 import com.xunyu.config.oos.AliyunOssUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.xunyu.config.oos.ImgUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,18 +22,12 @@ import java.util.UUID;
 public class FileUpController {
 
     /**
-     * 注入
-     */
-    @Autowired
-    private AliyunOssUtil aliyunOssUtil;
-
-    /**
      * 上传文件
      * @Param file文件对象
      * @Param dirName目录名称
      * @Param fileName文件名称
      */
-    @RequestMapping(value = "uploadFile",method = RequestMethod.POST)
+    @RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
     public Map<String,Object> uploadFileData(HttpServletRequest request,
            String folderName,HttpServletResponse response){
 
@@ -44,11 +38,18 @@ public class FileUpController {
         String fileName = file.getOriginalFilename();
         if(file != null) {
             try {
+                AliyunOssUtil aliyunOssUtil = AliyunOssUtil.getInstance();
                 String rex = fileName.substring(fileName.lastIndexOf("."));
                 String dirName = "";//通过后缀确定上传目录名称
                 StringBuffer newName = new StringBuffer();
                 newName.append(UUID.randomUUID()).append(rex);
-                map = aliyunOssUtil.uploadFileOSS(file, dirName, fileName);
+                if(ImgUtils.isImg(rex)) {//是图片
+                    dirName = "/image";
+                    map = aliyunOssUtil.ImgUploadLimitSizeOSS(file,dirName,newName.toString(),9);
+                }else{
+                    dirName = "/"+rex;
+                    map = aliyunOssUtil.uploadFileOSS(file,dirName,newName.toString());
+                }
             }catch (Exception e){
                 e.printStackTrace();
             }
