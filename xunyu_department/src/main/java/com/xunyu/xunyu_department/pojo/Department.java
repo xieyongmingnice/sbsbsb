@@ -29,7 +29,7 @@ public class Department implements Serializable{
      */
     private String departmentPhone;
     /**
-     * 可用状态标志
+     * 可用状态标志 1：可用，0：不可用
      */
     private int isabled;
 

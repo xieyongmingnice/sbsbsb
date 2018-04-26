@@ -82,6 +82,13 @@ public class DepartmentController {
         if (result.getCode() != null){
             return result;
         }
+        int currPage = model.getCurrPage();
+        if (currPage == 0){
+            result.setMessage(ResultMessage.Message.PRAMA_LOSS);
+            result.setCode(ResultMessage.Code.PRAMA_LOSS);
+            return result;
+        }
+        model.setOffset(model.getStartRows());
         Map map = Maps.newHashMap();
         map.put("model",model);
         try{
@@ -92,6 +99,8 @@ public class DepartmentController {
                 result.setCode(ResultMessage.Code.SUCCESS);
                 result.setMessage(ResultMessage.Message.SUCCESS);
                 result.setTotalRows(departments.size());
+            }else {
+                result.setMessage(ResultMessage.Message.NO_VALUE);
             }
         }catch (Exception e){
             result.setCode(ResultMessage.Code.ERROR);
