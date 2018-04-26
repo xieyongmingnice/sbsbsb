@@ -7,6 +7,7 @@ import java.util.Date;
 /**
  * @author dth
  * @date 2018/4/26 14:46
+ * 客户付费记录
  **/
 public class CustomerPay extends UserModel{
 
