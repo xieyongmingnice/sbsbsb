@@ -1,6 +1,7 @@
 package com.xunyu.xunyu_department.service.impl;
 
 import com.xunyu.model.department.DepartmentModel;
+import com.xunyu.model.usergroup.UserGroupModel;
 import com.xunyu.model.users.UsersModel;
 import com.xunyu.xunyu_department.dao.UserDaoImpl;
 import com.xunyu.xunyu_department.pojo.Users;
@@ -19,6 +20,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UsersVO> selectUserListByDepartmentId(DepartmentModel model) {
         return dao.selectUserListByDepartmentId(model);
+    }
+
+    @Override
+    public List<UsersVO> selectUserListByUserGroupId(UserGroupModel model) {
+        return dao.selectUserListByUserGroupId(model);
     }
 
     @Override

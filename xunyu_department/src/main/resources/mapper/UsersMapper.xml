@@ -19,9 +19,10 @@
     <id column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="account" jdbcType="VARCHAR" property="account" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
     <result column="isabled" jdbcType="INTEGER" property="isabled" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="user_type_str" jdbcType="VARCHAR" property="userTypeStr" />
   </resultMap>
 
   <sql id="Example_Where_Clause">
@@ -253,15 +254,20 @@
 
   <!-- 通过部门查询员工 -->
   <select id="selectUserListByDepartmentId" parameterType="com.xunyu.model.department.DepartmentModel" resultMap="ResultVOMap">
-    select u.user_id,u.account,u.create_time,u.isabled,
+    select u.user_id,u.account,u.user_type,u.create_time,u.isabled,
     case when u.user_type = 1 then '员工'
          when u.user_type = 2 then '用户'
-    end as user_type
+    end as user_type_str
     from tbl_department_user_r r
     left join tbl_users u
     on r.user_id = u.user_id
-    and u.isabled = 1
-    where r.department_id = #{departmentId,jdbcType=VARCHAR}
+    left join tbl_department d
+    on r.department_id = d.department_id
+    where u.isabled = 1 and u.user_type = 1
+    and d.isabled = 1
+    <if test="departmentId != null">
+      and r.department_id = #{departmentId,jdbcType=VARCHAR}
+    </if>
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
 
@@ -269,7 +275,7 @@
   <insert id="addUser" parameterType="com.xunyu.model.users.UsersModel">
     insert into tbl_users
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="user_id != null">
+      <if test="userId != null">
         user_id,
       </if>
       <if test="account != null">
@@ -278,13 +284,10 @@
       <if test="password != null">
         password,
       </if>
-      <if test="user_type != null">
+      <if test="userType != null">
         user_type,
       </if>
-      <if test="isabled != null">
-        isabled,
-      </if>
-      <if test="create_time != null">
+      <if test="createTime != null">
         create_time,
       </if>
     </trim>
@@ -299,9 +302,6 @@
         #{password,jdbcType=VARCHAR},
       </if>
         1,
-      <if test="isabled != null">
-        #{isabled,jdbcType=INTEGER},
-      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -321,26 +321,22 @@
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="user_type != null">
-        user_type = #{userType,jdbcType=INTEGER},
-      </if>
-      <if test="isabled != null">
-        isabled = #{isabled,jdbcType=INTEGER},
-      </if>
-      <if test="create_time != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
+    and user_type = 1
+    and isabled = 1
   </update>
 
   <!--删除员工-->
   <update id="deleteUser" parameterType="com.xunyu.model.users.UsersModel">
     update tbl_users
     set isabled = 0
-    where 1=0
+    where isabled = 1 and
     <if test="userId != null">
-      or user_id = #{userId,jdbcType=INTEGER}
+      user_type = 1 and user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="userId == null">
+      1 = 0
     </if>
     limit 1
   </update>
@@ -348,20 +344,17 @@
   <!-- 查询员工信息列表 -->
   <select id="selectUserList" parameterType="com.xunyu.model.users.UsersModel" resultMap="ResultVOMap">
     select
-    <include refid="Base_Column_List"></include>
+      user_id,account,create_time,user_type,isabled,
+      case when user_type = 1 then '员工'
+           when user_type = 2 then '用户'
+      end as user_type_str
     from tbl_users
-    where isabled = 1
-    <if test="userId != null">
-      and user_id = #{userId,jdbcType=INTEGER}
-    </if>
+    where isabled = 1 and user_type = 1
     <if test="account != null and account != '' ">
       and account like concat('%',#{account,jdbcType=VARCHAR},'%')
     </if>
     <if test="password != null and password != '' ">
       and password = #{password,jdbcType=VARCHAR}
-    </if>
-    <if test="userType != null">
-      and user_type = #{userType,jdbcType=INTEGER}
     </if>
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
@@ -370,7 +363,9 @@
   <update id="batchDeleteUser" parameterType="java.util.List">
     update tbl_users
     set  isabled = 0
-    where user_id in
+    where user_type = 1
+    and isabled = 1
+    and user_id in
     <foreach collection="list" index="index" item="item"
              separator="," open="(" close=")">
       #{item,jdbcType=INTEGER}
@@ -385,5 +380,24 @@
     <if test="account != null and account != '' ">
       and account = #{account,jdbcType=VARCHAR}
     </if>
+  </select>
+
+  <!-- 通过员工分组查询员工列表 -->
+  <select id="selectUserListByUserGroupId" parameterType="com.xunyu.model.usergroup.UserGroupModel" resultMap="ResultVOMap">
+    select u.user_id,u.account,u.create_time,
+      case when u.user_type = 1 then '员工'
+           when u.user_type = 2 then '用户'
+      end as user_type_str
+    from tbl_group_user_r r
+    left join tbl_users u
+    on u.user_id = r.user_id
+    left join tbl_user_group g
+    on g.user_group_id = r.user_group_id
+    where u.isabled = 1 and u.user_type = 1
+    and g.isabled = 1
+    <if test="userGroupId != null">
+      and r.user_group_id = #{userGroupId,jdbcType=INTEGER}
+    </if>
+    limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
 </mapper>

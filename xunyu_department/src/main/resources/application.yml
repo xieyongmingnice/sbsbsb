@@ -7,11 +7,11 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:17081/eureka/
+      defaultZone: http://localhost:8001/eureka/
 #  instance:
 #      status-page-url: http://doctorppe.zhyaoshi.com/info
 server:
-  port: 17096
+  port: 8008
 
 logging:
   level:

@@ -11,7 +11,7 @@ public class UsersVO {
     /**
      * 流水id
      */
-    private long  userId;
+    private Long  userId;
     /**
      * 账号
      */
@@ -20,24 +20,31 @@ public class UsersVO {
      * 密码
      */
     private String password;
+
     /**
      * 用户类型
      */
-    private String userType;
+    private Integer userType;
+
     /**
-     *
+     * 可用状态
      */
-    private int isabled;
+    private Integer isabled;
     /**
-     *
+     * 创建时间
      */
     private Date createTime;
 
-    public long getUserId() {
+    /**
+     * 用户类型str
+     */
+    private String userTypeStr;
+
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -57,20 +64,20 @@ public class UsersVO {
         this.password = password;
     }
 
-    public String getUserType() {
+    public Integer getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
+    public void setUserType(Integer userType) {
         this.userType = userType;
     }
 
-    public int getIsabled() {
+    public Integer getIsabled() {
         return isabled;
     }
 
-    public void setIsabled(int isAbled) {
-        this.isabled = isAbled;
+    public void setIsabled(Integer isabled) {
+        this.isabled = isabled;
     }
 
     public Date getCreateTime() {
@@ -79,5 +86,13 @@ public class UsersVO {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getUserTypeStr() {
+        return userTypeStr;
+    }
+
+    public void setUserTypeStr(String userTypeStr) {
+        this.userTypeStr = userTypeStr;
     }
 }

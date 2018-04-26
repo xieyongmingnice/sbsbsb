@@ -2,6 +2,7 @@ package com.xunyu.xunyu_department.dao;
 
 import com.commons.core.dao.impl.BaseDao;
 import com.xunyu.model.department.DepartmentModel;
+import com.xunyu.model.usergroup.UserGroupModel;
 import com.xunyu.model.users.UsersModel;
 import com.xunyu.xunyu_department.pojo.Users;
 import com.xunyu.xunyu_department.vo.UsersVO;
@@ -26,6 +27,14 @@ public class UserDaoImpl extends BaseDao {
         return super.selectList("com.xunyu.xunyu_department.pojo.Users.selectUserListByDepartmentId",model);
     }
 
+    /**
+     * 通过员工分组id查询员工列表
+     * @param model
+     * @return
+     */
+    public List<UsersVO> selectUserListByUserGroupId(UserGroupModel model){
+        return super.selectList("com.xunyu.xunyu_department.pojo.Users.selectUserListByUserGroupId",model);
+    }
     public int addUser(UsersModel model){
         return super.insert("com.xunyu.xunyu_department.pojo.Users.addUser",model);
     }
@@ -49,6 +58,8 @@ public class UserDaoImpl extends BaseDao {
     public List<Users> selectUserByAccount(UsersModel model){
         return super.selectList("com.xunyu.xunyu_department.pojo.Users.selectUserByAccount",model);
     }
+
+
 
     public UserDaoImpl(SqlSessionFactory sqlSessionFactory) {
         super(sqlSessionFactory);

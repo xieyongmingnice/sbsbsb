@@ -2,12 +2,12 @@ package com.xunyu.xunyu_department.controller;
 
 import com.commons.core.message.Result;
 import com.commons.core.message.ResultMessage;
+import com.commons.core.util.MD5Utils;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.user.UserModel;
 import com.xunyu.model.users.UsersModel;
 import com.xunyu.xunyu_department.pojo.Users;
 import com.xunyu.xunyu_department.service.UserService;
-import com.xunyu.xunyu_department.vo.UserGroupVO;
 import com.xunyu.xunyu_department.vo.UsersVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +30,8 @@ public class UserController {
 
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    private static final String success = "SUCCESS";
+
     @Autowired
     UserService userService;
 
@@ -44,11 +46,10 @@ public class UserController {
     @RequestMapping(value = "/addemployee",method = RequestMethod.POST)
     @ResponseBody
     public Result<String> addEmployee(UsersModel model){
-//        Result result = checkLogin(new Result(),model.getSessionId());
-//        if (result.getCode() != null){
-//            return result;
-//        }
-        Result result = new Result();
+        Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
         try{
             List<Users> users = userService.selectUserListByAccount(model);
             if (users != null && users.size()>0){
@@ -56,10 +57,11 @@ public class UserController {
                 result.setCode(ResultMessage.Code.USER_EXIST);
                 return result;
             }
+            model.setPassword(MD5Utils.getMD5(model.getPassword()));
             int count = userService.addUser(model);
             if (count > 0){
                 operationSuccess(result);
-                result.setRes("SUCCESS");
+                result.setRes(success);
             }
         }catch (Exception e){
             catchExcpetion(e,result);
@@ -75,16 +77,18 @@ public class UserController {
     @RequestMapping(value = "/editemployeeinfo",method = RequestMethod.POST)
     @ResponseBody
     public Result<String> editEmployeeInfo(UsersModel model){
-//        Result result = checkLogin(new Result(),model.getSessionId());
-//        if (result.getCode() != null){
-//            return result;
-//        }
-        Result result = new Result();
+        Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
         try {
+            if (model.getPassword() != null){
+                model.setPassword(MD5Utils.getMD5(model.getPassword()));
+            }
             int count = userService.updateUserInfo(model);
             if (count>0){
                 operationSuccess(result);
-                result.setRes("SUCCESS");
+                result.setRes(success);
             }
         }catch (Exception e){
             catchExcpetion(e,result);
@@ -100,16 +104,15 @@ public class UserController {
     @RequestMapping(value = "/delemployee",method = RequestMethod.POST)
     @ResponseBody
     public Result<String> deleteEmployee(UsersModel model){
-//        Result result = checkLogin(new Result(),model.getSessionId());
-//        if (result.getCode() != null){
-//            return result;
-//        }
-        Result result = new Result();
+        Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
         try {
             int success = userService.deleteUser(model);
             if (success>0){
                 operationSuccess(result);
-                result.setRes("SUCCESS");
+                result.setRes(success);
             }
         }catch (Exception e){
             catchExcpetion(e,result);
@@ -125,11 +128,10 @@ public class UserController {
     @RequestMapping(value = "getemployeelist",method = RequestMethod.POST)
     @ResponseBody
     public Result<List<UsersVO>> getEmployeeList(UsersModel model){
-//        Result result = checkLogin(new Result(),model.getSessionId());
-//        if (result.getCode() != null){
-//            return result;
-//        }
-        Result result = new Result();
+        Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
         try {
             List<UsersVO> list = userService.selectUserList(model);
             operationSuccess(result);
@@ -150,17 +152,16 @@ public class UserController {
     @RequestMapping(value = "/batchdelemployee",method = RequestMethod.POST)
     @ResponseBody
     public Result<String> batchDeleteEmployee(UsersModel model){
-//        Result result = checkLogin(new Result(),model.getSessionId());
-//        if (result.getCode() != null){
-//            return result;
-//        }
-        Result result = new Result();
+        Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
         List<Long> list = model.getIdList();
         try{
             int count = userService.batchDeleteUser(list);
             if(list !=null && count == list.size()){
                 operationSuccess(result);
-                result.setRes("SUCCESS");
+                result.setRes(success);
             }
         }catch (Exception e){
             catchExcpetion(e,result);
