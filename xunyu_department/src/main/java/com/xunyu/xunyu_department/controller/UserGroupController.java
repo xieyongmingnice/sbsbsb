@@ -25,7 +25,7 @@ import java.util.List;
  * @date 2018/4/25 14:48
  */
 @RestController
-@RequestMapping("usergroup")
+@RequestMapping("/usergroup")
 public class UserGroupController {
 
     @Autowired
