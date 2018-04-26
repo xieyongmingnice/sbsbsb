@@ -254,15 +254,20 @@
 
   <!-- 通过部门查询员工 -->
   <select id="selectUserListByDepartmentId" parameterType="com.xunyu.model.department.DepartmentModel" resultMap="ResultVOMap">
-    select u.user_id,u.account,u,user_type,u.create_time,u.isabled,
+    select u.user_id,u.account,u.user_type,u.create_time,u.isabled,
     case when u.user_type = 1 then '员工'
          when u.user_type = 2 then '用户'
     end as user_type_str
     from tbl_department_user_r r
     left join tbl_users u
     on r.user_id = u.user_id
-    and u.isabled = 1
-    where r.department_id = #{departmentId,jdbcType=VARCHAR}
+    left join tbl_department d
+    on r.department_id = d.department_id
+    where u.isabled = 1 and u.user_type = 1
+    and d.isabled = 1
+    <if test="departmentId != null">
+      and r.department_id = #{departmentId,jdbcType=VARCHAR}
+    </if>
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
 
@@ -375,5 +380,24 @@
     <if test="account != null and account != '' ">
       and account = #{account,jdbcType=VARCHAR}
     </if>
+  </select>
+
+  <!-- 通过员工分组查询员工列表 -->
+  <select id="selectUserListByUserGroupId" parameterType="com.xunyu.model.usergroup.UserGroupModel" resultMap="ResultVOMap">
+    select u.user_id,u.account,u.create_time,
+      case when u.user_type = 1 then '员工'
+           when u.user_type = 2 then '用户'
+      end as user_type_str
+    from tbl_group_user_r r
+    left join tbl_users u
+    on u.user_id = r.user_id
+    left join tbl_user_group g
+    on g.user_group_id = r.user_group_id
+    where u.isabled = 1 and u.user_type = 1
+    and g.isabled = 1
+    <if test="userGroupId != null">
+      and r.user_group_id = #{userGroupId,jdbcType=INTEGER}
+    </if>
+    limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
 </mapper>

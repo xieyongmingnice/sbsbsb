@@ -2,6 +2,7 @@ package com.xunyu.xunyu_department.service;
 
 import com.xunyu.model.department.DepartmentModel;
 import com.xunyu.model.user.UserModel;
+import com.xunyu.model.usergroup.UserGroupModel;
 import com.xunyu.model.users.UsersModel;
 import com.xunyu.xunyu_department.pojo.Users;
 import com.xunyu.xunyu_department.vo.UsersVO;
@@ -21,6 +22,13 @@ public interface UserService {
      * @return
      */
     List<UsersVO> selectUserListByDepartmentId(DepartmentModel model);
+
+    /**
+     * 通过员工分组id查询员工列表
+     * @param model
+     * @return
+     */
+    List<UsersVO> selectUserListByUserGroupId(UserGroupModel model);
 
     /**
      * 新增员工

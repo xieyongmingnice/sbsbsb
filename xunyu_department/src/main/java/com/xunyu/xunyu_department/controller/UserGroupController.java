@@ -6,6 +6,7 @@ import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.usergroup.UserGroupModel;
 import com.xunyu.xunyu_department.pojo.UserGroup;
 import com.xunyu.xunyu_department.service.UserGroupService;
+import com.xunyu.xunyu_department.service.UserService;
 import com.xunyu.xunyu_department.vo.UserGroupVO;
 import com.xunyu.xunyu_department.vo.UsersVO;
 import org.slf4j.Logger;
@@ -29,6 +30,9 @@ public class UserGroupController {
 
     @Autowired
     UserGroupService userGroupService;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     RedisUtil redisUtil;
@@ -145,11 +149,27 @@ public class UserGroupController {
         return result;
     }
     /**
-     * 导出员工分组信息
+     * 查看员工列表
      */
-//    @RequestMapping(value = "/exportusergroup",method = RequestMethod.POST)
-//    @ResponseBody
-
+    @RequestMapping(value = "/showemployees",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<UsersVO> showEmployees(UserGroupModel model){
+        Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
+        try{
+            List<UsersVO> users = userService.selectUserListByUserGroupId(model);
+            if (users != null && users.size() > 0){
+                operationSuccess(result);
+                result.setRes(users);
+                result.setTotalRows(users.size());
+            }
+        }catch (Exception e){
+            catchExcpetion(e,result);
+        }
+        return result;
+    }
 
 
     private Result checkLogin(Result r, String sessionId){
