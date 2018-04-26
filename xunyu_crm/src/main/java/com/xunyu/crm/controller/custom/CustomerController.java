@@ -3,10 +3,8 @@ package com.xunyu.crm.controller.custom;
 import com.commons.core.message.Result;
 import com.commons.core.util.StringUtils2;
 import com.xunyu.config.redis.RedisUtil;
-import com.xunyu.crm.pojo.customer.CustomerGroup;
 import com.xunyu.crm.pojo.customer.CustomerTab;
 import com.xunyu.crm.service.customer.CustomerService;
-import com.xunyu.model.customer.CustomerGroupModel;
 import com.xunyu.model.customer.CustomerModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -133,8 +131,8 @@ public class CustomerController {
     /**
      * 获取客户信息列表
      */
-    @RequestMapping(value = "customerGroupList",method = RequestMethod.POST)
-    public Result<List<CustomerTab>> customerGroupListData(HttpServletResponse response, CustomerModel cm){
+    @RequestMapping(value = "customerList",method = RequestMethod.POST)
+    public Result<List<CustomerTab>> customerListData(HttpServletResponse response, CustomerModel cm){
         response.setHeader("Access-Control-Allow-Origin", "*");
         Result<List<CustomerTab>> res = new Result<List<CustomerTab>>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
@@ -202,4 +200,6 @@ public class CustomerController {
         }
         return res;
     }
+
+
 }

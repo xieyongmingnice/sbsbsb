@@ -1,19 +1,13 @@
-package com.xunyu.shiro.pojo.user;
-
-import com.xunyu.model.user.UserModel;
-import com.xunyu.shiro.pojo.roles.RolesUsersR;
+package com.xunyu.model.user;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @Author  dth
- * 账号信息
+ * 用户信息
  */
-public class User extends UserModel implements Serializable {
-
-    private static final long serialVersionUID = -3267918083809259248L;
+public class User extends UserModel {
 
     private Long userId;//用户ID
 
@@ -26,16 +20,6 @@ public class User extends UserModel implements Serializable {
     private Integer isabled;//0-不可用，1-可用该账户是否可用，不可用时禁止登陆
 
     private Date userCreateTime;//创建时间
-
-    private List<RolesUsersR> rolesUsersRList;//角色和用户关系表
-
-    public List<RolesUsersR> getRolesUsersRList() {
-        return rolesUsersRList;
-    }
-
-    public void setRolesUsersRList(List<RolesUsersR> rolesUsersRList) {
-        this.rolesUsersRList = rolesUsersRList;
-    }
 
     public Long getUserId() {
         return userId;

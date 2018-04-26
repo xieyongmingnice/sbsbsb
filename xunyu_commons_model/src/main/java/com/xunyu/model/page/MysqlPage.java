@@ -32,7 +32,7 @@ public class MysqlPage implements Serializable {
 
     public long getEndRows() {
 
-        return currPage * limit;
+        return limit;
     }
 
     public long getOffset() {

@@ -1,4 +1,4 @@
-package com.xunyu.crm.dao;
+package com.xunyu.crm.dao.customer;
 
 import com.commons.core.dao.impl.BaseDao;
 import com.xunyu.crm.pojo.customer.CustomerGroup;

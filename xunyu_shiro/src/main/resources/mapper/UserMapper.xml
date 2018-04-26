@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xunyu.shiro.pojo.user.User">
+<mapper namespace="com.xunyu.shiro.pojo.user.UserAll">
 
-    <resultMap id="user_ResultMap" type="com.xunyu.shiro.pojo.user.User">
+    <resultMap id="user_ResultMap" type="com.xunyu.model.user.User">
         <id column="user_id" property="userId"></id>
         <result column="account" property="account"></result>
         <result column="password" property="passWord"></result>
         <result column="user_type" property="userType"></result>
         <result column="isabled" property="isabled"></result>
-        <result column="create_time" property="createTime"></result>
+        <result column="create_time" property="userCreateTime"></result>
     </resultMap>
 
-    <resultMap id="userDetail_Map" type="com.xunyu.shiro.pojo.user.User">
+    <resultMap id="userDetail_Map" type="com.xunyu.shiro.pojo.user.UserAll">
         <id column="user_id" property="userId"></id>
         <result column="account" property="account"></result>
         <result column="password" property="passWord"></result>
@@ -104,7 +104,7 @@
         </if>
     </sql>
 
-    <insert id = "addUser" parameterType="com.xunyu.shiro.pojo.user.User"
+    <insert id = "addUser" parameterType="com.xunyu.model.user.User"
             useGeneratedKeys="true" keyColumn="user_id" keyProperty="userId">
         insert into tbl_users
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -126,7 +126,7 @@
         </trim>
     </insert>
 
-    <update id="updateUser" parameterType="com.xunyu.shiro.pojo.user.User">
+    <update id="updateUser" parameterType="com.xunyu.model.user.User">
         update tbl_users
         <set>
             <if test='account != null and account != ""'>

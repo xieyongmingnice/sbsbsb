@@ -64,6 +64,9 @@
         <if test = 'business != null and business !=""'>
             and business = #{business}
         </if>
+        <if test = 'customerGroupId != null'>
+            and customer_group_id = #{customerGroupId}
+        </if>
     </sql>
     <insert id = "addCustomer" parameterType="com.xunyu.crm.pojo.customer.CustomerTab" useGeneratedKeys="true" keyColumn="customer_id"
             keyProperty="customerId">
@@ -189,6 +192,9 @@
         <where>
             <if test="customerId != null">
                 customer_id = #{customerId}
+            </if>
+            <if test = "customerGroupId != null">
+                customer_group_id = #{customerGroupId}
             </if>
         </where>
     </update>

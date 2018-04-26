@@ -14,6 +14,16 @@ public class CustomerGroupModel extends UserModel implements Serializable {
     private String customerName;//名称
     private String remark;//备注
 
+    private String customerGroupIds;//ids
+
+    public String getCustomerGroupIds() {
+        return customerGroupIds;
+    }
+
+    public void setCustomerGroupIds(String customerGroupIds) {
+        this.customerGroupIds = customerGroupIds;
+    }
+
     public Long getCustomerGroupId() {
         return customerGroupId;
     }

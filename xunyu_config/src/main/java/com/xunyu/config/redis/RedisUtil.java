@@ -131,7 +131,10 @@ public class RedisUtil {
      */
     public Session getSession(String sessionId) {
         byte[] session = (byte[]) get(sessionId);
-        Session se = new SessionDao().byteToSession(session);
+        Session se = null;
+        if(session != null) {
+            se = new SessionDao().byteToSession(session);
+        }
         return se;
     }
 

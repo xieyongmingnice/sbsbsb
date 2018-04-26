@@ -1,6 +1,7 @@
 package com.xunyu.crm.controller.custom;
 
 import com.commons.core.message.Result;
+import com.commons.core.util.StringUtils2;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.crm.pojo.customer.CustomerGroup;
 import com.xunyu.crm.service.customer.CustomerService;
@@ -171,7 +172,7 @@ public class CustomerGroupController {
     /**
      * 删除分组
      */
-    /*@RequestMapping(value = "updateCustomerGroup",method = RequestMethod.POST)
+    @RequestMapping(value = "delCustomerGroup",method = RequestMethod.POST)
     public Result<CustomerGroup> updateCustomerGroupData(HttpServletResponse response,CustomerGroupModel cm){
 
         response.setHeader("Access-Control-Allow-Origin", "*");
@@ -183,8 +184,10 @@ public class CustomerGroupController {
             return res;
         }
         try{
-            if(cm.getCustomerGroupId() != null){
-                customerService.updateCustomerGroup()
+            if(StringUtils2.isNotEmpty(cm.getCustomerGroupIds())){
+                customerService.updateCustomerGroupAll(cm.getCustomerGroupIds());
+                res.setCode("200");
+                res.setMessage("success");
             }
         }catch (Exception e){
             res.setCode("500");
@@ -192,6 +195,6 @@ public class CustomerGroupController {
             e.printStackTrace();
         }
         return res;
-    }*/
+    }
 
 }

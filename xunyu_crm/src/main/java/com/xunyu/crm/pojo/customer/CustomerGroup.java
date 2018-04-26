@@ -10,13 +10,21 @@ import java.util.Date;
  * @date 2018/4/24 10:30
  *  客户分组表
  **/
-public class CustomerGroup extends UserModel implements Serializable {
-    private static final long serialVersionUID = 1452847469102503992L;
+public class CustomerGroup extends UserModel{
     private Long customerGroupId;//主键
     private String customerName;//名称
     private Integer isabled;//0删除 1未删除
     private String remark;//备注
     private Date createTime;//创建时间
+    private Integer userNum;//客户分组下的客户数
+
+    public Integer getUserNum() {
+        return userNum;
+    }
+
+    public void setUserNum(Integer userNum) {
+        this.userNum = userNum;
+    }
 
     public Long getCustomerGroupId() {
         return customerGroupId;

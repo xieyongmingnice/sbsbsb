@@ -1,10 +1,10 @@
 package com.xunyu.shiro.dao.user;
 
 import com.commons.core.dao.impl.BaseDao;
-import com.xunyu.shiro.pojo.user.User;
+import com.xunyu.model.user.User;
+import com.xunyu.shiro.pojo.user.UserAll;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +20,7 @@ public class UserDaoImpl extends BaseDao<User, Long> {
      */
     public int updateUser(User user){
 
-        return super.update("com.xunyu.shiro.pojo.user.User.updateUser", user);
+        return super.update("com.xunyu.shiro.pojo.user.UserAll.updateUser", user);
     }
 
     /**
@@ -28,30 +28,30 @@ public class UserDaoImpl extends BaseDao<User, Long> {
      */
     public int addUser(User user){
 
-       return super.insert("com.xunyu.shiro.pojo.user.User.addUser", user);
+       return super.insert("com.xunyu.shiro.pojo.user.UserAll.addUser", user);
     }
 
     /**
      * 获取用户详情
      */
-    public User getUserDetail(Map<String, Object> map){
+    public UserAll getUserDetail(Map<String, Object> map){
 
-        return super.selectOne("com.xunyu.shiro.pojo.user.User.getUserDetail",map);
+        return super.selectForObject("com.xunyu.shiro.pojo.user.UserAll.getUserDetail",map);
     }
 
     /**
      * 获取用户信息
      */
-    public User getUserInfo(Map<String,Object> map){
+    public User  getUserInfo(Map<String,Object> map){
 
-        return super.selectOne("com.xunyu.shiro.pojo.user.User.getUserInfo",map);
+        return super.selectForObject("com.xunyu.shiro.pojo.user.UserAll.getUserInfo",map);
     }
 
     /**
      * 获取用户列表
      */
     public List<User> listUser(Map<String, Object> map) {
-        return super.selectForListObject("com.xunyu.shiro.pojo.user.User.listUser", map);
+        return super.selectForListObject("com.xunyu.shiro.pojo.user.UserAll.listUser", map);
     }
 
     /**

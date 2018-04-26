@@ -20,7 +20,7 @@ public interface CustomerService {
      * 修改分组信息
      */
     int updateCustomerGroup(CustomerGroup cg);
-
+    int updateCustomerGroupAll(String ids);
     /**
      * 获取客户分组列表
      */

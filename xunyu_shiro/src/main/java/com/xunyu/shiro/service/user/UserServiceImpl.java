@@ -1,7 +1,8 @@
 package com.xunyu.shiro.service.user;
 
 import com.xunyu.shiro.dao.user.UserDaoImpl;
-import com.xunyu.shiro.pojo.user.User;
+import com.xunyu.model.user.User;
+import com.xunyu.shiro.pojo.user.UserAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Map;
@@ -17,13 +18,13 @@ public class UserServiceImpl implements UserService {
     private UserDaoImpl userDaoImpl;
 
     @Override
-    public User getUserInfo(Map<String, Object> map) {
+    public User  getUserInfo(Map<String, Object> map) {
 
         return userDaoImpl.getUserInfo(map);
     }
 
     @Override
-    public User getUserDetail(Map<String, Object> map) {
+    public UserAll getUserDetail(Map<String, Object> map) {
         return userDaoImpl.getUserDetail(map);
     }
 

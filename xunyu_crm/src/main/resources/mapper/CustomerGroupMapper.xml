@@ -8,6 +8,7 @@
         <result column="isabled" property="isabled"></result>
         <result column="remark" property="remark"></result>
         <result column="create_time" property="createTime"></result>
+        <result column="userNum" property="userNum"></result>
     </resultMap>
 
     <sql id = "cg_column">
@@ -15,30 +16,32 @@
     </sql>
 
     <select id = "customerGroupCount" parameterType="map" resultType="int">
-        select count(1) from tbl_customer_group
+        select count(1) from tbl_customer_group cg
         where isabled = 1 <include refid = "cg_where" />
     </select>
 
     <select id = "customerGroupList" parameterType="map" resultMap="cg_ResultMap">
-        select <include refid = "cg_column" /> from tbl_customer_group
-        where isabled = 1 <include refid = "cg_where" /> order by customer_group_id desc
+        select <include refid = "cg_column" />
+        ,(select count(1) from tbl_customer cc where cc.customer_group_id = cg.customer_group_id) as userNum
+        from tbl_customer_group cg
+        where cg.isabled = 1 <include refid = "cg_where" /> order by customer_group_id desc
         limit #{startRow},#{endRow}
     </select>
 
     <select id = "getCustomerGroup" parameterType="map" resultMap="cg_ResultMap">
-        select <include refid = "cg_column" /> from tbl_customer_group
-        where isabled = 1 <include refid = "cg_where" />
+        select <include refid = "cg_column" /> from tbl_customer_group cg
+        where cg.isabled = 1 <include refid = "cg_where" />
     </select>
 
     <sql id = "cg_where">
         <if test = "customerGroupId != null">
-            and customer_group_id = #{customerGroupId}
+            and cg.customer_group_id = #{customerGroupId}
         </if>
         <if test = 'customerName != null and customerName !=""'>
-            and customer_name like concat(#{customerName},"%")
+            and cg.customer_name like concat(#{customerName},"%")
         </if>
         <if test = 'remark != null and remark !=""'>
-            and remark like concat("%",concat(#{remark},"%"))
+            and cg.remark like concat("%",concat(#{remark},"%"))
         </if>
     </sql>
 

@@ -2,8 +2,7 @@ package com.xunyu.shiro.config;
 
 import com.commons.core.util.MD5Utils;
 import com.commons.core.util.RandomUtils;
-import com.xunyu.shiro.ehcache.MyCacheManager;
-import com.xunyu.shiro.pojo.user.User;
+import com.xunyu.model.user.User;
 import com.xunyu.shiro.service.user.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -14,7 +13,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,32 +61,31 @@ public class MyRealm extends AuthorizingRealm {
         /**
          * 通过userName在缓存中查找一遍，否则直接查数据库
          */
-        MyCacheManager<String,User> cache = new MyCacheManager<String,User>();
-        user = cache.get(account+pwd);
-        if (user == null) {
+        /*MyCacheManager<String,User> cache = new MyCacheManager<String,User>();
+        user = cache.get(account+pwd);*/
             //查询数据库
             map.put("account",account);
             map.put("passWord",MD5Utils.getMD5(String.valueOf(pwd)));//md5加密
-            user = userService.getUserDetail(map);
+            user = userService.getUserInfo(map);
             if(user != null) {
                 if (user.getIsabled() == 0) {//禁用
                     throw new LockedAccountException();
                 } else {//做缓存
-                    cache.put(account + pwd, user);
+                   // cache.put(account + pwd, user);
+                    //把用户放到session中
+                    Subject subject = SecurityUtils.getSubject();
+                    subject.getSession().setAttribute("user", user);
                 }
             }else{
                 throw new UnknownAccountException();//没找到帐号
             }
-        }
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 user.getAccount(), //用户名
                 user.getPassWord(), //密码
                 ByteSource.Util.bytes(user.getAccount()+RandomUtils.generateMixString(4)),//salt=username+salt
                 this.getName()  //realm name
         );
-        //把用户放到session中
-        Subject subject = SecurityUtils.getSubject();
-        subject.getSession().setAttribute("user", user);
+
         return authenticationInfo;
     }  
 

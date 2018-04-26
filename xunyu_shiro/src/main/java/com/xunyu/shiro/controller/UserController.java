@@ -6,7 +6,7 @@ import com.commons.core.util.MD5Utils;
 import com.commons.core.util.StringUtils2;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.config.redis.SessionDao;
-import com.xunyu.shiro.pojo.user.User;
+import com.xunyu.model.user.User;
 import com.xunyu.shiro.service.user.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -41,7 +41,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Map<String,Object> ajaxLogin(User user, HttpServletResponse response) {
+    public Map<String,Object> ajaxLogin(com.xunyu.model.user.User user, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String,Object> map = new HashMap<String,Object>();
         Subject subject = SecurityUtils.getSubject();
@@ -155,7 +155,7 @@ public class UserController {
             try {
                 //先判断账号是否存在
                 map.put("account",user.getAccount());
-                User user2 = userService.getUserDetail(map);
+                User user2 = userService.getUserInfo(map);
                 if(user2 == null) { //说明该账号不存在，可以添加
                     user.setIsabled(1);//显示状态
                     user.setUserCreateTime(new Date());
@@ -224,6 +224,32 @@ public class UserController {
                 e.printStackTrace();
             }
 
+        return res;
+    }
+
+    /**
+     * 查询用户详情接口
+     */
+    @RequestMapping(value = "getUserInfo",method = RequestMethod.POST)
+    public Result<User> getUserInfoData(HttpServletResponse response,User user) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        Result<User> res = new Result<User>();
+        try{
+            if (StringUtils2.isNotEmpty(user.getAccount())) {
+                Map<String,Object> map = new HashMap<String,Object>();
+                map.put("account",user.getAccount());
+                user = userService.getUserInfo(map);
+                res.setCode("200");
+                res.setMessage("success");
+                res.setRes(user);
+
+            }
+        }catch (Exception e){
+            res.setCode("500");
+            res.setMessage("系统异常");
+            e.printStackTrace();
+        }
         return res;
     }
 

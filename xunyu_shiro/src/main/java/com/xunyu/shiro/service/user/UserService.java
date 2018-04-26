@@ -1,6 +1,7 @@
 package com.xunyu.shiro.service.user;
 
-import com.xunyu.shiro.pojo.user.User;
+import com.xunyu.model.user.User;
+import com.xunyu.shiro.pojo.user.UserAll;
 
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public interface UserService {
     /**
      * 获取用户详情
      */
-    User getUserDetail(Map<String,Object> map);
+    UserAll getUserDetail(Map<String,Object> map);
 
     /**
      * 修改用户信息

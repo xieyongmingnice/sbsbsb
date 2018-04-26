@@ -10,8 +10,8 @@ import java.util.Date;
  * @date 2018/4/24 10:35
  * 客户表
  **/
-public class CustomerTab extends UserModel implements Serializable {
-    private static final long serialVersionUID = -3540101582605462310L;
+public class CustomerTab extends UserModel{
+
     private Long customerId;//主键
     private Long customerGroupId;//客户分组id
     private String customerName;//客户（企业）名称

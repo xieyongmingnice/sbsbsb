@@ -9,8 +9,7 @@ import java.io.Serializable;
  * @date 2018/4/12 14:58'
  * 通过sessionId判断当前会话是否失效
  **/
-public class UserModel extends MysqlPage implements Serializable {
-    private static final long serialVersionUID = 1233577594582916728L;
+public class UserModel extends MysqlPage {
 
    private String sessionId;
 
