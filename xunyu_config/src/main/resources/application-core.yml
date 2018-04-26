@@ -49,8 +49,12 @@ logging:
   config: classpath:logback-medicare.xml
 
 #oss参数配置
-oss:
-  endPoint: http://oss-cn-qingdao.aliyuncs.com
-  accessKeyId: LTAIxfWn1qhejCJ8
-  accessKeySecret: HEvipWVkRkQBiaSX237kuHnRFF59KO
-  bucketName: xunyu-ossfile
+#oss:
+  #endPoint: http://oss-cn-qingdao.aliyuncs.com
+  #accessKeyId: LTAIxfWn1qhejCJ8
+  #accessKeySecret: HEvipWVkRkQBiaSX237kuHnRFF59KO
+  #bucketName: xunyu-ossfile
+
+#上传
+multipart:
+  enabled: true

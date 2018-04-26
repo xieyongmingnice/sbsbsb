@@ -142,6 +142,7 @@ public class CustomerController {
             return res;
         }
         try{
+            List<CustomerTab> list = null;
             if(cm.getCurrPage() != 0){
                 int total = 0;
                 Map<String,Object> map = new HashMap<String,Object>();
@@ -153,12 +154,17 @@ public class CustomerController {
                 map.put("business",cm.getBusiness());
                 total = customerService.customerTabCount(map);
                 if(total > 0){
-                    List<CustomerTab> list = customerService.customerTabList(map);
-                    res.setCode("200");
+                    list = customerService.customerTabList(map);
+
+                }res.setCode("200");
+                if(list != null && list.size() > 0) {
                     res.setMessage("success");
-                    res.setRes(list);
-                    res.setTotalRows(total);
+                }else {
+                    res.setMessage("notvalue");
                 }
+                res.setRes(list);
+                res.setTotalRows(total);
+
             }else{
                 res.setCode("413");
                 res.setMessage("currPage不能为空或0");

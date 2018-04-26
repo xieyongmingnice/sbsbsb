@@ -12,12 +12,12 @@ public class ImgUtils {
     public static boolean isImg(String extend) {
         boolean ret = false;
         List<String> list = new java.util.ArrayList<String>();
-        list.add("jpg");
-        list.add("jpeg");
-        list.add("bmp");
-        list.add("gif");
-        list.add("png");
-        list.add("tif");
+        list.add(".jpg");
+        list.add(".jpeg");
+        list.add(".bmp");
+        list.add(".gif");
+        list.add(".png");
+        list.add(".tif");
         for (String s : list) {
             if (s.equalsIgnoreCase(extend))
                 ret = true;

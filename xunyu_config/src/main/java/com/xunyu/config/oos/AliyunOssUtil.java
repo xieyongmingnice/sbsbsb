@@ -8,14 +8,15 @@ import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,71 +27,53 @@ import java.util.Map;
  *
  * @version1.0
  */
+@Configuration
 public class AliyunOssUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(AliyunOssUtil.class);
-
+    private final Logger logger = LoggerFactory.getLogger(AliyunOssUtil.class);
     /**
      * 阿里云API的内或外网域名
      */
-    @Value("${oss.endPoint}")
-    public static String ENDPOINT;
+    //@Value("${oss.endPoint}")
+    private String ENDPOINT = "http://oss-cn-qingdao.aliyuncs.com";
 
     /**
      * OSS签名key
      */
-    @Value("${oss.accessKeyId}")
-    public static String ACCESS_KEY_ID;
+    //@Value("${oss.accessKeyId}")
+    private String ACCESS_KEY_ID = "LTAIxfWn1qhejCJ8";
 
     /**
      * OSS签名密钥
      */
-    @Value("${oss.accessKeySecret}")
-    public static String ACCESS_KEY_SECRET;
+    //@Value("${oss.accessKeySecret}")
+    private String ACCESS_KEY_SECRET = "HEvipWVkRkQBiaSX237kuHnRFF59KO";
 
     /**
      * 存储空间名称
      */
-    @Value("${oss.bucketName}")
-    public static String BUCKETNAME;
+    //@Value("${oss.bucketName}")
+    private String BUCKETNAME = "xunyu-ossfile";
 
-    private static OSSClient ossClient = null;
+    private  OSSClient ossClient = null;
 
      Map<String, Object> resultMap = new HashMap<String, Object>();
-
-    /**
-     * 静态代码块，初始化参数。并实例化ossClient对象
-     */
-   static {
-        try {
-
-            logger.debug("初始化:应用信息初始化--阿里云API的内或外网域名:【{}】。 \n"
-                    + "访问access_key:【{}】。   \n"
-                    + "访问秘钥access_key_secret:【{}】。  \n"
-                    + "oss存储空间bucketName:【{}】", ENDPOINT, ACCESS_KEY_ID, ACCESS_KEY_SECRET, BUCKETNAME);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // 初始化一个OSSClient
-        ossClient = new OSSClient(ENDPOINT, ACCESS_KEY_ID, ACCESS_KEY_SECRET);
-    }
 
 
     /**
      * 判断bucket存储空间是否已建立
      * 若未建立，先创建一个Bucket
      */
-    public  void ensureBucket() throws OSSException, ClientException {
+    public void ensureBucket() throws OSSException, ClientException {
 
         try {
             //判断bucket是否存在
-            boolean exists = ossClient.doesBucketExist(AliyunOssUtil.BUCKETNAME);
+            boolean exists = ossClient.doesBucketExist(BUCKETNAME);
             if (!exists) {
 
-                logger.error("bucket不存在，新建当前bucket:{}", AliyunOssUtil.BUCKETNAME);
+                logger.error("bucket不存在，新建当前bucket:{}", BUCKETNAME);
 
-                ossClient.createBucket(AliyunOssUtil.BUCKETNAME);
+                ossClient.createBucket(BUCKETNAME);
             }
 
         } catch (ServiceException e) {
@@ -112,7 +95,7 @@ public class AliyunOssUtil {
      * stauts :true 上传成功   。 false  上传失败
      * msg :成功，返回文件路径。失败，返回失败信息
      */
-    public  Map<String, Object> uploadFileOSS(CommonsMultipartFile file, String dirName, String fileName) {
+    public Map<String, Object> uploadFileOSS(MultipartFile file, String dirName, String fileName) {
 
         String ret = "";//上传完成返回签名
         String uploadDir = "";//目录名
@@ -122,7 +105,7 @@ public class AliyunOssUtil {
 
 
         if (!"".equals(dirName) && dirName != null) {
-            uploadDir = dirName.substring(0, dirName.length()).replaceAll("\\\\", "/") + "/";
+            uploadDir = dirName.substring(0, dirName.length()).replaceAll("\\\\", "/") + "-";
         }
 
         try {
@@ -133,7 +116,7 @@ public class AliyunOssUtil {
             //获取上传文件后缀名
             String fileSuffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 
-            uploadPath = uploadDir + fileName + fileSuffix;
+            uploadPath = uploadDir + fileName;
 
             //创建上传Object的Metadata。ObjectMetaData是用户对该object的描述
             ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -141,25 +124,24 @@ public class AliyunOssUtil {
             objectMetadata.setCacheControl("no-cache");
             objectMetadata.setContentEncoding("utf-8");
             objectMetadata.setContentType(getcontentType(file, fileSuffix));//获取文件类型
-            objectMetadata.setContentDisposition("attachment;filename=" + fileName + fileSuffix);
+            objectMetadata.setContentDisposition("attachment;filename=" + fileName);
 
             uploadInputStrem = file.getInputStream();   //文件输入流
 
 
             //上传文件
             logger.debug("正在上传文件到OSS...");
-            PutObjectResult putResult = ossClient.putObject(AliyunOssUtil.BUCKETNAME, uploadPath, uploadInputStrem, objectMetadata);
+            PutObjectResult putResult = ossClient.putObject(BUCKETNAME, uploadPath, uploadInputStrem, objectMetadata);
             logger.debug("上传文件完成...");
-
             ret = putResult.getETag();
             logger.debug("上传后的文件MD5数字唯一签名:{}", ret);
 
         } catch (IOException e) {
-            logger.error(e.getMessage(), e);
+            e.printStackTrace();
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            e.printStackTrace();
             resultMap.put("status", false);
-            resultMap.put("msg", "上传失败!");
+            resultMap.put("message", "上传失败!");
             return resultMap;
         } finally {
 
@@ -177,11 +159,12 @@ public class AliyunOssUtil {
 
         if (!"".equals(ret) && ret != null) {
             resultMap.put("status", true);
-            resultMap.put("msg", uploadPath);
+            resultMap.put("url", getUrl(uploadPath));
+            resultMap.put("message","上传成功");
             return resultMap;
         } else {
             resultMap.put("status", false);
-            resultMap.put("msg", "上传失败!");
+            resultMap.put("message", "上传失败!");
             return resultMap;
         }
     }
@@ -199,19 +182,19 @@ public class AliyunOssUtil {
      * stauts :true 上传成功   。 false  上传失败
      * msg :成功，返回文件路径。失败，返回失败信息
      */
-    public  Map<String, Object> UploadLimitSizeOSS(CommonsMultipartFile file,
+    public Map<String, Object> UploadLimitSizeOSS(MultipartFile file,
                                                   String dirName, String fileName, int limitSize) {
 
         if (file == null) {
             resultMap.put("status", false);
-            resultMap.put("msg", "未选择文件");
+            resultMap.put("message", "未选择文件");
             destory();
             return resultMap;
         }
         long limitSizeBytes = limitSize * 1024 * 1024;// 把单位M转换为bytes
         if (file.getSize() > limitSizeBytes) {
             resultMap.put("status", false);
-            resultMap.put("msg", "您上传的文件超出限制大小。" + limitSize + "M");
+            resultMap.put("message", "您上传的文件超出限制大小。" + limitSize + "M");
             destory();
             return resultMap;
         }
@@ -232,19 +215,19 @@ public class AliyunOssUtil {
      * stauts :true 上传成功   。 false  上传失败
      * msg :成功，返回文件路径。失败，返回失败信息
      */
-    public  Map<String, Object> ImgUploadLimitSizeOSS(CommonsMultipartFile file,
+    public Map<String, Object> ImgUploadLimitSizeOSS(MultipartFile file,
                                                      String dirName, String fileName, int limitSize) {
 
         if (file == null) {
             resultMap.put("status", false);
-            resultMap.put("msg", "未选择文件。");
+            resultMap.put("message", "未选择文件。");
             destory();
             return resultMap;
         }
     
        /* if (!ImageUtil.fileIsImage(file)) {
             resultMap.put("status", false);
-            resultMap.put("msg", "请选择上传图片文件!");
+            resultMap.put("message", "请选择上传图片文件!");
             destory();
             return resultMap;
         }*/
@@ -253,7 +236,7 @@ public class AliyunOssUtil {
 
         if (file.getSize() > limitSizeBytes) {
             resultMap.put("status", false);
-            resultMap.put("msg", "您上传的文件超出限制大小" + limitSize + "M");
+            resultMap.put("message", "您上传的文件超出限制大小" + limitSize + "M");
             destory();
             return resultMap;
         }
@@ -269,7 +252,7 @@ public class AliyunOssUtil {
      * @param FilenameExtension      文件后缀
      * @return String
      */
-    public  String getcontentType(CommonsMultipartFile file, String FilenameExtension) {
+    public String getcontentType(MultipartFile file, String FilenameExtension) {
 
         if (FilenameExtension.equalsIgnoreCase(".bmp")) {
             return "image/bmp";
@@ -321,7 +304,7 @@ public class AliyunOssUtil {
     /**
      * 销毁阿里云OSS客户端对象
      */
-    public  void destory() {
+    public void destory() {
         ossClient.shutdown();
     }
 
@@ -334,7 +317,7 @@ public class AliyunOssUtil {
      * @param //OutputStream oputstream  输出流
      * @throws IOException
      */
-    public  void downFile(String ossPrefix, String fileUrl, OutputStream oputstream) throws IOException {
+    public void downFile(String ossPrefix, String fileUrl, OutputStream oputstream) throws IOException {
 
         InputStream iputstream = null;
 
@@ -363,19 +346,33 @@ public class AliyunOssUtil {
         }
     }
 
-    /**
-     * 做内部类的单利模式
-     * 1/构造器私有化
-     */
-    private AliyunOssUtil(){}
 
-    private static class OssUtilSigen{
-        //静态初始化器，由JVM来保证线程安全
-        private static AliyunOssUtil instance=new AliyunOssUtil();
+    public AliyunOssUtil(){
+        try {
+        // 初始化一个OSSClient
+            ossClient = new OSSClient(ENDPOINT, ACCESS_KEY_ID, ACCESS_KEY_SECRET);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
-    public static AliyunOssUtil getInstance(){
-        return OssUtilSigen.instance;
+    /**
+     * 获得url链接
+     *
+     * @param key
+     * @return
+     */
+    public String getUrl(String key) {
+        // 设置URL过期时间为10年 3600l* 1000*24*365*10
+
+        Date expiration = new Date(System.currentTimeMillis() + 3600L * 1000 * 24 * 365 * 10);
+        // 生成URL
+        URL url = ossClient.generatePresignedUrl(BUCKETNAME, key, expiration);
+        if (url != null) {
+            return url.toString();
+        }
+        return null;
     }
 
 }

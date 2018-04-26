@@ -136,6 +136,7 @@ public class CustomerGroupController {
         response.setHeader("Access-Control-Allow-Origin", "*");
         Result<List<CustomerGroup>> res = new Result<List<CustomerGroup>>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
+        List<CustomerGroup> list = null;
         if(!status) {
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
@@ -151,12 +152,16 @@ public class CustomerGroupController {
                 map.put("remark",cm.getRemark());
                 total = customerService.customerGroupCount(map);
                 if(total > 0){
-                    List<CustomerGroup> list = customerService.customerGroupList(map);
-                    res.setCode("200");
-                    res.setMessage("success");
-                    res.setRes(list);
-                    res.setTotalRows(total);
+                    list = customerService.customerGroupList(map);
                 }
+                res.setCode("200");
+                if(list != null && list.size() > 0) {
+                    res.setMessage("success");
+                }else {
+                    res.setMessage("notvalue");
+                }
+                res.setRes(list);
+                res.setTotalRows(total);
             }else{
                 res.setCode("413");
                 res.setMessage("currPage不能为空或0");

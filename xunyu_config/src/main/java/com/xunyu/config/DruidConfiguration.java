@@ -123,5 +123,12 @@ public class DruidConfiguration {
         }
     }
 
+   /* @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver getCommonsMultipartResolver() {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(209715200);//配置文件最大值  200MB
+        multipartResolver.setMaxInMemorySize(1048576);//配置缓存
+        return multipartResolver;
+    }*/
 
 }
