@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.system.pojo.sysconfig.SystemConfig">
+
+    <resultMap id="sys_ResultMap" type="com.xunyu.system.pojo.sysconfig.SystemConfig">
+        <id column="sys_id" property="sysId"></id>
+        <result column="isabled" property="isabled"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="sys_ip" property="sysIp"></result>
+        <result column="sys_return" property="sysReturn"></result>
+        <result column="sys_open" property="sysOpen"></result>
+        <result column="yidong_port" property="yidongPort"></result>
+        <result column="liantong_port" property="liantongPort"></result>
+        <result column="dianxin_port" property="dianxinPort"></result>
+        <result column="up_keyword" property="upKeyword"></result>
+        <result column="up_white" property="upWhite"></result>
+        <result column="up_black" property="upBlack"></result>
+        <result column="sys_listen" property="sysListen"></result>
+        <result column="sys_w_proportion" property="sysWProportion"></result>
+        <result column="sys_f_proportion" property="sysFProportion"></result>
+        <result column="sys_s_proportion" property="sysSProportion"></result>
+        <result column="sys_remind" property="sysRemind"></result>
+        <result column="re_num" property="reNum"></result>
+        <result column="re_content" property="reContent"></result>
+        <result column="re_interval" property="reInterval"></result>
+        <result column="re_date" property="reDate"></result>
+        <result column="re_sp" property="reSp"></result>
+
+    </resultMap>
+
+    <select id="getSysConfigDetail" parameterType="map" resultMap="sys_ResultMap">
+        select
+          tc.sys_id,tc.isabled,tc.create_time,tc.sys_ip
+          ,tc.sys_return,tc.sys_open,tc.yidong_port,tc.liantong_port,tc.dianxin_port,tc.up_keyword,tc.up_white,tc.up_black
+          ,tc.sys_listen,tc.sys_w_proportion,tc.sys_f_proportion,tc.sys_s_proportion,tc.sys_remind,tc.re_num,tc.re_content
+          ,tc.re_interval,tc.re_date,tc.re_sp
+        from tbl_sys_config tc
+        where tc.isabled = 1
+    </select>
+
+    <insert id = "addSysConfig" parameterType="com.xunyu.system.pojo.sysconfig.SystemConfig"
+            useGeneratedKeys="true" keyColumn="sys_id" keyProperty="sysId">
+        insert into tbl_sys_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysId != null">sys_id,</if>
+            <if test='isabled != null'>isabled,</if>
+            <if test='createTime != null'>create_time,</if>
+            <if test='sysIp != null and sysIp != ""'>sys_ip,</if>
+            <if test='sysReturn != null'>sys_return,</if>
+            <if test='sysOpen != null'>sys_open,</if>
+            <if test='yidongPort != null and yidongPort != ""'>yidong_port,</if>
+            <if test='liantongPort != null and liantongPort != ""'>liantong_port,</if>
+            <if test='dianxinPort != null and dianxinPort != ""'>dianxin_port,</if>
+            <if test='upKeyword != null'>up_keyword,</if>
+            <if test='upWhite != null'>up_white,</if>
+            <if test='upBlack != null'>up_black,</if>
+            <if test='sysListen != null'>sys_listen,</if>
+            <if test='sysWProportion != null'>sys_w_proportion,</if>
+            <if test='sysFProportion != null'>sys_f_proportion,</if>
+            <if test='sysSProportion != null'>sys_s_proportion,</if>
+            <if test='sysRemind != null'>sys_remind,</if>
+            <if test='reNum != null'>re_num,</if>
+            <if test='reContent != null and reContent != ""'>re_content,</if>
+            <if test='reInterval != null and reInterval != ""'>re_interval,</if>
+            <if test='reDate != null and reDate != ""'>re_date,</if>
+            <if test='reSp != null and reSp != ""'>re_sp,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysId != null">#{sysId},</if>
+            <if test='isabled != null'>#{isabled},</if>
+            <if test='createTime != null'>#{createTime},</if>
+            <if test='sysIp != null and sysIp != ""'>#{sysIp},</if>
+            <if test='sysReturn != null'>#{sysReturn},</if>
+            <if test='sysOpen != null'>#{sysOpen},</if>
+            <if test='yidongPort != null and yidongPort != ""'>#{yidongPort},</if>
+            <if test='liantongPort != null and liantongPort != ""'>#{liantongPort},</if>
+            <if test='dianxinPort != null and dianxinPort != ""'>#{dianxinPort},</if>
+            <if test='upKeyword != null'>#{upKeyword},</if>
+            <if test='upWhite != null'>#{upWhite},</if>
+            <if test='upBlack != null'>#{upBlack},</if>
+            <if test='sysListen != null'>#{sysListen},</if>
+            <if test='sysWProportion != null'>#{sysWProportion},</if>
+            <if test='sysFProportion != null'>#{sysFProportion},</if>
+            <if test='sysSProportion != null'>#{sysSProportion},</if>
+            <if test='sysRemind != null'>#{sysRemind},</if>
+            <if test='reNum != null'>#{reNum},</if>
+            <if test='reContent != null and reContent != ""'>#{reContent},</if>
+            <if test='reInterval != null and reInterval != ""'>#{reInterval},</if>
+            <if test='reDate != null and reDate != ""'>#{reDate},</if>
+            <if test='reSp != null and reSp != ""'>#{reSp},</if>
+        </trim>
+    </insert>
+
+    <update id="updateSysConfig" parameterType="com.xunyu.system.pojo.sysconfig.SystemConfig">
+        update tbl_sys_config
+        <set>
+            <if test='isabled != null'>
+                <![CDATA[ isabled = #{isabled},  ]]>
+            </if>
+            <if test='createTime != null'>
+                <![CDATA[ create_time = #{createTime}, ]]>
+            </if>
+            <if test='sysIp != null and sysIp != ""'>
+                <![CDATA[ sys_ip = #{sysIp}, ]]>
+            </if>
+            <if test='sysReturn != null'>
+                <![CDATA[ sys_return = #{sysReturn}, ]]>
+            </if>
+            <if test='sysOpen != null'>
+                <![CDATA[ sys_open = #{sysOpen}, ]]>
+            </if>
+            <if test='yidongPort != null and yidongPort != ""'>
+                <![CDATA[ yidong_port = #{yidongPort}, ]]>
+            </if>
+            <if test='liantongPort != null and liantongPort != ""'>
+                <![CDATA[ liantong_port = #{liantongPort}, ]]>
+            </if>
+            <if test='dianxinPort != null and dianxinPort != ""'>
+                <![CDATA[ dianxin_port = #{dianxinPort}, ]]>
+            </if>
+            <if test='upKeyword != null'>
+                <![CDATA[ up_keyword = #{upKeyword}, ]]>
+            </if>
+            <if test='upWhite != null'>
+                <![CDATA[ up_white = #{upWhite}, ]]>
+            </if>
+            <if test='upBlack != null'>
+                <![CDATA[  up_black = #{upBlack}, ]]>
+            </if>
+            <if test='sysListen != null'>
+                <![CDATA[ sys_listen = #{sysListen}, ]]>
+            </if>
+            <if test='sysWProportion != null'>
+                <![CDATA[ sys_w_proportion = #{sysWProportion}, ]]>
+            </if>
+            <if test='sysFProportion != null'>
+                <![CDATA[ sys_f_proportion = #{sysFProportion}, ]]>
+            </if>
+            <if test='sysSProportion != null'>
+                <![CDATA[  sys_s_proportion = #{sysSProportion}, ]]>
+            </if>
+            <if test='sysRemind != null'>
+                <![CDATA[ sys_remind = #{sysRemind}, ]]>
+            </if>
+            <if test='reNum != null'>
+                <![CDATA[ re_num = #{reNum}, ]]>
+            </if>
+            <if test='reContent != null and reContent != ""'>
+                <![CDATA[ re_content = #{reContent}, ]]>
+            </if>
+            <if test='reInterval != null and reInterval != ""'>
+                <![CDATA[ re_interval = #{reInterval}, ]]>
+            </if>
+            <if test='reDate != null and reDate != ""'>
+                <![CDATA[  re_date = #{reDate}, ]]>
+            </if>
+            <if test='reSp != null and reSp != ""'>
+                <![CDATA[  re_sp = #{reSp}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="sysId != null">
+                <![CDATA[ sys_id = #{sysId} ]]>
+            </if>
+        </where>
+    </update>
+
+
+
+</mapper>

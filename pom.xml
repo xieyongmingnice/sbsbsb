@@ -19,6 +19,7 @@
         <module>xunyu_shiro</module>
         <module>xunyu_department</module>
         <module>xunyu_crm</module>
+        <module>xunyu_system</module>
     </modules>
     <packaging>pom</packaging>
 

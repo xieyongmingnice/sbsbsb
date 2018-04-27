@@ -37,6 +37,9 @@ zuul:
     api-department:
       path: /department/**
       service-id: xunyu-department
+    api-system:
+       path: /sys/**
+       service-id: xunyu-system
 
 
 hystrix:
