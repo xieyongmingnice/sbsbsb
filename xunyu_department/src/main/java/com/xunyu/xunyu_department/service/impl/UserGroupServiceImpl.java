@@ -1,6 +1,6 @@
 package com.xunyu.xunyu_department.service.impl;
 
-import com.xunyu.model.usergroup.UserGroupModel;
+import com.xunyu.model.department.UserGroupModel;
 import com.xunyu.xunyu_department.dao.UserGroupDaoImpl;
 import com.xunyu.xunyu_department.service.UserGroupService;
 import com.xunyu.xunyu_department.vo.UserGroupVO;
@@ -42,5 +42,10 @@ public class UserGroupServiceImpl implements UserGroupService {
     @Override
     public int batchDeleteUserGroup(List<Long> idList) {
         return userGroupDao.batchDeleteUserGroup(idList);
+    }
+
+    @Override
+    public Integer selectTotalRows(UserGroupModel model) {
+        return userGroupDao.selectTotalRows(model);
     }
 }

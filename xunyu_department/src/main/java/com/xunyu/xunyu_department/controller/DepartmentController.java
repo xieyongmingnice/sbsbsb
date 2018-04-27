@@ -92,13 +92,14 @@ public class DepartmentController {
         Map map = Maps.newHashMap();
         map.put("model",model);
         try{
+            Integer totalRows = userService.selectTotalRows(model);
+
             List<Department> departments = departmentService.selectDepartmentList(map);
-            result.setTotalRows(0);
             if (departments != null && departments.size() > 0){
                 result.setRes(departments);
                 result.setCode(ResultMessage.Code.SUCCESS);
                 result.setMessage(ResultMessage.Message.SUCCESS);
-                result.setTotalRows(departments.size());
+                result.setTotalRows(totalRows == null ? 0 :totalRows);
             }else {
                 result.setMessage(ResultMessage.Message.NO_VALUE);
             }

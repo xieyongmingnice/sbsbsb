@@ -272,7 +272,7 @@
   </select>
 
   <!--增加员工-->
-  <insert id="addUser" parameterType="com.xunyu.model.users.UsersModel">
+  <insert id="addUser" parameterType="com.xunyu.model.department.UsersModel">
     insert into tbl_users
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -309,7 +309,7 @@
   </insert>
 
 <!--修改员工信息-->
-  <update id="updateUserInfo" parameterType="com.xunyu.model.users.UsersModel">
+  <update id="updateUserInfo" parameterType="com.xunyu.model.department.UsersModel">
     <!--
       WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
     -->
@@ -328,7 +328,7 @@
   </update>
 
   <!--删除员工-->
-  <update id="deleteUser" parameterType="com.xunyu.model.users.UsersModel">
+  <update id="deleteUser" parameterType="com.xunyu.model.department.UsersModel">
     update tbl_users
     set isabled = 0
     where isabled = 1 and
@@ -342,7 +342,7 @@
   </update>
 
   <!-- 查询员工信息列表 -->
-  <select id="selectUserList" parameterType="com.xunyu.model.users.UsersModel" resultMap="ResultVOMap">
+  <select id="selectUserList" parameterType="com.xunyu.model.department.UsersModel" resultMap="ResultVOMap">
     select
       user_id,account,create_time,user_type,isabled,
       case when user_type = 1 then '员工'
@@ -376,7 +376,7 @@
   </update>
 
   <!-- 通过account来查询员工列表 -->
-  <select id="selectUserByAccount" resultMap="BaseResultMap" parameterType="com.xunyu.model.users.UsersModel">
+  <select id="selectUserByAccount" resultMap="BaseResultMap" parameterType="com.xunyu.model.department.UsersModel">
     select *
     from tbl_users
     where isabled = 1
@@ -386,7 +386,7 @@
   </select>
 
   <!-- 通过员工分组查询员工列表 -->
-  <select id="selectUserListByUserGroupId" parameterType="com.xunyu.model.usergroup.UserGroupModel" resultMap="ResultVOMap">
+  <select id="selectUserListByUserGroupId" parameterType="com.xunyu.model.department.UserGroupModel" resultMap="ResultVOMap">
     select u.user_id,u.account,u.create_time,
       case when u.user_type = 1 then '员工'
            when u.user_type = 2 then '用户'
@@ -402,5 +402,48 @@
       and r.user_group_id = #{userGroupId,jdbcType=INTEGER}
     </if>
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectTotalRows" resultType="java.lang.Integer" parameterType="com.xunyu.model.user.UserModel">
+    select count(1)
+    from tbl_users
+    where isabled = 1 and user_type = 1
+    <if test="userId != null and userId != 0">
+      and user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="account != null and account != '' ">
+      and account like concat('%',#{account,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+
+
+  <!-- 查询总条数 分组-->
+  <select id="selectTotalRowsByGroupId" resultType="java.lang.Integer" parameterType="com.xunyu.model.user.UserModel">
+    select count(u.user_id)
+    from tbl_group_user_r r
+    left join tbl_users u
+    on u.user_id = r.user_id
+    left join tbl_user_group g
+    on g.user_group_id = r.user_group_id
+    where u.isabled = 1 and u.user_type = 1
+    and g.isabled = 1
+    <if test="userGroupId != null">
+      and r.user_group_id = #{userGroupId,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <!-- 查询总条数 部门-->
+  <select id="selectTotalRowsByDepartmentId" resultType="java.lang.Integer" parameterType="com.xunyu.model.user.UserModel">
+    select count(u.user_id)
+    from tbl_department_user_r r
+    left join tbl_users u
+    on r.user_id = u.user_id
+    left join tbl_department d
+    on r.department_id = d.department_id
+    where u.isabled = 1 and u.user_type = 1
+    and d.isabled = 1
+    <if test="departmentId != null">
+      and r.department_id = #{departmentId,jdbcType=VARCHAR}
+    </if>
   </select>
 </mapper>

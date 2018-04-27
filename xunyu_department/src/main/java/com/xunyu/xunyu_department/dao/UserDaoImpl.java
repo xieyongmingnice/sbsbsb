@@ -2,8 +2,9 @@ package com.xunyu.xunyu_department.dao;
 
 import com.commons.core.dao.impl.BaseDao;
 import com.xunyu.model.department.DepartmentModel;
-import com.xunyu.model.usergroup.UserGroupModel;
-import com.xunyu.model.users.UsersModel;
+import com.xunyu.model.user.UserModel;
+import com.xunyu.model.department.UserGroupModel;
+import com.xunyu.model.department.UsersModel;
 import com.xunyu.xunyu_department.pojo.Users;
 import com.xunyu.xunyu_department.vo.UsersVO;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -59,7 +60,16 @@ public class UserDaoImpl extends BaseDao {
         return super.selectList("com.xunyu.xunyu_department.pojo.Users.selectUserByAccount",model);
     }
 
-
+    public Integer selectTotalRows(UserModel model){
+        if (model instanceof DepartmentModel){
+            super.selectOne("com.xunyu.xunyu_department.pojo.Users.selectTotalRowsByDepartmentId",model) ;
+        } else if (model instanceof UserGroupModel){
+            return super.selectOne("com.xunyu.xunyu_department.pojo.Users.selectTotalRowsByGroupId",model) ;
+        }else if (model instanceof UsersModel){
+            return super.selectOne("com.xunyu.xunyu_department.pojo.Users.selectTotalRows",model);
+        }
+        return 0;
+    }
 
     public UserDaoImpl(SqlSessionFactory sqlSessionFactory) {
         super(sqlSessionFactory);

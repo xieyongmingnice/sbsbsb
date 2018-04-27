@@ -3,8 +3,7 @@ package com.xunyu.xunyu_department.controller;
 import com.commons.core.message.Result;
 import com.commons.core.message.ResultMessage;
 import com.xunyu.config.redis.RedisUtil;
-import com.xunyu.model.usergroup.UserGroupModel;
-import com.xunyu.xunyu_department.pojo.UserGroup;
+import com.xunyu.model.department.UserGroupModel;
 import com.xunyu.xunyu_department.service.UserGroupService;
 import com.xunyu.xunyu_department.service.UserService;
 import com.xunyu.xunyu_department.vo.UserGroupVO;
@@ -67,7 +66,7 @@ public class UserGroupController {
     @RequestMapping(value = "/getusergrouplist",method = RequestMethod.POST)
     @ResponseBody
     public Result<List<UserGroupVO>> selectUserGroupList(UserGroupModel model){
-                Result result = checkLogin(new Result(),model.getSessionId());
+        Result result = checkLogin(new Result(),model.getSessionId());
         if (result.getCode() != null){
             return result;
         }
@@ -79,11 +78,12 @@ public class UserGroupController {
         }
         model.setOffset(model.getStartRows());
         try {
+            Integer totalRows = userGroupService.selectTotalRows(model);
             List<UserGroupVO> list = userGroupService.selectUserGroupList(model);
             operationSuccess(result);
             if (list != null && list.size()>0) {
                 result.setRes(list);
-                result.setTotalRows(list.size());
+                result.setTotalRows(totalRows);
             }else {
                 result.setMessage(ResultMessage.Message.NO_VALUE);
             }
@@ -168,11 +168,14 @@ public class UserGroupController {
             return result;
         }
         try{
+            Integer totalRows = userService.selectTotalRows(model);
+            result.setTotalRows(totalRows == null ? 0 : totalRows);
             List<UsersVO> users = userService.selectUserListByUserGroupId(model);
             if (users != null && users.size() > 0){
                 operationSuccess(result);
                 result.setRes(users);
-                result.setTotalRows(users.size());
+            }else{
+                result.setMessage(ResultMessage.Message.NO_VALUE);
             }
         }catch (Exception e){
             catchExcpetion(e,result);

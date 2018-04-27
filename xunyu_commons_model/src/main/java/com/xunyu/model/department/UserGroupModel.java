@@ -1,4 +1,4 @@
-package com.xunyu.model.usergroup;
+package com.xunyu.model.department;
 
 import com.xunyu.model.user.UserModel;
 

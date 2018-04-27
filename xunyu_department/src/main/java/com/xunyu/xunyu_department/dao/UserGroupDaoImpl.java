@@ -1,7 +1,7 @@
 package com.xunyu.xunyu_department.dao;
 
 import com.commons.core.dao.impl.BaseDao;
-import com.xunyu.model.usergroup.UserGroupModel;
+import com.xunyu.model.department.UserGroupModel;
 import com.xunyu.xunyu_department.vo.UserGroupVO;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
@@ -45,6 +45,14 @@ public class UserGroupDaoImpl extends BaseDao {
      */
     public int batchDeleteUserGroup(List<Long> idList){
         return super.delete("com.xunyu.xunyu_department.pojo.UserGroup.batchDeleteUserGroup",idList);
+    }
+
+    /**
+     * 统计全部条数
+     * @return
+     */
+    public Integer selectTotalRows(UserGroupModel model){
+        return super.selectOne("com.xunyu.xunyu_department.pojo.UserGroup.selectTotalRows",model);
     }
 
     public UserGroupDaoImpl(SqlSessionFactory sqlSessionFactory) {

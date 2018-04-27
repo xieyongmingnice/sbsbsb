@@ -4,8 +4,7 @@ import com.commons.core.message.Result;
 import com.commons.core.message.ResultMessage;
 import com.commons.core.util.MD5Utils;
 import com.xunyu.config.redis.RedisUtil;
-import com.xunyu.model.user.UserModel;
-import com.xunyu.model.users.UsersModel;
+import com.xunyu.model.department.UsersModel;
 import com.xunyu.xunyu_department.pojo.Users;
 import com.xunyu.xunyu_department.service.UserService;
 import com.xunyu.xunyu_department.vo.UsersVO;
@@ -140,11 +139,12 @@ public class UserController {
         }
         model.setOffset(model.getStartRows());
         try {
+            Integer totalRows = userService.selectTotalRows(model);
             List<UsersVO> list = userService.selectUserList(model);
-            operationSuccess(result);
             if (list != null && list.size()>0) {
+                operationSuccess(result);
                 result.setRes(list);
-                result.setTotalRows(list.size());
+                result.setTotalRows(totalRows == null?0:totalRows);
             }else {
                 result.setMessage(ResultMessage.Message.NO_VALUE);
             }
