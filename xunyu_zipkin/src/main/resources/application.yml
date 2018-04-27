@@ -1,0 +1,18 @@
+eureka:
+  enabled: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+      #defaultZone: http://47.104.190.174:8001/eureka/
+
+spring:
+  application:
+    name: xunyu-zipkin
+    #表示当前程序不使用sleuth
+  sleuth:
+    enabled: false
+  ###############暂时未做日志持久化处理########################
+  #profiles:
+    #active: core//不需要加载xunyu_config中的配置文件
+server:
+  port: 8006

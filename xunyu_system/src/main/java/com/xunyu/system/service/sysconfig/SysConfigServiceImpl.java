@@ -1,6 +1,6 @@
 package com.xunyu.system.service.sysconfig;
 
-import com.xunyu.system.dao.SysConfigDaoImpl;
+import com.xunyu.system.dao.sysconfig.SysConfigDaoImpl;
 import com.xunyu.system.pojo.sysconfig.SystemConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

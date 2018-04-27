@@ -1,4 +1,4 @@
-package com.xunyu.system.dao;
+package com.xunyu.system.dao.sysconfig;
 
 import com.commons.core.dao.impl.BaseDao;
 import com.xunyu.system.pojo.sysconfig.SystemConfig;

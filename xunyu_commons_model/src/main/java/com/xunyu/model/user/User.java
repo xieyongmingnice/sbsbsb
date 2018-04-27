@@ -5,9 +5,13 @@ import java.util.Date;
 
 /**
  * @Author  dth
- * 用户信息
+ * 用户信息(用于用户登录)
+ *
  */
-public class User extends UserModel {
+public class User implements Serializable {
+
+
+    private static final long serialVersionUID = 5214167894101236574L;
 
     private Long userId;//用户ID
 
@@ -20,6 +24,17 @@ public class User extends UserModel {
     private Integer isabled;//0-不可用，1-可用该账户是否可用，不可用时禁止登陆
 
     private Date userCreateTime;//创建时间
+
+    private String SessionId;
+
+
+    public String getSessionId() {
+        return SessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        SessionId = sessionId;
+    }
 
     public Long getUserId() {
         return userId;

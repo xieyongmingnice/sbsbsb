@@ -8,30 +8,36 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>xunyu_zuul</artifactId>
+
+    <artifactId>xunyu_zipkin</artifactId>
     <packaging>pom</packaging>
-    <name>xunyu_zuul</name>
+    <name>xunyu_zipkin</name>
     <url>http://maven.apache.org</url>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zuul</artifactId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <groupId>io.zipkin.java</groupId>
+            <artifactId>zipkin-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zipkin.java</groupId>
+            <artifactId>zipkin-autoconfigure-ui</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>zuul-xunyu</finalName>
+        <finalName>xunyu_zipkin</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.xunyu.zuul.ZuulApiGatewayStarter</mainClass>
+                    <mainClass>com.xunyu.zipkin.ZipkinApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

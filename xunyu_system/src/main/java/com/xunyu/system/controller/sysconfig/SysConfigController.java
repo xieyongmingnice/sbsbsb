@@ -1,15 +1,15 @@
-package com.xunyu.system.controller;
+package com.xunyu.system.controller.sysconfig;
 
 import com.commons.core.message.Result;
 import com.xunyu.config.redis.RedisUtil;
-import com.xunyu.model.sysconfig.SysConfigModel;
+import com.xunyu.model.system.sysconfig.SysConfigModel;
+import com.xunyu.model.user.User;
 import com.xunyu.system.pojo.sysconfig.SystemConfig;
 import com.xunyu.system.service.sysconfig.SysConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,17 +38,19 @@ public class SysConfigController {
     public Result<SystemConfig> addSysConfigData(HttpServletResponse response,SystemConfig sc){
         response.setHeader("Access-Control-Allow-Origin", "*");
         Result<SystemConfig> res = new Result<SystemConfig>();
-        boolean status = redisUtil.sessionStatus(sc.getSessionId());
+        User us = redisUtil.getCurrUser(sc.getSessionId());
         Map<String,Object> map = new HashMap<String,Object>();
         int flag = 0;
-        if(!status){
+        if(us == null){
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
         try{
+
             sc.setIsabled(1);
             sc.setCreateTime(new Date());
+            sc.setUserId(us.getUserId());
             flag = sysConfigService.addSysConfig(sc);
 
             if(flag > 0){
@@ -107,15 +109,16 @@ public class SysConfigController {
     public Result<SystemConfig> getSysConfigDetail(HttpServletResponse response, SysConfigModel sm) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         Result<SystemConfig> res = new Result<SystemConfig>();
-        boolean status = redisUtil.sessionStatus(sm.getSessionId());
+        User us = redisUtil.getCurrUser(sm.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
         int flag = 0;
-        if (!status) {
+        if (us == null) {
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
         try{
+            map.put("userId",us.getUserId());
             SystemConfig sys = sysConfigService.getSysConfigDetail(map);
             res.setRes(sys);
             res.setMessage("success");

@@ -1,4 +1,4 @@
-package com.xunyu.model.customer;
+package com.xunyu.model.crm.customer;
 
 import com.xunyu.model.user.UserModel;
 

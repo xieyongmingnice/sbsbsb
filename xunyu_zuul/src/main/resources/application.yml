@@ -40,8 +40,9 @@ zuul:
     api-system:
        path: /sys/**
        service-id: xunyu-system
-
-
+    api-zipkin:
+           path: /zipkin/**
+           service-id: xunyu-zipkin
 hystrix:
   command:
     default:
@@ -55,3 +56,7 @@ ribbon:
   ConnectTimeout: 60000 #客户端等待与服务器建立连接的时间（以毫秒计）
   MaxAutoRetries: 0 #在同一台服务器上重试的最大次数
   MaxAutoRetriesNextServer: 1 #要重试的下一个服务器的最大数量
+
+#日志
+#logging:
+ #config: classpath:logback-medicare.xml

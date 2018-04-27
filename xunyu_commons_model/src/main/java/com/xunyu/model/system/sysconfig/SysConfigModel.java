@@ -1,4 +1,4 @@
-package com.xunyu.model.sysconfig;
+package com.xunyu.model.system.sysconfig;
 
 import com.xunyu.model.user.UserModel;
 

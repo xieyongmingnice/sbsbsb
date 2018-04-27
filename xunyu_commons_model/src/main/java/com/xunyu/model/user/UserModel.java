@@ -2,8 +2,6 @@ package com.xunyu.model.user;
 
 import com.xunyu.model.page.MysqlPage;
 
-import java.io.Serializable;
-
 /**
  * @author dth
  * @date 2018/4/12 14:58'
@@ -12,6 +10,16 @@ import java.io.Serializable;
 public class UserModel extends MysqlPage {
 
    private String sessionId;
+
+   private Long uid;//当前登录用户id
+
+    public Long getUid() {
+        return uid;
+    }
+
+    public void setUid(Long uid) {
+        this.uid = uid;
+    }
 
     public String getSessionId() {
         return sessionId;

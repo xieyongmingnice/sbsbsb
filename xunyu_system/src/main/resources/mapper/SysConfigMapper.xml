@@ -25,7 +25,7 @@
         <result column="re_interval" property="reInterval"></result>
         <result column="re_date" property="reDate"></result>
         <result column="re_sp" property="reSp"></result>
-
+        <result column="userid" property="userId"></result>
     </resultMap>
 
     <select id="getSysConfigDetail" parameterType="map" resultMap="sys_ResultMap">
@@ -33,9 +33,9 @@
           tc.sys_id,tc.isabled,tc.create_time,tc.sys_ip
           ,tc.sys_return,tc.sys_open,tc.yidong_port,tc.liantong_port,tc.dianxin_port,tc.up_keyword,tc.up_white,tc.up_black
           ,tc.sys_listen,tc.sys_w_proportion,tc.sys_f_proportion,tc.sys_s_proportion,tc.sys_remind,tc.re_num,tc.re_content
-          ,tc.re_interval,tc.re_date,tc.re_sp
+          ,tc.re_interval,tc.re_date,tc.re_sp,tc.userid
         from tbl_sys_config tc
-        where tc.isabled = 1
+        where tc.isabled = 1 and tc.userid = #{userId}
     </select>
 
     <insert id = "addSysConfig" parameterType="com.xunyu.system.pojo.sysconfig.SystemConfig"
@@ -64,6 +64,8 @@
             <if test='reInterval != null and reInterval != ""'>re_interval,</if>
             <if test='reDate != null and reDate != ""'>re_date,</if>
             <if test='reSp != null and reSp != ""'>re_sp,</if>
+            <if test='userId != null'>userid,</if>
+
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -89,6 +91,7 @@
             <if test='reInterval != null and reInterval != ""'>#{reInterval},</if>
             <if test='reDate != null and reDate != ""'>#{reDate},</if>
             <if test='reSp != null and reSp != ""'>#{reSp},</if>
+            <if test='userId != null'>#{userId},</if>
         </trim>
     </insert>
 
@@ -158,6 +161,9 @@
             <if test='reSp != null and reSp != ""'>
                 <![CDATA[  re_sp = #{reSp}, ]]>
             </if>
+            <if test='userId != null'>
+                <![CDATA[  userid = #{userId}, ]]>
+            </if>
         </set>
         <where>
             <if test="sysId != null">
@@ -165,7 +171,5 @@
             </if>
         </where>
     </update>
-
-
 
 </mapper>

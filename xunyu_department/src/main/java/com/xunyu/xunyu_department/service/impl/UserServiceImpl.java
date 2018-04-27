@@ -23,6 +23,8 @@ public class UserServiceImpl implements UserService {
         return dao.selectUserListByDepartmentId(model);
     }
 
+
+
     @Override
     public List<UsersVO> selectUserListByUserGroupId(UserGroupModel model) {
         return dao.selectUserListByUserGroupId(model);

@@ -5,7 +5,7 @@ import com.commons.core.util.StringUtils2;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.crm.pojo.customer.CustomerTab;
 import com.xunyu.crm.service.customer.CustomerService;
-import com.xunyu.model.customer.CustomerModel;
+import com.xunyu.model.crm.customer.CustomerModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

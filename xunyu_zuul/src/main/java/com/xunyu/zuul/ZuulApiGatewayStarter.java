@@ -10,13 +10,12 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 
 @EnableDiscoveryClient
-@SpringBootApplication
 @EnableZuulProxy
+@SpringBootApplication
 public class ZuulApiGatewayStarter {
     private static final Logger log = LoggerFactory.getLogger(ZuulApiGatewayStarter.class);
     public static void main(String[] args) {
         SpringApplication.run(ZuulApiGatewayStarter.class, args);
-        log.info("zuul启动成功...");
     }
 
     /**

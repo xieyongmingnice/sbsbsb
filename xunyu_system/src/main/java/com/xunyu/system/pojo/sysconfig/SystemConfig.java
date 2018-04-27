@@ -34,6 +34,15 @@ public class SystemConfig extends UserModel {
     private String reInterval;//余额提醒间隔
     private String reDate;//余额提醒时间
     private String reSp;//余额提醒发送SP代码
+    private Long userId;//当前登录用户id
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public Integer getReNum() {
         return reNum;

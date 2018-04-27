@@ -7,10 +7,9 @@ spring:
 eureka:
   client:
     serviceUrl:
-      #defaultZone: http://localhost:8001/eureka/
-      defaultZone: http://47.104.190.174:8001/eureka/
-#  instance:
-#      status-page-url: http://doctorppe.zhyaoshi.com/info
+      defaultZone: http://localhost:8001/eureka/
+      #defaultZone: http://47.104.190.174:8001/eureka/
+
 server:
   port: 8005
 

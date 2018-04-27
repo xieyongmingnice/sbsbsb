@@ -20,6 +20,8 @@
         <module>xunyu_department</module>
         <module>xunyu_crm</module>
         <module>xunyu_system</module>
+        <module>xunyu_smgp</module>
+        <module>xunyu_zipkin</module>
     </modules>
     <packaging>pom</packaging>
 
