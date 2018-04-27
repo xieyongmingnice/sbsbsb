@@ -9,7 +9,9 @@ import com.xunyu.model.page.MysqlPage;
  **/
 public class UserModel extends MysqlPage {
 
-   private String sessionId;
+    private static final long serialVersionUID = 5834709242803694524L;
+
+    private String sessionId;
 
    private Long uid;//当前登录用户id
 

@@ -1,6 +1,7 @@
 package com.xunyu.xunyu_department.dao;
 
 import com.commons.core.dao.impl.BaseDao;
+import com.xunyu.model.department.DepartmentModel;
 import com.xunyu.xunyu_department.pojo.Department;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
@@ -35,6 +36,14 @@ public class DepartmentDaoImpl extends BaseDao{
 
     public int batchDeleteDepartment(List<Long> list) {
         return super.update("com.xunyu.xunyu_department.pojo.Department.batchDeleteDepartment",list);
+    }
+
+    public Integer selectTotalRows(DepartmentModel model){
+        return super.selectOne("com.xunyu.xunyu_department.pojo.Department.selectTotalRows",model);
+    }
+
+    public Department selectByPrimaryKey(DepartmentModel model){
+        return super.selectOne("com.xunyu.xunyu_department.pojo.Department.selectByPrimaryKey",model);
     }
 
     public DepartmentDaoImpl(SqlSessionFactory sqlSessionFactory) {

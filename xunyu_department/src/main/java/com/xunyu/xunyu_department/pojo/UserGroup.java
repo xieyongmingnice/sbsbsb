@@ -12,39 +12,28 @@ public class UserGroup implements Serializable {
 
     private static final long serialVersionUID = 1079259782336957778L;
     /**
-     *
      * 员工分组ID
-     * @mbg.generated Wed Apr 25 14:43:51 CST 2018
      */
     private Long userGroupId;
 
     /**
-     *
      * 员工分组名称
-     * @mbg.generated Wed Apr 25 14:43:51 CST 2018
      */
     private String userGroupName;
 
     /**
-     *
      *   是否可用标志
      *   0-不可用，1-可用
-     *
-     * @mbg.generated Wed Apr 25 14:43:51 CST 2018
      */
     private Integer isabled;
 
     /**
-     *
      * 备注
-     * @mbg.generated Wed Apr 25 14:43:51 CST 2018
      */
     private String remark;
 
     /**
-     *
      * 创建时间
-     * @mbg.generated Wed Apr 25 14:43:51 CST 2018
      */
     private Date createTime;
 

@@ -197,7 +197,7 @@ public class UserGroupController {
             return result;
         }
         Long id = model.getUserGroupId();
-        if (id == null && id.intValue() == 0){
+        if (id == null || id.intValue() == 0){
             result.setCode(ResultMessage.Code.PRAMA_LOSS);
             result.setMessage(ResultMessage.Message.PRAMA_LOSS);
             return result;

@@ -26,7 +26,7 @@
     department_id, department_name, department_linkman, department_phone, isabled, remark, 
     create_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="com.xunyu.model.department.DepartmentModel" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tbl_department
@@ -128,7 +128,7 @@
 
   <!--查询企业部门列表-->
   <select id="selectDepartmentList" parameterType="java.util.Map" resultMap="selectListResultMap">
-      select d.department_id, d.department_name, d.department_linkman,department_phone,
+      select d.department_id, d.department_name, d.department_linkman,department_phone,d.isabled
               d.remark,  d.create_time ,count(r.user_id) employee_num
       from tbl_department d
       LEFT JOIN tbl_department_user_r r
@@ -163,6 +163,16 @@
       #{item,jdbcType=INTEGER}
     </foreach>
   </update>
+
+  <select id="selectTotalRows" parameterType="com.xunyu.model.department.DepartmentModel" resultType="java.lang.Integer">
+    select count(1) from tbl_department where isabled =1
+    <if test="departmentId != null">
+      and department_id = #{departmentId,jdbcType=INTEGER}
+    </if>
+    <if test="departmentName != '' and departmentName != null">
+      and department_name like CONCAT('%',#{departmentName,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
 
 
 </mapper>

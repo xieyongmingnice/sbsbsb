@@ -92,7 +92,7 @@ public class DepartmentController {
         Map map = Maps.newHashMap();
         map.put("model",model);
         try{
-            Integer totalRows = userService.selectTotalRows(model);
+            Integer totalRows = departmentService.selectTotalRows(model);
 
             List<Department> departments = departmentService.selectDepartmentList(map);
             if (departments != null && departments.size() > 0){
@@ -225,9 +225,37 @@ public class DepartmentController {
         return result;
     }
 
+
     /**
-     * 导出企业部门
+     * 查询单个企业部门信息
      */
+    @RequestMapping(value = "/getdepartmentinfo",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<Department> getDepartmentInfo(DepartmentModel model){
+        Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
+        try{
+            Department department = departmentService.selectByPrimaryKey(model);
+            if (department != null ){
+                result.setMessage(ResultMessage.Message.SUCCESS);
+                result.setCode(ResultMessage.Code.SUCCESS);
+                result.setRes(department);
+            }else {
+                result.setMessage(ResultMessage.Code.SUCCESS);
+                result.setCode(ResultMessage.Message.NO_VALUE);
+            }
+        }catch (Exception e){
+            result.setCode(ResultMessage.Code.ERROR);
+            result.setMessage(ResultMessage.Message.ERROR);
+            logger.info("系统异常");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
 
     private Result checkLogin(Result r,String sessionId){
         boolean flag = redisUtil.sessionStatus(sessionId);

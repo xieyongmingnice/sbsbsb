@@ -178,6 +178,33 @@ public class UserController {
         return result;
     }
 
+    /**
+     * 查询单个员工信息
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/getuserinfo",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<Users> getUserInfo(UsersModel model){
+        Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
+        try{
+            Users users = userService.selectByPrimaryKey(model);
+            if(users !=null){
+                operationSuccess(result);
+                result.setRes(users);
+            }else {
+                result.setCode(ResultMessage.Code.SUCCESS);
+                result.setMessage(ResultMessage.Message.NO_VALUE);
+            }
+        }catch (Exception e){
+            catchExcpetion(e,result);
+        }
+        return result;
+    }
+
     private Result checkLogin(Result r, String sessionId){
         boolean flag = redisUtil.sessionStatus(sessionId);
         if (!flag) {

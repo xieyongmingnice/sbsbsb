@@ -1,5 +1,6 @@
 package com.xunyu.xunyu_department.service;
 
+import com.xunyu.model.department.DepartmentModel;
 import com.xunyu.xunyu_department.pojo.Department;
 
 import java.util.List;
@@ -36,7 +37,15 @@ public interface DepartmentService {
     int batchDeleteDepartment(List<Long> list);
 
     /**
-     * 导出企业部门
+     * 查询list时查询总条数
+     * @param model
+     * @return
      */
+    Integer selectTotalRows(DepartmentModel model);
 
+
+    /**
+     * 查询单条部门记录
+     */
+    Department selectByPrimaryKey(DepartmentModel model);
 }

@@ -1,5 +1,6 @@
 package com.xunyu.xunyu_department.service.impl;
 
+import com.xunyu.model.department.DepartmentModel;
 import com.xunyu.xunyu_department.dao.DepartmentDaoImpl;
 import com.xunyu.xunyu_department.pojo.Department;
 import com.xunyu.xunyu_department.service.DepartmentService;
@@ -38,5 +39,15 @@ public class DepartmentServiceImpl implements DepartmentService{
     @Override
     public int batchDeleteDepartment(List<Long> list) {
         return dao.batchDeleteDepartment(list);
+    }
+
+    @Override
+    public Integer selectTotalRows(DepartmentModel model) {
+        return dao.selectTotalRows(model);
+    }
+
+    @Override
+    public Department selectByPrimaryKey(DepartmentModel model) {
+        return dao.selectByPrimaryKey(model);
     }
 }

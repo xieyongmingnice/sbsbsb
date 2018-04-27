@@ -1,10 +1,9 @@
 package com.xunyu.xunyu_department.service;
 
-
 import com.xunyu.model.department.DepartmentModel;
+import com.xunyu.model.user.UserModel;
 import com.xunyu.model.department.UserGroupModel;
 import com.xunyu.model.department.UsersModel;
-import com.xunyu.model.user.UserModel;
 import com.xunyu.xunyu_department.pojo.Users;
 import com.xunyu.xunyu_department.vo.UsersVO;
 
@@ -76,4 +75,9 @@ public interface UserService {
      * @return
      */
     Integer selectTotalRows(UserModel model);
+
+    /**
+     * 查单个员工信息
+     */
+    Users selectByPrimaryKey(UserModel model);
 }

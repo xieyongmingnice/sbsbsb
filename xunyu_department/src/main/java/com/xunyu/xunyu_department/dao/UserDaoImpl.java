@@ -71,6 +71,10 @@ public class UserDaoImpl extends BaseDao {
         return 0;
     }
 
+    public Users selectByPrimaryKey(UserModel model){
+        return super.selectOne("com.xunyu.xunyu_department.pojo.Users.selectByPrimaryKey",model);
+    }
+
     public UserDaoImpl(SqlSessionFactory sqlSessionFactory) {
         super(sqlSessionFactory);
     }

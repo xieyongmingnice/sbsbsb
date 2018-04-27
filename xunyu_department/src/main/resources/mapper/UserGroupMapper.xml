@@ -23,7 +23,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="user_group_number" jdbcType="INTEGER" property="userGroupNumber" />
   </resultMap>
-  
+
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbg.generated  This element was generated on Wed Apr 25 14:43:51 CST 2018. by MyBatis Generator, do not modify.
@@ -95,11 +95,11 @@
     user_group_id, user_group_name, isabled, remark, create_time
   </sql>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="com.xunyu.model.department.UserGroupModel" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated  This element was generated on Wed Apr 25 14:43:51 CST 2018. by MyBatis Generator, do not modify.
     -->
-    select 
+    select
     <include refid="Base_Column_List" />
     from tbl_user_group
     where user_group_id = #{userGroupId,jdbcType=INTEGER}
@@ -115,10 +115,10 @@
     <!--
       WARNING - @mbg.generated  This element was generated on Wed Apr 25 14:43:51 CST 2018. by MyBatis Generator, do not modify.
     -->
-    insert into tbl_user_group (user_group_id, user_group_name, isabled, 
-      remark, create_time)
-    values (#{userGroupId,jdbcType=INTEGER}, #{userGroupName,jdbcType=VARCHAR}, #{isabled,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+    insert into tbl_user_group (user_group_id, user_group_name, isabled,
+    remark, create_time)
+    values (#{userGroupId,jdbcType=INTEGER}, #{userGroupName,jdbcType=VARCHAR}, #{isabled,jdbcType=INTEGER},
+    #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.xunyu.xunyu_department.pojo.UserGroup">
     <!--
@@ -192,10 +192,10 @@
     -->
     update tbl_user_group
     set user_group_id = #{record.userGroupId,jdbcType=INTEGER},
-      user_group_name = #{record.userGroupName,jdbcType=VARCHAR},
-      isabled = #{record.isabled,jdbcType=INTEGER},
-      remark = #{record.remark,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    user_group_name = #{record.userGroupName,jdbcType=VARCHAR},
+    isabled = #{record.isabled,jdbcType=INTEGER},
+    remark = #{record.remark,jdbcType=VARCHAR},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,16 +227,16 @@
     -->
     update tbl_user_group
     set user_group_name = #{userGroupName,jdbcType=VARCHAR},
-      isabled = #{isabled,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+    isabled = #{isabled,jdbcType=INTEGER},
+    remark = #{remark,jdbcType=VARCHAR},
+    create_time = #{createTime,jdbcType=TIMESTAMP}
     where user_group_id = #{userGroupId,jdbcType=INTEGER}
   </update>
 
   <!--以下为自定义sql-->
 
   <!--增-->
-  <insert id="addUserGroup" parameterType="com.xunyu.model.crm.usergroup.UserGroupModel">
+  <insert id="addUserGroup" parameterType="com.xunyu.model.department.UserGroupModel">
     insert into tbl_user_group
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userGroupId != null">
@@ -274,14 +274,14 @@
     </trim>
   </insert>
   <!--删-->
-  <update id="deleteUserGroup" parameterType="com.xunyu.model.usergroup.UserGroupModel">
+  <update id="deleteUserGroup" parameterType="com.xunyu.model.department.UserGroupModel">
     update tbl_user_group
     set isabled = 0
     where user_group_id = #{userGroupId,jdbcType=INTEGER}
     limit 1
   </update>
   <!--改-->
-  <update id="updateUserGroupInfo" parameterType="com.xunyu.model.usergroup.UserGroupModel">
+  <update id="updateUserGroupInfo" parameterType="com.xunyu.model.department.UserGroupModel">
     update tbl_user_group
     set
     <if test="userGroupName != null and userGroupName != ''">
@@ -300,12 +300,15 @@
     limit 1
   </update>
   <!--查-->
-  <select id="selectUserGroupList" parameterType="com.xunyu.model.usergroup.UserGroupModel" resultMap="selectListResultMap">
+  <select id="selectUserGroupList" parameterType="com.xunyu.model.department.UserGroupModel" resultMap="selectListResultMap">
     select g.user_group_id , g.user_group_name , g.remark , g.create_time ,g.isabled , count(r.user_id) as user_group_number
     from tbl_user_group g
     left join tbl_group_user_r r
     on g.user_group_id = r.user_group_id
     where g.isabled = 1
+    <if test="userGroupId != null and userGroupId != 0">
+      and g.user_group_id = #{userGroupId,jdbcType=INTEGER}
+    </if>
     <if test="userGroupName != null and userGroupName != '' ">
       and g.user_group_name like concat('%',#{userGroupName,jdbcType=VARCHAR},'%')
     </if>
@@ -313,6 +316,7 @@
       and g.remark like concat('%',#{remark,jdbcType=VARCHAR},'%')
     </if>
     group by g.user_group_id
+    limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
 
   <!--批量删除-->
@@ -326,4 +330,17 @@
     </foreach>
   </update>
 
+  <!--查询总条数-->
+  <select id="selectTotalRows" resultType="java.lang.Integer" parameterType="com.xunyu.model.department.UserGroupModel">
+    select count(1) from tbl_user_group where isabled = 1
+    <if test="userGroupId != null and userGroupId != 0">
+      and user_group_id = #{userGroupId,jdbcType=INTEGER}
+    </if>
+    <if test="userGroupName != null and userGroupName != '' ">
+      and user_group_name like concat('%',#{userGroupName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="remark != null and remark != '' ">
+      and remark like concat('%',#{remark,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
 </mapper>

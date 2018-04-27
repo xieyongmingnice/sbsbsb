@@ -23,8 +23,6 @@ public class UserServiceImpl implements UserService {
         return dao.selectUserListByDepartmentId(model);
     }
 
-
-
     @Override
     public List<UsersVO> selectUserListByUserGroupId(UserGroupModel model) {
         return dao.selectUserListByUserGroupId(model);
@@ -63,5 +61,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer selectTotalRows(UserModel model) {
         return dao.selectTotalRows(model);
+    }
+
+    @Override
+    public Users selectByPrimaryKey(UserModel model) {
+        return dao.selectByPrimaryKey(model);
     }
 }
