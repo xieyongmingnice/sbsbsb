@@ -132,12 +132,21 @@ public class UserController {
         if (result.getCode() != null){
             return result;
         }
+        int currPage = model.getCurrPage();
+        if (currPage == 0){
+            result.setMessage(ResultMessage.Message.PRAMA_LOSS);
+            result.setCode(ResultMessage.Code.PRAMA_LOSS);
+            return result;
+        }
+        model.setOffset(model.getStartRows());
         try {
             List<UsersVO> list = userService.selectUserList(model);
             operationSuccess(result);
             if (list != null && list.size()>0) {
                 result.setRes(list);
                 result.setTotalRows(list.size());
+            }else {
+                result.setMessage(ResultMessage.Message.NO_VALUE);
             }
         }catch (Exception e){
             catchExcpetion(e,result);

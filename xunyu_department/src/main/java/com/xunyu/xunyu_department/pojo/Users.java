@@ -11,7 +11,7 @@ import java.util.Date;
 public class Users implements Serializable{
     private static final long serialVersionUID = 8471439465791691291L;
     /**
-     * 流水id
+     * 员工id
      */
     private long  userId;
     /**
@@ -27,11 +27,11 @@ public class Users implements Serializable{
      */
     private int userType;
     /**
-     *
+     * 可用状态标签 1：可用，0：不可用
      */
     private int isabled;
     /**
-     *
+     * 创建时间
      */
     private Date createTime;
 

@@ -17,6 +17,10 @@ public interface ResultMessage {
         String SUCCESS = "操作成功";
 
         String ERROR = "服务器异常";
+
+        String PRAMA_LOSS = "必要参数缺失";
+
+        String NO_VALUE = "结果集为空";
     }
 
     /**
@@ -30,8 +34,9 @@ public interface ResultMessage {
 
         String ERROR = "500";
 
-        String USER_EXIST = "413";
+        String USER_EXIST = "412";
 
+        String PRAMA_LOSS = "413";
     }
 
 }

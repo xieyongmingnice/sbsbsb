@@ -1,5 +1,6 @@
 package com.xunyu.xunyu_department.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,9 +8,10 @@ import java.util.Date;
  * @description  员工VO
  * @date 2018/4/25 10:53
  */
-public class UsersVO {
+public class UsersVO implements Serializable{
+    private static final long serialVersionUID = 6068165852947723583L;
     /**
-     * 流水id
+     * 员工id
      */
     private Long  userId;
     /**
@@ -22,7 +24,7 @@ public class UsersVO {
     private String password;
 
     /**
-     * 用户类型
+     * 用户类型 1-员工 ，2-用户
      */
     private Integer userType;
 
@@ -36,7 +38,7 @@ public class UsersVO {
     private Date createTime;
 
     /**
-     * 用户类型str
+     * 用户类型 字符串：员工 ，用户
      */
     private String userTypeStr;
 
