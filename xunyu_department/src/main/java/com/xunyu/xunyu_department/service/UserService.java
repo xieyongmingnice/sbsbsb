@@ -72,7 +72,6 @@ public interface UserService {
 
     /**
      * 查询
-     * @param model
      * @return
      */
     Integer selectTotalRows(UserModel model);
