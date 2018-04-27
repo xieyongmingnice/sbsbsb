@@ -2,6 +2,7 @@ package com.xunyu.xunyu_department.service.impl;
 
 import com.xunyu.model.department.UserGroupModel;
 import com.xunyu.xunyu_department.dao.UserGroupDaoImpl;
+import com.xunyu.xunyu_department.pojo.UserGroup;
 import com.xunyu.xunyu_department.service.UserGroupService;
 import com.xunyu.xunyu_department.vo.UserGroupVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,10 @@ public class UserGroupServiceImpl implements UserGroupService {
     @Override
     public Integer selectTotalRows(UserGroupModel model) {
         return userGroupDao.selectTotalRows(model);
+    }
+
+    @Override
+    public UserGroup selectByPrimaryKey(Long id) {
+        return userGroupDao.selectByPrimaryKey(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.xunyu.xunyu_department.service;
 
 import com.xunyu.model.department.UserGroupModel;
+import com.xunyu.xunyu_department.pojo.UserGroup;
 import com.xunyu.xunyu_department.vo.UserGroupVO;
 
 import java.util.List;
@@ -36,4 +37,8 @@ public interface UserGroupService {
      * 查询员工分组总条数
      */
     Integer selectTotalRows(UserGroupModel model);
+    /**
+     *
+     */
+    UserGroup selectByPrimaryKey(Long id);
 }

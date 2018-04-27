@@ -4,6 +4,7 @@ import com.commons.core.message.Result;
 import com.commons.core.message.ResultMessage;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.department.UserGroupModel;
+import com.xunyu.xunyu_department.pojo.UserGroup;
 import com.xunyu.xunyu_department.service.UserGroupService;
 import com.xunyu.xunyu_department.service.UserService;
 import com.xunyu.xunyu_department.vo.UserGroupVO;
@@ -175,7 +176,41 @@ public class UserGroupController {
                 operationSuccess(result);
                 result.setRes(users);
             }else{
+                result.setCode(ResultMessage.Code.SUCCESS);
                 result.setMessage(ResultMessage.Message.NO_VALUE);
+            }
+        }catch (Exception e){
+            catchExcpetion(e,result);
+        }
+        return result;
+    }
+
+
+    /**
+     * 根据主键查询用户分组信息
+     */
+    @RequestMapping(value = "/getusergroupinfo",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<UserGroup> getUserGroupInfo(UserGroupModel model){
+        Result result = checkLogin(new Result(),model.getSessionId());
+        if (result.getCode() != null){
+            return result;
+        }
+        Long id = model.getUserGroupId();
+        if (id == null && id.intValue() == 0){
+            result.setCode(ResultMessage.Code.PRAMA_LOSS);
+            result.setMessage(ResultMessage.Message.PRAMA_LOSS);
+            return result;
+        }
+        try{
+            UserGroup userGroup = userGroupService.selectByPrimaryKey(id);
+            if (userGroup == null){
+                result.setCode(ResultMessage.Code.SUCCESS);
+                result.setMessage(ResultMessage.Message.NO_VALUE);
+                return result;
+            }else {
+                operationSuccess(result);
+                result.setRes(userGroup);
             }
         }catch (Exception e){
             catchExcpetion(e,result);

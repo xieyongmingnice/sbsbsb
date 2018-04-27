@@ -2,6 +2,8 @@ package com.xunyu.xunyu_department.dao;
 
 import com.commons.core.dao.impl.BaseDao;
 import com.xunyu.model.department.UserGroupModel;
+import com.xunyu.xunyu_department.pojo.UserGroup;
+import com.xunyu.xunyu_department.pojo.Users;
 import com.xunyu.xunyu_department.vo.UserGroupVO;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
@@ -53,6 +55,13 @@ public class UserGroupDaoImpl extends BaseDao {
      */
     public Integer selectTotalRows(UserGroupModel model){
         return super.selectOne("com.xunyu.xunyu_department.pojo.UserGroup.selectTotalRows",model);
+    }
+
+    /**
+     * 根据主键查询
+     */
+    public UserGroup selectByPrimaryKey(Long id){
+        return super.selectOne("com.xunyu.xunyu_department.pojo.UserGroup.selectByPrimaryKey",id);
     }
 
     public UserGroupDaoImpl(SqlSessionFactory sqlSessionFactory) {
