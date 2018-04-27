@@ -306,6 +306,9 @@
     left join tbl_group_user_r r
     on g.user_group_id = r.user_group_id
     where g.isabled = 1
+    <if test="userGroupId != null and userGroupId != 0">
+      and g.user_group_id = #{userGroupId,jdbcType=INTEGER}
+    </if>
     <if test="userGroupName != null and userGroupName != '' ">
       and g.user_group_name like concat('%',#{userGroupName,jdbcType=VARCHAR},'%')
     </if>

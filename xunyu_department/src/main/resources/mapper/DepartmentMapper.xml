@@ -134,6 +134,9 @@
       LEFT JOIN tbl_department_user_r r
       ON  d.department_id = r.department_id
       where d.isabled = 1
+      <if test="model.departmentId != null">
+        and d.department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
       <if test="model.departmentName != '' and model.departmentName != null">
         and d.department_name like CONCAT('%',#{model.departmentName,jdbcType=VARCHAR},'%')
       </if>
