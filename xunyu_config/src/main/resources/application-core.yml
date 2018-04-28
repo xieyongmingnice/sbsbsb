@@ -72,8 +72,6 @@ eureka:
       #defaultZone: http://47.104.190.174:8001/eureka/
 
 feign:
-   httpclient:
-      enabled: true
    compression:
        request:
          mime-types:
