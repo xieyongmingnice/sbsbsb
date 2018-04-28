@@ -109,18 +109,10 @@
   <update id="updateDepartmentInfo" parameterType="com.xunyu.xunyu_department.pojo.Department">
     update tbl_department
     <set>
-      <if test="departmentName != null">
         department_name = #{departmentName,jdbcType=VARCHAR},
-      </if>
-      <if test="departmentLinkman != null">
         department_linkman = #{departmentLinkman,jdbcType=VARCHAR},
-      </if>
-      <if test="departmentPhone != null">
         department_phone = #{departmentPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
-      </if>
     </set>
     where department_id = #{departmentId,jdbcType=INTEGER}
     limit 1
@@ -128,7 +120,7 @@
 
   <!--查询企业部门列表-->
   <select id="selectDepartmentList" parameterType="java.util.Map" resultMap="selectListResultMap">
-      select d.department_id, d.department_name, d.department_linkman,department_phone,d.isabled
+      select d.department_id, d.department_name, d.department_linkman,department_phone,d.isabled,
               d.remark,  d.create_time ,count(r.user_id) employee_num
       from tbl_department d
       LEFT JOIN tbl_department_user_r r

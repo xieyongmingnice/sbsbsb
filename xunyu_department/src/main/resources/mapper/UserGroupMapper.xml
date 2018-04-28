@@ -284,12 +284,8 @@
   <update id="updateUserGroupInfo" parameterType="com.xunyu.model.department.UserGroupModel">
     update tbl_user_group
     set
-    <if test="userGroupName != null and userGroupName != ''">
       user_group_name = #{userGroupName,jdbcType=VARCHAR},
-    </if>
-    <if test="remark != null and remark != '' ">
       remark = #{remark,jdbcType=VARCHAR}
-    </if>
     where
     <if test="userGroupId != null">
       user_group_id = #{userGroupId,jdbcType=INTEGER}
