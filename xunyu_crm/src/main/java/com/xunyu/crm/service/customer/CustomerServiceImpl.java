@@ -85,7 +85,11 @@ public class CustomerServiceImpl implements CustomerService {
         int n = 0;
         n = customerDaoImpl.addCustomer(customerTab);
         if (n > 0) {
-            //异步往tbl_users表中添加一条账号信息记录
+            /*异步往tbl_users表中添加一条账号信息记录
+            *在这里不用feign调用shiro服务中的添加接口是因为
+            * 防止数据丢失，（当shiro微服务出现堵塞或者挂掉时，就无法添加数据了，不能保证
+            * 客户信息表中的账号初始化到用户表）
+             */
             ExecutorService pool = Executors.newCachedThreadPool();
             Runnable run = new Runnable() {//创建一个线程匿名内部类
                 @Override
