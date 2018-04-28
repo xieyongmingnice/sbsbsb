@@ -34,7 +34,7 @@
     </dependencies>
 
     <build>
-        <finalName>xunyu_system</finalName>
+        <finalName>system-xunyu</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

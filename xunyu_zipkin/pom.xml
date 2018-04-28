@@ -31,7 +31,7 @@
     </dependencies>
 
     <build>
-        <finalName>xunyu_zipkin</finalName>
+        <finalName>zipkin-xunyu</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

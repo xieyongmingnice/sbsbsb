@@ -3,6 +3,7 @@ package com.commons.core.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 public class RandomUtils {
 
@@ -164,5 +165,15 @@ public class RandomUtils {
             return random(begin, end);
         }
         return rtn;
+    }
+
+    /**
+     * 判断是不是数字
+     * @param str
+     * @return
+     */
+    public static boolean isInteger(String str) {
+        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+        return pattern.matcher(str).matches();
     }
 }

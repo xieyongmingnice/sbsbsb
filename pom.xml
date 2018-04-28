@@ -9,9 +9,7 @@
     <modules>
         <module>xunyu_config</module>
         <module>xunyu_commons-core</module>
-        <module>xunyu_consume</module>
         <module>xunyu_zuul</module>
-        <module>xunyu_provider</module>
         <module>xunyu_commons_model</module>
         <module>xunyu_sgip</module>
         <module>xunyu-eureka</module>
