@@ -7,15 +7,3 @@ spring:
 server:
   port: 8004
 
-feign:
-   hystrix:
-     enabled: true  #激活断路游
-
-hystrix:
-   command:
-    default:
-      execution:
-        isolation:
-         thread:
-          timeoutInMilliseconds: 40000  #设置超时时间
-

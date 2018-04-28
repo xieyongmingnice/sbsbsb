@@ -20,7 +20,7 @@ zuul:
   host:
       socket-timeout-millis: 60000
       connect-timeout-millis: 60000
-  add-host-header: true #表示API网关在进行请求路由转发前为请求设置Host头信息。
+      add-host-header: true #表示API网关在进行请求路由转发前为请求设置Host头信息。
   routes:
     api-provider:
       path: /provider/**
@@ -41,8 +41,9 @@ zuul:
        path: /sys/**
        service-id: xunyu-system
     api-zipkin:
-           path: /zipkin/**
-           service-id: xunyu-zipkin
+       path: /zipkin/**
+       service-id: xunyu-zipkin
+
 hystrix:
   command:
     default:
