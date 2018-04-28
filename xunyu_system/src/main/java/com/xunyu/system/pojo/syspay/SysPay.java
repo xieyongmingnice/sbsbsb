@@ -13,7 +13,7 @@ public class SysPay extends UserModel {
     private Long payId;//主键id
     private Integer isabled;//1未删除 0删除
     private Date createTime;//创建时间
-    private String payName;//支付
+    private String payName;//支付名称
     private String merchantName;//商户名称
     private String payAccount;//支付账号
     private String payPid;//支付pid

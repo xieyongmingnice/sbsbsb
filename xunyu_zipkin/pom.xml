@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>xunyu_zipkin</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>xunyu_zipkin</name>
     <url>http://maven.apache.org</url>
 

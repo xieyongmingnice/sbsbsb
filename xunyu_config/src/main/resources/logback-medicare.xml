@@ -12,7 +12,7 @@
     <appender name="xunyu_rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.dir}/logs/xunyu.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.dir}/logs/${USER_HOME}-%d{yyyy-MM-dd_HH}.%i.log
+            <fileNamePattern>${log.dir}/logs/config-%d{yyyy-MM-dd_HH}.%i.log
             </fileNamePattern>
             <maxHistory>5</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy
