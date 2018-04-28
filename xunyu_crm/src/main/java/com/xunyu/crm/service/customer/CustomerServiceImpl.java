@@ -1,6 +1,7 @@
 package com.xunyu.crm.service.customer;
 
 import com.commons.core.util.MD5Utils;
+import com.commons.core.util.RandomUtils;
 import com.commons.core.util.StringUtils2;
 import com.xunyu.crm.dao.customer.CustomerDaoImpl;
 import com.xunyu.crm.dao.customer.CustomerGroupDaoImpl;
@@ -87,8 +88,8 @@ public class CustomerServiceImpl implements CustomerService {
         if (n > 0) {
             /*异步往tbl_users表中添加一条账号信息记录
             *在这里不用feign调用shiro服务中的添加接口是因为
-            * 防止数据丢失，（当shiro微服务出现堵塞或者挂掉时，就无法添加数据了，不能保证
-            * 客户信息表中的账号初始化到用户表）
+            * 防止数据丢失，（当shiro微服务出现堵塞、挂掉、重启时，就无法添加数据了，不能保证
+            * 客户信息表中的账号能最大限度的初始化到用户表）
              */
             ExecutorService pool = Executors.newCachedThreadPool();
             Runnable run = new Runnable() {//创建一个线程匿名内部类
@@ -151,7 +152,7 @@ public class CustomerServiceImpl implements CustomerService {
         int n = 0;
         String[] idsLon = customerIds.split(",");
         for (int i = 0; i < idsLon.length; i++) {
-            if (StringUtils2.isNotEmpty(idsLon[i])) { //再一次判断字符串末尾是不是有逗号
+            if (RandomUtils.isInteger(idsLon[i])) { //判断是不是数字
                 CustomerTab cu = new CustomerTab();
                 cu.setIsabled(0);
                 cu.setCustomerId(Long.parseLong(idsLon[i]));
@@ -181,7 +182,6 @@ public class CustomerServiceImpl implements CustomerService {
     //级联删除
     private int delJilian(String ids) {
         int n = 1;
-        //异步往tbl_users表中添加一条账号信息记录
         ExecutorService pool = Executors.newCachedThreadPool();
         Runnable run = new Runnable() {//创建一个线程匿名内部类
             @Override
@@ -189,7 +189,7 @@ public class CustomerServiceImpl implements CustomerService {
                 try {
                     String[] idsLon = ids.split(",");
                     for (int i = 0; i < idsLon.length; i++) {
-                        if (StringUtils2.isNotEmpty(idsLon[i])) { //再一次判断字符串末尾是不是有逗号
+                        if (RandomUtils.isInteger(idsLon[i])) { //判断是不是数字
                             CustomerTab cu = new CustomerTab();
                             cu.setIsabled(0);
                             cu.setCustomerGroupId(Long.parseLong(idsLon[i]));
