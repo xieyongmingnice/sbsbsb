@@ -4,12 +4,6 @@ spring:
   profiles:
     active: core #加载xunyu_config项目中 的application-core.yml文件
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8001/eureka/
-#  instance:
-#      status-page-url: http://doctorppe.zhyaoshi.com/info
 server:
   port: 8008
 
