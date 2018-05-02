@@ -32,7 +32,7 @@ public class SessionFilter implements Filter {
         httpResponse.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
         httpResponse.addHeader("Access-Control-Allow-Headers", "Content-Type, token");
         httpResponse.addHeader("Access-Control-Max-Age", "1800");//30 min
-
+        chain.doFilter(httpRequest,httpResponse);
     }
 
     @Override
