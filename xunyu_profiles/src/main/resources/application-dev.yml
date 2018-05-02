@@ -42,8 +42,8 @@ spring:
       redisPassWord: XunYuDEVRedis2018
 #配置zipKin Server的地址
   zipkin:
-    base-url: http://127.0.0.1:8006
-    #base-url: http://47.104.190.174:8006
+    #base-url: http://127.0.0.1:8006
+    base-url: http://47.104.190.174:8006
 
 #mybatis配置
 mybatis:
@@ -69,8 +69,8 @@ eureka:
   enabled: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:8001/eureka/
-      #defaultZone: http://47.104.190.174:8001/eureka/
+      #defaultZone: http://localhost:8001/eureka/
+      defaultZone: http://47.104.190.174:8001/eureka/
 
 feign:
    compression:
