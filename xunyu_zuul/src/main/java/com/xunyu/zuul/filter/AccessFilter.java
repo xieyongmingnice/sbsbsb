@@ -12,7 +12,7 @@ public class AccessFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
-        return false;   //决定是否走该过滤器
+        return true;   //决定是否走该过滤器
     }
 
     /**
@@ -31,11 +31,11 @@ public class AccessFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        Object accessToken = request.getParameter("accessToken");  //定义规则：访问url中必须带有accessToken参数
+        Object accessToken = request.getParameter("sessionId");  //定义规则：访问url中必须带有sessionId参数
         if (accessToken == null) {
             ctx.setSendZuulResponse(false);
-            ctx.setResponseStatusCode(401);
-            ctx.setResponseBody("Network delay, please wait patiently...");
+            ctx.setResponseStatusCode(404);
+            ctx.setResponseBody("请传入sessionId");
             return null;
         }
         return null;
