@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -105,7 +104,7 @@ public class AliyunOssUtil {
 
 
         if (!"".equals(dirName) && dirName != null) {
-            uploadDir = dirName.substring(0, dirName.length()).replaceAll("\\\\", "/") + "-";
+            uploadDir = dirName.substring(0, dirName.length()).replaceAll("\\\\", "/");
         }
 
         try {

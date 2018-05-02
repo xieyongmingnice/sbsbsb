@@ -20,6 +20,7 @@
         <module>xunyu_system</module>
         <module>xunyu_smgp</module>
         <module>xunyu_zipkin</module>
+        <module>xunyu_profiles</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -105,49 +106,6 @@
         </dependencies>
 
     </dependencyManagement>
-
-    <profiles>
-        <profile>
-            <id>local</id>
-            <properties>
-                <env>local</env>
-                <maven.test.skip>true</maven.test.skip>
-                <!--默认生效的配置组-->
-                <activeByDefault>true</activeByDefault>
-            </properties>
-        </profile>
-        <!-- test -->
-        <profile>
-            <id>test</id>
-            <properties>
-                <env>test</env>
-                <maven.test.skip>true</maven.test.skip>
-            </properties>
-        </profile> <!-- test -->
-        <profile>
-            <id>dev</id>
-            <properties>
-                <env>dev</env>
-                <maven.test.skip>true</maven.test.skip>
-            </properties>
-        </profile>
-        <!-- ppe -->
-        <profile>
-            <id>ppe</id>
-            <properties>
-                <env>ppe</env>
-                <maven.test.skip>true</maven.test.skip>
-            </properties>
-        </profile>
-        <!-- online -->
-        <profile>
-            <id>online</id>
-            <properties>
-                <env>online</env>
-                <maven.test.skip>true</maven.test.skip>
-            </properties>
-        </profile>
-    </profiles>
 
     <build>
         <finalName>msg-xunyu-all</finalName>

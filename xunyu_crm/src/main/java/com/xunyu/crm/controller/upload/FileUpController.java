@@ -66,7 +66,7 @@ public class FileUpController {
                     String rex = fileName.substring(fileName.lastIndexOf("."));
                     try {
                         //AliyunOssUtil aliyunOssUtil = AliyunOssUtil.getInstance();
-                        String dirName = rex;//通过后缀确定上传目录名称
+                        String dirName = rex+"/";//通过后缀确定上传目录名称
                         StringBuffer newName = new StringBuffer();
                         newName.append(UUID.randomUUID()).append(rex);
                         if (ImgUtils.isImg(rex)) {//是图片

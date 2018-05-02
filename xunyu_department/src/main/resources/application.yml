@@ -2,7 +2,9 @@ spring:
   application:
     name: xunyu-department
   profiles:
-    active: core #加载xunyu_config项目中 的application-core.yml文件
+    #active: pro #加载xunyu_profiles项目中 的application-core.yml文件
+    #active: dev #加载xunyu_profiles项目中 的application-dev.yml文件
+    active: local #加载xunyu_profiles项目中 的application-dev.yml文件
 
 server:
   port: 8008
