@@ -40,7 +40,6 @@ public class OperatorController {
     @RequestMapping(value = "addOperator",method = RequestMethod.POST)
     public Result<Operator> addOperatorData(HttpServletResponse response,Operator op){
 
-        response.setHeader("Access-Control-Allow-Origin", "*");
         Result<Operator> res = new Result<Operator>();
         User us = redisUtil.getCurrUser(op.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -72,7 +71,6 @@ public class OperatorController {
     @RequestMapping(value = "updateOperator",method = RequestMethod.POST)
     public Result<Operator> updateOperatorData(HttpServletResponse response,Operator op) {
 
-        response.setHeader("Access-Control-Allow-Origin", "*");
         Result<Operator> res = new Result<Operator>();
         User us = redisUtil.getCurrUser(op.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -107,7 +105,6 @@ public class OperatorController {
     @RequestMapping(value = "getOperatorDetail",method = RequestMethod.POST)
     public Result<Operator> getOperatorDetailData(HttpServletResponse response,OperatorModel op) {
 
-        response.setHeader("Access-Control-Allow-Origin", "*");
         Result<Operator> res = new Result<Operator>();
         User us = redisUtil.getCurrUser(op.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -148,7 +145,6 @@ public class OperatorController {
     @RequestMapping(value = "operatorList",method = RequestMethod.POST)
     public Result<List<Operator>> OperatorListData(HttpServletResponse response, OperatorModel op) {
 
-        response.setHeader("Access-Control-Allow-Origin", "*");
         Result<List<Operator>> res = new Result<List<Operator>>();
         User us = redisUtil.getCurrUser(op.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -189,7 +185,6 @@ public class OperatorController {
     @RequestMapping(value = "delOperatorByIds",method = RequestMethod.POST)
     public Result<Operator> delOperatorData(HttpServletResponse response,OperatorModel op) {
 
-        response.setHeader("Access-Control-Allow-Origin", "*");
         Result<Operator> res = new Result<Operator>();
         User us = redisUtil.getCurrUser(op.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();

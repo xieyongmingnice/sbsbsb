@@ -36,7 +36,7 @@ public class SysConfigController {
      */
     @RequestMapping(value = "addSysConfig",method = RequestMethod.POST)
     public Result<SystemConfig> addSysConfigData(HttpServletResponse response,SystemConfig sc){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         Result<SystemConfig> res = new Result<SystemConfig>();
         User us = redisUtil.getCurrUser(sc.getSessionId());
         Map<String,Object> map = new HashMap<String,Object>();
@@ -71,7 +71,7 @@ public class SysConfigController {
      */
     @RequestMapping(value = "updateSysConfig",method = RequestMethod.POST)
     public Result<SystemConfig> updateSysConfigData(HttpServletResponse response,SystemConfig sc) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         Result<SystemConfig> res = new Result<SystemConfig>();
         boolean status = redisUtil.sessionStatus(sc.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -107,7 +107,7 @@ public class SysConfigController {
      */
     @RequestMapping(value = "getSysConfigDetail",method = RequestMethod.POST)
     public Result<SystemConfig> getSysConfigDetail(HttpServletResponse response, SysConfigModel sm) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         Result<SystemConfig> res = new Result<SystemConfig>();
         User us = redisUtil.getCurrUser(sm.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();

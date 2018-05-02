@@ -35,7 +35,7 @@ public class CustomerGroupController {
      */
     @RequestMapping(value = "addCustomerGroup",method = RequestMethod.POST)
     public Result<CustomerGroup> addCustomerGroupData(HttpServletResponse response,CustomerGroup cg){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         //验证session是否失效
         Result<CustomerGroup> res = new Result<CustomerGroup>();
         boolean status = redisUtil.sessionStatus(cg.getSessionId());
@@ -67,7 +67,7 @@ public class CustomerGroupController {
      */
     @RequestMapping(value = "updateCustomerGroup",method = RequestMethod.POST)
     public Result<CustomerGroup> updateCustomerGroupData(HttpServletResponse response,CustomerGroup cg){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         Result<CustomerGroup> res = new Result<CustomerGroup>();
         boolean status = redisUtil.sessionStatus(cg.getSessionId());
         if(!status) {
@@ -100,7 +100,7 @@ public class CustomerGroupController {
      */
     @RequestMapping(value = "getCustomerGroupDetail",method = RequestMethod.POST)
     public Result<CustomerGroup> getCustomerGroupDetailData(HttpServletResponse response, CustomerGroupModel cm){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         Result<CustomerGroup> res = new Result<CustomerGroup>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
         if(!status) {
@@ -133,7 +133,7 @@ public class CustomerGroupController {
      */
     @RequestMapping(value = "customerGroupList",method = RequestMethod.POST)
     public Result<List<CustomerGroup>> customerGroupListData(HttpServletResponse response, CustomerGroupModel cm){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         Result<List<CustomerGroup>> res = new Result<List<CustomerGroup>>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
         List<CustomerGroup> list = null;
@@ -180,7 +180,6 @@ public class CustomerGroupController {
     @RequestMapping(value = "delCustomerGroup",method = RequestMethod.POST)
     public Result<CustomerGroup> updateCustomerGroupData(HttpServletResponse response,CustomerGroupModel cm){
 
-        response.setHeader("Access-Control-Allow-Origin", "*");
         Result<CustomerGroup> res = new Result<CustomerGroup>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
         if(!status) {

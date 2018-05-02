@@ -41,7 +41,6 @@ public class FileUpController {
     public Map<String,Object> uploadFileData(HttpServletRequest request
                  ,String sessionId,HttpServletResponse response){
 
-        response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String,Object> map = new HashMap<String,Object>();
         if(StringUtils2.isNotEmpty(sessionId)) {
             boolean status = redisUtil.sessionStatus(sessionId);

@@ -6,7 +6,7 @@
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%date %level [%class:%line] %msg%n</pattern>
-            <charset>GBK</charset>
+            <charset>utf-8</charset>
         </encoder>
     </appender>
     <appender name="xunyu_rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">

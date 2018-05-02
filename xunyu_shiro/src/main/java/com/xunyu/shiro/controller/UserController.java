@@ -42,7 +42,7 @@ public class UserController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Map<String,Object> ajaxLogin(com.xunyu.model.user.User user, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         Map<String,Object> map = new HashMap<String,Object>();
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getAccount(), user.getPassWord());
@@ -86,7 +86,7 @@ public class UserController {
      */
     @RequestMapping(value = "getUserBySessionId",method = RequestMethod.POST)
     public Result<User> getUserBySessionIdData(String sessionId,HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         User user = null;
         Result<User> res = new Result<User>();
         if(StringUtils2.isNotEmpty(sessionId)) {
@@ -117,7 +117,7 @@ public class UserController {
 
     @RequestMapping(value = "logout",method = RequestMethod.POST)
     public Result<String> destorySessionData(String sessionId,HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         //退出删除当前会话中的用户信息
         Result<String> res = new Result<String>();
 
@@ -141,7 +141,7 @@ public class UserController {
      */
     @RequestMapping(value = "addUser",method = RequestMethod.POST)
     public Result<User> addUserData(User user, HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         Result<User> res = new  Result<User>();
         int flag = 0;
         boolean status = redisUtil.sessionStatus(user.getSessionId());
@@ -193,7 +193,7 @@ public class UserController {
      */
     @RequestMapping(value = "updateUser",method = RequestMethod.POST)
     public Result<User> updateUserData(HttpServletResponse response,User user){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
 
         Result<User> res = new Result<User>();
         int flag = 0;
@@ -232,7 +232,7 @@ public class UserController {
      */
     @RequestMapping(value = "getUserInfo",method = RequestMethod.POST)
     public Result<User> getUserInfoData(HttpServletResponse response,User user) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
 
         Result<User> res = new Result<User>();
         try{

@@ -35,7 +35,7 @@ public class CustomerController {
      */
     @RequestMapping(value = "addCustomer",method = RequestMethod.POST)
     public Result<CustomerTab> addCustomerData(HttpServletResponse response,CustomerTab ct){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         //验证session是否失效
         Result<CustomerTab> res = new Result<CustomerTab>();
         boolean status = redisUtil.sessionStatus(ct.getSessionId());
@@ -67,7 +67,7 @@ public class CustomerController {
      */
     @RequestMapping(value = "updateCustomer",method = RequestMethod.POST)
     public Result<CustomerTab> updateCustomerData(HttpServletResponse response,CustomerTab ct){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         Result<CustomerTab> res = new Result<CustomerTab>();
         boolean status = redisUtil.sessionStatus(ct.getSessionId());
         if(!status) {
@@ -100,7 +100,7 @@ public class CustomerController {
      */
     @RequestMapping(value = "getCustomerDetail",method = RequestMethod.POST)
     public Result<CustomerTab> getCustomerGroupDetailData(HttpServletResponse response, CustomerModel cm){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         Result<CustomerTab> res = new Result<CustomerTab>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
         if(!status) {
@@ -133,7 +133,7 @@ public class CustomerController {
      */
     @RequestMapping(value = "customerList",method = RequestMethod.POST)
     public Result<List<CustomerTab>> customerListData(HttpServletResponse response, CustomerModel cm){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         Result<List<CustomerTab>> res = new Result<List<CustomerTab>>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
         if(!status) {
@@ -182,7 +182,7 @@ public class CustomerController {
      */
     @RequestMapping(value = "delCustomer",method = RequestMethod.POST)
     public Result<CustomerTab> delCustomerData(HttpServletResponse response, CustomerModel cm) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         Result<CustomerTab> res = new Result<CustomerTab>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
         if (!status) {

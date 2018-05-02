@@ -37,7 +37,7 @@ public class SysPayController {
      */
     @RequestMapping(value = "addSysPay",method = RequestMethod.POST)
     public Result<SysPay> addSysPayData(HttpServletResponse response,SysPay sysPay){
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         User us = redisUtil.getCurrUser(sysPay.getSessionId());
         Map<String,Object> map = new HashMap<String,Object>();
         Result<SysPay> res = new Result<SysPay>();
@@ -69,7 +69,7 @@ public class SysPayController {
      */
     @RequestMapping(value = "updateSysPay",method = RequestMethod.POST)
     public Result<SysPay> updateSysPayData(HttpServletResponse response,SysPay sysPay) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         User us = redisUtil.getCurrUser(sysPay.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
         Result<SysPay> res = new Result<SysPay>();
@@ -103,7 +103,7 @@ public class SysPayController {
      */
     @RequestMapping(value = "getSysPayDetail",method = RequestMethod.POST)
     public Result<SysPay> getSysPayDetailData(HttpServletResponse response, SysPayModel sm) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+
         User us = redisUtil.getCurrUser(sm.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
         Result<SysPay> res = new Result<SysPay>();
