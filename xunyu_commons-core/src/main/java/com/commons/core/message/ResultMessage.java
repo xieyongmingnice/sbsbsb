@@ -21,6 +21,8 @@ public interface ResultMessage {
         String PRAMA_LOSS = "必要参数缺失";
 
         String NO_VALUE = "结果集为空";
+
+        String FAILED = "操作失败";
     }
 
     /**
@@ -37,6 +39,8 @@ public interface ResultMessage {
         String USER_EXIST = "412";
 
         String PRAMA_LOSS = "413";
+
+        String FAILED = "414";
     }
 
 }

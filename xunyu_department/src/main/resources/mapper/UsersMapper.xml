@@ -287,6 +287,7 @@
       <if test="userType != null">
         user_type,
       </if>
+      isabled,
       <if test="createTime != null">
         create_time,
       </if>
@@ -301,6 +302,7 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
+      1,
       1,
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -317,6 +319,7 @@
     <set>
         account = #{account,jdbcType=VARCHAR},
         password = #{password,jdbcType=VARCHAR},
+        isabled = 1,
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
     and user_type = 1

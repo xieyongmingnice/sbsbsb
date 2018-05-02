@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.xunyu_tactics.pojo.SysRedlist">
+  <resultMap id="BaseResultMap" type="com.xunyu.xunyu_tactics.pojo.SysRedlist">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Sat Apr 28 14:14:09 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <id column="sys_redlist_id" jdbcType="INTEGER" property="sysRedlistId" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="redlist_source" jdbcType="INTEGER" property="redlistSource" />
+    <result column="join_time" jdbcType="TIMESTAMP" property="joinTime" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Sat Apr 28 14:14:09 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Sat Apr 28 14:14:09 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Sat Apr 28 14:14:09 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    sys_redlist_id, phone_number, redlist_source, join_time, remarks
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Sat Apr 28 14:14:09 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_sys_redlist
+    where sys_redlist_id = #{sysRedlistId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Sat Apr 28 14:14:09 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    delete from tbl_sys_redlist
+    where sys_redlist_id = #{sysRedlistId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.xunyu.xunyu_tactics.pojo.SysRedlist">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Sat Apr 28 14:14:09 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    insert into tbl_sys_redlist (sys_redlist_id, phone_number, redlist_source, 
+      join_time, remarks)
+    values (#{sysRedlistId,jdbcType=INTEGER}, #{phoneNumber,jdbcType=VARCHAR}, #{redlistSource,jdbcType=INTEGER}, 
+      #{joinTime,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunyu.xunyu_tactics.pojo.SysRedlist">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Sat Apr 28 14:14:09 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    insert into tbl_sys_redlist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sysRedlistId != null">
+        sys_redlist_id,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="redlistSource != null">
+        redlist_source,
+      </if>
+      <if test="joinTime != null">
+        join_time,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sysRedlistId != null">
+        #{sysRedlistId,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="redlistSource != null">
+        #{redlistSource,jdbcType=INTEGER},
+      </if>
+      <if test="joinTime != null">
+        #{joinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Sat Apr 28 14:14:09 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update tbl_sys_redlist
+    <set>
+      <if test="record.sysRedlistId != null">
+        sys_redlist_id = #{record.sysRedlistId,jdbcType=INTEGER},
+      </if>
+      <if test="record.phoneNumber != null">
+        phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.redlistSource != null">
+        redlist_source = #{record.redlistSource,jdbcType=INTEGER},
+      </if>
+      <if test="record.joinTime != null">
+        join_time = #{record.joinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Sat Apr 28 14:14:09 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update tbl_sys_redlist
+    set sys_redlist_id = #{record.sysRedlistId,jdbcType=INTEGER},
+      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      redlist_source = #{record.redlistSource,jdbcType=INTEGER},
+      join_time = #{record.joinTime,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyu.xunyu_tactics.pojo.SysRedlist">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Sat Apr 28 14:14:09 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update tbl_sys_redlist
+    <set>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="redlistSource != null">
+        redlist_source = #{redlistSource,jdbcType=INTEGER},
+      </if>
+      <if test="joinTime != null">
+        join_time = #{joinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sys_redlist_id = #{sysRedlistId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyu.xunyu_tactics.pojo.SysRedlist">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Sat Apr 28 14:14:09 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update tbl_sys_redlist
+    set phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      redlist_source = #{redlistSource,jdbcType=INTEGER},
+      join_time = #{joinTime,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where sys_redlist_id = #{sysRedlistId,jdbcType=INTEGER}
+  </update>
+
+
+
+</mapper>
