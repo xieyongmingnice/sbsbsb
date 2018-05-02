@@ -1,0 +1,90 @@
+#开发环境配置
+#数据库配置
+db: 
+  host: rm-m5e03vwf88v7vufn9ho.mysql.rds.aliyuncs.com
+  #host: 118.190.192.244  和上面的是一个host
+  port: 3306
+  name: xunyu_db
+  public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJZcCjn1viAr1f4994+1Do1i1xQnqDD3OupuyqG1Yq2EI+OV/enBB9ETdztE1ptXuU2lGq3eDHV22oat2BZXVIMCAwEAAQ==
+#  public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIeMfolobgSenbQUUeSDQ/jvyjjJnBvu+v96HjaQma55SuDPMQxVI3GrtDcWmtKyj6RxvrPntQfblqWhCTn1p+kCAwEAAQ==
+
+#数据源配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: xunyu_db
+    password: XunYu@DEV-DB
+    #password: gDMiHwt8T05aHOGLyyUetgks2P320nacsVxrzYq3znT7/onzpcTQ7SkEhxce+dZ1A4Bu/Dzyq2AZX7yKqbhaNQ==
+    url: jdbc:mysql://${db.host}:${db.port}/${db.name}?useUnicode=true&characterEncoding=utf8&useOldAliasMetadataBehavior=true&useSSL=false
+    filter-class-names: stat
+    filters: stat,config
+    #初始化连接大小
+    initial-size: 8
+    #最小空闲连接数
+    min-idle: 5
+    #最大连接数
+    max-active: 10
+    #查询超时时间
+    query-timeout: 60000
+    #事务查询超时时间
+    transaction-query-timeout: 60000
+    #关闭空闲连接超时时间
+    remove-abandoned-timeout: 1800
+  redis:
+      hostName: 47.104.135.244
+      port: 6379
+      timeOut: 100000
+      maxIdle: 10
+      maxWaitMillis: 15000
+      testOnBorrow: true
+      testWhileIdle: false
+      redisPassWord: XunYuDEVRedis2018
+#配置zipKin Server的地址
+  zipkin:
+    base-url: http://127.0.0.1:8006
+    #base-url: http://47.104.190.174:8006
+
+#mybatis配置
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml,classpath*:mapper/*Mapper.xml
+
+#日志
+logging:
+  config: classpath:logback-medicare.xml
+
+#oss参数配置
+#oss:
+  #endPoint: http://oss-cn-qingdao.aliyuncs.com
+  #accessKeyId: LTAIxfWn1qhejCJ8
+  #accessKeySecret: HEvipWVkRkQBiaSX237kuHnRFF59KO
+  #bucketName: xunyu-ossfile
+
+#上传
+multipart:
+  enabled: true
+
+eureka:
+  enabled: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+      #defaultZone: http://47.104.190.174:8001/eureka/
+
+feign:
+   compression:
+       request:
+         mime-types:
+         - text/xml
+         - application/xml
+         - application/json
+         min-request-size: 2048  #超过2048的字节进行压缩
+
+hystrix:
+   command:
+    default:
+      execution:
+        isolation:
+         thread:
+          timeoutInMilliseconds: 40000  #设置超时时间
