@@ -52,4 +52,5 @@ public interface CustomerService {
      */
     CustomerTab getCustomerTabDetail(Map<String,Object> map);
 
+
 }

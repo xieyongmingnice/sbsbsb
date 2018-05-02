@@ -193,10 +193,16 @@
             <if test="customerId != null">
                 customer_id = #{customerId}
             </if>
-            <if test = "customerGroupId != null">
-                customer_group_id = #{customerGroupId}
-            </if>
+
         </where>
     </update>
 
+    <update id = "delCustomer" parameterType="map">
+        update tbl_customer set
+        isabled = #{isabled}
+        where customer_id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

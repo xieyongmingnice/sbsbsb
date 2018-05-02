@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -150,17 +151,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public int updateCustomerAll(String customerIds) {
         int n = 0;
-        String[] idsLon = customerIds.split(",");
-        for (int i = 0; i < idsLon.length; i++) {
-            if (RandomUtils.isInteger(idsLon[i])) { //判断是不是数字
-                CustomerTab cu = new CustomerTab();
-                cu.setIsabled(0);
-                cu.setCustomerId(Long.parseLong(idsLon[i]));
-                n = customerDaoImpl.updateCustomer(cu);
-            } else {
-                continue;
-            }
-        }
+        n = delCustomer(customerIds);
         return n;
     }
 
@@ -179,6 +170,29 @@ public class CustomerServiceImpl implements CustomerService {
         return customerDaoImpl.getCustomerTabDetail(map);
     }
 
+
+    public int delCustomer(String cusIds) {
+        int n = 0;
+        if(StringUtils2.isNotEmpty(cusIds)) {
+
+            Map<String,Object> map = new HashMap<String,Object>();
+            String[] idsDir = cusIds.split(",");
+            String[] array = new String[idsDir.length];
+            for (int i = 0; i < idsDir.length; i++) {
+                if(RandomUtils.isInteger(idsDir[i])){
+                    array[i] = idsDir[i];
+
+                }else{
+                    continue;
+                }
+            }
+            map.put("isabled",0);
+            map.put("array",array);
+            n = customerDaoImpl.delCustomer(map);
+        }
+        return n;
+    }
+
     //级联删除
     private int delJilian(String ids) {
         int n = 1;
@@ -187,17 +201,7 @@ public class CustomerServiceImpl implements CustomerService {
             @Override
             public void run() {
                 try {
-                    String[] idsLon = ids.split(",");
-                    for (int i = 0; i < idsLon.length; i++) {
-                        if (RandomUtils.isInteger(idsLon[i])) { //判断是不是数字
-                            CustomerTab cu = new CustomerTab();
-                            cu.setIsabled(0);
-                            cu.setCustomerGroupId(Long.parseLong(idsLon[i]));
-                            customerDaoImpl.updateCustomer(cu);
-                        } else {
-                            continue;
-                        }
-                    }
+                    delCustomer(ids);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
