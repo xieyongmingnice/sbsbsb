@@ -31,8 +31,8 @@ public class SessionFilter implements Filter {
         // Access-Control-Allow-Methods: 授权请求的方法（GET, POST, PUT, DELETE，OPTIONS等)
         httpResponse.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
         httpResponse.addHeader("Access-Control-Allow-Headers", "Content-Type, token");
-        httpResponse.addHeader("Access-Control-Max-Age", "1800");//30 min
-        chain.doFilter(httpRequest,httpResponse);
+        httpResponse.addHeader("Access-Control-Max-Age", "180000");//30 min
+        chain.doFilter(servletRequest,servletResponse);
     }
 
     @Override

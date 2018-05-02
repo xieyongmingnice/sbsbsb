@@ -42,7 +42,7 @@ public class UserController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Map<String,Object> ajaxLogin(com.xunyu.model.user.User user, HttpServletResponse response) {
-
+        response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String,Object> map = new HashMap<String,Object>();
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getAccount(), user.getPassWord());

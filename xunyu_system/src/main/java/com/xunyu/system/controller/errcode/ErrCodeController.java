@@ -1,0 +1,197 @@
+package com.xunyu.system.controller.errcode;
+
+import com.commons.core.message.Result;
+import com.commons.core.util.StringUtils2;
+import com.xunyu.config.redis.RedisUtil;
+import com.xunyu.model.system.errcode.ErrorCodeModel;
+import com.xunyu.model.user.User;
+import com.xunyu.system.pojo.errcode.ErrorCode;
+import com.xunyu.system.service.errcode.ErrorCodeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @author dth
+ * @date 2018/5/2 16:27
+ * 错误码配置
+ **/
+@RestController
+@RequestMapping("code/")
+public class ErrCodeController {
+
+    @Autowired
+    private RedisUtil redisUtil;
+    @Autowired
+    private ErrorCodeService errorCodeService;
+
+    /**
+     * 添加错误码配置
+     */
+    @RequestMapping(value = "addErrCode",method = RequestMethod.POST)
+    public Result<ErrorCode> addErrCodeData(ErrorCode ec){
+        Result<ErrorCode> res = new Result<ErrorCode>();
+        User us = redisUtil.getCurrUser(ec.getSessionId());
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (us == null) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        try{
+            ec.setIsabled(1);
+            ec.setCreateTime(new Date());
+            errorCodeService.addErrCodeConfig(ec);
+            res.setCode("200");
+            res.setMessage("success");
+            res.setRes(ec);
+        }catch (Exception e){
+            res.setCode("500");
+            res.setMessage("系统异常");
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+
+    /**
+     * 修改错误码配置
+     */
+    @RequestMapping(value = "updateErrCode",method = RequestMethod.POST)
+    public Result<ErrorCode> updateErrCodeData(ErrorCode ec) {
+        Result<ErrorCode> res = new Result<ErrorCode>();
+        User us = redisUtil.getCurrUser(ec.getSessionId());
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (us == null) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        try{
+            if(ec.getErrId() != null){
+                errorCodeService.updateErrCodeConfig(ec);
+                res.setCode("200");
+                res.setMessage("success");
+                res.setRes(ec);
+            }else{
+                res.setCode("413");
+                res.setMessage("errId不能为空");
+                res.setRes(ec);
+            }
+        }catch (Exception e){
+            res.setCode("500");
+            res.setMessage("系统异常");
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    /**
+     * 获取错误码配置详情
+     */
+    @RequestMapping(value = "getErrCodeDetail",method = RequestMethod.POST)
+    public Result<ErrorCode> getErrCodeDetailData(ErrorCodeModel ec) {
+        Result<ErrorCode> res = new Result<ErrorCode>();
+        User us = redisUtil.getCurrUser(ec.getSessionId());
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (us == null) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        try{
+            ErrorCode errc = null;
+            if(ec.getErrId() != null){
+                map.put("errId",ec.getErrId());
+                errc = errorCodeService.getErrCodeConfigDetail(map);
+                res.setCode("200");
+                res.setMessage("success");
+                res.setRes(errc);
+            }else{
+                res.setCode("413");
+                res.setMessage("errId不能为空");
+                res.setRes(errc);
+            }
+        }catch (Exception e){
+            res.setCode("500");
+            res.setMessage("系统异常");
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+
+    /**
+     * 获取列表
+     */
+    @RequestMapping(value = "errCodeConfigList",method = RequestMethod.POST)
+    public Result<List<ErrorCode>> errCodeConfigListData(ErrorCodeModel ec) {
+        Result<List<ErrorCode>> res = new Result<List<ErrorCode>>();
+        User us = redisUtil.getCurrUser(ec.getSessionId());
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (us == null) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        try{
+            int total = 0;
+            map.put("agreeType",ec.getAgreeType());
+            map.put("errType",ec.getErrType());
+            map.put("errCode",ec.getErrCode());
+            map.put("errText",ec.getErrText());
+            total = errorCodeService.errCodeConfigCount(map);
+            if(total > 0){
+                List<ErrorCode> list = errorCodeService.errCodeConfigList(map);
+                res.setCode("200");
+                res.setMessage("success");
+                res.setRes(list);
+                res.setTotalRows(total);
+            }else{
+                res.setMessage("notvalue");
+                res.setCode("412");
+            }
+        }catch (Exception e){
+            res.setCode("500");
+            res.setMessage("系统异常");
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    /**
+     * 删除
+     */
+    @RequestMapping(value = "delErrCodeConfig",method = RequestMethod.POST)
+    public Result<ErrorCodeModel> delErrCodeConfigData(ErrorCodeModel ec) {
+        Result<ErrorCodeModel> res = new Result<ErrorCodeModel>();
+        User us = redisUtil.getCurrUser(ec.getSessionId());
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (us == null) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        try{
+            if(StringUtils2.isNotEmpty(ec.getErrIds())) {
+                errorCodeService.delErrCodeConfig(ec.getErrIds());
+                res.setCode("200");
+                res.setMessage("success");
+            }else {
+                res.setCode("413");
+                res.setMessage("errIds不能为空");
+                res.setRes(ec);
+            }
+        }catch (Exception e){
+            res.setCode("500");
+            res.setMessage("系统异常");
+            e.printStackTrace();
+        }
+        return res;
+    }
+}

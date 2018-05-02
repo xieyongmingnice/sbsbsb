@@ -2,6 +2,7 @@ package com.xunyu.zuul.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import org.apache.commons.lang.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,12 +32,18 @@ public class AccessFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        Object accessToken = request.getParameter("sessionId");  //定义规则：访问url中必须带有sessionId参数
-        if (accessToken == null) {
-            ctx.setSendZuulResponse(false);
-            ctx.setResponseStatusCode(404);
-            ctx.setResponseBody("请传入sessionId");
+        String url = request.getRequestURI();
+        if(StringUtils.isNotEmpty(url) && url.indexOf("shiro") >= 0) {
+            //如果包含shiro开头的请求，直接放行
             return null;
+        }else{
+            Object accessToken = request.getParameter("sessionId");  //定义规则：访问url中必须带有sessionId参数
+            if (accessToken == null) {
+                ctx.setSendZuulResponse(false);
+                ctx.setResponseStatusCode(404);
+                ctx.setResponseBody("请传入sessionId");
+                return null;
+            }
         }
         return null;
 
