@@ -34,7 +34,7 @@ public class ErrCodeController {
      * 添加错误码配置
      */
     @RequestMapping(value = "addErrCode",method = RequestMethod.POST)
-    public Result<ErrorCode> addErrCodeData(ErrorCode ec){
+    public Result<ErrorCode> addErrCodeData(ErrorCode ec) throws Exception{
         Result<ErrorCode> res = new Result<ErrorCode>();
         User us = redisUtil.getCurrUser(ec.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -43,19 +43,12 @@ public class ErrCodeController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
             ec.setIsabled(1);
             ec.setCreateTime(new Date());
             errorCodeService.addErrCodeConfig(ec);
             res.setCode("200");
             res.setMessage("success");
             res.setRes(ec);
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
-
         return res;
     }
 
@@ -63,7 +56,7 @@ public class ErrCodeController {
      * 修改错误码配置
      */
     @RequestMapping(value = "updateErrCode",method = RequestMethod.POST)
-    public Result<ErrorCode> updateErrCodeData(ErrorCode ec) {
+    public Result<ErrorCode> updateErrCodeData(ErrorCode ec) throws Exception{
         Result<ErrorCode> res = new Result<ErrorCode>();
         User us = redisUtil.getCurrUser(ec.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -72,7 +65,6 @@ public class ErrCodeController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
             if(ec.getErrId() != null){
                 errorCodeService.updateErrCodeConfig(ec);
                 res.setCode("200");
@@ -83,11 +75,7 @@ public class ErrCodeController {
                 res.setMessage("errId不能为空");
                 res.setRes(ec);
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
+
         return res;
     }
 
@@ -95,7 +83,7 @@ public class ErrCodeController {
      * 获取错误码配置详情
      */
     @RequestMapping(value = "getErrCodeDetail",method = RequestMethod.POST)
-    public Result<ErrorCode> getErrCodeDetailData(ErrorCodeModel ec) {
+    public Result<ErrorCode> getErrCodeDetailData(ErrorCodeModel ec) throws Exception{
         Result<ErrorCode> res = new Result<ErrorCode>();
         User us = redisUtil.getCurrUser(ec.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -104,7 +92,7 @@ public class ErrCodeController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
+
             ErrorCode errc = null;
             if(ec.getErrId() != null){
                 map.put("errId",ec.getErrId());
@@ -117,12 +105,6 @@ public class ErrCodeController {
                 res.setMessage("errId不能为空");
                 res.setRes(errc);
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
-
         return res;
     }
 
@@ -130,7 +112,7 @@ public class ErrCodeController {
      * 获取列表
      */
     @RequestMapping(value = "errCodeConfigList",method = RequestMethod.POST)
-    public Result<List<ErrorCode>> errCodeConfigListData(ErrorCodeModel ec) {
+    public Result<List<ErrorCode>> errCodeConfigListData(ErrorCodeModel ec) throws Exception{
         Result<List<ErrorCode>> res = new Result<List<ErrorCode>>();
         User us = redisUtil.getCurrUser(ec.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -139,7 +121,6 @@ public class ErrCodeController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
             int total = 0;
             map.put("agreeType",ec.getAgreeType());
             map.put("errType",ec.getErrType());
@@ -156,11 +137,7 @@ public class ErrCodeController {
                 res.setMessage("notvalue");
                 res.setCode("412");
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
+
         return res;
     }
 
@@ -168,7 +145,7 @@ public class ErrCodeController {
      * 删除
      */
     @RequestMapping(value = "delErrCodeConfig",method = RequestMethod.POST)
-    public Result<ErrorCodeModel> delErrCodeConfigData(ErrorCodeModel ec) {
+    public Result<ErrorCodeModel> delErrCodeConfigData(ErrorCodeModel ec) throws Exception{
         Result<ErrorCodeModel> res = new Result<ErrorCodeModel>();
         User us = redisUtil.getCurrUser(ec.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -177,7 +154,7 @@ public class ErrCodeController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
+
             if(StringUtils2.isNotEmpty(ec.getErrIds())) {
                 errorCodeService.delErrCodeConfig(ec.getErrIds());
                 res.setCode("200");
@@ -187,11 +164,7 @@ public class ErrCodeController {
                 res.setMessage("errIds不能为空");
                 res.setRes(ec);
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
+
         return res;
     }
 }

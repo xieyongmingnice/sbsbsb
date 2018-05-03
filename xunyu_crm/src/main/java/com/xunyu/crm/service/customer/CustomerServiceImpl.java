@@ -127,7 +127,7 @@ public class CustomerServiceImpl implements CustomerService {
         int n = 0;
         n = customerDaoImpl.updateCustomer(customerTab);
         if (n > 0) {
-            //异步往tbl_users表中添加一条账号信息记录
+            //异步往tbl_users表中修改一条账号信息记录
             ExecutorService pool = Executors.newCachedThreadPool();
             Runnable run = new Runnable() { //创建一个线程匿名内部类
                 @Override

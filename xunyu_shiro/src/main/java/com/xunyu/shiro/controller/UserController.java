@@ -41,7 +41,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Map<String,Object> ajaxLogin(com.xunyu.model.user.User user, HttpServletResponse response) {
+    public Map<String,Object> ajaxLogin(com.xunyu.model.user.User user, HttpServletResponse response)  {
         response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String,Object> map = new HashMap<String,Object>();
         Subject subject = SecurityUtils.getSubject();
@@ -116,12 +116,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "logout",method = RequestMethod.POST)
-    public Result<String> destorySessionData(String sessionId,HttpServletResponse response){
+    public Result<String> destorySessionData(String sessionId) throws Exception{
 
         //退出删除当前会话中的用户信息
         Result<String> res = new Result<String>();
-
-        try {
             redisUtil.remove(sessionId);
             byte[] session = (byte[])redisUtil.get(sessionId);
             if(session != null) {
@@ -130,9 +128,7 @@ public class UserController {
             }
             res.setCode("200");
             res.setMessage(String.valueOf(ResultTypeEnum.SUCCESS));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
         return res;
     }
 

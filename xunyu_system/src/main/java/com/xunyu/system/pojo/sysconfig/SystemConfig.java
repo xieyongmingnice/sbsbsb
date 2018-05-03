@@ -15,7 +15,7 @@ public class SystemConfig extends UserModel {
     private Integer isabled;//1未删除  0删除
     private Date createTime;//创建时间
     private String sysIp;//系统IP配置
-    private Integer sysReturn;//是否自动返还 1自动 2不自动
+    private Integer sysReturn;//是否自动返还 1全部不返还 2按用户配置  3全部返还
     private Integer sysOpen;//余额放开IP查询 1全部固定IP 2按用户配置 3全部放开IP
     private String yidongPort;//移动端口配置
     private String liantongPort;//联通端口配置
@@ -24,6 +24,7 @@ public class SystemConfig extends UserModel {
     private Integer upWhite;//批量修改白名单 1不修改  2全部启用 3全部停用
     private Integer upBlack;//批量修改黑名单 1不修改  2全部启用 3全部停用
     private Integer sysListen;//网关告警监控是否启用 1启用 2不启用
+    private String  statisTime;//网关告警监控统计时间
     private Integer sysWProportion;//网关告警监控未知量比例
     private Integer sysFProportion;//网关告警监控失败量比例
     private Integer sysSProportion;//网关告警监控成功率告警
@@ -35,6 +36,14 @@ public class SystemConfig extends UserModel {
     private String reDate;//余额提醒时间
     private String reSp;//余额提醒发送SP代码
     private Long userId;//当前登录用户id
+
+    public String getStatisTime() {
+        return statisTime;
+    }
+
+    public void setStatisTime(String statisTime) {
+        this.statisTime = statisTime;
+    }
 
     public Long getUserId() {
         return userId;

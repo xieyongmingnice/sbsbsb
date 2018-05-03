@@ -193,7 +193,9 @@
             <if test="customerId != null">
                 customer_id = #{customerId}
             </if>
-
+            <if test="customerId != null">
+                customer_id = #{customerId}
+            </if>
         </where>
     </update>
 

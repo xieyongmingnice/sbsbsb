@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -39,7 +38,7 @@ public class FileUpController {
      */
     @RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
     public Map<String,Object> uploadFileData(HttpServletRequest request
-                 ,String sessionId,HttpServletResponse response){
+                 ,String sessionId) throws Exception{
 
         Map<String,Object> map = new HashMap<String,Object>();
         if(StringUtils2.isNotEmpty(sessionId)) {

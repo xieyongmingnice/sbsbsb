@@ -16,6 +16,7 @@
         <result column="up_white" property="upWhite"></result>
         <result column="up_black" property="upBlack"></result>
         <result column="sys_listen" property="sysListen"></result>
+        <result column="statis_time" property="statisTime"></result>
         <result column="sys_w_proportion" property="sysWProportion"></result>
         <result column="sys_f_proportion" property="sysFProportion"></result>
         <result column="sys_s_proportion" property="sysSProportion"></result>
@@ -33,7 +34,7 @@
           tc.sys_id,tc.isabled,tc.create_time,tc.sys_ip
           ,tc.sys_return,tc.sys_open,tc.yidong_port,tc.liantong_port,tc.dianxin_port,tc.up_keyword,tc.up_white,tc.up_black
           ,tc.sys_listen,tc.sys_w_proportion,tc.sys_f_proportion,tc.sys_s_proportion,tc.sys_remind,tc.re_num,tc.re_content
-          ,tc.re_interval,tc.re_date,tc.re_sp,tc.userid
+          ,tc.re_interval,tc.re_date,tc.re_sp,tc.userid,tc.statis_time
         from tbl_sys_config tc
         where tc.isabled = 1 and tc.userid = #{userId}
     </select>
@@ -55,6 +56,7 @@
             <if test='upWhite != null'>up_white,</if>
             <if test='upBlack != null'>up_black,</if>
             <if test='sysListen != null'>sys_listen,</if>
+            <if test='statisTime != null'>statis_time,</if>
             <if test='sysWProportion != null'>sys_w_proportion,</if>
             <if test='sysFProportion != null'>sys_f_proportion,</if>
             <if test='sysSProportion != null'>sys_s_proportion,</if>
@@ -82,6 +84,7 @@
             <if test='upWhite != null'>#{upWhite},</if>
             <if test='upBlack != null'>#{upBlack},</if>
             <if test='sysListen != null'>#{sysListen},</if>
+            <if test='statisTime != null'>#{statisTime},</if>
             <if test='sysWProportion != null'>#{sysWProportion},</if>
             <if test='sysFProportion != null'>#{sysFProportion},</if>
             <if test='sysSProportion != null'>#{sysSProportion},</if>
@@ -133,6 +136,9 @@
             </if>
             <if test='sysListen != null'>
                 <![CDATA[ sys_listen = #{sysListen}, ]]>
+            </if>
+            <if test='statisTime != null'>
+                <![CDATA[ statis_time = #{statisTime}, ]]>
             </if>
             <if test='sysWProportion != null'>
                 <![CDATA[ sys_w_proportion = #{sysWProportion}, ]]>

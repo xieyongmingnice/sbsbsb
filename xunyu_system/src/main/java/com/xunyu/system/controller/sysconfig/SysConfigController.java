@@ -35,7 +35,7 @@ public class SysConfigController {
      * @return
      */
     @RequestMapping(value = "addSysConfig",method = RequestMethod.POST)
-    public Result<SystemConfig> addSysConfigData(HttpServletResponse response,SystemConfig sc){
+    public Result<SystemConfig> addSysConfigData(SystemConfig sc) throws Exception{
 
         Result<SystemConfig> res = new Result<SystemConfig>();
         User us = redisUtil.getCurrUser(sc.getSessionId());
@@ -46,8 +46,6 @@ public class SysConfigController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
-
             sc.setIsabled(1);
             sc.setCreateTime(new Date());
             sc.setUserId(us.getUserId());
@@ -58,11 +56,7 @@ public class SysConfigController {
                 res.setMessage("success");
                 res.setRes(sc);
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
+
         return res;
     }
 
@@ -70,7 +64,7 @@ public class SysConfigController {
      * 修改全局配置信息
      */
     @RequestMapping(value = "updateSysConfig",method = RequestMethod.POST)
-    public Result<SystemConfig> updateSysConfigData(HttpServletResponse response,SystemConfig sc) {
+    public Result<SystemConfig> updateSysConfigData(SystemConfig sc) throws Exception{
 
         Result<SystemConfig> res = new Result<SystemConfig>();
         boolean status = redisUtil.sessionStatus(sc.getSessionId());
@@ -81,7 +75,6 @@ public class SysConfigController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
             if(sc.getSysId() != null){
                 flag = sysConfigService.updateSysConfig(sc);
                 if(flag > 0){
@@ -94,11 +87,7 @@ public class SysConfigController {
                 res.setMessage("SysId不能为空");
                 res.setRes(sc);
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
+
         return res;
     }
 
@@ -106,7 +95,7 @@ public class SysConfigController {
      * 查询全局配置信息实例
      */
     @RequestMapping(value = "getSysConfigDetail",method = RequestMethod.POST)
-    public Result<SystemConfig> getSysConfigDetail(HttpServletResponse response, SysConfigModel sm) {
+    public Result<SystemConfig> getSysConfigDetail(SysConfigModel sm) throws Exception{
 
         Result<SystemConfig> res = new Result<SystemConfig>();
         User us = redisUtil.getCurrUser(sm.getSessionId());
@@ -117,17 +106,12 @@ public class SysConfigController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
             map.put("userId",us.getUserId());
             SystemConfig sys = sysConfigService.getSysConfigDetail(map);
             res.setRes(sys);
             res.setMessage("success");
             res.setCode("200");
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
+
         return res;
     }
 

@@ -38,7 +38,7 @@ public class OperatorController {
      * @return
      */
     @RequestMapping(value = "addOperator",method = RequestMethod.POST)
-    public Result<Operator> addOperatorData(HttpServletResponse response,Operator op){
+    public Result<Operator> addOperatorData(Operator op) throws Exception{
 
         Result<Operator> res = new Result<Operator>();
         User us = redisUtil.getCurrUser(op.getSessionId());
@@ -49,19 +49,12 @@ public class OperatorController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
             op.setCreateTime(new Date());
             op.setIsabled(1);
             operatorService.addOperator(op);
             res.setMessage("success");
             res.setCode("200");
             res.setRes(op);
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
-
         return res;
     }
 
@@ -69,7 +62,7 @@ public class OperatorController {
      * 修改运营商配置
      */
     @RequestMapping(value = "updateOperator",method = RequestMethod.POST)
-    public Result<Operator> updateOperatorData(HttpServletResponse response,Operator op) {
+    public Result<Operator> updateOperatorData(Operator op) throws Exception{
 
         Result<Operator> res = new Result<Operator>();
         User us = redisUtil.getCurrUser(op.getSessionId());
@@ -80,7 +73,6 @@ public class OperatorController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
             if(op.getOperId() != null){
                 operatorService.updateOPerator(op);
                 res.setMessage("success");
@@ -91,11 +83,7 @@ public class OperatorController {
                 res.setMessage("operId不能为空");
                 res.setRes(op);
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
+
         return res;
     }
 
@@ -103,7 +91,7 @@ public class OperatorController {
      * 获取运营商配置详情
      */
     @RequestMapping(value = "getOperatorDetail",method = RequestMethod.POST)
-    public Result<Operator> getOperatorDetailData(HttpServletResponse response,OperatorModel op) {
+    public Result<Operator> getOperatorDetailData(OperatorModel op) throws Exception{
 
         Result<Operator> res = new Result<Operator>();
         User us = redisUtil.getCurrUser(op.getSessionId());
@@ -114,7 +102,6 @@ public class OperatorController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
             if(op.getOperId() != null){
                 map.put("operId",op.getOperId());
                 Operator oop =  operatorService.getOperatorDetail(map);
@@ -131,11 +118,6 @@ public class OperatorController {
                 res.setCode("413");
                 res.setMessage("operId不能为空");
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
         return res;
     }
 
@@ -143,7 +125,7 @@ public class OperatorController {
      * 获取运营商配置列表
      */
     @RequestMapping(value = "operatorList",method = RequestMethod.POST)
-    public Result<List<Operator>> OperatorListData(HttpServletResponse response, OperatorModel op) {
+    public Result<List<Operator>> OperatorListData(OperatorModel op) throws Exception{
 
         Result<List<Operator>> res = new Result<List<Operator>>();
         User us = redisUtil.getCurrUser(op.getSessionId());
@@ -155,7 +137,6 @@ public class OperatorController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
             map.put("operId",op.getOperId());
             map.put("operName",op.getOperName());
             map.put("startRow", op.getStartRows());
@@ -171,11 +152,6 @@ public class OperatorController {
                 res.setMessage("notvalue");
                 res.setCode("412");
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
         return res;
     }
 
@@ -183,7 +159,7 @@ public class OperatorController {
      * 批量删除
      */
     @RequestMapping(value = "delOperatorByIds",method = RequestMethod.POST)
-    public Result<Operator> delOperatorData(HttpServletResponse response,OperatorModel op) {
+    public Result<Operator> delOperatorData(OperatorModel op) throws Exception{
 
         Result<Operator> res = new Result<Operator>();
         User us = redisUtil.getCurrUser(op.getSessionId());
@@ -194,7 +170,7 @@ public class OperatorController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
+
             if(StringUtils2.isNotEmpty(op.getOperIds())){
                operatorService.delOperatorById(op.getOperIds());
                 res.setCode("200");
@@ -203,11 +179,7 @@ public class OperatorController {
                 res.setCode("413");
                 res.setMessage("operIds不能为空");
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
+
         return res;
     }
 

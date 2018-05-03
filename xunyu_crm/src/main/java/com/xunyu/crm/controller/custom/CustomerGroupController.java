@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +33,7 @@ public class CustomerGroupController {
      * 添加客户分组
      */
     @RequestMapping(value = "addCustomerGroup",method = RequestMethod.POST)
-    public Result<CustomerGroup> addCustomerGroupData(HttpServletResponse response,CustomerGroup cg){
+    public Result<CustomerGroup> addCustomerGroupData(CustomerGroup cg) throws Exception{
 
         //验证session是否失效
         Result<CustomerGroup> res = new Result<CustomerGroup>();
@@ -45,7 +44,6 @@ public class CustomerGroupController {
             return res;
         }
         int flag = 0;
-        try{
             cg.setCreateTime(new Date());
             cg.setIsabled(1);//默认有效
             flag = customerService.addCustomerGroup(cg);
@@ -54,11 +52,7 @@ public class CustomerGroupController {
                 res.setMessage("success");
                 res.setRes(cg);
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
+
         return res;
     }
 
@@ -66,7 +60,7 @@ public class CustomerGroupController {
      * 修改客户分组
      */
     @RequestMapping(value = "updateCustomerGroup",method = RequestMethod.POST)
-    public Result<CustomerGroup> updateCustomerGroupData(HttpServletResponse response,CustomerGroup cg){
+    public Result<CustomerGroup> updateCustomerGroupData(CustomerGroup cg) throws Exception{
 
         Result<CustomerGroup> res = new Result<CustomerGroup>();
         boolean status = redisUtil.sessionStatus(cg.getSessionId());
@@ -75,7 +69,6 @@ public class CustomerGroupController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
             int flag = 0;
             if(cg.getCustomerGroupId() != null){
                 flag = customerService.updateCustomerGroup(cg);
@@ -87,11 +80,6 @@ public class CustomerGroupController {
                 res.setMessage("CustomerGroupId 不能为空");
                 res.setRes(cg);
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
         return res;
     }
 
@@ -99,7 +87,7 @@ public class CustomerGroupController {
      * 获取分组详情
      */
     @RequestMapping(value = "getCustomerGroupDetail",method = RequestMethod.POST)
-    public Result<CustomerGroup> getCustomerGroupDetailData(HttpServletResponse response, CustomerGroupModel cm){
+    public Result<CustomerGroup> getCustomerGroupDetailData(CustomerGroupModel cm) throws Exception{
 
         Result<CustomerGroup> res = new Result<CustomerGroup>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
@@ -108,23 +96,16 @@ public class CustomerGroupController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        if(cm.getCustomerGroupId() != null){
-            try{
-                Map<String,Object> map = new HashMap<String,Object>();
-                map.put("customerGroupId",cm.getCustomerGroupId());
-                CustomerGroup cg = customerService.getCustomerGroup(map);
-                res.setCode("200");
-                res.setMessage("success");
-                res.setRes(cg);
-            }catch (Exception e){
-                res.setCode("500");
-                res.setMessage("系统异常");
-                e.printStackTrace();
-            }
-        }else{
-            res.setCode("413");
-            res.setMessage("CustomerGroupId 不能为空");
+        if(cm.getCustomerGroupId() != null) {
+
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("customerGroupId", cm.getCustomerGroupId());
+            CustomerGroup cg = customerService.getCustomerGroup(map);
+            res.setCode("200");
+            res.setMessage("success");
+            res.setRes(cg);
         }
+
         return res;
     }
 
@@ -132,7 +113,7 @@ public class CustomerGroupController {
      * 获取分组列表
      */
     @RequestMapping(value = "customerGroupList",method = RequestMethod.POST)
-    public Result<List<CustomerGroup>> customerGroupListData(HttpServletResponse response, CustomerGroupModel cm){
+    public Result<List<CustomerGroup>> customerGroupListData(CustomerGroupModel cm) throws Exception{
 
         Result<List<CustomerGroup>> res = new Result<List<CustomerGroup>>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
@@ -142,7 +123,7 @@ public class CustomerGroupController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
+
             if(cm.getCurrPage() != 0){
                 int total = 0;
                 Map<String,Object> map = new HashMap<String,Object>();
@@ -166,11 +147,6 @@ public class CustomerGroupController {
                 res.setCode("413");
                 res.setMessage("currPage不能为空或0");
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
        return res;
     }
 
@@ -178,7 +154,7 @@ public class CustomerGroupController {
      * 删除分组
      */
     @RequestMapping(value = "delCustomerGroup",method = RequestMethod.POST)
-    public Result<CustomerGroup> updateCustomerGroupData(HttpServletResponse response,CustomerGroupModel cm){
+    public Result<CustomerGroup> updateCustomerGroupData(CustomerGroupModel cm) throws Exception{
 
         Result<CustomerGroup> res = new Result<CustomerGroup>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
@@ -187,17 +163,12 @@ public class CustomerGroupController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
             if(StringUtils2.isNotEmpty(cm.getCustomerGroupIds())){
                 customerService.updateCustomerGroupAll(cm.getCustomerGroupIds());
                 res.setCode("200");
                 res.setMessage("success");
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
+
         return res;
     }
 

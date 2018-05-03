@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +33,7 @@ public class CustomerController {
      * 添加客户信息
      */
     @RequestMapping(value = "addCustomer",method = RequestMethod.POST)
-    public Result<CustomerTab> addCustomerData(HttpServletResponse response,CustomerTab ct){
+    public Result<CustomerTab> addCustomerData(CustomerTab ct) throws Exception{
 
         //验证session是否失效
         Result<CustomerTab> res = new Result<CustomerTab>();
@@ -45,7 +44,7 @@ public class CustomerController {
             return res;
         }
         int flag = 0;
-        try{
+
             ct.setCreateTime(new Date());
             ct.setIsabled(1);//默认有效
             flag = customerService.addCustomer(ct);
@@ -54,11 +53,7 @@ public class CustomerController {
                 res.setMessage("success");
                 res.setRes(ct);
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
+
         return res;
     }
 
@@ -66,7 +61,7 @@ public class CustomerController {
      * 修改客户信息
      */
     @RequestMapping(value = "updateCustomer",method = RequestMethod.POST)
-    public Result<CustomerTab> updateCustomerData(HttpServletResponse response,CustomerTab ct){
+    public Result<CustomerTab> updateCustomerData(CustomerTab ct) throws Exception{
 
         Result<CustomerTab> res = new Result<CustomerTab>();
         boolean status = redisUtil.sessionStatus(ct.getSessionId());
@@ -75,7 +70,6 @@ public class CustomerController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
             int flag = 0;
             if(ct.getCustomerId() != null){
                 flag = customerService.updateCustomer(ct);
@@ -87,11 +81,7 @@ public class CustomerController {
                 res.setMessage("CustomerId 不能为空");
                 res.setRes(ct);
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
+
         return res;
     }
 
@@ -99,7 +89,7 @@ public class CustomerController {
      * 获取客户详情
      */
     @RequestMapping(value = "getCustomerDetail",method = RequestMethod.POST)
-    public Result<CustomerTab> getCustomerGroupDetailData(HttpServletResponse response, CustomerModel cm){
+    public Result<CustomerTab> getCustomerGroupDetailData(CustomerModel cm) throws Exception{
 
         Result<CustomerTab> res = new Result<CustomerTab>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
@@ -109,18 +99,14 @@ public class CustomerController {
             return res;
         }
         if(cm.getCustomerId() != null){
-            try{
+
                 Map<String,Object> map = new HashMap<String,Object>();
                 map.put("customerId",cm.getCustomerId());
                 CustomerTab cg = customerService.getCustomerTabDetail(map);
                 res.setCode("200");
                 res.setMessage("success");
                 res.setRes(cg);
-            }catch (Exception e){
-                res.setCode("500");
-                res.setMessage("系统异常");
-                e.printStackTrace();
-            }
+
         }else{
             res.setCode("413");
             res.setMessage("CustomerId 不能为空");
@@ -132,7 +118,7 @@ public class CustomerController {
      * 获取客户信息列表
      */
     @RequestMapping(value = "customerList",method = RequestMethod.POST)
-    public Result<List<CustomerTab>> customerListData(HttpServletResponse response, CustomerModel cm){
+    public Result<List<CustomerTab>> customerListData(CustomerModel cm) throws Exception{
 
         Result<List<CustomerTab>> res = new Result<List<CustomerTab>>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
@@ -141,7 +127,6 @@ public class CustomerController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
             List<CustomerTab> list = null;
             if(cm.getCurrPage() != 0){
                 int total = 0;
@@ -169,11 +154,6 @@ public class CustomerController {
                 res.setCode("413");
                 res.setMessage("currPage不能为空或0");
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
        return res;
     }
 
@@ -181,7 +161,7 @@ public class CustomerController {
      * 删除客户信息
      */
     @RequestMapping(value = "delCustomer",method = RequestMethod.POST)
-    public Result<CustomerTab> delCustomerData(HttpServletResponse response, CustomerModel cm) {
+    public Result<CustomerTab> delCustomerData(CustomerModel cm) throws Exception{
 
         Result<CustomerTab> res = new Result<CustomerTab>();
         boolean status = redisUtil.sessionStatus(cm.getSessionId());
@@ -190,7 +170,7 @@ public class CustomerController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        try{
+
             if(StringUtils2.isNotEmpty(cm.getCustomerIds())){
                 customerService.updateCustomerAll(cm.getCustomerIds());
                 res.setCode("200");
@@ -199,11 +179,7 @@ public class CustomerController {
                 res.setCode("413");
                 res.setMessage("CustomerIds 不能为空");
             }
-        }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            e.printStackTrace();
-        }
+
         return res;
     }
 
