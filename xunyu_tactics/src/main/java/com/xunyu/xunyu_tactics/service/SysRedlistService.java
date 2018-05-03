@@ -37,4 +37,14 @@ public interface SysRedlistService {
      */
     int excelDeleteRedlist(List<SysRedlist> list);
 
+    /**
+     * 为列表查询提供条数查询
+     */
+    int selectTotalRows(SysRedlistModel model);
+
+    /**
+     * 批量删除
+     */
+    int batchDeleteRedlist(SysRedlistModel model);
+
 }

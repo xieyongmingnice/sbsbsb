@@ -35,7 +35,10 @@ public class SysRedlistVO implements Serializable{
      *   备注
      */
     private String remarks;
-
+    /**
+     * 是否可用标志 1可用 ，0不可用
+     */
+    private Integer isabled;
     /**
      *  红名单来源字符串
      */
@@ -87,5 +90,13 @@ public class SysRedlistVO implements Serializable{
 
     public void setRedlistSourceStr(String redlistSourceStr) {
         this.redlistSourceStr = redlistSourceStr;
+    }
+
+    public Integer getIsabled() {
+        return isabled;
+    }
+
+    public void setIsabled(Integer isabled) {
+        this.isabled = isabled;
     }
 }

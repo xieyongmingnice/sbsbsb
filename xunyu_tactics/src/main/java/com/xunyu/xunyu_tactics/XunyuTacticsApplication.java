@@ -16,12 +16,9 @@ import org.springframework.context.annotation.ComponentScan;
  * @description
  * @date 2018/4/27 15:45
  */
-//热部署
-@RefreshScope
-@ComponentScan(basePackages = {"com.xunyu"})
+@ComponentScan(basePackages = {"com.xunyu",})
 @EnableEurekaClient
 @SpringBootApplication
-//@EnableCircuitBreaker//启动断路器   基于Ribbon
 //Feign  本身集成了断路游
 @EnableFeignClients
 public class XunyuTacticsApplication extends SpringBootServletInitializer {

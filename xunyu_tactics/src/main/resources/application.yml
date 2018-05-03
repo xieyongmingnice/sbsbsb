@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: xunyu_tactics
+  profiles:
+    #active: pro #加载xunyu_profiles项目中 的application-core.yml文件
+    #active: dev #加载xunyu_profiles项目中 的application-dev.yml文件
+    active: local #加载xunyu_profiles项目中 的application-dev.yml文件
+  http:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 11MB
+
+server:
+  port: 8009
+
+logging:
+  level:
+    src.main.java.com.xunyu.xunyu_tactics.dao: debug
+    src.main.resources.mapper: debug

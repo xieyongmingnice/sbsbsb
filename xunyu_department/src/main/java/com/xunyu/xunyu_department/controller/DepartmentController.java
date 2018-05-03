@@ -157,12 +157,20 @@ public class DepartmentController {
             return result;
         }
         try{
+            int currPage = model.getCurrPage();
+            if (currPage == 0){
+                result.setMessage(ResultMessage.Message.PRAMA_LOSS);
+                result.setCode(ResultMessage.Code.PRAMA_LOSS);
+                return result;
+            }
+            model.setOffset(model.getStartRows());
             List<UsersVO> users = userService.selectUserListByDepartmentId(model);
+            int totalRows = userService.selectTotalRows(model);
             if (users != null && users.size() > 0){
                 result.setRes(users);
                 result.setMessage(ResultMessage.Message.SUCCESS);
                 result.setCode(ResultMessage.Code.SUCCESS);
-                result.setTotalRows(users.size());
+                result.setTotalRows(totalRows);
             }
         }catch (Exception e){
             result.setCode(ResultMessage.Code.ERROR);

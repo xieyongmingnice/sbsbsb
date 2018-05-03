@@ -12,8 +12,29 @@ public interface SysRedlistConstant {
      */
     interface RedlistSource{
 
+        /**
+         * 自动添加
+         */
         int AUTO_ADD = 1;
 
+        /**
+         * 手动添加
+         */
         int MANUAL_ADD = 2;
+    }
+
+    /**
+     * 是否可用
+     */
+    interface Isabled{
+        /**
+         * 可用
+         */
+        int ENABLED = 1;
+
+        /**
+         * 不可用
+         */
+        int DISABLED = 0;
     }
 }

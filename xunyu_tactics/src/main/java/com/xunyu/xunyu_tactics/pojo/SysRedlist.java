@@ -4,14 +4,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author xym
- * @description 系统红名单 实体类
- * @date 2018/4/28 14:18
+ * Created By MBG-GUI-EXTENSION https://github.com/spawpaw/mybatis-generator-gui-extension
+ * Description:
+ * 
+ *
+ * @author 
  */
-public class SysRedlist  implements Serializable {
-    private static final long serialVersionUID = 8401033822587064250L;
+public class SysRedlist implements Serializable {
+
+    private static final long serialVersionUID = 1872767265019716100L;
     /**
-     * id
+     * 流水id
      */
     private Integer sysRedlistId;
 
@@ -36,11 +39,17 @@ public class SysRedlist  implements Serializable {
     private String remarks;
 
     /**
+     *   1：可用，0：不可用
+     */
+
+    private Integer isabled;
+
+    /**
      * This method returns the value of the database column tbl_sys_redlist.sys_redlist_id
      *
      * @return the value of tbl_sys_redlist.sys_redlist_id
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public Integer getSysRedlistId() {
         return sysRedlistId;
@@ -48,7 +57,7 @@ public class SysRedlist  implements Serializable {
 
     /**
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public SysRedlist withSysRedlistId(Integer sysRedlistId) {
         this.setSysRedlistId(sysRedlistId);
@@ -60,7 +69,7 @@ public class SysRedlist  implements Serializable {
      *
      * @param sysRedlistId the value for tbl_sys_redlist.sys_redlist_id
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public void setSysRedlistId(Integer sysRedlistId) {
         this.sysRedlistId = sysRedlistId;
@@ -71,7 +80,7 @@ public class SysRedlist  implements Serializable {
      *
      * @return the value of tbl_sys_redlist.phone_number
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public String getPhoneNumber() {
         return phoneNumber;
@@ -79,7 +88,7 @@ public class SysRedlist  implements Serializable {
 
     /**
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public SysRedlist withPhoneNumber(String phoneNumber) {
         this.setPhoneNumber(phoneNumber);
@@ -91,7 +100,7 @@ public class SysRedlist  implements Serializable {
      *
      * @param phoneNumber the value for tbl_sys_redlist.phone_number
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
@@ -102,7 +111,7 @@ public class SysRedlist  implements Serializable {
      *
      * @return the value of tbl_sys_redlist.redlist_source
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public Integer getRedlistSource() {
         return redlistSource;
@@ -110,7 +119,7 @@ public class SysRedlist  implements Serializable {
 
     /**
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public SysRedlist withRedlistSource(Integer redlistSource) {
         this.setRedlistSource(redlistSource);
@@ -122,7 +131,7 @@ public class SysRedlist  implements Serializable {
      *
      * @param redlistSource the value for tbl_sys_redlist.redlist_source
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public void setRedlistSource(Integer redlistSource) {
         this.redlistSource = redlistSource;
@@ -133,7 +142,7 @@ public class SysRedlist  implements Serializable {
      *
      * @return the value of tbl_sys_redlist.join_time
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public Date getJoinTime() {
         return joinTime;
@@ -141,7 +150,7 @@ public class SysRedlist  implements Serializable {
 
     /**
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public SysRedlist withJoinTime(Date joinTime) {
         this.setJoinTime(joinTime);
@@ -153,7 +162,7 @@ public class SysRedlist  implements Serializable {
      *
      * @param joinTime the value for tbl_sys_redlist.join_time
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public void setJoinTime(Date joinTime) {
         this.joinTime = joinTime;
@@ -164,7 +173,7 @@ public class SysRedlist  implements Serializable {
      *
      * @return the value of tbl_sys_redlist.remarks
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public String getRemarks() {
         return remarks;
@@ -172,7 +181,7 @@ public class SysRedlist  implements Serializable {
 
     /**
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public SysRedlist withRemarks(String remarks) {
         this.setRemarks(remarks);
@@ -184,15 +193,46 @@ public class SysRedlist  implements Serializable {
      *
      * @param remarks the value for tbl_sys_redlist.remarks
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
 
     /**
+     * This method returns the value of the database column tbl_sys_redlist.isabled
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @return the value of tbl_sys_redlist.isabled
+     *
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
+     */
+    public Integer getIsabled() {
+        return isabled;
+    }
+
+    /**
+     *
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
+     */
+    public SysRedlist withIsabled(Integer isabled) {
+        this.setIsabled(isabled);
+        return this;
+    }
+
+    /**
+     * This method sets the value of the database column tbl_sys_redlist.isabled
+     *
+     * @param isabled the value for tbl_sys_redlist.isabled
+     *
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
+     */
+    public void setIsabled(Integer isabled) {
+        this.isabled = isabled;
+    }
+
+    /**
+     *
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     @Override
     public String toString() {
@@ -205,13 +245,14 @@ public class SysRedlist  implements Serializable {
         sb.append(", redlistSource=").append(redlistSource);
         sb.append(", joinTime=").append(joinTime);
         sb.append(", remarks=").append(remarks);
+        sb.append(", isabled=").append(isabled);
         sb.append("]");
         return sb.toString();
     }
 
     /**
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     @Override
     public boolean equals(Object that) {
@@ -229,12 +270,13 @@ public class SysRedlist  implements Serializable {
             && (this.getPhoneNumber() == null ? other.getPhoneNumber() == null : this.getPhoneNumber().equals(other.getPhoneNumber()))
             && (this.getRedlistSource() == null ? other.getRedlistSource() == null : this.getRedlistSource().equals(other.getRedlistSource()))
             && (this.getJoinTime() == null ? other.getJoinTime() == null : this.getJoinTime().equals(other.getJoinTime()))
-            && (this.getRemarks() == null ? other.getRemarks() == null : this.getRemarks().equals(other.getRemarks()));
+            && (this.getRemarks() == null ? other.getRemarks() == null : this.getRemarks().equals(other.getRemarks()))
+            && (this.getIsabled() == null ? other.getIsabled() == null : this.getIsabled().equals(other.getIsabled()));
     }
 
     /**
      *
-     * @mbg.generated Sat Apr 28 14:14:09 CST 2018
+     * @mbg.generated Wed May 02 17:00:55 CST 2018
      */
     @Override
     public int hashCode() {
@@ -245,6 +287,7 @@ public class SysRedlist  implements Serializable {
         result = prime * result + ((getRedlistSource() == null) ? 0 : getRedlistSource().hashCode());
         result = prime * result + ((getJoinTime() == null) ? 0 : getJoinTime().hashCode());
         result = prime * result + ((getRemarks() == null) ? 0 : getRemarks().hashCode());
+        result = prime * result + ((getIsabled() == null) ? 0 : getIsabled().hashCode());
         return result;
     }
 }

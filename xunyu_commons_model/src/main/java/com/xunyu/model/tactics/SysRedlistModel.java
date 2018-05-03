@@ -3,6 +3,7 @@ package com.xunyu.model.tactics;
 import com.xunyu.model.user.UserModel;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author xym
@@ -13,7 +14,7 @@ public class SysRedlistModel extends UserModel{
     private static final long serialVersionUID = -353652518206452870L;
 
     /**
-     * id
+     * 主键id
      */
     private Integer sysRedlistId;
 
@@ -38,6 +39,11 @@ public class SysRedlistModel extends UserModel{
     private String remarks;
 
     /**
+     * 可用状态标志
+     */
+    private Integer isabled;
+
+    /**
      *   加入时间
      */
     private Date startTime;
@@ -46,6 +52,11 @@ public class SysRedlistModel extends UserModel{
      * 结束时间
      */
     private Date endTime;
+
+    /**
+     * 批量操作时用的主键集合
+     */
+    private List<Long> idList;
 
 
     public Integer getSysRedlistId() {
@@ -102,5 +113,21 @@ public class SysRedlistModel extends UserModel{
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public Integer getIsabled() {
+        return isabled;
+    }
+
+    public void setIsabled(Integer isabled) {
+        this.isabled = isabled;
+    }
+
+    public List<Long> getIdList() {
+        return idList;
+    }
+
+    public void setIdList(List<Long> idList) {
+        this.idList = idList;
     }
 }
