@@ -318,10 +318,10 @@
     <if test="phoneNumber != null and phoneNumber != '' ">
       and phone_number like concat('%',#{phoneNumber,jdbcType=VARCHAR},'%')
     </if>
-    <if test="startTime != null ">
+    <if test="startTime != null and startTime != '' ">
       <![CDATA[and join_time >= #{startTime,jdbcType=TIMESTAMP}]]>
     </if>
-    <if test="endTime != null">
+    <if test="endTime != null and endTime != '' ">
       <![CDATA[and join_time <= #{endTime,jdbcType=TIMESTAMP}]]>
     </if>
   </select>

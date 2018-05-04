@@ -52,4 +52,24 @@ public interface TacticsConstants {
          */
         String XLSX = "xlsx";
     }
+
+    /**
+     * 黑名单来源
+     */
+    interface BlacklistSource{
+        /**
+         * 回复加黑
+         */
+        int REPLY = 1;
+
+        /**
+         * 手动添加
+         */
+        int MANNUAL = 2;
+
+        /**
+         * 其他收集
+         */
+        int OTHER = 3;
+    }
 }

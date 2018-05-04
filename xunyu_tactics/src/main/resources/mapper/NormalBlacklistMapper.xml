@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.xunyu_tactics.pojo.NormalBlacklist">
+  <resultMap id="BaseResultMap" type="com.xunyu.xunyu_tactics.pojo.NormalBlacklist">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Fri May 04 16:41:15 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <id column="normal_blacklist_id" jdbcType="INTEGER" property="normalBlacklistId" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="blacklist_source" jdbcType="INTEGER" property="blacklistSource" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="join_time" jdbcType="TIMESTAMP" property="joinTime" />
+  </resultMap>
+
+  <resultMap id="BaseResultMapVO" type="com.xunyu.xunyu_tactics.vo.NormalBlacklistVO">
+    <id column="normal_blacklist_id" jdbcType="INTEGER" property="normalBlacklistId" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="blacklist_source" jdbcType="INTEGER" property="blacklistSource" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="join_time" jdbcType="TIMESTAMP" property="joinTime" />
+    <result column="blacklist_source_str" jdbcType="VARCHAR" property="blacklistSourceStr"/>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Fri May 04 16:41:15 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    normal_blacklist_id, phone_number, blacklist_source, remarks, isabled, join_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Fri May 04 16:41:15 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_normal_blacklist
+    where normal_blacklist_id = #{normalBlacklistId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Fri May 04 16:41:15 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    delete from tbl_normal_blacklist
+    where normal_blacklist_id = #{normalBlacklistId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.xunyu.xunyu_tactics.pojo.NormalBlacklist">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Fri May 04 16:41:15 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    insert into tbl_normal_blacklist (normal_blacklist_id, phone_number, blacklist_source, 
+      remarks, isabled, join_time
+      )
+    values (#{normalBlacklistId,jdbcType=INTEGER}, #{phoneNumber,jdbcType=VARCHAR}, #{blacklistSource,jdbcType=INTEGER}, 
+      #{remarks,jdbcType=VARCHAR}, #{isabled,jdbcType=INTEGER}, #{joinTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunyu.xunyu_tactics.pojo.NormalBlacklist">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Fri May 04 16:41:15 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    insert into tbl_normal_blacklist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="normalBlacklistId != null">
+        normal_blacklist_id,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="blacklistSource != null">
+        blacklist_source,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="isabled != null">
+        isabled,
+      </if>
+      <if test="joinTime != null">
+        join_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="normalBlacklistId != null">
+        #{normalBlacklistId,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="blacklistSource != null">
+        #{blacklistSource,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isabled != null">
+        #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="joinTime != null">
+        #{joinTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyu.xunyu_tactics.pojo.NormalBlacklist">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Fri May 04 16:41:15 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update tbl_normal_blacklist
+    <set>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="blacklistSource != null">
+        blacklist_source = #{blacklistSource,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isabled != null">
+        isabled = #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="joinTime != null">
+        join_time = #{joinTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where normal_blacklist_id = #{normalBlacklistId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyu.xunyu_tactics.pojo.NormalBlacklist">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Fri May 04 16:41:15 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update tbl_normal_blacklist
+    set phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      blacklist_source = #{blacklistSource,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      isabled = #{isabled,jdbcType=INTEGER},
+      join_time = #{joinTime,jdbcType=TIMESTAMP}
+    where normal_blacklist_id = #{normalBlacklistId,jdbcType=INTEGER}
+  </update>
+
+  <!-- 以下为自定义sql -->
+
+  <!--新增-->
+  <insert id="addBlacklist" parameterType="com.xunyu.model.tactics.NormalBlacklistModel">
+    insert into tbl_normal_blacklist (phone_number, blacklist_source, remarks, isabled)
+    values ( #{phoneNumber,jdbcType=VARCHAR}, #{blacklistSource,jdbcType=INTEGER},#{remarks,jdbcType=VARCHAR}, 1)
+  </insert>
+
+  <!--删除-->
+  <update id="deleteBlacklist" parameterType="com.xunyu.model.tactics.NormalBlacklistModel">
+    update tbl_normal_blacklist
+    set isabled = 0
+    where isabled = 1 and normal_blacklist_id = #{normalBlacklistId,jdbcType=INTEGER}
+    limit 1
+  </update>
+
+  <!--查询列表-->
+  <select id="selectBlacklist" parameterType="com.xunyu.model.tactics.NormalBlacklistModel" resultMap="BaseResultMapVO">
+    select normal_blacklist_id, phone_number, blacklist_source, remarks, isabled, join_time,
+    case when blacklist_source = 1 then '回复加黑'
+         when blacklist_source = 2 then '手动添加'
+         when blacklist_source = 3 then '其他搜集'
+    end as blacklist_source_str
+    from tbl_normal_blacklist
+    where isabled = 1
+    <if test="phoneNumber != null and phoneNumber != '' ">
+      and phone_number like concat('%',#{phoneNumber,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime != null and startTime != '' ">
+      <![CDATA[and join_time >= #{startTime,jdbcType=VARCHAR}]]>
+    </if>
+    <if test="endTime != null and endTime != '' ">
+      <![CDATA[and join_time <= #{endTime,jdbcType=VARCHAR}]]>
+    </if>
+    order by join_time desc
+    limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+  </select>
+
+  <!--查询总条数-->
+  <select id="selectTotalRows" parameterType="com.xunyu.model.tactics.NormalBlacklistModel" resultType="java.lang.Integer">
+    select count(1) from tbl_normal_blacklist
+    where isabled = 1
+    <if test="phoneNumber != null and phoneNumber != '' ">
+      and phone_number like concat('%',#{phoneNumber,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime != null and startTime != '' ">
+      <![CDATA[and join_time >= #{startTime,jdbcType=VARCHAR}]]>
+    </if>
+    <if test="endTime != null and endTime != '' ">
+      <![CDATA[and join_time <= #{endTime,jdbcType=VARCHAR}]]>
+    </if>
+  </select>
+
+  <!--批量删除-->
+  <update id="batchDeleteBlacklist" parameterType="com.xunyu.model.tactics.NormalBlacklistModel">
+    update tbl_normal_blacklist
+    set isabled = 0
+    where isabled = 1 and normal_blacklist_id in
+    <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </update>
+
+  <!-- 导入添加 -->
+  <insert id="excelAddBlacklist" parameterType="java.util.List">
+    insert into tbl_normal_blacklist  (phone_number, blacklist_source, remarks, isabled)
+    values
+    <foreach collection="list" item="item" index="index"  separator=",">
+      (#{item.phoneNumber,jdbcType=VARCHAR},#{item.blacklistSource,jdbcType=INTEGER}
+      ,#{item.remarks,jdbcType=VARCHAR},#{item.isabled,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+
+  <!-- 导入删除 -->
+  <update id="excelDeleteBlacklist" parameterType="java.util.List">
+    update tbl_normal_blacklist
+    set isabled = 0
+    where isabled = 1 and phone_number in
+    <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+      #{item.phoneNumber}
+    </foreach>
+  </update>
+
+</mapper>
