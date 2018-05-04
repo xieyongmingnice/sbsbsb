@@ -136,10 +136,12 @@ public class AliyunOssUtil {
             logger.debug("上传后的文件MD5数字唯一签名:{}", ret);
 
         } catch (IOException e) {
+            resultMap.put("code", 500);
+            resultMap.put("message", "上传失败!");
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
-            resultMap.put("status", false);
+            resultMap.put("code", 500);
             resultMap.put("message", "上传失败!");
             return resultMap;
         } finally {
@@ -157,12 +159,12 @@ public class AliyunOssUtil {
         }
 
         if (!"".equals(ret) && ret != null) {
-            resultMap.put("status", true);
+            resultMap.put("code", 200);
             resultMap.put("url", getUrl(uploadPath));
             resultMap.put("message","上传成功");
             return resultMap;
         } else {
-            resultMap.put("status", false);
+            resultMap.put("code", 500);
             resultMap.put("message", "上传失败!");
             return resultMap;
         }
@@ -192,7 +194,7 @@ public class AliyunOssUtil {
         }
         long limitSizeBytes = limitSize * 1024 * 1024;// 把单位M转换为bytes
         if (file.getSize() > limitSizeBytes) {
-            resultMap.put("status", false);
+            resultMap.put("code", "413");
             resultMap.put("message", "您上传的文件超出限制大小。" + limitSize + "M");
             destory();
             return resultMap;
@@ -218,7 +220,7 @@ public class AliyunOssUtil {
                                                      String dirName, String fileName, int limitSize) {
 
         if (file == null) {
-            resultMap.put("status", false);
+            resultMap.put("code", "413");
             resultMap.put("message", "未选择文件。");
             destory();
             return resultMap;
@@ -234,7 +236,7 @@ public class AliyunOssUtil {
         long limitSizeBytes = limitSize * 1024 * 1024;// 把单位M转换为bytes
 
         if (file.getSize() > limitSizeBytes) {
-            resultMap.put("status", false);
+            resultMap.put("code", "413");
             resultMap.put("message", "您上传的文件超出限制大小" + limitSize + "M");
             destory();
             return resultMap;

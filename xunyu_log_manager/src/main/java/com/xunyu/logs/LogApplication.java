@@ -1,4 +1,4 @@
-package com.xunyu.system;
+package com.xunyu.logs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,9 +14,9 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableFeignClients  //Feign 本身集成了断路游
-public class SystemApplication {
+public class LogApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SystemApplication.class, "-server -Xms512 -Xmx512");
+		SpringApplication.run(LogApplication.class, args);
 	}
 }

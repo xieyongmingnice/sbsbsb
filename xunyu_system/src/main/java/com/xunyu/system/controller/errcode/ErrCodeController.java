@@ -7,10 +7,13 @@ import com.xunyu.model.system.errcode.ErrorCodeModel;
 import com.xunyu.model.user.User;
 import com.xunyu.system.pojo.errcode.ErrorCode;
 import com.xunyu.system.service.errcode.ErrorCodeService;
+import com.xunyu.system.utils.syslog.LogService2;
+import com.xunyu.system.utils.syslog.SysLogsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +32,8 @@ public class ErrCodeController {
     private RedisUtil redisUtil;
     @Autowired
     private ErrorCodeService errorCodeService;
+    @Resource
+    private LogService2 logService;
 
     /**
      * 添加错误码配置
@@ -38,6 +43,7 @@ public class ErrCodeController {
         Result<ErrorCode> res = new Result<ErrorCode>();
         User us = redisUtil.getCurrUser(ec.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
+        int n = 0;
         if (us == null) {
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
@@ -45,10 +51,16 @@ public class ErrCodeController {
         }
             ec.setIsabled(1);
             ec.setCreateTime(new Date());
-            errorCodeService.addErrCodeConfig(ec);
+            n = errorCodeService.addErrCodeConfig(ec);
             res.setCode("200");
             res.setMessage("success");
             res.setRes(ec);
+        if(n > 0) {
+            //异步添加日志
+            SysLogsUtil su = SysLogsUtil.getInstance();
+            su.addSysLogs(logService,us,"添加错误码配置","添加");
+
+        }
         return res;
     }
 
@@ -65,11 +77,18 @@ public class ErrCodeController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
+        int n = 0;
             if(ec.getErrId() != null){
-                errorCodeService.updateErrCodeConfig(ec);
+                n = errorCodeService.updateErrCodeConfig(ec);
                 res.setCode("200");
                 res.setMessage("success");
                 res.setRes(ec);
+                if(n > 0) {
+                    //异步添加日志
+                    SysLogsUtil su = SysLogsUtil.getInstance();
+                    su.addSysLogs(logService,us,"修改错误码配置","修改");
+
+                }
             }else{
                 res.setCode("413");
                 res.setMessage("errId不能为空");
@@ -126,6 +145,8 @@ public class ErrCodeController {
             map.put("errType",ec.getErrType());
             map.put("errCode",ec.getErrCode());
             map.put("errText",ec.getErrText());
+            map.put("startRow",ec.getStartRows());
+            map.put("endRow",ec.getEndRows());
             total = errorCodeService.errCodeConfigCount(map);
             if(total > 0){
                 List<ErrorCode> list = errorCodeService.errCodeConfigList(map);
@@ -154,11 +175,17 @@ public class ErrCodeController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-
+            int n = 0;
             if(StringUtils2.isNotEmpty(ec.getErrIds())) {
-                errorCodeService.delErrCodeConfig(ec.getErrIds());
+                n = errorCodeService.delErrCodeConfig(ec.getErrIds());
                 res.setCode("200");
                 res.setMessage("success");
+                if(n > 0) {
+                    //异步添加日志
+                    SysLogsUtil su = SysLogsUtil.getInstance();
+                    su.addSysLogs(logService,us,"删除错误码配置","删除");
+
+                }
             }else {
                 res.setCode("413");
                 res.setMessage("errIds不能为空");

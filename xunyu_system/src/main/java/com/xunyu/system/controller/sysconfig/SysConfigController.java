@@ -6,11 +6,14 @@ import com.xunyu.model.system.sysconfig.SysConfigModel;
 import com.xunyu.model.user.User;
 import com.xunyu.system.pojo.sysconfig.SystemConfig;
 import com.xunyu.system.service.sysconfig.SysConfigService;
+import com.xunyu.system.utils.syslog.LogService2;
+import com.xunyu.system.utils.syslog.SysLogsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import javax.servlet.http.HttpServletResponse;
+
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,10 +30,11 @@ public class SysConfigController {
     private SysConfigService sysConfigService;
     @Autowired
     private RedisUtil redisUtil;
-
+    @Resource
+    private LogService2 logService;
     /**
      * 添加全局配置信息
-     * @param response
+     * @param //response
      * @param sc
      * @return
      */
@@ -40,7 +44,7 @@ public class SysConfigController {
         Result<SystemConfig> res = new Result<SystemConfig>();
         User us = redisUtil.getCurrUser(sc.getSessionId());
         Map<String,Object> map = new HashMap<String,Object>();
-        int flag = 0;
+        int n = 0;
         if(us == null){
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
@@ -49,12 +53,14 @@ public class SysConfigController {
             sc.setIsabled(1);
             sc.setCreateTime(new Date());
             sc.setUserId(us.getUserId());
-            flag = sysConfigService.addSysConfig(sc);
-
-            if(flag > 0){
-                res.setCode("200");
-                res.setMessage("success");
-                res.setRes(sc);
+            n = sysConfigService.addSysConfig(sc);
+            res.setCode("200");
+            res.setMessage("success");
+            res.setRes(sc);
+            if(n > 0) {
+                //异步添加日志
+                SysLogsUtil su = SysLogsUtil.getInstance();
+                su.addSysLogs(logService,us,"添加全局配置信息","添加");
             }
 
         return res;
@@ -67,21 +73,25 @@ public class SysConfigController {
     public Result<SystemConfig> updateSysConfigData(SystemConfig sc) throws Exception{
 
         Result<SystemConfig> res = new Result<SystemConfig>();
-        boolean status = redisUtil.sessionStatus(sc.getSessionId());
+        User us = redisUtil.getCurrUser(sc.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
-        int flag = 0;
-        if (!status) {
+        int n = 0;
+        if (us != null) {
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
             if(sc.getSysId() != null){
-                flag = sysConfigService.updateSysConfig(sc);
-                if(flag > 0){
-                    res.setCode("200");
-                    res.setMessage("success");
-                    res.setRes(sc);
+                n = sysConfigService.updateSysConfig(sc);
+                res.setCode("200");
+                res.setMessage("success");
+                res.setRes(sc);
+                if(n > 0) {
+                    //异步添加日志
+                    SysLogsUtil su = SysLogsUtil.getInstance();
+                    su.addSysLogs(logService,us,"修改全局配置信息","修改");
                 }
+
             }else{
                 res.setCode("413");
                 res.setMessage("SysId不能为空");

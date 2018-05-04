@@ -312,6 +312,7 @@
       and g.remark like concat('%',#{remark,jdbcType=VARCHAR},'%')
     </if>
     group by g.user_group_id
+    order by g.create_time desc
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
 

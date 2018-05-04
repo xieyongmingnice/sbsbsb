@@ -36,6 +36,8 @@
             <include refid = "err_column" />
         from tbl_err_code_config
         where isabled = 1 <include refid = "err_where" />
+        order by err_id desc
+        limit #{startRow},#{endRow}
     </select>
 
     <sql id = "err_where">

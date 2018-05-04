@@ -38,7 +38,7 @@ public class FileUpController {
      */
     @RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
     public Map<String,Object> uploadFileData(HttpServletRequest request
-                 ,String sessionId) throws Exception{
+                 ,String sessionId){
 
         Map<String,Object> map = new HashMap<String,Object>();
         if(StringUtils2.isNotEmpty(sessionId)) {

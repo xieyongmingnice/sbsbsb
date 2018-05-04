@@ -29,6 +29,8 @@
             <include refid = "oper_column" />
         from tbl_operator
         where isabled = 1 <include refid = "oper_where" />
+        order by oper_id desc
+        limit #{startRow},#{endRow}
     </select>
 
     <sql id = "oper_where">

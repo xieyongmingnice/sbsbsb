@@ -2,8 +2,8 @@ eureka:
   enabled: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:8001/eureka/
-      #defaultZone: http://47.104.190.174:8001/eureka/
+      #defaultZone: http://localhost:8001/eureka/
+      defaultZone: http://47.104.190.174:8001/eureka/
       registry-fetch-interval-seconds: 5 #拉取服务注册信息时间间隔,默认为30秒
   instance:
       lease-renewal-interval-in-seconds: 5 #心跳时间,默认为30秒
@@ -49,23 +49,27 @@ ribbon.eureka.enabled: false
 
 xunyu-crm:
   ribbon:
-    listOfServers: http://localhost:8004,http://47.104.190.41:8004  #IP可以写多个用逗号隔开；listOfServers开启负载
+    listOfServers: http://47.104.190.41:8004  #IP可以写多个用逗号隔开；listOfServers开启负载
 
 xunyu-shiro:
   ribbon:
-      listOfServers: http://localhost:8003,http://47.104.190.41:8003
+      listOfServers: http://47.104.190.41:8003
 
 xunyu-system:
   ribbon:
-      listOfServers: http://localhost:8005,http://47.104.190.41:8005
+      listOfServers: http://47.104.190.41:8005
 
 xunyu-log-manager:
   ribbon:
-     listOfServers: http://localhost:8007,http://47.104.190.41:8007
+     listOfServers: http://47.104.190.41:8007
 
 xunyu-tactics:
   ribbon:
-     listOfServers: http://localhost:8009,http://47.104.190.174:8009
+     listOfServers: http://47.104.190.174:8009
+
+api-department:
+  ribbon:
+     istOfServers: http://47.104.190.174:8008
 
 hystrix:
   command:

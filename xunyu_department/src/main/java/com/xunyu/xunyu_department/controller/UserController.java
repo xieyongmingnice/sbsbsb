@@ -124,7 +124,7 @@ public class UserController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "getemployeelist",method = RequestMethod.POST)
+    @RequestMapping(value = "/getemployeelist",method = RequestMethod.POST)
     @ResponseBody
     public Result<List<UsersVO>> getEmployeeList(UsersModel model){
         Result result = checkLogin(new Result(),model.getSessionId());

@@ -13,7 +13,7 @@ public class AccessFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
-        return true;   //决定是否走该过滤器
+        return false;   //决定是否走该过滤器
     }
 
     /**

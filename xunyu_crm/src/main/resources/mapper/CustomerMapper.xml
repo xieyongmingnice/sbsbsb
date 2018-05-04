@@ -39,7 +39,8 @@
 
     <select id = "customerTabList" parameterType="map" resultMap="customer_ResultMap">
         select <include refid = "customer_column" /> from tbl_customer
-        where isabled = 1 <include refid = "customer_where"/> order by customer_id desc
+        where isabled = 1 <include refid = "customer_where"/>
+        order by customer_id desc
         limit #{startRow},#{endRow}
     </select>
 

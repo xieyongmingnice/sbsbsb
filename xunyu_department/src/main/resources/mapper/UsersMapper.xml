@@ -268,6 +268,7 @@
     <if test="departmentId != null">
       and r.department_id = #{departmentId,jdbcType=VARCHAR}
     </if>
+    order by u.create_time desc
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
 
@@ -358,6 +359,7 @@
     <if test="password != null and password != '' ">
       and password = #{password,jdbcType=VARCHAR}
     </if>
+    order by create_time desc
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
 
@@ -382,6 +384,7 @@
     <if test="account != null and account != '' ">
       and account = #{account,jdbcType=VARCHAR}
     </if>
+    order by create_time desc
   </select>
 
   <!-- 通过员工分组查询员工列表 -->
@@ -400,6 +403,7 @@
     <if test="userGroupId != null">
       and r.user_group_id = #{userGroupId,jdbcType=INTEGER}
     </if>
+    order by u.create_time desc
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
 

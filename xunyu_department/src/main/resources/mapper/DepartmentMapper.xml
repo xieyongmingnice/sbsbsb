@@ -133,6 +133,7 @@
         and d.department_name like CONCAT('%',#{model.departmentName,jdbcType=VARCHAR},'%')
       </if>
       GROUP BY d.department_id
+      order by d.create_time desc
       limit #{model.offset,jdbcType=INTEGER},#{model.limit,jdbcType=INTEGER}
   </select>
 

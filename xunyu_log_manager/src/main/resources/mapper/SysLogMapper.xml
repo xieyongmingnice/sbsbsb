@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.model.log.syslog.SysLogs">
+
+    <insert id = "addSysLog" parameterType="com.xunyu.model.log.syslog.SysLogs"
+            useGeneratedKeys="true" keyColumn="logs_id" keyProperty="logsId">
+        insert into sys_logs
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="logsId != null">logs_id,</if>
+            <if test='operTime != null'>oper_time,</if>
+            <if test='operName != null and operName != ""'>oper_name,</if>
+            <if test='operIp != null and operIp != ""'>oper_ip,</if>
+            <if test='operType != null and operType != ""'>oper_type,</if>
+            <if test='operObj != null and operObj != ""'>oper_obj,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="logsId != null">#{logsId},</if>
+            <if test='operTime != null'>#{operTime},</if>
+            <if test='operName != null and operName != ""'>#{operName},</if>
+            <if test='operIp != null and operIp != ""'>#{operIp},</if>
+            <if test='operType != null and operType != ""'>#{operType},</if>
+            <if test='operObj != null and operObj != ""'>#{operObj},</if>
+        </trim>
+    </insert>
+
+
+</mapper>

@@ -7,12 +7,14 @@ import com.xunyu.model.system.operator.OperatorModel;
 import com.xunyu.model.user.User;
 import com.xunyu.system.pojo.operator.Operator;
 import com.xunyu.system.service.operator.OperatorService;
+import com.xunyu.system.utils.syslog.LogService2;
+import com.xunyu.system.utils.syslog.SysLogsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -30,10 +32,12 @@ public class OperatorController {
     private RedisUtil redisUtil;
     @Autowired
     private OperatorService operatorService;
+    @Resource
+    private LogService2 logService;
 
     /**
      * 添加运营商配置
-     * @param response
+     * @param //response
      * @param op
      * @return
      */
@@ -49,12 +53,19 @@ public class OperatorController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
+            int n = 0;
             op.setCreateTime(new Date());
             op.setIsabled(1);
-            operatorService.addOperator(op);
+            n = operatorService.addOperator(op);
             res.setMessage("success");
             res.setCode("200");
             res.setRes(op);
+            if(n > 0) {
+                //异步添加日志
+                SysLogsUtil su = SysLogsUtil.getInstance();
+                su.addSysLogs(logService,us,"添加运营商配置","添加");
+
+            }
         return res;
     }
 
@@ -67,17 +78,23 @@ public class OperatorController {
         Result<Operator> res = new Result<Operator>();
         User us = redisUtil.getCurrUser(op.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
-        int flag = 0;
+        int n = 0;
         if (us == null) {
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
             if(op.getOperId() != null){
-                operatorService.updateOPerator(op);
+                n = operatorService.updateOPerator(op);
                 res.setMessage("success");
                 res.setCode("200");
                 res.setRes(op);
+                if(n > 0) {
+                    //异步添加日志
+                    SysLogsUtil su = SysLogsUtil.getInstance();
+                    su.addSysLogs(logService,us,"修改运营商配置","修改");
+
+                }
             }else{
                 res.setCode("413");
                 res.setMessage("operId不能为空");
@@ -141,6 +158,8 @@ public class OperatorController {
             map.put("operName",op.getOperName());
             map.put("startRow", op.getStartRows());
             map.put("endRow", op.getEndRows());
+            map.put("startRow",op.getStartRows());
+            map.put("endRow",op.getEndRows());
             total = operatorService.OperatorCount(map);
             if(total > 0){
                List<Operator> list = operatorService.OperatorList(map);
@@ -164,7 +183,7 @@ public class OperatorController {
         Result<Operator> res = new Result<Operator>();
         User us = redisUtil.getCurrUser(op.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
-        int flag = 0;
+        int n = 0;
         if (us == null) {
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
@@ -172,9 +191,15 @@ public class OperatorController {
         }
 
             if(StringUtils2.isNotEmpty(op.getOperIds())){
-               operatorService.delOperatorById(op.getOperIds());
+                n = operatorService.delOperatorById(op.getOperIds());
                 res.setCode("200");
                 res.setMessage("success");
+                if(n > 0) {
+                    //异步添加日志
+                    SysLogsUtil su = SysLogsUtil.getInstance();
+                    su.addSysLogs(logService,us,"删除运营商配置","删除");
+
+                }
             }else{
                 res.setCode("413");
                 res.setMessage("operIds不能为空");

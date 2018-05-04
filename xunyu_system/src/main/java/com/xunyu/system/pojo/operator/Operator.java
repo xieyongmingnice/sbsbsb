@@ -13,7 +13,7 @@ public class Operator extends UserModel {
     private Long operId;//主键
     private Integer isabled;//1未删除  0删除
     private Date createTime;//创建时间
-    private Integer operType;//运营商类型 1移动  2联通 3电信 0其它
+    private Integer operType;//运营商类型 1移动  2联通 3电信 4其它
     private String operName;//运营商名称
     private String operCharge;//运营商负责人
     private String operTelphone;//运营商联系电话
