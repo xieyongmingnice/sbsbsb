@@ -5,7 +5,7 @@ package com.xunyu.xunyu_tactics.constant;
  * @description 常量类
  * @date 2018/5/2 15:06
  */
-public interface SysRedlistConstant {
+public interface TacticsConstants {
 
     /**
      * 系统红名单来源
@@ -36,5 +36,20 @@ public interface SysRedlistConstant {
          * 不可用
          */
         int DISABLED = 0;
+    }
+
+    /**
+     * 文件名后缀
+     */
+    interface Suffix{
+        /**
+         * xls
+         */
+        String XLS = "xls";
+
+        /**
+         * xlsx
+         */
+        String XLSX = "xlsx";
     }
 }

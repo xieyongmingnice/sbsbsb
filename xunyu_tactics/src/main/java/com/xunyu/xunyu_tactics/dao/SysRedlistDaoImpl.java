@@ -28,7 +28,7 @@ public class SysRedlistDaoImpl extends BaseDao {
      * 删除
      */
     public int deleteSysRedlist(SysRedlistModel model){
-        return super.delete("com.xunyu.xunyu_tactics.pojo.SysRedlist.deleteSysRedlist",model);
+        return super.update("com.xunyu.xunyu_tactics.pojo.SysRedlist.deleteSysRedlist",model);
     }
     /**
      * 查询
@@ -62,7 +62,7 @@ public class SysRedlistDaoImpl extends BaseDao {
      * 批量删除
      */
     public int batchDeleteRedlist(SysRedlistModel model){
-        return super.delete("com.xunyu.xunyu_tactics.pojo.SysRedlist.batchDeleteRedlist",model);
+        return super.update("com.xunyu.xunyu_tactics.pojo.SysRedlist.batchDeleteRedlist",model);
     }
 
     public SysRedlistDaoImpl(SqlSessionFactory sqlSessionFactory) {

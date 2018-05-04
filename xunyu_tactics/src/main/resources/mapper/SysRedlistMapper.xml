@@ -266,7 +266,7 @@
   <update id="deleteSysRedlist" parameterType="com.xunyu.model.tactics.SysRedlistModel">
     update  tbl_sys_redlist
     set isabled = 0
-    where  isabled = 1 and phone_number = #{phoneNumber,jdbcType=VARCHAR}
+    where  isabled = 1 and sys_redlist_id = #{sysRedlistId,jdbcType=INTEGER}
     limit 1
   </update>
 
@@ -281,13 +281,14 @@
     <if test="phoneNumber != null and phoneNumber != '' ">
       and phone_number like concat('%',#{phoneNumber,jdbcType=VARCHAR},'%')
     </if>
-    <if test="startTime != null ">
-      <![CDATA[and join_time >= #{startTime,jdbcType=TIMESTAMP}]]>
+    <if test="startTime != null and startTime != '' ">
+      <![CDATA[and join_time >= #{startTime,jdbcType=VARCHAR}]]>
     </if>
-    <if test="endTime != null">
-      <![CDATA[and join_time <= #{endTime,jdbcType=TIMESTAMP}]]>
+    <if test="endTime != null and endTime != '' ">
+      <![CDATA[and join_time <= #{endTime,jdbcType=VARCHAR}]]>
     </if>
-
+    order by join_time desc
+    limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
 
   <!-- 导入添加 -->
@@ -326,7 +327,7 @@
   </select>
 
     <!--批量删除-->
-    <select id="batchDeleteRedlist" parameterType="com.xunyu.model.tactics.SysRedlistModel" resultType="java.lang.Integer">
+    <update id="batchDeleteRedlist" parameterType="com.xunyu.model.tactics.SysRedlistModel">
         update tbl_sys_redlist
         set isabled = 0
         where isabled = 1
@@ -334,9 +335,5 @@
         <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
             #{item}
         </foreach>
-        <if test="phoneNumber != null and phoneNumber != '' ">
-            and phone_number = #{phoneNumber,jdbcType=VARCHAR}
-        </if>
-
-    </select>
+    </update>
 </mapper>
