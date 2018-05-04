@@ -1,6 +1,6 @@
 spring:
   application:
-    name: xunyu_tactics
+    name: xunyu-tactics
   profiles:
     #active: pro #加载xunyu_profiles项目中 的application-core.yml文件
     #active: dev #加载xunyu_profiles项目中 的application-dev.yml文件

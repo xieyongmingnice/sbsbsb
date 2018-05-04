@@ -2,11 +2,10 @@ package com.xunyu.xunyu_tactics.controller;
 
 import com.commons.core.message.Result;
 import com.commons.core.message.ResultMessage;
-import com.commons.core.util.StringUtils2;
 import com.google.common.collect.Lists;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.tactics.SysRedlistModel;
-import com.xunyu.xunyu_tactics.constant.SysRedlistConstant;
+import com.xunyu.xunyu_tactics.constant.TacticsConstants;
 import com.xunyu.xunyu_tactics.pojo.SysRedlist;
 import com.xunyu.xunyu_tactics.service.ExcelService;
 import com.xunyu.xunyu_tactics.service.SysRedlistService;
@@ -35,10 +34,6 @@ public class SysRedlistController {
     private static final Logger logger = LoggerFactory.getLogger(SysRedlistController.class);
 
     private static final String SUCCESS = "SUCCESS";
-
-    private static final String FILE_FORMAT_XLS = "xls";
-
-    private static final String FILE_FORMAT_XLSX = "xlsx";
     @Autowired
     RedisUtil redisUtil;
 
@@ -59,8 +54,8 @@ public class SysRedlistController {
             return result;
         }
         try{
-            model.setRedlistSource(SysRedlistConstant.RedlistSource.MANUAL_ADD);
-            model.setIsabled(SysRedlistConstant.Isabled.ENABLED);
+            model.setRedlistSource(TacticsConstants.RedlistSource.MANUAL_ADD);
+            model.setIsabled(TacticsConstants.Isabled.ENABLED);
             model.setRemarks("单条添加");
             int success = sysRedlistService.addSysRedlist(model);
             if (success>0){
@@ -184,7 +179,7 @@ public class SysRedlistController {
             logger.info(e.getMessage());
             e.printStackTrace();
         }
-        if (!(FILE_FORMAT_XLS).equals(fileType.toLowerCase()) &&  !(FILE_FORMAT_XLSX).equals(fileType.toLowerCase())){
+        if (!(TacticsConstants.Suffix.XLS).equals(fileType.toLowerCase()) &&  !(TacticsConstants.Suffix.XLSX).equals(fileType.toLowerCase())){
             result.setMessage("文件格式错误");
             result.setCode(ResultMessage.Code.FAILED);
             return result;
@@ -204,7 +199,7 @@ public class SysRedlistController {
             long phoneNumber = (long) row.getCell(0).getNumericCellValue();
             redlist.setPhoneNumber(String.valueOf(phoneNumber));
             redlist.setRemarks("手动导入");
-            redlist.setRedlistSource(SysRedlistConstant.RedlistSource.MANUAL_ADD);
+            redlist.setRedlistSource(TacticsConstants.RedlistSource.MANUAL_ADD);
             list.add(redlist);
         }
         if ( list.size() <= 0 ){
@@ -246,7 +241,7 @@ public class SysRedlistController {
             e.printStackTrace();
             logger.info(e.getMessage());
         }
-        if (!(FILE_FORMAT_XLS).equals(fileType.toLowerCase()) &&  !(FILE_FORMAT_XLSX).equals(fileType.toLowerCase())){
+        if (!(TacticsConstants.Suffix.XLS).equals(fileType.toLowerCase()) &&  !(TacticsConstants.Suffix.XLSX).equals(fileType.toLowerCase())){
             result.setMessage("文件格式错误");
             result.setCode(ResultMessage.Code.FAILED);
             return result;
@@ -265,16 +260,17 @@ public class SysRedlistController {
             SysRedlist redlist = new SysRedlist();
             long phoneNumber = (long) row.getCell(0).getNumericCellValue();
             redlist.setPhoneNumber(String.valueOf(phoneNumber));
-            redlist.setRedlistSource(SysRedlistConstant.RedlistSource.MANUAL_ADD);
+            redlist.setRedlistSource(TacticsConstants.RedlistSource.MANUAL_ADD);
             list.add(redlist);
         }
         if ( list.size() <= 0 ){
             result.setCode(ResultMessage.Code.FAILED);
-            result.setMessage("表中没有数据，请完善表格后再导入");
+            result.setMessage("文件中没有数据，请完善表格后再导入");
             return result;
         }
         try {
             int count = sysRedlistService.excelDeleteRedlist(list);
+            //TODO 判断哪些是重复号码
             if(count == list.size()){
                 result.setMessage(ResultMessage.Message.SUCCESS);
                 result.setCode(ResultMessage.Code.SUCCESS);
