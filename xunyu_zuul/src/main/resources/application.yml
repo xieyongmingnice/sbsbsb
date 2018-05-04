@@ -3,7 +3,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8001/eureka/
-      #defaultZone: http://47.104.190.174:8001/eureka/
+#      defaultZone: http://47.104.190.174:8001/eureka/
       registry-fetch-interval-seconds: 5 #拉取服务注册信息时间间隔,默认为30秒
   instance:
       lease-renewal-interval-in-seconds: 5 #心跳时间,默认为30秒
@@ -43,6 +43,9 @@ zuul:
     api-zipkin:
        path: /zipkin/**
        service-id: xunyu-zipkin
+    api-tactics:
+       path: /tactics/**
+       service-id: xunyu-tactics
 
 hystrix:
   command:
