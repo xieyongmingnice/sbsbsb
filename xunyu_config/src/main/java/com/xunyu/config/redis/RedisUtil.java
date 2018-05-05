@@ -1,6 +1,7 @@
 package com.xunyu.config.redis;
 
 import com.xunyu.model.user.User;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -158,14 +159,17 @@ public class RedisUtil {
      * 通过sessionId获取当前登录用户
      */
     public User getCurrUser(String sessionId) {
-
-        Session session = getSession(sessionId);
-        if (session != null){
-            User user = (User) session.getAttribute("user");
-             return user;
-         }else{
+        if(StringUtils.isNotEmpty(sessionId)) {
+            Session session = getSession(sessionId);
+            if (session != null) {
+                User user = (User) session.getAttribute("user");
+                return user;
+            } else {
+                return null;
+            }
+        }else {
             return null;
-         }
+        }
 
     }
 }  

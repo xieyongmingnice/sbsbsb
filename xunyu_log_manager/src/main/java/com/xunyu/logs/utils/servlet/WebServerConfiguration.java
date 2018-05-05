@@ -1,4 +1,4 @@
-package com.xunyu.system.utils.servlet;
+package com.xunyu.logs.utils.servlet;
 
 import org.apache.catalina.valves.AccessLogValve;
 import org.apache.catalina.valves.Constants;
@@ -14,7 +14,7 @@ public class WebServerConfiguration {
     public EmbeddedServletContainerFactory embeddedServletContainerFactory() {
         TomcatEmbeddedServletContainerFactory factory = new TomcatEmbeddedServletContainerFactory();
         //设置端口
-        factory.setPort(8005);
+        factory.setPort(8007);
         //设置404错误界面
         //factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404.html"));
         //设置在容器初始化的时候触发
@@ -32,7 +32,7 @@ public class WebServerConfiguration {
 
         });
         //设置访问日志记录文件的目录
-        //factory.addContextValves(getLogAccessLogValue());
+        factory.addContextValves(getLogAccessLogValue());
         return factory;
     }
 
