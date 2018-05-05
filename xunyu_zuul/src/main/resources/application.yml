@@ -45,11 +45,12 @@ zuul:
        service-id: xunyu-log-manager
 
  # 注意，这里在运行的时候有个坑，如果以树形展开写法的话，那么就会出错了，所以这个配置还是避免用树形写法
-ribbon.eureka.enabled: false
+ribbon.eureka.enabled: false  # 禁用 eureka 使用listOfServers配置外部ribbon(基于客户端的)负载
 
+#zuul  通过listOfServers配置外部服务的负载均衡
 xunyu-crm:
-  ribbon:
-    listOfServers: http://localhost:8004,http://47.104.190.41:8004  #IP可以写多个用逗号隔开；listOfServers开启负载
+  ribbon:  #IP可以写多个用逗号隔开；开启ribbon(客户端)负载
+    listOfServers: http://localhost:8004,http://47.104.190.41:8004
 
 xunyu-shiro:
   ribbon:

@@ -25,19 +25,7 @@ public class SysLogsServiceImpl implements SysLogsService {
     @Override
     public int addSysLog(SysLogs sl) {
         int n = 0;
-        ExecutorService pool = Executors.newCachedThreadPool();
-        Runnable run = new Runnable() {//创建一个线程匿名内部类
-            @Override
-            public void run() {
-                try {
-                    sysLogsDaoImpl.addSysLog(sl);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        pool.submit(run);
-        pool.shutdown();//执行完之后释放该线程
+        n = sysLogsDaoImpl.addSysLog(sl);
         return n;
     }
 }
