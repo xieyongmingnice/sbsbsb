@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class SysConfigController {
      * @return
      */
     @RequestMapping(value = "addSysConfig",method = RequestMethod.POST)
-    public Result<SystemConfig> addSysConfigData(SystemConfig sc) throws Exception{
+    public Result<SystemConfig> addSysConfigData(SystemConfig sc,HttpServletRequest request) throws Exception{
 
         Result<SystemConfig> res = new Result<SystemConfig>();
         User us = redisUtil.getCurrUser(sc.getSessionId());
@@ -60,7 +61,7 @@ public class SysConfigController {
             if(n > 0) {
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService,us,"添加全局配置信息","添加");
+                su.addSysLogs(logService,us,"添加全局配置信息","添加",request);
             }
 
         return res;
@@ -70,7 +71,7 @@ public class SysConfigController {
      * 修改全局配置信息
      */
     @RequestMapping(value = "updateSysConfig",method = RequestMethod.POST)
-    public Result<SystemConfig> updateSysConfigData(SystemConfig sc) throws Exception{
+    public Result<SystemConfig> updateSysConfigData(SystemConfig sc,HttpServletRequest request) throws Exception{
 
         Result<SystemConfig> res = new Result<SystemConfig>();
         User us = redisUtil.getCurrUser(sc.getSessionId());
@@ -89,7 +90,7 @@ public class SysConfigController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"修改全局配置信息","修改");
+                    su.addSysLogs(logService,us,"修改全局配置信息","修改",request);
                 }
 
             }else{

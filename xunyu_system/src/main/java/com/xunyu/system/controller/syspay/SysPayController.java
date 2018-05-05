@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class SysPayController {
      * 添加支付配置信息
      */
     @RequestMapping(value = "addSysPay",method = RequestMethod.POST)
-    public Result<SysPay> addSysPayData(SysPay sysPay) throws Exception{
+    public Result<SysPay> addSysPayData(SysPay sysPay,HttpServletRequest request) throws Exception{
 
         User us = redisUtil.getCurrUser(sysPay.getSessionId());
         Map<String,Object> map = new HashMap<String,Object>();
@@ -61,7 +62,7 @@ public class SysPayController {
             if(n > 0) {
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService,us,"添加支付配置信息","添加");
+                su.addSysLogs(logService,us,"添加支付配置信息","添加",request);
             }
 
         return res;
@@ -71,7 +72,7 @@ public class SysPayController {
      * 修改支付配置信息
      */
     @RequestMapping(value = "updateSysPay",method = RequestMethod.POST)
-    public Result<SysPay> updateSysPayData(SysPay sysPay) throws Exception{
+    public Result<SysPay> updateSysPayData(SysPay sysPay,HttpServletRequest request) throws Exception{
 
         User us = redisUtil.getCurrUser(sysPay.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -90,7 +91,7 @@ public class SysPayController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"修改支付配置信息","修改");
+                    su.addSysLogs(logService,us,"修改支付配置信息","修改",request);
                 }
             }else{
                 res.setCode("413");

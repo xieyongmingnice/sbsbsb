@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +40,7 @@ public class ErrCodeController {
      * 添加错误码配置
      */
     @RequestMapping(value = "addErrCode",method = RequestMethod.POST)
-    public Result<ErrorCode> addErrCodeData(ErrorCode ec) throws Exception{
+    public Result<ErrorCode> addErrCodeData(ErrorCode ec, HttpServletRequest request) throws Exception{
         Result<ErrorCode> res = new Result<ErrorCode>();
         User us = redisUtil.getCurrUser(ec.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -58,7 +59,7 @@ public class ErrCodeController {
         if(n > 0) {
             //异步添加日志
             SysLogsUtil su = SysLogsUtil.getInstance();
-            su.addSysLogs(logService,us,"添加错误码配置","添加");
+            su.addSysLogs(logService,us,"添加错误码配置","添加",request);
 
         }
         return res;
@@ -68,7 +69,7 @@ public class ErrCodeController {
      * 修改错误码配置
      */
     @RequestMapping(value = "updateErrCode",method = RequestMethod.POST)
-    public Result<ErrorCode> updateErrCodeData(ErrorCode ec) throws Exception{
+    public Result<ErrorCode> updateErrCodeData(ErrorCode ec,HttpServletRequest request) throws Exception{
         Result<ErrorCode> res = new Result<ErrorCode>();
         User us = redisUtil.getCurrUser(ec.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -86,7 +87,7 @@ public class ErrCodeController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"修改错误码配置","修改");
+                    su.addSysLogs(logService,us,"修改错误码配置","修改",request);
 
                 }
             }else{
@@ -166,7 +167,7 @@ public class ErrCodeController {
      * 删除
      */
     @RequestMapping(value = "delErrCodeConfig",method = RequestMethod.POST)
-    public Result<ErrorCodeModel> delErrCodeConfigData(ErrorCodeModel ec) throws Exception{
+    public Result<ErrorCodeModel> delErrCodeConfigData(ErrorCodeModel ec,HttpServletRequest request) throws Exception{
         Result<ErrorCodeModel> res = new Result<ErrorCodeModel>();
         User us = redisUtil.getCurrUser(ec.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -183,7 +184,7 @@ public class ErrCodeController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"删除错误码配置","删除");
+                    su.addSysLogs(logService,us,"删除错误码配置","删除",request);
 
                 }
             }else {

@@ -1,7 +1,9 @@
 package com.xunyu.system.utils.syslog;
 
+import com.commons.core.util.IpAdrressUtil;
 import com.xunyu.model.user.User;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -12,7 +14,8 @@ import java.util.concurrent.Executors;
  **/
 public class SysLogsUtil {
 
-    public int addSysLogs(LogService2 logService, User us, String operObj, String operType){
+    public int addSysLogs(LogService2 logService, User us, String operObj
+            , String operType, HttpServletRequest request){
         ExecutorService pool = Executors.newCachedThreadPool();
         Runnable run = new Runnable() {//创建一个线程匿名内部类
             @Override
@@ -20,7 +23,7 @@ public class SysLogsUtil {
                 try {
                     com.xunyu.model.log.syslog.SysLogs sl = new com.xunyu.model.log.syslog.SysLogs();
                     sl.setOperName(us.getAccount());
-                    sl.setOperIp("127.0.0.1");
+                    sl.setOperIp(IpAdrressUtil.getIpAdrress(request));
                     sl.setOperObj(operObj);
                     sl.setOperType(operType);
                     sl.setOperTime(new Date());

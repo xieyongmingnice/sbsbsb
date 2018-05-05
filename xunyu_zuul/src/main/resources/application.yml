@@ -69,8 +69,8 @@ xunyu-tactics:
      listOfServers: http://localhost:8009,http://47.104.190.174:8009
 
 xunyu-department:
-     ribbon:
-          listOfServers: http://localhost:8008,http://47.104.190.174:8008
+   ribbon:
+      listOfServers: http://localhost:8008,http://47.104.190.174:8008
 
 hystrix:
   command:

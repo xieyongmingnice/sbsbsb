@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +43,7 @@ public class OperatorController {
      * @return
      */
     @RequestMapping(value = "addOperator",method = RequestMethod.POST)
-    public Result<Operator> addOperatorData(Operator op) throws Exception{
+    public Result<Operator> addOperatorData(Operator op,HttpServletRequest request) throws Exception{
 
         Result<Operator> res = new Result<Operator>();
         User us = redisUtil.getCurrUser(op.getSessionId());
@@ -63,7 +64,7 @@ public class OperatorController {
             if(n > 0) {
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService,us,"添加运营商配置","添加");
+                su.addSysLogs(logService,us,"添加运营商配置","添加",request);
 
             }
         return res;
@@ -73,7 +74,7 @@ public class OperatorController {
      * 修改运营商配置
      */
     @RequestMapping(value = "updateOperator",method = RequestMethod.POST)
-    public Result<Operator> updateOperatorData(Operator op) throws Exception{
+    public Result<Operator> updateOperatorData(Operator op,HttpServletRequest request) throws Exception{
 
         Result<Operator> res = new Result<Operator>();
         User us = redisUtil.getCurrUser(op.getSessionId());
@@ -92,7 +93,7 @@ public class OperatorController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"修改运营商配置","修改");
+                    su.addSysLogs(logService,us,"修改运营商配置","修改",request);
 
                 }
             }else{
@@ -178,7 +179,7 @@ public class OperatorController {
      * 批量删除
      */
     @RequestMapping(value = "delOperatorByIds",method = RequestMethod.POST)
-    public Result<Operator> delOperatorData(OperatorModel op) throws Exception{
+    public Result<Operator> delOperatorData(OperatorModel op,HttpServletRequest request) throws Exception{
 
         Result<Operator> res = new Result<Operator>();
         User us = redisUtil.getCurrUser(op.getSessionId());
@@ -197,7 +198,7 @@ public class OperatorController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"删除运营商配置","删除");
+                    su.addSysLogs(logService,us,"删除运营商配置","删除",request);
 
                 }
             }else{

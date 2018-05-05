@@ -80,7 +80,7 @@ public class SysGuideController {
                     if(n > 0){
                         //异步添加日志
                         SysLogsUtil su = SysLogsUtil.getInstance();
-                        su.addSysLogs(logService,us,"添加系统基本指导内容","添加");
+                        su.addSysLogs(logService,us,"添加系统基本指导内容","添加",request);
                     }
                 }
             }else{
@@ -97,7 +97,7 @@ public class SysGuideController {
      * @return
      */
     @RequestMapping(value = "delSysGuide",method = RequestMethod.POST)
-    public Result<SysGuideModel> delSysGuideData(SysGuideModel sm) throws Exception {
+    public Result<SysGuideModel> delSysGuideData(SysGuideModel sm,HttpServletRequest request) throws Exception {
         Result<SysGuideModel> res = new Result<SysGuideModel>();
         User us = redisUtil.getCurrUser(sm.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
@@ -126,7 +126,7 @@ public class SysGuideController {
             if(n > 0){
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService,us,"删除系统基本指导内容","删除");
+                su.addSysLogs(logService,us,"删除系统基本指导内容","删除",request);
             }
         }else{
             res.setCode("413");
