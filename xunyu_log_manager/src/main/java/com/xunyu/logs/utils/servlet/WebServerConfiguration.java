@@ -3,6 +3,8 @@ package com.xunyu.logs.utils.servlet;
 import org.apache.catalina.valves.AccessLogValve;
 import org.apache.catalina.valves.Constants;
 import org.apache.coyote.http11.Http11NioProtocol;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
@@ -10,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootConfiguration
 public class WebServerConfiguration {
+    private static final Logger log = LoggerFactory.getLogger(WebServerConfiguration.class);
     @Bean
     public EmbeddedServletContainerFactory embeddedServletContainerFactory() {
         TomcatEmbeddedServletContainerFactory factory = new TomcatEmbeddedServletContainerFactory();
@@ -19,7 +22,7 @@ public class WebServerConfiguration {
         //factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404.html"));
         //设置在容器初始化的时候触发
         factory.addInitializers((servletContext) -> {
-            System.out.println(" = = = = 获取服务器信息 = = " + servletContext.getServerInfo());
+            log.info(" = = = = 获取服务器信息 = = " + servletContext.getServerInfo());
         });
         //设置最大连接数和最大线程数
         factory.addConnectorCustomizers((connector) -> {
