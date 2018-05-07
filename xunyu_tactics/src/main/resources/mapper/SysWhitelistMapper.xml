@@ -198,7 +198,7 @@
   
   <!-- 查询列表 -->
   <select id="selectWhitelist" parameterType="com.xunyu.model.tactics.SysWhitelistModel" resultMap="BaseResultMap">
-    select sys_whitelist_id, phone_number, join_time, isabled
+    select count(distinct phone_number),sys_whitelist_id, phone_number, join_time, isabled
     from tbl_sys_whitelist
     where isabled = 1
     <if test="phoneNumber != null and phoneNumber != '' ">
@@ -210,13 +210,14 @@
     <if test="endTime != null and endTime != '' ">
       <![CDATA[and join_time <= #{endTime,jdbcType=VARCHAR}]]>
     </if>
+    group by phone_number
     order by join_time desc
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
 
   <!-- 查询总条数 -->
   <select id="selectTotalRows" parameterType="com.xunyu.model.tactics.SysWhitelistModel" resultType="java.lang.Integer">
-    select count(1)
+    select count(distinct phone_number)
     from tbl_sys_whitelist
     where isabled = 1
     <if test="phoneNumber != null and phoneNumber != '' ">

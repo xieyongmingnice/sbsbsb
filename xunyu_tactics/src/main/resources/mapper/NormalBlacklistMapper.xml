@@ -160,7 +160,7 @@
 
   <!--查询列表-->
   <select id="selectBlacklist" parameterType="com.xunyu.model.tactics.NormalBlacklistModel" resultMap="BaseResultMapVO">
-    select normal_blacklist_id, phone_number, blacklist_source, remarks, isabled, join_time,
+    select count(distinct phone_number),normal_blacklist_id, phone_number, blacklist_source, remarks, isabled, join_time,
     case when blacklist_source = 1 then '回复加黑'
          when blacklist_source = 2 then '手动添加'
          when blacklist_source = 3 then '其他搜集'
@@ -176,13 +176,14 @@
     <if test="endTime != null and endTime != '' ">
       <![CDATA[and join_time <= #{endTime,jdbcType=VARCHAR}]]>
     </if>
+    group by phone_number
     order by join_time desc
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
 
   <!--查询总条数-->
   <select id="selectTotalRows" parameterType="com.xunyu.model.tactics.NormalBlacklistModel" resultType="java.lang.Integer">
-    select count(1) from tbl_normal_blacklist
+    select count(distinct phone_number) from tbl_normal_blacklist
     where isabled = 1
     <if test="phoneNumber != null and phoneNumber != '' ">
       and phone_number like concat('%',#{phoneNumber,jdbcType=VARCHAR},'%')

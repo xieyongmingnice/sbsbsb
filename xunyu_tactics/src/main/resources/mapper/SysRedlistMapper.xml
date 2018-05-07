@@ -272,7 +272,7 @@
 
   <!-- 查询列表 -->
   <select id="selectSysRedlist" parameterType="com.xunyu.model.tactics.SysRedlistModel" resultMap="BaseResultVOMap">
-    select sys_redlist_id, phone_number, redlist_source, join_time, remarks, isabled,
+    select count(distinct phone_number),sys_redlist_id, phone_number, redlist_source, join_time, remarks, isabled,
       case when redlist_source = 1 then '自动添加'
            when redlist_source = 2 then '手动添加'
       end as redlist_source_str
@@ -287,6 +287,7 @@
     <if test="endTime != null and endTime != '' ">
       <![CDATA[and join_time <= #{endTime,jdbcType=VARCHAR}]]>
     </if>
+    group by phone_number
     order by join_time desc
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
   </select>
