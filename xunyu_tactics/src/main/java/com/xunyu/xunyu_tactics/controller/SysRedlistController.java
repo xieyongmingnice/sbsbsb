@@ -56,13 +56,14 @@ public class SysRedlistController {
         try{
             model.setRedlistSource(TacticsConstants.RedlistSource.MANUAL_ADD);
             model.setIsabled(TacticsConstants.Isabled.ENABLED);
-            model.setRemarks("单条添加");
+            model.setRemarks("手动添加");
             int success = sysRedlistService.addSysRedlist(model);
             if (success>0){
                 operationSuccess(result);
                 result.setRes(SUCCESS);
             }else {
                 operationFailed(result);
+                result.setMessage("操作失败，请检查手机号是否已存在红名单中");
             }
         }catch (Exception e){
             catchExcpetion(e,result);
@@ -151,10 +152,12 @@ public class SysRedlistController {
             return result;
         }
         int count = sysRedlistService.batchDeleteRedlist(model);
-        if (count == model.getIdList().size()){
+        if (count > 0){
             result.setCode(ResultMessage.Code.SUCCESS);
             result.setMessage(ResultMessage.Message.SUCCESS);
             result.setRes(SUCCESS);
+        }else {
+            operationFailed(result);
         }
         return result;
     }
@@ -209,10 +212,13 @@ public class SysRedlistController {
         }
         try {
             int count = sysRedlistService.excelAddRedlist(list);
-            if(count == list.size()){
+            if(count > 0){
                 result.setMessage(ResultMessage.Message.SUCCESS);
                 result.setCode(ResultMessage.Code.SUCCESS);
                 result.setRes(SUCCESS);
+            }else {
+                operationFailed(result);
+                result.setMessage("操作失败，请检查手机号是否已存在红名单中");
             }
         }catch (Exception e){
             logger.error(e.getMessage());
@@ -260,7 +266,6 @@ public class SysRedlistController {
             SysRedlist redlist = new SysRedlist();
             long phoneNumber = (long) row.getCell(0).getNumericCellValue();
             redlist.setPhoneNumber(String.valueOf(phoneNumber));
-            redlist.setRedlistSource(TacticsConstants.RedlistSource.MANUAL_ADD);
             list.add(redlist);
         }
         if ( list.size() <= 0 ){
@@ -270,11 +275,11 @@ public class SysRedlistController {
         }
         try {
             int count = sysRedlistService.excelDeleteRedlist(list);
-            //TODO 判断哪些是重复号码
-            if(count == list.size()){
-                result.setMessage(ResultMessage.Message.SUCCESS);
-                result.setCode(ResultMessage.Code.SUCCESS);
+            if(count > 0 ){
+                operationSuccess(result);
                 result.setRes(SUCCESS);
+            }else {
+                operationFailed(result);
             }
         }catch (Exception e){
             logger.error(e.getMessage());

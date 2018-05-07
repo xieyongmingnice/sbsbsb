@@ -7,41 +7,35 @@ import java.util.List;
 
 /**
  * @author xym
- * @description 普通黑名单 请求参数实体类
- * @date 2018/5/4 16:46
+ * @description 白名单 请求参数实体类
+ * @date 2018/5/7 13:52
  */
-public class NormalBlacklistModel extends UserModel {
-    private static final long serialVersionUID = -1613073626030038470L;
+public class NormalWhitelistModel extends UserModel {
+    private static final long serialVersionUID = 1667231589883903440L;
 
     /**
      *   主键
+     *
      */
-    private Integer normalBlacklistId;
+    private Integer normalWhitelistId;
 
     /**
-     *   手机号码
+     *   手机号
+     *
      */
     private String phoneNumber;
 
     /**
-     *   黑名单来源 1:回复加黑，2:手动加黑，3:其他搜集
-     */
-    private Integer blacklistSource;
-
-    /**
-     *   备注
-     */
-    private String remarks;
-
-    /**
-     *   可用状态标签
-     */
-    private Integer isabled;
-
-    /**
      *   加入时间
+     *
      */
     private Date joinTime;
+
+    /**
+     *   1：可用，0：不可用
+     *
+     */
+    private Integer isabled;
 
     /**
      *   开始时间
@@ -58,12 +52,12 @@ public class NormalBlacklistModel extends UserModel {
      */
     private List<Long> idList;
 
-    public Integer getNormalBlacklistId() {
-        return normalBlacklistId;
+    public Integer getNormalWhitelistId() {
+        return normalWhitelistId;
     }
 
-    public void setNormalBlacklistId(Integer normalBlacklistId) {
-        this.normalBlacklistId = normalBlacklistId;
+    public void setNormalWhitelistId(Integer normalWhitelistId) {
+        this.normalWhitelistId = normalWhitelistId;
     }
 
     public String getPhoneNumber() {
@@ -74,20 +68,12 @@ public class NormalBlacklistModel extends UserModel {
         this.phoneNumber = phoneNumber;
     }
 
-    public Integer getBlacklistSource() {
-        return blacklistSource;
+    public Date getJoinTime() {
+        return joinTime;
     }
 
-    public void setBlacklistSource(Integer blacklistSource) {
-        this.blacklistSource = blacklistSource;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
+    public void setJoinTime(Date joinTime) {
+        this.joinTime = joinTime;
     }
 
     public Integer getIsabled() {
@@ -96,14 +82,6 @@ public class NormalBlacklistModel extends UserModel {
 
     public void setIsabled(Integer isabled) {
         this.isabled = isabled;
-    }
-
-    public Date getJoinTime() {
-        return joinTime;
-    }
-
-    public void setJoinTime(Date joinTime) {
-        this.joinTime = joinTime;
     }
 
     public String getStartTime() {

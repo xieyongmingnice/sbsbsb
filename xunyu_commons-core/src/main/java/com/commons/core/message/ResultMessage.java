@@ -22,7 +22,7 @@ public interface ResultMessage {
 
         String NO_VALUE = "结果集为空";
 
-        String FAILED = "操作失败";
+        String FAILED = "操作失败，请检查操作数据";
     }
 
     /**
