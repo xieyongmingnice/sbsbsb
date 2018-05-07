@@ -108,10 +108,10 @@
         </dependency>
 
         <!--zipkinstream  跟踪-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zipkin</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
     <build>
         <finalName>config-xunyu</finalName>

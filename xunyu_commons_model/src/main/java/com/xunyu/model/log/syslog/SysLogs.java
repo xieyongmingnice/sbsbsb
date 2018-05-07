@@ -17,6 +17,25 @@ public class SysLogs extends UserModel {
     private String operText;//操作描述
     private Integer operStatus;// 操作状态 1成功  2失败
 
+    private String beginTime;//开始时间
+    private String endTime; //结束时间
+
+    public String getBeginTime() {
+        return beginTime;
+    }
+
+    public void setBeginTime(String beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
     public String getEnterContact() {
         return enterContact;
     }

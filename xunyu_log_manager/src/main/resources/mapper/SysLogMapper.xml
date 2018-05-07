@@ -2,6 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xunyu.model.log.syslog.SysLogs">
 
+    <resultMap id="logs_ResultMap" type="com.xunyu.model.log.syslog.SysLogs">
+        <id column="logs_id" property="logsId"></id>
+        <result column="oper_time" property="operTime"></result>
+        <result column="oper_name" property="operName"></result>
+        <result column="oper_ip" property="operIp"></result>
+        <result column="oper_type" property="operType"></result>
+        <result column="oper_obj" property="operObj"></result>
+        <result column="enter_contact" property="enterContact"></result>
+        <result column="oper_port" property="operPort"></result>
+        <result column="oper_text" property="operText"></result>
+        <result column="oper_status" property="operStatus"></result>
+    </resultMap>
+
+    <sql id = "sysLogs_column">
+        logs_id,oper_time,oper_name,oper_ip,oper_type,oper_obj,enter_contact
+        ,oper_port,oper_text,oper_status
+    </sql>
+
+    <select id = "sysLogsCount" parameterType="map" resultType="int">
+        select count(1) from sys_logs where 1=1 <include refid = "logs_where" />
+    </select>
+
+    <select id = "sysLogsList" resultMap="logs_ResultMap" parameterType="map">
+        select <include refid = "sysLogs_column" /> from sys_logs
+        where 1=1
+        <include refid = "logs_where" />
+        order by logs_id desc
+        limit #{startRow},#{endRow}
+    </select>
+
+    <select id = "getSysLogsDetail" parameterType="map" resultMap="logs_ResultMap">
+        select <include refid = "sysLogs_column" />  from sys_logs
+        where 1=1
+        <include refid = "logs_where" />
+    </select>
+
+    <sql id = "logs_where">
+        <if test = 'beginTime != null and endTime != null'>
+            and oper_time between #{beginTime} and #{endTime}
+        </if>
+        <if test = "logsId != null">
+            and logs_id = #{logsId}
+        </if>
+        <if test = 'operName != null and operName !=""'>
+            and oper_name = #{operName}
+        </if>
+        <if test = 'operObj != null and operObj!= ""'>
+            and oper_obj like concat("%",concat(#{operObj},"%"))
+        </if>
+    </sql>
+
     <insert id = "addSysLog" parameterType="com.xunyu.model.log.syslog.SysLogs"
             useGeneratedKeys="true" keyColumn="logs_id" keyProperty="logsId">
         insert into sys_logs
@@ -31,4 +82,6 @@
             <if test='operStatus != null'>#{operStatus},</if>
         </trim>
     </insert>
+
+
 </mapper>

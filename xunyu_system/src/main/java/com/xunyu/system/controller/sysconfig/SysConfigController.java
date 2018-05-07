@@ -109,6 +109,7 @@ public class SysConfigController {
 
     /**
      * 查询全局配置信息实例
+     * org.springframework.cloud.sleuth.zipkin.RestTemplateSender
      */
     @RequestMapping(value = "getSysConfigDetail",method = RequestMethod.POST)
     public Result<SystemConfig> getSysConfigDetail(SysConfigModel sm) throws Exception{

@@ -41,8 +41,8 @@ spring:
       testWhileIdle: false
       redisPassWord: XunYuDEVRedis2018
 #配置zipKin Server的地址
-  zipkin:
-    base-url: http://127.0.0.1:8006
+  #zipkin:
+    #base-url: http://127.0.0.1:8006
     #base-url: http://47.104.190.174:8006
 
 #mybatis配置
