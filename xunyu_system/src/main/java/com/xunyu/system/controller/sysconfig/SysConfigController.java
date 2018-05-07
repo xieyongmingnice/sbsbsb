@@ -6,6 +6,7 @@ import com.xunyu.model.system.sysconfig.SysConfigModel;
 import com.xunyu.model.user.User;
 import com.xunyu.system.pojo.sysconfig.SystemConfig;
 import com.xunyu.system.service.sysconfig.SysConfigService;
+import com.xunyu.system.utils.syslog.CrmService;
 import com.xunyu.system.utils.syslog.LogService2;
 import com.xunyu.system.utils.syslog.SysLogsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class SysConfigController {
     private RedisUtil redisUtil;
     @Resource
     private LogService2 logService;
+    @Resource
+    private CrmService crmService;
     /**
      * 添加全局配置信息
      * @param //response
@@ -61,7 +64,8 @@ public class SysConfigController {
             if(n > 0) {
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService,us,"添加全局配置信息","添加",request);
+                su.addSysLogs(logService,us,"添加全局配置信息"
+                        ,"添加",request,"添加全局配置信息",crmService);
             }
 
         return res;
@@ -90,7 +94,8 @@ public class SysConfigController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"修改全局配置信息","修改",request);
+                    su.addSysLogs(logService,us,"修改全局配置信息"
+                            ,"修改",request,"修改全局配置信息",crmService);
                 }
 
             }else{

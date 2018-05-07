@@ -6,6 +6,7 @@ import com.xunyu.model.system.syspay.SysPayModel;
 import com.xunyu.model.user.User;
 import com.xunyu.system.pojo.syspay.SysPay;
 import com.xunyu.system.service.syspay.SysPayService;
+import com.xunyu.system.utils.syslog.CrmService;
 import com.xunyu.system.utils.syslog.LogService2;
 import com.xunyu.system.utils.syslog.SysLogsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,8 @@ public class SysPayController {
     private SysPayService sysPayService;
     @Resource
     private LogService2 logService;
-
+    @Resource
+    private CrmService crmService;
     /**
      * 添加支付配置信息
      */
@@ -62,7 +64,8 @@ public class SysPayController {
             if(n > 0) {
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService,us,"添加支付配置信息","添加",request);
+                su.addSysLogs(logService,us,"添加支付配置信息"
+                        ,"添加",request,"添加支付配置信息",crmService);
             }
 
         return res;
@@ -91,7 +94,8 @@ public class SysPayController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"修改支付配置信息","修改",request);
+                    su.addSysLogs(logService,us,"修改支付配置信息"
+                            ,"修改",request,"修改支付配置信息",crmService);
                 }
             }else{
                 res.setCode("413");

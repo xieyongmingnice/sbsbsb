@@ -2,8 +2,10 @@ package com.xunyu.crm.dao.customer;
 
 import com.commons.core.dao.impl.BaseDao;
 import com.xunyu.crm.pojo.customer.CustomerTab;
+import com.xunyu.model.crm.customer.CustomerModel;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +52,10 @@ public class CustomerDaoImpl extends BaseDao<CustomerTab, Long> {
      */
     public CustomerTab getCustomerTabDetail(Map<String,Object> map){
        return super.selectForObject("com.xunyu.crm.pojo.customer.CustomerTab.getCustomerTabDetail",map);
+    }
+
+    public CustomerModel getCusDetailFeign(Map<String,Object> map){
+      return super.selectForObject("com.xunyu.crm.pojo.customer.CustomerTab.getCusDetailFeign",map);
     }
 
     /**

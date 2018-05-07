@@ -12,6 +12,10 @@
             <if test='operIp != null and operIp != ""'>oper_ip,</if>
             <if test='operType != null and operType != ""'>oper_type,</if>
             <if test='operObj != null and operObj != ""'>oper_obj,</if>
+            <if test='enterContact != null and enterContact != ""'>enter_contact,</if>
+            <if test='operPort != null and operPort != ""'>oper_port,</if>
+            <if test='operText != null and operText != ""'>oper_text,</if>
+            <if test='operStatus != null'>oper_status,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -21,8 +25,10 @@
             <if test='operIp != null and operIp != ""'>#{operIp},</if>
             <if test='operType != null and operType != ""'>#{operType},</if>
             <if test='operObj != null and operObj != ""'>#{operObj},</if>
+            <if test='enterContact != null and enterContact != ""'>#{enterContact},</if>
+            <if test='operPort != null and operPort != ""'>#{operPort},</if>
+            <if test='operText != null and operText != ""'>#{operText},</if>
+            <if test='operStatus != null'>#{operStatus},</if>
         </trim>
     </insert>
-
-
 </mapper>

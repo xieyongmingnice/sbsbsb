@@ -7,12 +7,14 @@ import com.xunyu.model.system.errcode.ErrorCodeModel;
 import com.xunyu.model.user.User;
 import com.xunyu.system.pojo.errcode.ErrorCode;
 import com.xunyu.system.service.errcode.ErrorCodeService;
+import com.xunyu.system.utils.syslog.CrmService;
 import com.xunyu.system.utils.syslog.LogService2;
 import com.xunyu.system.utils.syslog.SysLogsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -35,6 +37,8 @@ public class ErrCodeController {
     private ErrorCodeService errorCodeService;
     @Resource
     private LogService2 logService;
+    @Resource
+    private CrmService crmService;
 
     /**
      * 添加错误码配置
@@ -59,7 +63,8 @@ public class ErrCodeController {
         if(n > 0) {
             //异步添加日志
             SysLogsUtil su = SysLogsUtil.getInstance();
-            su.addSysLogs(logService,us,"添加错误码配置","添加",request);
+            su.addSysLogs(logService,us,"添加错误码配置","添加",
+                    request,"添加错误码配置信息",crmService);
 
         }
         return res;
@@ -87,7 +92,8 @@ public class ErrCodeController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"修改错误码配置","修改",request);
+                    su.addSysLogs(logService,us,"修改错误码配置"
+                            ,"修改",request,"修改错误码配置信息",crmService);
 
                 }
             }else{
@@ -184,7 +190,8 @@ public class ErrCodeController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"删除错误码配置","删除",request);
+                    su.addSysLogs(logService,us,"删除错误码配置"
+                            ,"删除",request,"删除错误码配置信息",crmService);
 
                 }
             }else {

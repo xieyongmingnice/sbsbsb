@@ -12,6 +12,42 @@ public class SysLogs extends UserModel {
     private String operIp;//操作IP
     private String operType;//操作类型
     private String operObj;//操作对象
+    private String enterContact;//联系人
+    private String operPort;//操作端口
+    private String operText;//操作描述
+    private Integer operStatus;// 操作状态 1成功  2失败
+
+    public String getEnterContact() {
+        return enterContact;
+    }
+
+    public void setEnterContact(String enterContact) {
+        this.enterContact = enterContact;
+    }
+
+    public String getOperPort() {
+        return operPort;
+    }
+
+    public void setOperPort(String operPort) {
+        this.operPort = operPort;
+    }
+
+    public String getOperText() {
+        return operText;
+    }
+
+    public void setOperText(String operText) {
+        this.operText = operText;
+    }
+
+    public Integer getOperStatus() {
+        return operStatus;
+    }
+
+    public void setOperStatus(Integer operStatus) {
+        this.operStatus = operStatus;
+    }
 
     public Long getLogsId() {
         return logsId;

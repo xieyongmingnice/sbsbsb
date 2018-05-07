@@ -20,4 +20,5 @@ public interface LogService2 {
      */
     @RequestMapping(value = "/syslog/addSysLogs",method = RequestMethod.POST ,consumes={"application/json"})
     int addSysLog(@RequestBody SysLogs sl);
+
 }

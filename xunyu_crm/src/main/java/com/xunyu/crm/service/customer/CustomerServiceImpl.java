@@ -9,6 +9,7 @@ import com.xunyu.crm.dao.customer.user.UserDaoImpl;
 import com.xunyu.crm.pojo.customer.CustomerGroup;
 import com.xunyu.crm.pojo.customer.CustomerTab;
 import com.xunyu.crm.pojo.customer.CustomerUseraccount;
+import com.xunyu.model.crm.customer.CustomerModel;
 import com.xunyu.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -85,6 +86,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public int addCustomer(CustomerTab customerTab) {
         int n = 0;
+        //先查询一遍用户表，看看该账号是否存在
         n = customerDaoImpl.addCustomer(customerTab);
         if (n > 0) {
             /*异步往tbl_users表中添加一条账号信息记录
@@ -168,6 +170,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerTab getCustomerTabDetail(Map<String, Object> map) {
         return customerDaoImpl.getCustomerTabDetail(map);
+    }
+
+    @Override
+    public CustomerModel getCusDetailFeign(Map<String, Object> map) {
+        return customerDaoImpl.getCusDetailFeign(map);
     }
 
 

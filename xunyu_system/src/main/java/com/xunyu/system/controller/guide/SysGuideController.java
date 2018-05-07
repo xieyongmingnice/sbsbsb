@@ -10,6 +10,7 @@ import com.xunyu.model.system.guide.SysGuideModel;
 import com.xunyu.model.user.User;
 import com.xunyu.system.pojo.guide.SysGuide;
 import com.xunyu.system.service.guide.SysGuideService;
+import com.xunyu.system.utils.syslog.CrmService;
 import com.xunyu.system.utils.syslog.LogService2;
 import com.xunyu.system.utils.syslog.SysLogsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,8 @@ public class SysGuideController {
     private AliyunOssUtil aliyunOssUtil;
     @Resource
     private LogService2 logService;
-
+    @Resource
+    private CrmService crmService;
     /**
      * 添加文件
      */
@@ -80,7 +82,8 @@ public class SysGuideController {
                     if(n > 0){
                         //异步添加日志
                         SysLogsUtil su = SysLogsUtil.getInstance();
-                        su.addSysLogs(logService,us,"添加系统基本指导内容","添加",request);
+                        su.addSysLogs(logService,us,"添加系统基本指导内容"
+                                ,"添加",request,"添加系统基本指导内容信息",crmService);
                     }
                 }
             }else{
@@ -126,7 +129,8 @@ public class SysGuideController {
             if(n > 0){
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService,us,"删除系统基本指导内容","删除",request);
+                su.addSysLogs(logService,us,"删除系统基本指导内容"
+                        ,"删除",request,"删除系统基本指导内容信息",crmService);
             }
         }else{
             res.setCode("413");

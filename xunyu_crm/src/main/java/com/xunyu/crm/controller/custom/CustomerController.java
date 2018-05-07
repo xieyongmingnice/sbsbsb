@@ -3,12 +3,15 @@ package com.xunyu.crm.controller.custom;
 import com.commons.core.message.Result;
 import com.commons.core.util.StringUtils2;
 import com.xunyu.config.redis.RedisUtil;
+import com.xunyu.crm.dao.customer.user.UserDaoImpl;
 import com.xunyu.crm.pojo.customer.CustomerTab;
 import com.xunyu.crm.service.customer.CustomerService;
 import com.xunyu.model.crm.customer.CustomerModel;
+import com.xunyu.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -28,7 +31,8 @@ public class CustomerController {
     private RedisUtil redisUtil;
     @Autowired
     private CustomerService customerService;
-
+    @Autowired
+    private UserDaoImpl userDaoImpl;
     /**
      * 添加客户信息
      */
@@ -47,11 +51,17 @@ public class CustomerController {
 
             ct.setCreateTime(new Date());
             ct.setIsabled(1);//默认有效
-            flag = customerService.addCustomer(ct);
-            if(flag > 0){
+            Map<String,Object> map = new HashMap<String,Object>();
+            map.put("account",ct.getCustomerAccount());
+            User us = userDaoImpl.getUserByAccount(map);
+            if(us == null) {
+                flag = customerService.addCustomer(ct);
                 res.setCode("200");
                 res.setMessage("success");
                 res.setRes(ct);
+            }else{
+                res.setCode("412");
+                res.setMessage("该账号已存在");
             }
 
         return res;
@@ -72,10 +82,18 @@ public class CustomerController {
         }
             int flag = 0;
             if(ct.getCustomerId() != null){
-                flag = customerService.updateCustomer(ct);
-                res.setCode("200");
-                res.setMessage("success");
-                res.setRes(ct);
+                Map<String,Object> map = new HashMap<String,Object>();
+                map.put("account",ct.getCustomerAccount());
+                User us = userDaoImpl.getUserByAccount(map);
+                if(us == null) {
+                    customerService.updateCustomer(ct);
+                    res.setCode("200");
+                    res.setMessage("success");
+                    res.setRes(ct);
+                }else{
+                    res.setCode("412");
+                    res.setMessage("该账号已存在");
+                }
             }else{
                 res.setCode("413");
                 res.setMessage("CustomerId 不能为空");
@@ -183,5 +201,16 @@ public class CustomerController {
         return res;
     }
 
+    /**
+     * 获取客户详情
+     */
+    @RequestMapping(value = "getCusDetailFeign",method = RequestMethod.POST)
+    public CustomerModel getCusDetailFeignData(@RequestParam(value = "customerAccount",required = false)
+                       String customerAccount) throws Exception{
 
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("customerAccount",customerAccount);
+        CustomerModel cg = customerService.getCusDetailFeign(map);
+        return cg;
+    }
 }

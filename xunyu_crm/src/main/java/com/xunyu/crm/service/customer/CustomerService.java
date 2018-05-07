@@ -2,6 +2,7 @@ package com.xunyu.crm.service.customer;
 
 import com.xunyu.crm.pojo.customer.CustomerGroup;
 import com.xunyu.crm.pojo.customer.CustomerTab;
+import com.xunyu.model.crm.customer.CustomerModel;
 
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,6 @@ public interface CustomerService {
      * 获取客户详情
      */
     CustomerTab getCustomerTabDetail(Map<String,Object> map);
-
+    CustomerModel getCusDetailFeign(Map<String,Object> map);
 
 }

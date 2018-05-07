@@ -27,6 +27,15 @@
         <result column="isabled" property="isabled"></result>
     </resultMap>
 
+    <resultMap id="cusModel_ResultMap" type="com.xunyu.model.crm.customer.CustomerModel">
+        <id column="customer_id" property="customerId"></id>
+        <result column="customer_name" property="customerName"></result>
+        <result column="customer_account" property="customerAccount"></result>
+        <result column="enter_contact" property="enterContact"></result>
+        <result column="business" property="business"></result>
+
+    </resultMap>
+
     <sql id = "customer_column">
         customer_id,customer_group_id,customer_name,address,telphone
         ,customer_account,customer_psw,enter_contact,mophone,qq,email,business
@@ -47,6 +56,11 @@
     <select id = "getCustomerTabDetail" parameterType="map" resultMap="customer_ResultMap">
         select <include refid = "customer_column" /> from tbl_customer
         where isabled = 1 <include refid = "customer_where"/>
+    </select>
+
+    <select id = "getCusDetailFeign" parameterType="map" resultMap="cusModel_ResultMap">
+        select <include refid = "customer_column" /> from tbl_customer
+        where customer_account = #{customerAccount}
     </select>
 
     <sql id = "customer_where">

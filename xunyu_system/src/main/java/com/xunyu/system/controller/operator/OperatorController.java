@@ -7,6 +7,7 @@ import com.xunyu.model.system.operator.OperatorModel;
 import com.xunyu.model.user.User;
 import com.xunyu.system.pojo.operator.Operator;
 import com.xunyu.system.service.operator.OperatorService;
+import com.xunyu.system.utils.syslog.CrmService;
 import com.xunyu.system.utils.syslog.LogService2;
 import com.xunyu.system.utils.syslog.SysLogsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class OperatorController {
     private OperatorService operatorService;
     @Resource
     private LogService2 logService;
+    @Resource
+    private CrmService crmService;
 
     /**
      * 添加运营商配置
@@ -64,7 +67,8 @@ public class OperatorController {
             if(n > 0) {
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService,us,"添加运营商配置","添加",request);
+                su.addSysLogs(logService,us,"添加运营商配置"
+                        ,"添加",request,"添加运营商配置信息",crmService);
 
             }
         return res;
@@ -93,7 +97,8 @@ public class OperatorController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"修改运营商配置","修改",request);
+                    su.addSysLogs(logService,us,"修改运营商配置"
+                            ,"修改",request,"修改运营商配置信息",crmService);
 
                 }
             }else{
@@ -198,7 +203,8 @@ public class OperatorController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"删除运营商配置","删除",request);
+                    su.addSysLogs(logService,us,"删除运营商配置"
+                            ,"删除",request,"删除运营商配置信息",crmService);
 
                 }
             }else{

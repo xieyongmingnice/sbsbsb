@@ -6,6 +6,8 @@ import com.xunyu.model.user.User;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.Map;
+
 /**
  * @author dth
  * @date 2018/4/11 15:08
@@ -35,6 +37,13 @@ public class UserDaoImpl extends BaseDao<User, Long> {
     public int addCustomerUseraccount(CustomerUseraccount cu){
 
         return super.insert("com.xunyu.model.user.User.addCustomerUseraccount", cu);
+    }
+
+    /**
+     * 获取账号信息
+     */
+    public User getUserByAccount(Map<String,Object> map){
+        return super.selectForObject("com.xunyu.model.user.User.getUserByAccount",map);
     }
 
     /**
