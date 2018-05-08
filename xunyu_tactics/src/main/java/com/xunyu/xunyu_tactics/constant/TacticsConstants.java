@@ -72,4 +72,18 @@ public interface TacticsConstants {
          */
         int OTHER = 3;
     }
+
+    /**
+     * 成功、失败
+     */
+    interface CompleteStatus{
+        /**
+         * 成功
+         */
+        String SUCCESS = "SUCCESS";
+        /**
+         * 失败
+         */
+        String FAILED = "FAILED";
+    }
 }

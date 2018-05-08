@@ -34,9 +34,6 @@ import java.util.Map;
 public class NormalWhitelistController {
     private static final Logger logger = LoggerFactory.getLogger(NormalWhitelistController.class);
 
-    private static final String SUCCESS = "SUCCESS";
-
-    private static final String FAILED = "FAILED";
 
     @Autowired
     RedisUtil redisUtil;
@@ -61,7 +58,7 @@ public class NormalWhitelistController {
         if (model.getPhoneNumber() == null || "".equals(model.getPhoneNumber())){
             result.setMessage(ResultMessage.Message.PRAMA_LOSS);
             result.setCode(ResultMessage.Code.PRAMA_LOSS);
-            result.setRes(FAILED);
+            result.setRes(TacticsConstants.CompleteStatus.FAILED);
             return result;
         }
         int success = normalWhitelistService.insertWhitelist(model);
@@ -87,7 +84,7 @@ public class NormalWhitelistController {
         if (model.getPhoneNumber() == null || ("").equals(model.getPhoneNumber())){
             result.setMessage(ResultMessage.Message.PRAMA_LOSS);
             result.setCode(ResultMessage.Code.PRAMA_LOSS);
-            result.setRes(FAILED);
+            result.setRes(TacticsConstants.CompleteStatus.FAILED);
             return result;
         }
         int success = normalWhitelistService.deleteWhitelist(model);
@@ -235,7 +232,7 @@ public class NormalWhitelistController {
     private void operationSuccess(Result result){
         result.setCode(ResultMessage.Code.SUCCESS);
         result.setMessage(ResultMessage.Message.SUCCESS);
-        result.setRes(SUCCESS);
+        result.setRes(TacticsConstants.CompleteStatus.SUCCESS);
     }
 
     /**
@@ -245,6 +242,6 @@ public class NormalWhitelistController {
     private void operationFailed(Result result){
         result.setCode(ResultMessage.Code.FAILED);
         result.setMessage(ResultMessage.Message.FAILED);
-        result.setRes(FAILED);
+        result.setRes(TacticsConstants.CompleteStatus.FAILED);
     }
 }

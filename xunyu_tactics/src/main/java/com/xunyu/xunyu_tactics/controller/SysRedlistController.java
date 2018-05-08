@@ -33,9 +33,6 @@ public class SysRedlistController {
 
     private static final Logger logger = LoggerFactory.getLogger(SysRedlistController.class);
 
-    private static final String SUCCESS = "SUCCESS";
-
-    private static final String FAILED = "FAILED";
     @Autowired
     RedisUtil redisUtil;
 
@@ -57,7 +54,7 @@ public class SysRedlistController {
         }
         if (model.getPhoneNumber() == null || ("").equals(model.getPhoneNumber())){
             result.setCode(ResultMessage.Code.PRAMA_LOSS);
-            result.setRes(FAILED);
+            result.setRes(TacticsConstants.CompleteStatus.FAILED);
             result.setMessage(ResultMessage.Message.PRAMA_LOSS);
             return result;
         }
@@ -68,7 +65,7 @@ public class SysRedlistController {
             int success = sysRedlistService.addSysRedlist(model);
             if (success>0){
                 operationSuccess(result);
-                result.setRes(SUCCESS);
+                result.setRes(TacticsConstants.CompleteStatus.SUCCESS);
             }else {
                 operationFailed(result);
                 result.setMessage("操作失败，请检查手机号是否已存在红名单中");
@@ -131,7 +128,7 @@ public class SysRedlistController {
             int success = sysRedlistService.deleteSysRedlist(model);
             if (success>0){
                 operationSuccess(result);
-                result.setRes(SUCCESS);
+                result.setRes(TacticsConstants.CompleteStatus.SUCCESS);
             }else {
                 operationFailed(result);
             }
@@ -169,7 +166,7 @@ public class SysRedlistController {
         if (count > 0){
             result.setCode(ResultMessage.Code.SUCCESS);
             result.setMessage(ResultMessage.Message.SUCCESS);
-            result.setRes(SUCCESS);
+            result.setRes(TacticsConstants.CompleteStatus.SUCCESS);
         }else {
             operationFailed(result);
         }
@@ -229,7 +226,7 @@ public class SysRedlistController {
             if(count > 0){
                 result.setMessage(ResultMessage.Message.SUCCESS);
                 result.setCode(ResultMessage.Code.SUCCESS);
-                result.setRes(SUCCESS);
+                result.setRes(TacticsConstants.CompleteStatus.SUCCESS);
             }else {
                 operationFailed(result);
                 result.setMessage("操作失败，请检查手机号是否已存在红名单中");
@@ -291,7 +288,7 @@ public class SysRedlistController {
             int count = sysRedlistService.excelDeleteRedlist(list);
             if(count > 0 ){
                 operationSuccess(result);
-                result.setRes(SUCCESS);
+                result.setRes(TacticsConstants.CompleteStatus.SUCCESS);
             }else {
                 operationFailed(result);
             }

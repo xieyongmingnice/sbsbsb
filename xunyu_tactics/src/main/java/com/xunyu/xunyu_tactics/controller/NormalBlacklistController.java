@@ -7,8 +7,6 @@ import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.tactics.NormalBlacklistModel;
 import com.xunyu.xunyu_tactics.constant.TacticsConstants;
 import com.xunyu.xunyu_tactics.pojo.NormalBlacklist;
-import com.xunyu.xunyu_tactics.pojo.SysRedlist;
-import com.xunyu.xunyu_tactics.pojo.SysWhitelist;
 import com.xunyu.xunyu_tactics.service.ExcelService;
 import com.xunyu.xunyu_tactics.service.NormalBlacklistService;
 import com.xunyu.xunyu_tactics.vo.NormalBlacklistVO;
@@ -37,10 +35,6 @@ import java.util.Map;
 public class NormalBlacklistController {
 
     private static final Logger logger = LoggerFactory.getLogger(NormalBlacklistController.class);
-
-    private static final String SUCCESS = "SUCCESS";
-
-    private static final String FAILED = "FAILED";
 
     @Autowired
     RedisUtil redisUtil;
@@ -245,7 +239,7 @@ public class NormalBlacklistController {
         int count = blacklistService.excelDeleteBlacklist(list);
         if(count > 0 ){
             operationSuccess(result);
-            result.setRes(SUCCESS);
+            result.setRes(TacticsConstants.CompleteStatus.SUCCESS);
         }else {
             operationFailed(result);
         }
@@ -265,12 +259,12 @@ public class NormalBlacklistController {
     private void operationSuccess(Result result){
         result.setCode(ResultMessage.Code.SUCCESS);
         result.setMessage(ResultMessage.Message.SUCCESS);
-        result.setRes(SUCCESS);
+        result.setRes(TacticsConstants.CompleteStatus.SUCCESS);
     }
 
     private void operationFailed(Result result){
         result.setCode(ResultMessage.Code.FAILED);
         result.setMessage(ResultMessage.Message.FAILED);
-        result.setRes(FAILED);
+        result.setRes(TacticsConstants.CompleteStatus.FAILED);
     }
 }

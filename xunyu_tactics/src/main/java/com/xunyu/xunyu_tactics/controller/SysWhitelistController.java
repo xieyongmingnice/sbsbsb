@@ -35,10 +35,6 @@ public class SysWhitelistController {
 
     private static final Logger logger = LoggerFactory.getLogger(SysWhitelistController.class);
 
-    private static final String SUCCESS = "SUCCESS";
-
-    private static final String FAILED = "FAILED";
-
     @Autowired
     RedisUtil redisUtil;
 
@@ -90,7 +86,7 @@ public class SysWhitelistController {
         if (model.getPhoneNumber() == null || ("").equals(model.getPhoneNumber())){
             result.setCode(ResultMessage.Code.PRAMA_LOSS);
             result.setMessage(ResultMessage.Message.PRAMA_LOSS);
-            result.setRes(FAILED);
+            result.setRes(TacticsConstants.CompleteStatus.FAILED);
             return result;
         }
         int success = whitelistService.deleteWhitelist(model);
@@ -233,12 +229,12 @@ public class SysWhitelistController {
     private void operationSuccess(Result result){
         result.setCode(ResultMessage.Code.SUCCESS);
         result.setMessage(ResultMessage.Message.SUCCESS);
-        result.setRes(SUCCESS);
+        result.setRes(TacticsConstants.CompleteStatus.SUCCESS);
     }
 
     private void operationFailed(Result result){
         result.setCode(ResultMessage.Code.FAILED);
         result.setMessage(ResultMessage.Message.FAILED);
-        result.setRes(FAILED);
+        result.setRes(TacticsConstants.CompleteStatus.FAILED);
     }
 }

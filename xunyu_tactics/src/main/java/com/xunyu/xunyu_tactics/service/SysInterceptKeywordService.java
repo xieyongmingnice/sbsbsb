@@ -13,7 +13,7 @@ import java.util.List;
 public interface SysInterceptKeywordService {
 
     /**
-     * 新增红名单
+     * 新增关键字
      */
     int insertKeyword(SysInterceptKeywordModel model);
 

@@ -30,16 +30,34 @@ public interface ResultMessage {
      */
     interface Code{
 
+        /**
+         * 成功
+         */
         String SUCCESS = "200";
 
+        /**
+         * 找不到页面
+         */
         String NOT_FOUND = "404";
 
+        /**
+         * 系统异常
+         */
         String ERROR = "500";
 
+        /**
+         * 用户已存在
+         */
         String USER_EXIST = "412";
 
+        /**
+         * 参数缺失
+         */
         String PRAMA_LOSS = "413";
 
+        /**
+         * 失败
+         */
         String FAILED = "414";
     }
 
