@@ -68,7 +68,7 @@ public class OperatorController {
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
                 su.addSysLogs(logService,us,"添加运营商配置"
-                        ,"添加",request,"添加运营商配置信息",crmService);
+                        ,"添加",request,"添加运营商配置信息",crmService,1);
 
             }
         return res;
@@ -98,7 +98,7 @@ public class OperatorController {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
                     su.addSysLogs(logService,us,"修改运营商配置"
-                            ,"修改",request,"修改运营商配置信息",crmService);
+                            ,"修改",request,"修改运营商配置信息",crmService,1);
 
                 }
             }else{
@@ -204,7 +204,7 @@ public class OperatorController {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
                     su.addSysLogs(logService,us,"删除运营商配置"
-                            ,"删除",request,"删除运营商配置信息",crmService);
+                            ,"删除",request,"删除运营商配置信息",crmService,1);
 
                 }
             }else{

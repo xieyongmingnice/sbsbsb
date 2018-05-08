@@ -83,7 +83,7 @@ public class SysGuideController {
                         //异步添加日志
                         SysLogsUtil su = SysLogsUtil.getInstance();
                         su.addSysLogs(logService,us,"添加系统基本指导内容"
-                                ,"添加",request,"添加系统基本指导内容信息",crmService);
+                                ,"添加",request,"添加系统基本指导内容信息",crmService,1);
                     }
                 }
             }else{
@@ -130,7 +130,7 @@ public class SysGuideController {
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
                 su.addSysLogs(logService,us,"删除系统基本指导内容"
-                        ,"删除",request,"删除系统基本指导内容信息",crmService);
+                        ,"删除",request,"删除系统基本指导内容信息",crmService,1);
             }
         }else{
             res.setCode("413");

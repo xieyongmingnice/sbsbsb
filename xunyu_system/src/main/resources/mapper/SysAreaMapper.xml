@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.system.pojo.sysarea.SysArea">
+
+    <resultMap id="area_ResultMap" type="com.xunyu.system.pojo.sysarea.SysArea">
+        <id column="area_id" property="areaId"></id>
+        <result column="isabled" property="isabled"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="area_code" property="areaCode"></result>
+        <result column="area_name" property="areaName"></result>
+        <result column="p_area" property="pArea"></result>
+        <result column="area_type" property="areaType"></result>
+        <result column="area_abbre" property="areaAbbre"></result>
+        <result column="area_pinyin" property="areaPinyin"></result>
+        <result column="area_zipcode" property="areaZipcode"></result>
+        <result column="area_grade" property="areaGrade"></result>
+        <result column="area_order" property="areaOrder"></result>
+        <result column="area_index" property="areaIndex"></result>
+        <result column="area_status" property="areaStatus"></result>
+        <result column="area_text" property="areaText"></result>
+        <result column="price" property="price"></result>
+    </resultMap>
+
+    <sql id = "area_column">
+        area_id,isabled,create_time,area_code,area_name,p_area,area_type
+        ,area_abbre,area_pinyin,area_zipcode,area_grade,area_order,area_index
+        ,area_status,area_text,price
+    </sql>
+
+    <select id="getSysAreaConfig" parameterType="map" resultMap="area_ResultMap">
+        select
+        <include refid = "area_column" />
+        from tbl_area_config
+        where isabled = 1 <include refid = "area_where" />
+    </select>
+
+    <select id = "sysAreaConfigCount" parameterType="map" resultType="int">
+        select count(1) from tbl_area_config
+        where isabled = 1 <include refid = "area_where" />
+    </select>
+
+    <select id = "sysAreaConfigList" parameterType="map" resultMap="area_ResultMap">
+        select
+            <include refid = "area_column" />
+        from tbl_area_config
+        where isabled = 1 <include refid = "area_where" />
+        order by area_id desc
+        limit #{startRow},#{endRow}
+    </select>
+
+    <sql id = "area_where">
+        <if test = "areaId != null">
+            and area_id = #{areaId}
+        </if>
+        <if test = 'areaCode != null and areaCode !=""'>
+            and area_code = #{areaCode}
+        </if>
+        <if test = 'areaName != null and areaName !=""'>
+            and area_name = #{areaName}
+        </if>
+    </sql>
+
+    <insert id = "addSysAreaConfig" parameterType="com.xunyu.system.pojo.sysarea.SysArea"
+            useGeneratedKeys="true" keyColumn="area_id" keyProperty="areaId">
+        insert into tbl_area_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="areaId != null">area_id,</if>
+            <if test='isabled != null'>isabled,</if>
+            <if test='createTime != null'>create_time,</if>
+            <if test='areaCode != null and areaCode !=""'>area_code,</if>
+            <if test='areaName != null and areaName !=""'>area_name,</if>
+            <if test='pArea != null and pArea !=""'>p_area,</if>
+            <if test='areaType != null'>area_type,</if>
+            <if test='areaAbbre != null and areaAbbre != ""'>area_abbre,</if>
+            <if test='areaZipcode != null and areaZipcode != ""'>area_zipcode,</if>
+            <if test='areaPinyin != null and areaPinyin != ""'>area_pinyin,</if>
+            <if test='areaGrade != null and areaGrade != ""'>area_grade,</if>
+            <if test='areaOrder != null and areaOrder != ""'>area_order,</if>
+            <if test='areaIndex != null and areaIndex != ""'>area_index,</if>
+            <if test='areaStatus != null'>area_status,</if>
+            <if test='areaText != null and areaText != ""'>area_text,</if>
+            <if test='price != null'>price,</if>
+
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="areaId != null">#{areaId},</if>
+            <if test='isabled != null'>#{isabled},</if>
+            <if test='createTime != null'>#{createTime},</if>
+            <if test='areaCode != null and areaCode !=""'>#{areaCode},</if>
+            <if test='areaName != null and areaName !=""'>#{areaName},</if>
+            <if test='pArea != null and pArea !=""'>#{pArea},</if>
+            <if test='areaType != null'>#{areaType},</if>
+            <if test='areaAbbre != null and areaAbbre != ""'>#{areaAbbre},</if>
+            <if test='areaZipcode != null and areaZipcode != ""'>#{areaZipcode},</if>
+            <if test='areaPinyin != null and areaPinyin != ""'>#{areaPinyin},</if>
+            <if test='areaGrade != null and areaGrade != ""'>#{areaGrade},</if>
+            <if test='areaOrder != null and areaOrder != ""'>#{areaOrder},</if>
+            <if test='areaIndex != null and areaIndex != ""'>#{areaIndex},</if>
+            <if test='areaStatus != null'>#{areaStatus},</if>
+            <if test='areaText != null and areaText != ""'>#{areaText},</if>
+            <if test='price != null'>#{price},</if>
+        </trim>
+    </insert>
+
+    <update id="updateSysAreaConfig" parameterType="com.xunyu.system.pojo.sysarea.SysArea">
+        update tbl_area_config
+        <set>
+            <if test='isabled != null'>
+                <![CDATA[ isabled = #{isabled},  ]]>
+            </if>
+            <if test='createTime != null'>
+                <![CDATA[ create_time = #{createTime}, ]]>
+            </if>
+            <if test='areaCode != null and areaCode !=""'>
+                <![CDATA[ area_code = #{areaCode}, ]]>
+            </if>
+            <if test='areaName != null and areaName !=""'>
+                <![CDATA[ area_name = #{areaName}, ]]>
+            </if>
+            <if test='pArea != null and pArea !=""'>
+                <![CDATA[ p_area = #{pArea}, ]]>
+            </if>
+            <if test='areaType != null and areaType != ""'>
+                <![CDATA[ area_type = #{areaType}, ]]>
+            </if>
+            <if test='areaAbbre != null and areaAbbre != ""'>
+                <![CDATA[ area_abbre = #{areaAbbre}, ]]>
+            </if>
+            <if test='areaPinyin != null and areaPinyin != ""'>
+                <![CDATA[ area_pinyin = #{areaPinyin}, ]]>
+            </if>
+            <if test='areaZipcode != null and areaZipcode != ""'>
+                <![CDATA[ area_zipcode = #{areaZipcode}, ]]>
+            </if>
+            <if test='areaGrade != null and areaGrade != ""'>
+                <![CDATA[ area_grade = #{areaGrade}, ]]>
+            </if>
+            <if test='areaOrder != null and areaOrder != ""'>
+                <![CDATA[ area_order = #{areaOrder}, ]]>
+            </if>
+            <if test='areaIndex != null and areaIndex != ""'>
+                <![CDATA[ area_index = #{areaIndex}, ]]>
+            </if>
+            <if test='areaStatus != null'>
+                <![CDATA[ area_status = #{areaStatus}, ]]>
+            </if>
+            <if test='areaText != null and areaText != ""'>
+                <![CDATA[ area_text = #{areaText}, ]]>
+            </if>
+            <if test='price != null'>
+                <![CDATA[ price = #{price}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="areaId != null">
+                <![CDATA[ area_id = #{areaId} ]]>
+            </if>
+        </where>
+    </update>
+
+    <!--批量更新状态-->
+    <update id = "delSysAreaConfig" parameterType="map">
+        update tbl_area_config set
+        isabled = #{isabled}
+        where area_id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

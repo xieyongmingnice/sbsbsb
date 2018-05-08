@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtils {
@@ -146,12 +147,70 @@ public class DateUtils {
         Date date = sdf.parse(dateStr);
         return date;
     }
-	
+
+    private static boolean isSameDate(Date date1, Date date2) {
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(date1);
+
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(date2);
+
+        boolean isSameYear = cal1.get(Calendar.YEAR) == cal2
+                .get(Calendar.YEAR);
+        boolean isSameMonth = isSameYear
+                && cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH);
+        boolean isSameDate = isSameMonth
+                && cal1.get(Calendar.DAY_OF_MONTH) == cal2
+                .get(Calendar.DAY_OF_MONTH);
+
+        return isSameDate;
+    }
+
+    /**
+     * 判断两个日期是否相等，若果相等
+     * 则结束日期天数+1
+     * @param data1
+     * @param data2
+     * @return
+     */
+    public static Date getUpDate(String data1,String data2){
+        Date d1 = null;
+        Date d2 = null;
+        Date upDate = null;
+        try {
+            d1 = string2Date(data1);
+            d2 = string2Date(data2);
+            if (isSameDate(d1, d2)) {
+                Calendar cal1 = Calendar.getInstance();
+                cal1.setTime(d2);
+                cal1.add(Calendar.DAY_OF_MONTH, 1);// 今天+1天
+                upDate = cal1.getTime();
+
+            }else{
+                //返回传入的结束日期
+               return d2;
+            }
+        }catch (ParseException e) {
+
+            e.printStackTrace();
+        }
+        return upDate;
+    }
 	/*public static void main(String[] args) {
-		Date date;
-		try {
-			date = string2Date("2017-8-11");
-			getDiffMonth(date);
+		String data1 = "2018-05-07";
+		String data2 = "2018-05-07";
+        try {
+
+		Date d1 = string2Date(data1);
+        Date d2 = string2Date(data2);
+		if(isSameDate(d1,d2)){
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTime(d2);
+            cal1.add(Calendar.DAY_OF_MONTH, 1);// 今天+1天
+            Date tomorrow = cal1.getTime();
+
+        }
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

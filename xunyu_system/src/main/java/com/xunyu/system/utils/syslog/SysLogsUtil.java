@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 public class SysLogsUtil {
 
     public int addSysLogs(LogService2 logService, User us, String operObj
-            , String operType, HttpServletRequest request,String operText,CrmService crmService){
+            , String operType, HttpServletRequest request,String operText,CrmService crmService,int status){
         ExecutorService pool = Executors.newCachedThreadPool();
         Runnable run = new Runnable() {//创建一个线程匿名内部类
             @Override
@@ -25,7 +25,7 @@ public class SysLogsUtil {
                     CustomerModel ct = null;
                     com.xunyu.model.log.syslog.SysLogs sl = new com.xunyu.model.log.syslog.SysLogs();
                     sl.setOperName(us.getAccount());
-                    if(us.getUserType() == 1){//表示客户（只有客户信息才有联系人这一项）
+                    if(us.getUserType() == 2){//表示客户（只有客户信息才有联系人这一项）
                         ct = crmService.getCusDetailFeign(us.getAccount());
                     }
                     sl.setOperIp(IpAdrressUtil.getIpAdrress(request));
@@ -33,7 +33,11 @@ public class SysLogsUtil {
                     sl.setOperType(operType);
                     sl.setOperTime(new Date());
                     sl.setOperPort("8005");
-                    sl.setOperStatus(1);
+                    if(status == 0) {
+                        sl.setOperStatus(1);
+                    }else{
+                        sl.setOperStatus(status);
+                    }
                     if(ct != null) {
                         sl.setEnterContact(ct.getEnterContact());
                     }

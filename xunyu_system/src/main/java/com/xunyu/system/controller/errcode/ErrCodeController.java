@@ -64,7 +64,7 @@ public class ErrCodeController {
             //异步添加日志
             SysLogsUtil su = SysLogsUtil.getInstance();
             su.addSysLogs(logService,us,"添加错误码配置","添加",
-                    request,"添加错误码配置信息",crmService);
+                    request,"添加错误码配置信息",crmService,1);
 
         }
         return res;
@@ -93,7 +93,7 @@ public class ErrCodeController {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
                     su.addSysLogs(logService,us,"修改错误码配置"
-                            ,"修改",request,"修改错误码配置信息",crmService);
+                            ,"修改",request,"修改错误码配置信息",crmService,1);
 
                 }
             }else{
@@ -191,7 +191,7 @@ public class ErrCodeController {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
                     su.addSysLogs(logService,us,"删除错误码配置"
-                            ,"删除",request,"删除错误码配置信息",crmService);
+                            ,"删除",request,"删除错误码配置信息",crmService,1);
 
                 }
             }else {

@@ -53,7 +53,7 @@ public class SysLogsController {
             return res;
         }
         map.put("beginTime",DateUtils.string2Date(sl.getBeginTime()));
-        map.put("endTime",DateUtils.string2Date(sl.getEndTime()));
+        map.put("endTime",DateUtils.getUpDate(sl.getBeginTime(),sl.getEndTime()));
         map.put("logsId",sl.getLogsId());
         map.put("operName",sl.getOperName());
         map.put("operObj",sl.getOperObj());

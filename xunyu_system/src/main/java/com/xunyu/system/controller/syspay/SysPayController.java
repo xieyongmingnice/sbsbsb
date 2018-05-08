@@ -65,7 +65,7 @@ public class SysPayController {
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
                 su.addSysLogs(logService,us,"添加支付配置信息"
-                        ,"添加",request,"添加支付配置信息",crmService);
+                        ,"添加",request,"添加支付配置信息",crmService,1);
             }
 
         return res;
@@ -95,7 +95,7 @@ public class SysPayController {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
                     su.addSysLogs(logService,us,"修改支付配置信息"
-                            ,"修改",request,"修改支付配置信息",crmService);
+                            ,"修改",request,"修改支付配置信息",crmService,1);
                 }
             }else{
                 res.setCode("413");
