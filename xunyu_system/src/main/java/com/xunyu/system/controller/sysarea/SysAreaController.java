@@ -103,7 +103,7 @@ public class SysAreaController {
                 res.setRes(sa);
                 if(flag > 0){
                     su.addSysLogs(logService,us,"修改地理区域配置"
-                            ,"修改",request,"成功修改添加地理区域配置信息"
+                            ,"修改",request,"成功修改地理区域配置信息"
                             ,crmService,1);
                 }
             }else{
