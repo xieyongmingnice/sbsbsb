@@ -30,10 +30,6 @@
             <artifactId>xunyu_commons-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-feign</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

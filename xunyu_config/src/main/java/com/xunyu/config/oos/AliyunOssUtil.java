@@ -6,6 +6,7 @@ import com.aliyun.oss.OSSException;
 import com.aliyun.oss.ServiceException;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectResult;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
@@ -127,7 +128,6 @@ public class AliyunOssUtil {
 
             uploadInputStrem = file.getInputStream();   //文件输入流
 
-
             //上传文件
             logger.debug("正在上传文件到OSS...");
             PutObjectResult putResult = ossClient.putObject(BUCKETNAME, uploadPath, uploadInputStrem, objectMetadata);
@@ -135,15 +135,11 @@ public class AliyunOssUtil {
             ret = putResult.getETag();
             logger.debug("上传后的文件MD5数字唯一签名:{}", ret);
 
-        } catch (IOException e) {
-            resultMap.put("code", 500);
-            resultMap.put("message", "上传失败!");
-            e.printStackTrace();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             resultMap.put("code", 500);
             resultMap.put("message", "上传失败!");
-            return resultMap;
+
         } finally {
 
             try {
@@ -157,17 +153,15 @@ public class AliyunOssUtil {
                 e.printStackTrace();
             }
         }
-
-        if (!"".equals(ret) && ret != null) {
+        if (StringUtils.isNotEmpty(ret)) {
             resultMap.put("code", 200);
             resultMap.put("url", getUrl(uploadPath));
             resultMap.put("message","上传成功");
-            return resultMap;
         } else {
             resultMap.put("code", 500);
-            resultMap.put("message", "上传失败!");
-            return resultMap;
+            resultMap.put("message", "未上传成功ret=null");
         }
+        return resultMap;
     }
 
 

@@ -139,9 +139,9 @@ public class DruidConfiguration {
        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet());    //添加初始化参数：initParams
        servletRegistrationBean.addUrlMappings("/druid/*");
        //白名单：
-       servletRegistrationBean.addInitParameter("allow", "127.0.0.1");
+       //servletRegistrationBean.addInitParameter("allow", "47.104.190.41,127.0.0.1,47.104.190.174");
        //IP黑名单 (存在共同时，deny优先于allow) : 如果满足deny的话提示:Sorry, you are not permitted to view this page.
-       servletRegistrationBean.addInitParameter("deny", "47.104.190.41");
+      // servletRegistrationBean.addInitParameter("deny", "47.104.190.41");
        //登录查看信息的账号密码.
        servletRegistrationBean.addInitParameter("loginUsername", "admin");
        servletRegistrationBean.addInitParameter("loginPassword", "123456");

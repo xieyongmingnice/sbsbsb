@@ -1,11 +1,14 @@
-package com.xunyu.system.utils.syslog;
+package com.xunyu.crm.utils.syslog;
 
 import com.commons.core.util.IpAdrressUtil;
-import com.xunyu.model.crm.customer.CustomerModel;
+import com.xunyu.crm.pojo.customer.CustomerTab;
+import com.xunyu.crm.service.customer.CustomerService;
 import com.xunyu.model.user.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -15,18 +18,32 @@ import java.util.concurrent.Executors;
  **/
 public class SysLogsUtil {
 
+    /**
+     *
+     * @param logService
+     * @param us  用户对象
+     * @param operObj 操作对象
+     * @param operType 操作类型
+     * @param request
+     * @param operText  操作说明
+     * @param crmService
+     * @param status   操作状态 1成功  2失败
+     * @return
+     */
     public int addSysLogs(LogService2 logService, User us, String operObj
-            , String operType, HttpServletRequest request,String operText,CrmService crmService,int status){
+            , String operType, HttpServletRequest request, String operText, CustomerService crmService, int status){
         ExecutorService pool = Executors.newCachedThreadPool();
         Runnable run = new Runnable() {//创建一个线程匿名内部类
             @Override
             public void run() {
                 try {
-                    CustomerModel ct = null;
+                    CustomerTab ct = null;
                     com.xunyu.model.log.syslog.SysLogs sl = new com.xunyu.model.log.syslog.SysLogs();
                     sl.setOperName(us.getAccount());
                     if(us.getUserType() == 2){//表示客户（只有客户信息才有联系人这一项）
-                        ct = crmService.getCusDetailFeign(us.getAccount());
+                        Map<String,Object> map = new HashMap<String,Object>();
+                        map.put("customerAccount",us.getAccount());
+                        ct = crmService.getCustomerTabDetail(map);
                     }
                     sl.setOperIp(IpAdrressUtil.getIpAdrress(request));
                     sl.setOperObj(operObj);
