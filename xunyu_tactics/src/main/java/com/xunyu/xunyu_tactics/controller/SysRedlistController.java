@@ -34,6 +34,8 @@ public class SysRedlistController {
     private static final Logger logger = LoggerFactory.getLogger(SysRedlistController.class);
 
     private static final String SUCCESS = "SUCCESS";
+
+    private static final String FAILED = "FAILED";
     @Autowired
     RedisUtil redisUtil;
 
@@ -51,6 +53,12 @@ public class SysRedlistController {
     public Result<String> addRedlist(SysRedlistModel model){
         Result result = checkLogin(new Result(),model.getSessionId());
         if (result.getMessage() != null){
+            return result;
+        }
+        if (model.getPhoneNumber() == null || ("").equals(model.getPhoneNumber())){
+            result.setCode(ResultMessage.Code.PRAMA_LOSS);
+            result.setRes(FAILED);
+            result.setMessage(ResultMessage.Message.PRAMA_LOSS);
             return result;
         }
         try{
@@ -111,6 +119,12 @@ public class SysRedlistController {
     public Result<String> deleteRedlist(SysRedlistModel model){
         Result result = checkLogin(new Result(),model.getSessionId());
         if (result.getMessage() != null){
+            return result;
+        }
+        if (model.getPhoneNumber() == null || ("").equals(model.getPhoneNumber())){
+            result.setMessage(ResultMessage.Message.PRAMA_LOSS);
+            result.setCode(ResultMessage.Code.PRAMA_LOSS);
+            result.setRes("FAILED");
             return result;
         }
         try{

@@ -54,9 +54,9 @@ public class SysRedlistModel extends UserModel{
     private String endTime;
 
     /**
-     * 批量操作时用的主键集合
+     * 批量操作时用的参数集合（手机号）
      */
-    private List<Long> idList;
+    private List<String> idList;
 
 
     public Integer getSysRedlistId() {
@@ -123,11 +123,11 @@ public class SysRedlistModel extends UserModel{
         this.isabled = isabled;
     }
 
-    public List<Long> getIdList() {
+    public List<String> getIdList() {
         return idList;
     }
 
-    public void setIdList(List<Long> idList) {
+    public void setIdList(List<String> idList) {
         this.idList = idList;
     }
 }

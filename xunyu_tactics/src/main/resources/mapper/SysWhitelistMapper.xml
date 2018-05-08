@@ -183,8 +183,7 @@
     update tbl_sys_whitelist
     set isabled = 0
     where isabled = 1 and
-    sys_whitelist_id = #{sysWhitelistId,jdbcType=INTEGER}
-    limit 1
+    phone_number = #{phoneNumber,jdbcType=VARCHAR}
   </update>
 
   <!-- 导入添加 -->
@@ -232,11 +231,11 @@
   </select>
 
   <!-- 批量删除 -->
-  <update id="batchDeleteWhitelist" parameterType="java.util.List">
+  <update id="batchDeleteWhitelist" parameterType="com.xunyu.model.tactics.SysWhitelistModel">
     update tbl_sys_whitelist
     set isabled = 0
     where isabled = 1
-    and sys_whitelist_id in
+    and phone_number in
     <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
       #{item}
     </foreach>

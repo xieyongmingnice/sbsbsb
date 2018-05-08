@@ -35,9 +35,9 @@ public class SysWhitelistModel extends UserModel{
     private Integer isabled;
 
     /**
-     * 批量操作时用的主键集合
+     * 批量操作时用的参数集合（手机号）
      */
-    private List<Long> idList;
+    private List<String> idList;
 
     /**
      *   加入时间
@@ -81,11 +81,11 @@ public class SysWhitelistModel extends UserModel{
         this.isabled = isabled;
     }
 
-    public List<Long> getIdList() {
+    public List<String> getIdList() {
         return idList;
     }
 
-    public void setIdList(List<Long> idList) {
+    public void setIdList(List<String> idList) {
         this.idList = idList;
     }
 

@@ -87,13 +87,13 @@ public class SysWhitelistController {
         if (result.getMessage() != null){
             return result;
         }
-        int success = 0;
-        try {
-            success = whitelistService.deleteWhitelist(model);
-        }catch (Exception e){
-            catchExcpetion(e,result);
+        if (model.getPhoneNumber() == null || ("").equals(model.getPhoneNumber())){
+            result.setCode(ResultMessage.Code.PRAMA_LOSS);
+            result.setMessage(ResultMessage.Message.PRAMA_LOSS);
+            result.setRes(FAILED);
             return result;
         }
+        int success = whitelistService.deleteWhitelist(model);
         if (success > 0){
             operationSuccess(result);
         }else {
@@ -125,7 +125,6 @@ public class SysWhitelistController {
             if (totalRows <= 0){
                 result.setCode(ResultMessage.Code.SUCCESS);
                 result.setMessage(ResultMessage.Message.NO_VALUE);
-                result.setRes(SUCCESS);
                 return result;
             }
             List<SysWhitelist> list = whitelistService.selectWhitelist(model);
@@ -183,7 +182,6 @@ public class SysWhitelistController {
             operationSuccess(result);
         }else {
             operationFailed(result);
-            result.setMessage("操作失败，请检查手机号是否已存在系统白名单中");
         }
         return result;
     }
@@ -199,7 +197,7 @@ public class SysWhitelistController {
         if(result.getMessage() != null){
             return result;
         }
-        List<Long> idList = model.getIdList();
+        List<String> idList = model.getIdList();
         if (idList == null || idList.size() <= 0){
             result.setMessage(ResultMessage.Message.PRAMA_LOSS);
             result.setCode(ResultMessage.Code.PRAMA_LOSS);

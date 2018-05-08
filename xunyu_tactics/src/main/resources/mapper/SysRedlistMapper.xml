@@ -266,8 +266,7 @@
   <update id="deleteSysRedlist" parameterType="com.xunyu.model.tactics.SysRedlistModel">
     update  tbl_sys_redlist
     set isabled = 0
-    where  isabled = 1 and sys_redlist_id = #{sysRedlistId,jdbcType=INTEGER}
-    limit 1
+    where  isabled = 1 and phone_number = #{phoneNumber,jdbcType=VARCHAR}
   </update>
 
   <!-- 查询列表 -->
@@ -313,7 +312,7 @@
 
   <!--查询条数-->
   <select id="selectTotalRows" parameterType="com.xunyu.model.tactics.SysRedlistModel" resultType="java.lang.Integer">
-    select count(1)
+    select count(distinct phone_number)
     from tbl_sys_redlist
     where isabled = 1
     <if test="phoneNumber != null and phoneNumber != '' ">
@@ -332,7 +331,7 @@
         update tbl_sys_redlist
         set isabled = 0
         where isabled = 1
-        and sys_redlist_id in
+        and phone_number in
         <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
             #{item}
         </foreach>

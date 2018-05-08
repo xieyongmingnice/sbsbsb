@@ -84,7 +84,7 @@ public class NormalWhitelistController {
         if (result.getMessage() != null){
             return result;
         }
-        if (model.getNormalWhitelistId() == null){
+        if (model.getPhoneNumber() == null || ("").equals(model.getPhoneNumber())){
             result.setMessage(ResultMessage.Message.PRAMA_LOSS);
             result.setCode(ResultMessage.Code.PRAMA_LOSS);
             result.setRes(FAILED);
@@ -119,7 +119,6 @@ public class NormalWhitelistController {
         model.setOffset(model.getStartRows());
         int totalRows = normalWhitelistService.selectTotalRows(model);
         if (totalRows <= 0){
-            result.setRes(SUCCESS);
             result.setMessage(ResultMessage.Message.NO_VALUE);
             result.setCode(ResultMessage.Code.SUCCESS);
             return result;
@@ -199,7 +198,7 @@ public class NormalWhitelistController {
         if(result.getMessage() != null){
             return result;
         }
-        List<Long> idList = model.getIdList();
+        List<String> idList = model.getIdList();
         if (idList == null || idList.size() <= 0){
             result.setCode(ResultMessage.Code.PRAMA_LOSS);
             result.setMessage(ResultMessage.Message.PRAMA_LOSS);

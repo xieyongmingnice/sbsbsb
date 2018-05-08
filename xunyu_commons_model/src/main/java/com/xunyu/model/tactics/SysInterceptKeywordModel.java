@@ -7,38 +7,34 @@ import java.util.List;
 
 /**
  * @author xym
- * @description 白名单 请求参数实体类
- * @date 2018/5/7 13:52
+ * @description 系统拦截关键词 参数类实体
+ * @date 2018/5/7 17:44
  */
-public class NormalWhitelistModel extends UserModel {
-    private static final long serialVersionUID = 1667231589883903440L;
+public class SysInterceptKeywordModel extends UserModel {
+    private static final long serialVersionUID = -5963565289827321793L;
 
     /**
      *   主键
-     *
      */
-    private Integer normalWhitelistId;
+    private Integer sysInterceptKeywordId;
 
     /**
-     *   手机号
-     *
+     *   系统拦截关键字
      */
-    private String phoneNumber;
-
-    /**
-     *   加入时间
-     *
-     */
-    private Date joinTime;
+    private String keyword;
 
     /**
      *   1：可用，0：不可用
-     *
      */
     private Integer isabled;
 
     /**
-     *   开始时间
+     *   加入时间
+     */
+    private Date joinTime;
+
+    /**
+     *   加入时间
      */
     private String startTime;
 
@@ -48,32 +44,24 @@ public class NormalWhitelistModel extends UserModel {
     private String endTime;
 
     /**
-     * 批量操作时用的参数集合（手机号）
+     * 批量操作时用的主键集合
      */
     private List<String> idList;
 
-    public Integer getNormalWhitelistId() {
-        return normalWhitelistId;
+    public Integer getSysInterceptKeywordId() {
+        return sysInterceptKeywordId;
     }
 
-    public void setNormalWhitelistId(Integer normalWhitelistId) {
-        this.normalWhitelistId = normalWhitelistId;
+    public void setSysInterceptKeywordId(Integer sysInterceptKeywordId) {
+        this.sysInterceptKeywordId = sysInterceptKeywordId;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getKeyword() {
+        return keyword;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Date getJoinTime() {
-        return joinTime;
-    }
-
-    public void setJoinTime(Date joinTime) {
-        this.joinTime = joinTime;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     public Integer getIsabled() {
@@ -82,6 +70,14 @@ public class NormalWhitelistModel extends UserModel {
 
     public void setIsabled(Integer isabled) {
         this.isabled = isabled;
+    }
+
+    public Date getJoinTime() {
+        return joinTime;
+    }
+
+    public void setJoinTime(Date joinTime) {
+        this.joinTime = joinTime;
     }
 
     public String getStartTime() {

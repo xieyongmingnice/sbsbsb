@@ -97,8 +97,7 @@
     update tbl_normal_whitelist
     set isabled = 0
     where isabled = 1 and
-    normal_whitelist_id = #{normalWhitelistId,jdbcType=INTEGER}
-    limit 1
+    phone_number = #{phoneNumber,jdbcType=VARCHAR}
   </update>
 
   <!-- 导入添加 -->
@@ -150,7 +149,7 @@
     update tbl_normal_whitelist
     set isabled = 0
     where isabled = 1
-    and normal_whitelist_id in
+    and phone_number in
     <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
       #{item}
     </foreach>

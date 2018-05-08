@@ -154,8 +154,7 @@
   <update id="deleteBlacklist" parameterType="com.xunyu.model.tactics.NormalBlacklistModel">
     update tbl_normal_blacklist
     set isabled = 0
-    where isabled = 1 and normal_blacklist_id = #{normalBlacklistId,jdbcType=INTEGER}
-    limit 1
+    where isabled = 1 and phone_number = #{phoneNumber,jdbcType=VARCHAR}
   </update>
 
   <!--查询列表-->
@@ -200,7 +199,7 @@
   <update id="batchDeleteBlacklist" parameterType="com.xunyu.model.tactics.NormalBlacklistModel">
     update tbl_normal_blacklist
     set isabled = 0
-    where isabled = 1 and normal_blacklist_id in
+    where isabled = 1 and phone_number in
     <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
       #{item}
     </foreach>
