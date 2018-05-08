@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.xunyu_tactics.pojo.SysAuditKeyword">
+  <resultMap id="BaseResultMap" type="com.xunyu.xunyu_tactics.pojo.SysAuditKeyword">
+    <id column="sys_audit_keyword_id" jdbcType="INTEGER" property="sysAuditKeywordId" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="join_time" jdbcType="TIMESTAMP" property="joinTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    sys_audit_keyword_id, keyword, isabled, join_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_sys_audit_keyword
+    where sys_audit_keyword_id = #{sysAuditKeywordId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_sys_audit_keyword
+    where sys_audit_keyword_id = #{sysAuditKeywordId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.xunyu.xunyu_tactics.pojo.SysAuditKeyword">
+    insert into tbl_sys_audit_keyword (sys_audit_keyword_id, keyword, isabled, 
+      join_time)
+    values (#{sysAuditKeywordId,jdbcType=INTEGER}, #{keyword,jdbcType=VARCHAR}, #{isabled,jdbcType=INTEGER}, 
+      #{joinTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunyu.xunyu_tactics.pojo.SysAuditKeyword">
+    insert into tbl_sys_audit_keyword
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sysAuditKeywordId != null">
+        sys_audit_keyword_id,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="isabled != null">
+        isabled,
+      </if>
+      <if test="joinTime != null">
+        join_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sysAuditKeywordId != null">
+        #{sysAuditKeywordId,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="isabled != null">
+        #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="joinTime != null">
+        #{joinTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyu.xunyu_tactics.pojo.SysAuditKeyword">
+    update tbl_sys_audit_keyword
+    <set>
+      <if test="keyword != null">
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="isabled != null">
+        isabled = #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="joinTime != null">
+        join_time = #{joinTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sys_audit_keyword_id = #{sysAuditKeywordId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyu.xunyu_tactics.pojo.SysAuditKeyword">
+    update tbl_sys_audit_keyword
+    set keyword = #{keyword,jdbcType=VARCHAR},
+      isabled = #{isabled,jdbcType=INTEGER},
+      join_time = #{joinTime,jdbcType=TIMESTAMP}
+    where sys_audit_keyword_id = #{sysAuditKeywordId,jdbcType=INTEGER}
+  </update>
+
+  <!-- 以下为自定义sql -->
+
+  <!--新增-->
+  <insert id="insertKeyword" parameterType="com.xunyu.model.tactics.SysAuditKeywordModel">
+    insert into tbl_sys_audit_keyword (keyword,isabled)
+    values ( #{keyword,jdbcType=VARCHAR}, #{isabled,jdbcType=INTEGER})
+  </insert>
+
+  <!--删除-->
+  <update id="deleteKeyword" parameterType="com.xunyu.model.tactics.SysAuditKeywordModel">
+    update tbl_sys_audit_keyword
+    set isabled = 0
+    where isabled = 1 and keyword = #{keyword,jdbcType=VARCHAR}
+  </update>
+
+  <!--查询列表-->
+  <select id="selectKeywordList" parameterType="com.xunyu.model.tactics.SysAuditKeywordModel" resultMap="BaseResultMap">
+    select count(distinct keyword),sys_audit_keyword_id,keyword,isabled,join_time
+    from tbl_sys_audit_keyword
+    where isabled = 1
+    <if test="keyword != null and keyword != '' ">
+      and keyword like concat('%',#{keyword,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime != null and startTime != '' ">
+      <![CDATA[and join_time >= #{startTime,jdbcType=VARCHAR}]]>
+    </if>
+    <if test="endTime != null and endTime != '' ">
+      <![CDATA[and join_time <= #{endTime,jdbcType=VARCHAR}]]>
+    </if>
+    group by keyword
+    order by join_time desc
+    limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+  </select>
+
+  <!--查询总条数-->
+  <select id="selectTotalRows" parameterType="com.xunyu.model.tactics.SysAuditKeywordModel" resultType="java.lang.Integer">
+    select count(distinct keyword) from tbl_sys_audit_keyword
+    where isabled = 1
+    <if test="keyword != null and keyword != '' ">
+      and keyword like concat('%',#{keyword,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime != null and startTime != '' ">
+      <![CDATA[and join_time >= #{startTime,jdbcType=VARCHAR}]]>
+    </if>
+    <if test="endTime != null and endTime != '' ">
+      <![CDATA[and join_time <= #{endTime,jdbcType=VARCHAR}]]>
+    </if>
+  </select>
+
+  <!--批量删除-->
+  <update id="batchDeleteKeyword" parameterType="com.xunyu.model.tactics.SysAuditKeywordModel">
+    update tbl_sys_audit_keyword
+    set isabled = 0
+    where isabled = 1 and keyword in
+    <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </update>
+
+  <!-- 导入添加 -->
+  <insert id="excelAddKeyword" parameterType="java.util.List">
+    insert into tbl_sys_audit_keyword  (keyword,  isabled)
+    values
+    <foreach collection="list" item="item" index="index"  separator=",">
+      (#{item.keyword,jdbcType=VARCHAR},#{item.isabled,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+
+  <!-- 导入删除 -->
+  <update id="excelDeleteKeyword" parameterType="java.util.List">
+    update tbl_sys_audit_keyword
+    set isabled = 0
+    where isabled = 1 and keyword in
+    <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+      #{item.keyword}
+    </foreach>
+  </update>
+
+  <!--检查关键字-->
+  <select id="checkKeyword" parameterType="com.xunyu.model.tactics.SysAuditKeywordModel" resultType="java.lang.String">
+    select keyword
+    from tbl_sys_audit_keyword
+    where isabled = 1 and #{content,jdbcType=VARCHAR} like concat('%',keyword,'%')
+  </select>
+</mapper>
