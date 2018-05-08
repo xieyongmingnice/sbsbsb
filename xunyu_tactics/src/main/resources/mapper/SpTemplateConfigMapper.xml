@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.xunyu_tactics.pojo.SpTemplateConfig">
+  <resultMap id="BaseResultMap" type="com.xunyu.xunyu_tactics.pojo.SpTemplateConfig">
+    <id column="sp_template_config_id" jdbcType="INTEGER" property="spTemplateConfigId" />
+    <result column="agreement_type" jdbcType="INTEGER" property="agreementType" />
+    <result column="net_gate_name" jdbcType="VARCHAR" property="netGateName" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_code" jdbcType="INTEGER" property="companyCode" />
+    <result column="access_code" jdbcType="VARCHAR" property="accessCode" />
+    <result column="report_count" jdbcType="INTEGER" property="reportCount" />
+    <result column="report_content" jdbcType="VARCHAR" property="reportContent" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    sp_template_config_id, agreement_type, net_gate_name, company_name, company_code, 
+    access_code, report_count, report_content, isabled, update_time, create_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_sp_template_config
+    where sp_template_config_id = #{spTemplateConfigId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_sp_template_config
+    where sp_template_config_id = #{spTemplateConfigId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.xunyu.xunyu_tactics.pojo.SpTemplateConfig">
+    insert into tbl_sp_template_config (sp_template_config_id, agreement_type, 
+      net_gate_name, company_name, company_code, 
+      access_code, report_count, report_content, 
+      isabled, update_time, create_time
+      )
+    values (#{spTemplateConfigId,jdbcType=INTEGER}, #{agreementType,jdbcType=INTEGER}, 
+      #{netGateName,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{companyCode,jdbcType=INTEGER}, 
+      #{accessCode,jdbcType=VARCHAR}, #{reportCount,jdbcType=INTEGER}, #{reportContent,jdbcType=VARCHAR}, 
+      #{isabled,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunyu.xunyu_tactics.pojo.SpTemplateConfig">
+    insert into tbl_sp_template_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="spTemplateConfigId != null">
+        sp_template_config_id,
+      </if>
+      <if test="agreementType != null">
+        agreement_type,
+      </if>
+      <if test="netGateName != null">
+        net_gate_name,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="companyCode != null">
+        company_code,
+      </if>
+      <if test="accessCode != null">
+        access_code,
+      </if>
+      <if test="reportCount != null">
+        report_count,
+      </if>
+      <if test="reportContent != null">
+        report_content,
+      </if>
+      <if test="isabled != null">
+        isabled,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="spTemplateConfigId != null">
+        #{spTemplateConfigId,jdbcType=INTEGER},
+      </if>
+      <if test="agreementType != null">
+        #{agreementType,jdbcType=INTEGER},
+      </if>
+      <if test="netGateName != null">
+        #{netGateName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        #{companyCode,jdbcType=INTEGER},
+      </if>
+      <if test="accessCode != null">
+        #{accessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reportCount != null">
+        #{reportCount,jdbcType=INTEGER},
+      </if>
+      <if test="reportContent != null">
+        #{reportContent,jdbcType=VARCHAR},
+      </if>
+      <if test="isabled != null">
+        #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyu.xunyu_tactics.pojo.SpTemplateConfig">
+    update tbl_sp_template_config
+    <set>
+      <if test="agreementType != null">
+        agreement_type = #{agreementType,jdbcType=INTEGER},
+      </if>
+      <if test="netGateName != null">
+        net_gate_name = #{netGateName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        company_code = #{companyCode,jdbcType=INTEGER},
+      </if>
+      <if test="accessCode != null">
+        access_code = #{accessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reportCount != null">
+        report_count = #{reportCount,jdbcType=INTEGER},
+      </if>
+      <if test="reportContent != null">
+        report_content = #{reportContent,jdbcType=VARCHAR},
+      </if>
+      <if test="isabled != null">
+        isabled = #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sp_template_config_id = #{spTemplateConfigId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyu.xunyu_tactics.pojo.SpTemplateConfig">
+    update tbl_sp_template_config
+    set agreement_type = #{agreementType,jdbcType=INTEGER},
+      net_gate_name = #{netGateName,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_code = #{companyCode,jdbcType=INTEGER},
+      access_code = #{accessCode,jdbcType=VARCHAR},
+      report_count = #{reportCount,jdbcType=INTEGER},
+      report_content = #{reportContent,jdbcType=VARCHAR},
+      isabled = #{isabled,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where sp_template_config_id = #{spTemplateConfigId,jdbcType=INTEGER}
+  </update>
+</mapper>
