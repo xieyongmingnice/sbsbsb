@@ -161,4 +161,11 @@
     </foreach>
   </update>
 
+  <!--检查关键字-->
+  <select id="checkKeyword" parameterType="com.xunyu.model.tactics.SysInterceptKeywordModel" resultType="java.lang.String">
+    select keyword
+    from tbl_sys_intercept_keyword
+    where isabled = 1 and #{content,jdbcType=VARCHAR} like concat('%',keyword,'%')
+  </select>
+
 </mapper>

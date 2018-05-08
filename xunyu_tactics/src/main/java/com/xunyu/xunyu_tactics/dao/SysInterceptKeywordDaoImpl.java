@@ -67,9 +67,14 @@ public class SysInterceptKeywordDaoImpl extends BaseDao {
      */
     public int excelDeleteKeyword(List<SysInterceptKeyword> list){
         return super.update("com.xunyu.xunyu_tactics.pojo.SysInterceptKeyword.excelDeleteKeyword",list);
-
     }
 
+    /**
+     * 检查内容关键字
+     */
+    public List<String> checkKeyword(SysInterceptKeywordModel model){
+        return super.selectList("com.xunyu.xunyu_tactics.pojo.SysInterceptKeyword.checkKeyword",model);
+    }
 
     public SysInterceptKeywordDaoImpl(SqlSessionFactory sqlSessionFactory) {
         super(sqlSessionFactory);

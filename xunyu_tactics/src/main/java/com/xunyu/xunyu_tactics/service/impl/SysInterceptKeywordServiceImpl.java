@@ -54,4 +54,9 @@ public class SysInterceptKeywordServiceImpl implements SysInterceptKeywordServic
     public int excelDeleteKeyword(List<SysInterceptKeyword> list) {
         return dao.excelDeleteKeyword(list);
     }
+
+    @Override
+    public List<String> checkKeyword(SysInterceptKeywordModel model) {
+        return dao.checkKeyword(model);
+    }
 }

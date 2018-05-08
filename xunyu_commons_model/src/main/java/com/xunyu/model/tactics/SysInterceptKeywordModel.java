@@ -34,7 +34,7 @@ public class SysInterceptKeywordModel extends UserModel {
     private Date joinTime;
 
     /**
-     *   加入时间
+     *   开始时间
      */
     private String startTime;
 
@@ -44,9 +44,14 @@ public class SysInterceptKeywordModel extends UserModel {
     private String endTime;
 
     /**
-     * 批量操作时用的主键集合
+     * 批量操作时用的数据集合(关键词)
      */
     private List<String> idList;
+
+    /**
+     * 检查内容关键词
+     */
+    private String content;
 
     public Integer getSysInterceptKeywordId() {
         return sysInterceptKeywordId;
@@ -102,5 +107,13 @@ public class SysInterceptKeywordModel extends UserModel {
 
     public void setIdList(List<String> idList) {
         this.idList = idList;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

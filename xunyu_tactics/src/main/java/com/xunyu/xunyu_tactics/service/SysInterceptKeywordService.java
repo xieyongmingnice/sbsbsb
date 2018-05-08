@@ -46,4 +46,10 @@ public interface SysInterceptKeywordService {
      */
     int excelDeleteKeyword(List<SysInterceptKeyword> list);
 
+    /**
+     * 检查内容关键字
+     * @return 内容中存在的关键字list
+     */
+    List<String> checkKeyword(SysInterceptKeywordModel model);
+
 }

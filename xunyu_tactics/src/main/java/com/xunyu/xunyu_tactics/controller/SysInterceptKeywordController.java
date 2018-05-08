@@ -230,11 +230,37 @@ public class SysInterceptKeywordController {
             result.setMessage("文件中没有数据，请完善表格后再导入");
             return result;
         }
-        int success = keywordService.excelAddKeyword(list);
+        int success = keywordService.excelDeleteKeyword(list);
         if (success > 0){
             operationSuccess(result);
         }else {
             operationFailed(result);
+        }
+        return result;
+    }
+
+    /**
+     * 检查内容关键字
+     * @return 内容中存在的关键字list
+     */
+    @RequestMapping(value = "/checkkeyword",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<List<String>> checkKeyword(SysInterceptKeywordModel model) throws Exception{
+        Result result = checkLogin(new Result(), model.getSessionId());
+        if (result.getMessage() != null) {
+            return result;
+        }
+        if (model.getContent() == null || "".equals(model.getContent())){
+            checkParamDefeat(result);
+            return result;
+        }
+        List<String> list = keywordService.checkKeyword(model);
+        if(list != null && list.size() > 0){
+            operationSuccess(result);
+            result.setRes(list);
+        }else {
+            result.setMessage(ResultMessage.Message.NO_VALUE);
+            result.setCode(ResultMessage.Code.SUCCESS);
         }
         return result;
     }
