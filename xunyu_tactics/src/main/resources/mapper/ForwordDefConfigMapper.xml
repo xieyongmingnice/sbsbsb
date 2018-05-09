@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.xunyu_tactics.pojo.ForwordDefConfig">
+  <resultMap id="BaseResultMap" type="com.xunyu.xunyu_tactics.pojo.ForwordDefConfig">
+    <id column="forword_def_config_id" jdbcType="INTEGER" property="forwordDefConfigId" />
+    <result column="gateway_name" jdbcType="VARCHAR" property="gatewayName" />
+    <result column="access_number" jdbcType="VARCHAR" property="accessNumber" />
+    <result column="gateway_status" jdbcType="INTEGER" property="gatewayStatus" />
+    <result column="gateway_code" jdbcType="VARCHAR" property="gatewayCode" />
+    <result column="forword_code" jdbcType="VARCHAR" property="forwordCode" />
+    <result column="whether_forword" jdbcType="INTEGER" property="whetherForword" />
+    <result column="whether_charging" jdbcType="INTEGER" property="whetherCharging" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    forword_def_config_id, gateway_name, access_number, gateway_status, gateway_code, 
+    forword_code, whether_forword, whether_charging, update_time, create_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_forword_def_config
+    where forword_def_config_id = #{forwordDefConfigId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_forword_def_config
+    where forword_def_config_id = #{forwordDefConfigId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.xunyu.xunyu_tactics.pojo.ForwordDefConfig">
+    insert into tbl_forword_def_config (forword_def_config_id, gateway_name, 
+      access_number, gateway_status, gateway_code, 
+      forword_code, whether_forword, whether_charging, 
+      update_time, create_time)
+    values (#{forwordDefConfigId,jdbcType=INTEGER}, #{gatewayName,jdbcType=VARCHAR}, 
+      #{accessNumber,jdbcType=VARCHAR}, #{gatewayStatus,jdbcType=INTEGER}, #{gatewayCode,jdbcType=VARCHAR}, 
+      #{forwordCode,jdbcType=VARCHAR}, #{whetherForword,jdbcType=INTEGER}, #{whetherCharging,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.xunyu.xunyu_tactics.pojo.ForwordDefConfig">
+    update tbl_forword_def_config
+    set gateway_name = #{gatewayName,jdbcType=VARCHAR},
+      access_number = #{accessNumber,jdbcType=VARCHAR},
+      gateway_status = #{gatewayStatus,jdbcType=INTEGER},
+      gateway_code = #{gatewayCode,jdbcType=VARCHAR},
+      forword_code = #{forwordCode,jdbcType=VARCHAR},
+      whether_forword = #{whetherForword,jdbcType=INTEGER},
+      whether_charging = #{whetherCharging,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where forword_def_config_id = #{forwordDefConfigId,jdbcType=INTEGER}
+  </update>
+</mapper>
