@@ -300,7 +300,8 @@ public class AliyunOssUtil {
      * 销毁阿里云OSS客户端对象
      */
     public void destory() {
-        ossClient.shutdown();
+        //ossClient.shutdown();//让gc回收
+
     }
 
 
