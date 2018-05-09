@@ -10,6 +10,7 @@ import com.xunyu.xunyu_tactics.pojo.SysRedlist;
 import com.xunyu.xunyu_tactics.service.FileService;
 import com.xunyu.xunyu_tactics.service.SysRedlistService;
 import com.xunyu.xunyu_tactics.vo.SysRedlistVO;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * @author xym
@@ -178,7 +180,6 @@ public class SysRedlistController {
      */
     @RequestMapping(value = "/exceladdredlist" ,method = RequestMethod.POST)
     public Result<String> excelAddRedlist(HttpServletRequest request, String sessionId){
-        //TODO 判断文件中的数据是否为电话号码
         Result result = checkLogin(new Result(),sessionId);
         if (result.getMessage() != null){
             return result;
@@ -205,12 +206,23 @@ public class SysRedlistController {
         }
         List<SysRedlist> list = Lists.newArrayList();
         Sheet sheet = workbook.getSheetAt(0);
+        StringBuffer sb = new StringBuffer("");
         for (Row row : sheet){
             if (row.getRowNum() < 1){
                 continue;
             }
             SysRedlist redlist = new SysRedlist();
-            long phoneNumber = (long) row.getCell(0).getNumericCellValue();
+            if (row.getCell(0).getCellTypeEnum()!= CellType.NUMERIC){
+                sb.append("第"+(row.getRowNum()+1) + "行不是正确的手机号格式"+TacticsConstants.Separator.COMMA);
+                continue;
+            }
+            long phoneNumber =  (long)row.getCell(0).getNumericCellValue();
+            String phoneNumberStr = String.valueOf(phoneNumber).trim();
+            Pattern pattern = Pattern.compile(TacticsConstants.Regex.PHONE_NUMBER);
+            if (phoneNumberStr.length() != 11 || !pattern.matcher(phoneNumberStr).matches() ){
+                sb.append("第"+(row.getRowNum()+1) + "行不是正确的手机号格式"+TacticsConstants.Separator.COMMA);
+                continue;
+            }
             redlist.setPhoneNumber(String.valueOf(phoneNumber));
             redlist.setRemarks("手动导入");
             redlist.setRedlistSource(TacticsConstants.RedlistSource.MANUAL_ADD);
@@ -235,6 +247,9 @@ public class SysRedlistController {
             logger.error(e.getMessage());
             e.printStackTrace();
         }
+        if (!"".equals(sb.toString())){
+            result.setRes(sb.toString());
+        }
         return result;
     }
     /**
@@ -243,7 +258,6 @@ public class SysRedlistController {
     @RequestMapping(value = "/exceldelredlist" ,method = RequestMethod.POST)
     @ResponseBody
     public Result excelDeleteRedlist(HttpServletRequest request,SysRedlistModel model){
-        //TODO 判断文件中的数据是否为电话号码
         Result result = checkLogin(new Result(),model.getSessionId());
         if (result.getMessage() != null){
             return result;
@@ -270,12 +284,23 @@ public class SysRedlistController {
         }
         List<SysRedlist> list = Lists.newArrayList();
         Sheet sheet = workbook.getSheetAt(0);
+        StringBuffer sb = new StringBuffer("");
         for (Row row : sheet){
             if(row.getRowNum()<1){
                 continue;
             }
             SysRedlist redlist = new SysRedlist();
-            long phoneNumber = (long) row.getCell(0).getNumericCellValue();
+            if (row.getCell(0).getCellTypeEnum()!= CellType.NUMERIC){
+                sb.append("第"+(row.getRowNum()+1) + "行不是正确的手机号格式"+TacticsConstants.Separator.COMMA);
+                continue;
+            }
+            long phoneNumber =  (long)row.getCell(0).getNumericCellValue();
+            String phoneNumberStr = String.valueOf(phoneNumber).trim();
+            Pattern pattern = Pattern.compile(TacticsConstants.Regex.PHONE_NUMBER);
+            if (phoneNumberStr.length() != 11 || !pattern.matcher(phoneNumberStr).matches() ){
+                sb.append("第"+(row.getRowNum()+1) + "行不是正确的手机号格式"+TacticsConstants.Separator.COMMA);
+                continue;
+            }
             redlist.setPhoneNumber(String.valueOf(phoneNumber));
             list.add(redlist);
         }
@@ -295,6 +320,9 @@ public class SysRedlistController {
         }catch (Exception e){
             logger.error(e.getMessage());
             e.printStackTrace();
+        }
+        if (!"".equals(sb.toString())){
+          result.setRes(sb.toString());
         }
         return result;
     }

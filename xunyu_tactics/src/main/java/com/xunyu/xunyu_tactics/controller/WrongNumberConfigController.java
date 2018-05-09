@@ -9,6 +9,7 @@ import com.xunyu.xunyu_tactics.constant.TacticsConstants;
 import com.xunyu.xunyu_tactics.pojo.WrongNumConfig;
 import com.xunyu.xunyu_tactics.service.FileService;
 import com.xunyu.xunyu_tactics.service.WrongNumberConfigService;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author xym
@@ -39,6 +42,7 @@ public class WrongNumberConfigController {
 
     @Autowired
     FileService fileService;
+
 
 
     /**
@@ -151,12 +155,23 @@ public class WrongNumberConfigController {
         }
         List<WrongNumConfig> list = Lists.newArrayList();
         Sheet sheet = workbook.getSheetAt(0);
+        StringBuffer sb = new StringBuffer("");
         for (Row row : sheet){
             if(row.getRowNum()<1){
                 continue;
             }
             WrongNumConfig wrongNumConfig = new WrongNumConfig();
-            long phoneNumber = (long) row.getCell(0).getNumericCellValue();
+            if (row.getCell(0).getCellTypeEnum()!=CellType.NUMERIC){
+                sb.append("第"+(row.getRowNum()+1) + "行不是正确的手机号格式"+TacticsConstants.Separator.COMMA);
+                continue;
+            }
+            long phoneNumber =  (long)row.getCell(0).getNumericCellValue();
+            String phoneNumberStr = String.valueOf(phoneNumber).trim();
+            Pattern pattern = Pattern.compile(TacticsConstants.Regex.PHONE_NUMBER);
+            if (phoneNumberStr.length() != 11 || !pattern.matcher(phoneNumberStr).matches() ){
+                sb.append("第"+(row.getRowNum()+1) + "行不是正确的手机号格式"+TacticsConstants.Separator.COMMA);
+                continue;
+            }
             wrongNumConfig.setPhoneNumber(String.valueOf(phoneNumber));
             wrongNumConfig.setIsabled(TacticsConstants.Isabled.ENABLED);
             list.add(wrongNumConfig);
@@ -171,6 +186,9 @@ public class WrongNumberConfigController {
             operationSuccess(result);
         }else {
             operationFailed(result);
+        }
+        if (!"".equals(sb.toString())){
+            result.setRes(sb.toString());
         }
         return result;
     }

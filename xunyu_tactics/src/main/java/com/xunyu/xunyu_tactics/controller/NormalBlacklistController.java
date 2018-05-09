@@ -10,6 +10,7 @@ import com.xunyu.xunyu_tactics.pojo.NormalBlacklist;
 import com.xunyu.xunyu_tactics.service.FileService;
 import com.xunyu.xunyu_tactics.service.NormalBlacklistService;
 import com.xunyu.xunyu_tactics.vo.NormalBlacklistVO;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -25,6 +26,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * @author xym
@@ -172,12 +174,23 @@ public class NormalBlacklistController {
         }
         List<NormalBlacklist> list = Lists.newArrayList();
         Sheet sheet = workbook.getSheetAt(0);
+        StringBuffer sb = new StringBuffer("");
         for (Row row : sheet){
             if(row.getRowNum()<1){
                 continue;
             }
             NormalBlacklist blacklist = new NormalBlacklist();
-            long phoneNumber = (long) row.getCell(0).getNumericCellValue();
+            if (row.getCell(0).getCellTypeEnum()!= CellType.NUMERIC){
+                sb.append("第"+(row.getRowNum()+1) + "行不是正确的手机号格式"+TacticsConstants.Separator.COMMA);
+                continue;
+            }
+            long phoneNumber =  (long)row.getCell(0).getNumericCellValue();
+            String phoneNumberStr = String.valueOf(phoneNumber).trim();
+            Pattern pattern = Pattern.compile(TacticsConstants.Regex.PHONE_NUMBER);
+            if (phoneNumberStr.length() != 11 || !pattern.matcher(phoneNumberStr).matches() ){
+                sb.append("第"+(row.getRowNum()+1) + "行不是正确的手机号格式"+TacticsConstants.Separator.COMMA);
+                continue;
+            }
             blacklist.setPhoneNumber(String.valueOf(phoneNumber));
             blacklist.setIsabled(TacticsConstants.Isabled.ENABLED);
             blacklist.setBlacklistSource(TacticsConstants.BlacklistSource.MANNUAL);
@@ -195,6 +208,9 @@ public class NormalBlacklistController {
         }else {
             operationFailed(result);
         }
+        if (!"".equals(sb.toString())){
+            result.setRes(sb.toString());
+        }
         return result;
     }
     /**
@@ -202,7 +218,6 @@ public class NormalBlacklistController {
      */
     @RequestMapping(value = "/exceldelblacklist",method = RequestMethod.POST)
     public Result<String> excelDeleteBlacklist(HttpServletRequest request,String sessionId) throws Exception{
-        //TODO 判断文件中的数据是否为电话号码
         Result result = checkLogin(new Result(),sessionId);
         if (result.getMessage() != null){
             return result;
@@ -222,12 +237,23 @@ public class NormalBlacklistController {
         }
         List<NormalBlacklist> list = Lists.newArrayList();
         Sheet sheet = workbook.getSheetAt(0);
+        StringBuffer sb = new StringBuffer("");
         for (Row row : sheet){
             if(row.getRowNum()<1){
                 continue;
             }
             NormalBlacklist blacklist = new NormalBlacklist();
-            long phoneNumber = (long) row.getCell(0).getNumericCellValue();
+            if (row.getCell(0).getCellTypeEnum()!= CellType.NUMERIC){
+                sb.append("第"+(row.getRowNum()+1) + "行不是正确的手机号格式"+TacticsConstants.Separator.COMMA);
+                continue;
+            }
+            long phoneNumber =  (long)row.getCell(0).getNumericCellValue();
+            String phoneNumberStr = String.valueOf(phoneNumber).trim();
+            Pattern pattern = Pattern.compile(TacticsConstants.Regex.PHONE_NUMBER);
+            if (phoneNumberStr.length() != 11 || !pattern.matcher(phoneNumberStr).matches() ){
+                sb.append("第"+(row.getRowNum()+1) + "行不是正确的手机号格式"+TacticsConstants.Separator.COMMA);
+                continue;
+            }
             blacklist.setPhoneNumber(String.valueOf(phoneNumber));
             list.add(blacklist);
         }
@@ -244,7 +270,9 @@ public class NormalBlacklistController {
         }else {
             operationFailed(result);
         }
-
+        if (!"".equals(sb.toString())){
+            result.setRes(sb.toString());
+        }
         return result;
     }
 
