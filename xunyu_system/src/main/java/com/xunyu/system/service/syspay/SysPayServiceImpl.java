@@ -5,6 +5,7 @@ import com.xunyu.system.pojo.syspay.SysPay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,7 +29,7 @@ public class SysPayServiceImpl implements SysPayService {
     }
 
     @Override
-    public SysPay getSysPayDetail(Map<String, Object> map) {
+    public List<SysPay> getSysPayDetail(Map<String, Object> map) {
         return sysPayDaoImpl.getSysPayDetail(map);
     }
 }

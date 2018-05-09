@@ -14,11 +14,12 @@
         <result column="pay_text" property="payText"></result>
         <result column="pay_state" property="payState"></result>
         <result column="userid" property="userId"></result>
+        <result column="pay_type" property="payType"></result>
     </resultMap>
 
     <sql id = "sysPay_column">
         pay_id,isabled,create_time,pay_name,merchant_name,pay_account,pay_pid
-        ,pay_key,pay_text,pay_state,userid
+        ,pay_key,pay_text,pay_state,userid,pay_type
     </sql>
     <select id="getSysPayDetail" parameterType="map" resultMap="sysPay_ResultMap">
         select
@@ -42,6 +43,7 @@
             <if test='payText != null and payText != ""'>pay_text,</if>
             <if test='payState != null'>pay_state,</if>
             <if test='userId != null'>userid,</if>
+            <if test='payType != null'>pay_type,</if>
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -56,6 +58,7 @@
             <if test='payText != null and payText != ""'>#{payText},</if>
             <if test='payState != null'>#{payState},</if>
             <if test='userId != null'>#{userId},</if>
+            <if test='payType != null'>#{payType},</if>
         </trim>
     </insert>
 
@@ -92,7 +95,9 @@
             <if test='userId != null'>
                 <![CDATA[ userid = #{userId}, ]]>
             </if>
-
+            <if test='payType != null'>
+                <![CDATA[ pay_type = #{payType}, ]]>
+            </if>
         </set>
         <where>
             <if test="payId != null">

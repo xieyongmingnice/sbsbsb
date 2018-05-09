@@ -2,6 +2,7 @@ package com.xunyu.system.service.syspay;
 
 import com.xunyu.system.pojo.syspay.SysPay;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,5 +24,5 @@ public interface SysPayService {
     /**
      * 查询当前登录用户支付配置信息
      */
-    SysPay getSysPayDetail(Map<String,Object> map);
+    List<SysPay> getSysPayDetail(Map<String,Object> map);
 }

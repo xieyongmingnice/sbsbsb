@@ -5,6 +5,7 @@ import com.xunyu.system.pojo.syspay.SysPay;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,8 +32,8 @@ public class SysPayDaoImpl extends BaseDao<SysPay,Long> {
     /**
      * 查询当前登录用户支付配置信息
      */
-    public SysPay getSysPayDetail(Map<String,Object> map){
-        return super.selectForObject("com.xunyu.system.pojo.syspay.SysPay.getSysPayDetail",map);
+    public List<SysPay> getSysPayDetail(Map<String,Object> map){
+        return super.selectForListObject("com.xunyu.system.pojo.syspay.SysPay.getSysPayDetail",map);
     }
 
     public SysPayDaoImpl(SqlSessionFactory sqlSessionFactory) {

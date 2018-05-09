@@ -18,6 +18,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -110,12 +111,11 @@ public class SysPayController {
      * 获取当前用户的支付配置信息
      */
     @RequestMapping(value = "getSysPayDetail",method = RequestMethod.POST)
-    public Result<SysPay> getSysPayDetailData(SysPayModel sm) throws Exception{
+    public Result<List<SysPay>> getSysPayDetailData(SysPayModel sm) throws Exception{
 
         User us = redisUtil.getCurrUser(sm.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
-        Result<SysPay> res = new Result<SysPay>();
-        int flag = 0;
+        Result<List<SysPay>> res = new Result<List<SysPay>>();
         if (us == null) {
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
@@ -123,7 +123,7 @@ public class SysPayController {
         }
             if(us.getUserId() != null){
                 map.put("userId",us.getUserId());
-                SysPay sy = sysPayService.getSysPayDetail(map);
+                List<SysPay> sy = sysPayService.getSysPayDetail(map);
                 res.setCode("200");
                 res.setMessage("success");
                 res.setRes(sy);

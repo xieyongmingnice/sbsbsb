@@ -21,6 +21,15 @@ public class SysPay extends UserModel {
     private String payText;//支付描述
     private Integer payState;//是否启用 1/支付宝 2微信 3全启用 4全不启用
     private Long userId; //当前登录用户id
+    private Integer payType;//1支付宝  2微信  3其它
+
+    public Integer getPayType() {
+        return payType;
+    }
+
+    public void setPayType(Integer payType) {
+        this.payType = payType;
+    }
 
     public Long getUserId() {
         return userId;
