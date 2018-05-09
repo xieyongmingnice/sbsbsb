@@ -2,6 +2,7 @@ package com.xunyu.logs.controller.syslog;
 
 import com.commons.core.message.Result;
 import com.commons.core.util.DateUtils;
+import com.commons.core.util.StringUtils2;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.logs.service.syslog.SysLogsService;
 import com.xunyu.model.log.syslog.SysLogs;
@@ -52,8 +53,11 @@ public class SysLogsController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        map.put("beginTime",DateUtils.string2Date(sl.getBeginTime()));
-        map.put("endTime",DateUtils.getUpDate(sl.getBeginTime(),sl.getEndTime()));
+        if(StringUtils2.isNotEmpty(sl.getBeginTime())) {
+
+            map.put("beginTime", DateUtils.string2Date(sl.getBeginTime()));
+            map.put("endTime", DateUtils.getUpDate(sl.getBeginTime(), sl.getEndTime()));
+        }
         map.put("logsId",sl.getLogsId());
         map.put("operName",sl.getOperName());
         map.put("operObj",sl.getOperObj());

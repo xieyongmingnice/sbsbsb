@@ -1,6 +1,7 @@
 package com.xunyu.system.utils.syslog;
 
 import com.commons.core.util.IpAdrressUtil;
+import com.xunyu.config.utils.ServicePortUtil;
 import com.xunyu.model.crm.customer.CustomerModel;
 import com.xunyu.model.user.User;
 
@@ -32,7 +33,7 @@ public class SysLogsUtil {
                     sl.setOperObj(operObj);
                     sl.setOperType(operType);
                     sl.setOperTime(new Date());
-                    sl.setOperPort("8005");
+                    sl.setOperPort(ServicePortUtil.getPort());
                     sl.setOperStatus(status);
                     if(ct != null) {
                         sl.setEnterContact(ct.getEnterContact());

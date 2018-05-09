@@ -1,10 +1,9 @@
-package com.xunyu.shiro.service.roles;
+package com.xunyu.shiro.service.permission;
 
 import com.commons.core.util.RandomUtils;
 import com.commons.core.util.StringUtils2;
-import com.xunyu.shiro.dao.roles.RolesDaoImpl;
-import com.xunyu.shiro.pojo.roles.Roles;
-import com.xunyu.shiro.pojo.roles.RolesUsersR;
+import com.xunyu.shiro.dao.permission.PermissionDaoImpl;
+import com.xunyu.shiro.pojo.permission.Permissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,32 +13,26 @@ import java.util.Map;
 
 /**
  * @author dth
- * @date 2018/4/20 18:17
+ * @date 2018/5/9 18:04
  **/
 @Service
-public class RolesServiceImpl implements RolesService {
+public class PermissionServiceImpl implements PermissionService {
 
     @Autowired
-    private RolesDaoImpl rolesDaoImpl;
-
+    private PermissionDaoImpl permissionDaoImpl;
 
     @Override
-    public List<Roles> listRoles(Map<String, Object> map) {
-        return rolesDaoImpl.listRoles(map);
+    public int addPermission(Permissions p) {
+        return permissionDaoImpl.addPermission(p);
     }
 
     @Override
-    public int addRoles(Roles rl) {
-        return rolesDaoImpl.addRoles(rl);
+    public int updatePermission(Permissions p) {
+        return permissionDaoImpl.updatePermission(p);
     }
 
     @Override
-    public int updateRoles(Roles rl) {
-        return rolesDaoImpl.updateRoles(rl);
-    }
-
-    @Override
-    public int delRoles(String ids) {
+    public int delPerminssion(String ids) {
         int n = 0;
         if (StringUtils2.isNotEmpty(ids)) {
 
@@ -56,14 +49,13 @@ public class RolesServiceImpl implements RolesService {
             }
             map.put("isabled", 0);
             map.put("array", array);
-            n = rolesDaoImpl.delRoles(map);
+            n = permissionDaoImpl.delPerminssion(map);
         }
         return n;
     }
 
     @Override
-    public int addRolesUser(RolesUsersR rr) {
-        return rolesDaoImpl.addRolesUser(rr);
+    public List<Permissions> permissionsList(Map<String, Object> map) {
+        return permissionDaoImpl.permissionsList(map);
     }
-
 }

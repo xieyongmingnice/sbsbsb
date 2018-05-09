@@ -4,9 +4,10 @@ eureka:
   instance:
     #hostname: 47.104.190.174
     hostname: localhost
+    prefer-ip-address: true  #地址使用该属性配置的IP
   client:
     register-with-eureka: false #是否将自已注册为客户端
-    fetch-registry: false
+    fetch-registry: false  #检索服务
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server:

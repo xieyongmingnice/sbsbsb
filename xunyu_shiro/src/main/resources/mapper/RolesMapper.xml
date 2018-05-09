@@ -3,16 +3,84 @@
 <mapper namespace="com.xunyu.shiro.pojo.roles.Roles">
 
     <resultMap id="roles_ResultMap" type="com.xunyu.shiro.pojo.roles.Roles">
-        <!--<id column="user_id" property="userId"></id>
-        <result column="account" property="account"></result>
-        <result column="password" property="passWord"></result>
-        <result column="user_type" property="userType"></result>
+        <id column="role_id" property="roleId"></id>
+        <result column="role_name" property="roleName"></result>
+        <result column="remark" property="remark"></result>
         <result column="isabled" property="isabled"></result>
-        <result column="create_time" property="createTime"></result>-->
+        <result column="create_time" property="rolesCreateTime"></result>
     </resultMap>
 
     <sql id="roles_column">
-
+      role_id,role_name,remark,isabled,create_time
     </sql>
+
+    <insert id = "addRoles" parameterType="com.xunyu.shiro.pojo.roles.Roles"
+            useGeneratedKeys="true" keyColumn="role_id" keyProperty="roleId">
+        insert into tbl_roles
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">role_id,</if>
+            <if test='roleName != null and roleName != ""'>role_name,</if>
+            <if test='isabled != null'>isabled,</if>
+            <if test='remark != null and remark != ""'>remark,</if>
+            <if test='rolesCreateTime != null'>create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">#{roleId},</if>
+            <if test='roleName != null and roleName != ""'>#{roleName},</if>
+            <if test='isabled != null'>#{isabled},</if>
+            <if test='remark != null and remark != ""'>#{remark},</if>
+            <if test='rolesCreateTime != null'>#{createTime},</if>
+        </trim>
+    </insert>
+
+    <insert id = "addRolesUser" parameterType="com.xunyu.shiro.pojo.roles.RolesUsersR"
+            useGeneratedKeys="true" keyColumn="role_user_r_id" keyProperty="roleUserRId">
+        insert into tbl_roles_users_r
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleUserRId != null">role_user_r_id,</if>
+            <if test='roleId != null'>role_id,</if>
+            <if test='userId != null'>user_id,</if>
+
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleUserRId != null">#{roleUserRId},</if>
+            <if test='roleId != null'>#{roleId},</if>
+            <if test='userId != null'>#{userId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateRoles" parameterType="com.xunyu.shiro.pojo.roles.Roles">
+        update tbl_roles
+        <set>
+            <if test='roleName != null and roleName != ""'>
+                <![CDATA[	role_name = #{roleName}, ]]>
+            </if>
+            <if test='isabled != null'>
+                <![CDATA[	isabled = #{isabled}, ]]>
+            </if>
+            <if test='remark != null and remark != ""'>
+                <![CDATA[	remark = #{remark}, ]]>
+            </if>
+            <if test='rolesCreateTime != null'>
+                <![CDATA[	create_time = #{rolesCreateTime}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="roleId != null">
+                role_id = #{roleId}
+            </if>
+        </where>
+    </update>
+
+    <update id = "delRoles" parameterType="map">
+        update tbl_roles set
+        isabled = #{isabled}
+        where role_id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
 
 </mapper>

@@ -94,21 +94,14 @@ public class CustomerController {
         }
         int flag = 0;
         if(ct.getCustomerId() != null){
-            map.put("account",ct.getCustomerAccount());
-            User us2 = userDaoImpl.getUserByAccount(map);
-            if(us2 == null) {
-                flag = customerService.updateCustomer(ct);
-                res.setCode("200");
-                res.setMessage("success");
-                res.setRes(ct);
-                if(flag > 0){
-                    SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService2,us,"修改客户信息","修改"
-                            ,request,"成功修改客户信息",customerService,1);
-                }
-            }else{
-                res.setCode("412");
-                res.setMessage("该账号已存在");
+            flag = customerService.updateCustomer(ct);
+            res.setCode("200");
+            res.setMessage("success");
+            res.setRes(ct);
+            if(flag > 0){
+                SysLogsUtil su = SysLogsUtil.getInstance();
+                su.addSysLogs(logService2,us,"修改客户信息","修改"
+                        ,request,"成功修改客户信息",customerService,1);
             }
         }else{
             res.setCode("413");

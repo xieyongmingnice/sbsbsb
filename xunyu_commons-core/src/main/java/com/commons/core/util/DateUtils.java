@@ -179,7 +179,11 @@ public class DateUtils {
         Date upDate = null;
         try {
             d1 = string2Date(data1);
-            d2 = string2Date(data2);
+            if(StringUtils2.isNotEmpty(data2)) {
+                d2 = string2Date(data2);
+            }else{
+                d2 = string2Date("9999-09-09");
+            }
             if (isSameDate(d1, d2)) {
                 Calendar cal1 = Calendar.getInstance();
                 cal1.setTime(d2);
