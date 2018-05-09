@@ -1,22 +1,15 @@
 package com.xunyu.xunyu_tactics.service.impl;
 
-import com.commons.core.message.ResultMessage;
 import com.google.common.collect.Maps;
-import com.xunyu.model.tactics.SysRedlistModel;
-import com.xunyu.xunyu_tactics.service.ExcelService;
-import org.apache.commons.fileupload.disk.DiskFileItem;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import com.xunyu.xunyu_tactics.service.FileService;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -26,7 +19,7 @@ import java.util.Map;
  * @date 2018/5/2 17:54
  */
 @Service
-public class ExcelServiceImpl implements ExcelService{
+public class FileServiceImpl implements FileService {
 
     @Override
     public Map getWorkBook(HttpServletRequest request) throws Exception {
@@ -44,7 +37,7 @@ public class ExcelServiceImpl implements ExcelService{
                 // 取得上传文件
                 MultipartFile file = multiRequest.getFile(iter.next());
                 String fileName = file.getOriginalFilename();
-                String fileType = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.lastIndexOf(".") + 4);
+                String fileType = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
                 Workbook workbook = WorkbookFactory.create(file.getInputStream());
                 map.put("workbook", workbook);
                 map.put("filetype", fileType);

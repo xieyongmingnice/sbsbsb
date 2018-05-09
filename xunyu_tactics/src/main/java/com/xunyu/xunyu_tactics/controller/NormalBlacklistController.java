@@ -7,7 +7,7 @@ import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.tactics.NormalBlacklistModel;
 import com.xunyu.xunyu_tactics.constant.TacticsConstants;
 import com.xunyu.xunyu_tactics.pojo.NormalBlacklist;
-import com.xunyu.xunyu_tactics.service.ExcelService;
+import com.xunyu.xunyu_tactics.service.FileService;
 import com.xunyu.xunyu_tactics.service.NormalBlacklistService;
 import com.xunyu.xunyu_tactics.vo.NormalBlacklistVO;
 import org.apache.poi.ss.usermodel.Row;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -40,7 +41,7 @@ public class NormalBlacklistController {
     RedisUtil redisUtil;
 
     @Autowired
-    ExcelService excelService;
+    FileService fileService;
 
     @Autowired
     NormalBlacklistService blacklistService;
@@ -156,7 +157,7 @@ public class NormalBlacklistController {
         if (result.getMessage() != null){
             return result;
         }
-        Map map = excelService.getWorkBook(request);
+        Map map = fileService.getWorkBook(request);
         String fileType = (String)map.get("filetype");
         Workbook workbook = (Workbook)map.get("workbook");
 
@@ -206,7 +207,7 @@ public class NormalBlacklistController {
         if (result.getMessage() != null){
             return result;
         }
-        Map map = excelService.getWorkBook(request);
+        Map map = fileService.getWorkBook(request);
         String fileType = (String)map.get("filetype");
         Workbook workbook = (Workbook)map.get("workbook");
 

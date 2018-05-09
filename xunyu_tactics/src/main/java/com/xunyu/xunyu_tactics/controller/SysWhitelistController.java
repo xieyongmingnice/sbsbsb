@@ -7,7 +7,7 @@ import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.tactics.SysWhitelistModel;
 import com.xunyu.xunyu_tactics.constant.TacticsConstants;
 import com.xunyu.xunyu_tactics.pojo.SysWhitelist;
-import com.xunyu.xunyu_tactics.service.ExcelService;
+import com.xunyu.xunyu_tactics.service.FileService;
 import com.xunyu.xunyu_tactics.service.SysWhitelistService;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -42,7 +42,7 @@ public class SysWhitelistController {
     SysWhitelistService whitelistService;
 
     @Autowired
-    ExcelService excelService;
+    FileService fileService;
 
 
 
@@ -142,7 +142,7 @@ public class SysWhitelistController {
         if (result.getMessage() != null){
             return result;
         }
-        Map map = excelService.getWorkBook(request);
+        Map map = fileService.getWorkBook(request);
         String fileType = (String)map.get("filetype");
         Workbook workbook = (Workbook)map.get("workbook");
 

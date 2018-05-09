@@ -1,11 +1,6 @@
 package com.xunyu.xunyu_tactics.service;
 
 
-import com.xunyu.model.tactics.SysRedlistModel;
-import com.xunyu.model.user.UserModel;
-import org.springframework.http.HttpRequest;
-import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
@@ -14,7 +9,7 @@ import java.util.Map;
  * @description excel相关service
  * @date 2018/5/2 17:42
  */
-public interface ExcelService {
+public interface FileService {
 
     /**
      * 根据http请求获得workbook对象 和 文件类型

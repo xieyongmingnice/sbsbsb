@@ -7,7 +7,7 @@ import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.tactics.NormalWhitelistModel;
 import com.xunyu.xunyu_tactics.constant.TacticsConstants;
 import com.xunyu.xunyu_tactics.pojo.NormalWhitelist;
-import com.xunyu.xunyu_tactics.service.ExcelService;
+import com.xunyu.xunyu_tactics.service.FileService;
 import com.xunyu.xunyu_tactics.service.NormalWhitelistService;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -42,7 +43,7 @@ public class NormalWhitelistController {
     NormalWhitelistService normalWhitelistService;
 
     @Autowired
-    ExcelService excelService;
+    FileService fileService;
 
 
     /**
@@ -141,7 +142,7 @@ public class NormalWhitelistController {
         }
         Map map = null;
         try {
-            map = excelService.getWorkBook(request);
+            map = fileService.getWorkBook(request);
         } catch (Exception e) {
             e.printStackTrace();
         }

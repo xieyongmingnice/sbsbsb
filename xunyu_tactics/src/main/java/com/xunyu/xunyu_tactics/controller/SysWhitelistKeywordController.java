@@ -7,7 +7,7 @@ import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.tactics.SysWhitelistKeywordModel;
 import com.xunyu.xunyu_tactics.constant.TacticsConstants;
 import com.xunyu.xunyu_tactics.pojo.SysWhitelistKeyword;
-import com.xunyu.xunyu_tactics.service.ExcelService;
+import com.xunyu.xunyu_tactics.service.FileService;
 import com.xunyu.xunyu_tactics.service.SysWhitelistKeywordService;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -39,7 +39,7 @@ public class SysWhitelistKeywordController {
     SysWhitelistKeywordService keywordService;
 
     @Autowired
-    ExcelService excelService;
+    FileService fileService;
 
     /**
      * 添加白名单关键字
@@ -158,7 +158,7 @@ public class SysWhitelistKeywordController {
         if(result.getMessage() != null ){
             return result;
         }
-        Map map = excelService.getWorkBook(request);
+        Map map = fileService.getWorkBook(request);
         String fileType = (String)map.get("filetype");
         Workbook workbook = (Workbook)map.get("workbook");
         if (!(TacticsConstants.Suffix.XLS).equals(fileType.toLowerCase()) &&  !(TacticsConstants.Suffix.XLSX).equals(fileType.toLowerCase())){

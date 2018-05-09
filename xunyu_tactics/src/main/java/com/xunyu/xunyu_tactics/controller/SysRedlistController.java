@@ -7,7 +7,7 @@ import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.tactics.SysRedlistModel;
 import com.xunyu.xunyu_tactics.constant.TacticsConstants;
 import com.xunyu.xunyu_tactics.pojo.SysRedlist;
-import com.xunyu.xunyu_tactics.service.ExcelService;
+import com.xunyu.xunyu_tactics.service.FileService;
 import com.xunyu.xunyu_tactics.service.SysRedlistService;
 import com.xunyu.xunyu_tactics.vo.SysRedlistVO;
 import org.apache.poi.ss.usermodel.Row;
@@ -40,7 +40,7 @@ public class SysRedlistController {
     SysRedlistService sysRedlistService;
 
     @Autowired
-    ExcelService excelService;
+    FileService fileService;
 
     /**
      * 新增红名单
@@ -186,7 +186,7 @@ public class SysRedlistController {
         String fileType = "";
         Workbook workbook = null;
         try {
-            Map map = excelService.getWorkBook(request);
+            Map map = fileService.getWorkBook(request);
             fileType = (String)map.get("filetype");
             workbook = (Workbook)map.get("workbook");
         }catch (Exception e){
@@ -251,7 +251,7 @@ public class SysRedlistController {
         String fileType = "";
         Workbook workbook = null;
         try {
-            Map map = excelService.getWorkBook(request);
+            Map map = fileService.getWorkBook(request);
             fileType = (String)map.get("filetype");
             workbook = (Workbook)map.get("workbook");
         }catch (Exception e){

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.xunyu_tactics.pojo.BlacklistKeyword">
+  <resultMap id="BaseResultMap" type="com.xunyu.xunyu_tactics.pojo.BlacklistKeyword">
+    <id column="blacklist_keyword_id" jdbcType="INTEGER" property="blacklistKeywordId" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="join_time" jdbcType="TIMESTAMP" property="joinTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    blacklist_keyword_id, keyword, isabled, join_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_blacklist_keyword
+    where blacklist_keyword_id = #{blacklistKeywordId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_blacklist_keyword
+    where blacklist_keyword_id = #{blacklistKeywordId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.xunyu.xunyu_tactics.pojo.BlacklistKeyword">
+    insert into tbl_blacklist_keyword (blacklist_keyword_id, keyword, isabled, 
+      join_time)
+    values (#{blacklistKeywordId,jdbcType=INTEGER}, #{keyword,jdbcType=VARCHAR}, #{isabled,jdbcType=INTEGER}, 
+      #{joinTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunyu.xunyu_tactics.pojo.BlacklistKeyword">
+    insert into tbl_blacklist_keyword
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blacklistKeywordId != null">
+        blacklist_keyword_id,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="isabled != null">
+        isabled,
+      </if>
+      <if test="joinTime != null">
+        join_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blacklistKeywordId != null">
+        #{blacklistKeywordId,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="isabled != null">
+        #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="joinTime != null">
+        #{joinTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyu.xunyu_tactics.pojo.BlacklistKeyword">
+    update tbl_blacklist_keyword
+    <set>
+      <if test="keyword != null">
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="isabled != null">
+        isabled = #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="joinTime != null">
+        join_time = #{joinTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where blacklist_keyword_id = #{blacklistKeywordId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyu.xunyu_tactics.pojo.BlacklistKeyword">
+    update tbl_blacklist_keyword
+    set keyword = #{keyword,jdbcType=VARCHAR},
+      isabled = #{isabled,jdbcType=INTEGER},
+      join_time = #{joinTime,jdbcType=TIMESTAMP}
+    where blacklist_keyword_id = #{blacklistKeywordId,jdbcType=INTEGER}
+  </update>
+
+  <!--新增-->
+  <insert id="insertKeyword" parameterType="com.xunyu.model.tactics.BlacklistKeywordModel">
+    insert into tbl_blacklist_keyword (keyword,isabled)
+    values ( #{keyword,jdbcType=VARCHAR}, #{isabled,jdbcType=INTEGER})
+  </insert>
+
+  <!--删除-->
+  <update id="deleteKeyword" parameterType="com.xunyu.model.tactics.BlacklistKeywordModel">
+    update tbl_blacklist_keyword
+    set isabled = 0
+    where isabled = 1 and keyword = #{keyword,jdbcType=VARCHAR}
+  </update>
+
+  <!--查询列表-->
+  <select id="selectKeywordList" parameterType="com.xunyu.model.tactics.BlacklistKeywordModel" resultMap="BaseResultMap">
+    select count(distinct keyword),blacklist_keyword_id,keyword,isabled,join_time
+    from tbl_blacklist_keyword
+    where isabled = 1
+    <if test="keyword != null and keyword != '' ">
+      and keyword like concat('%',#{keyword,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime != null and startTime != '' ">
+      <![CDATA[and join_time >= #{startTime,jdbcType=VARCHAR}]]>
+    </if>
+    <if test="endTime != null and endTime != '' ">
+      <![CDATA[and join_time <= #{endTime,jdbcType=VARCHAR}]]>
+    </if>
+    group by keyword
+    order by join_time desc
+    limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+  </select>
+
+  <!--查询总条数-->
+  <select id="selectTotalRows" parameterType="com.xunyu.model.tactics.BlacklistKeywordModel" resultType="java.lang.Integer">
+    select count(distinct keyword) from tbl_blacklist_keyword
+    where isabled = 1
+    <if test="keyword != null and keyword != '' ">
+      and keyword like concat('%',#{keyword,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime != null and startTime != '' ">
+      <![CDATA[and join_time >= #{startTime,jdbcType=VARCHAR}]]>
+    </if>
+    <if test="endTime != null and endTime != '' ">
+      <![CDATA[and join_time <= #{endTime,jdbcType=VARCHAR}]]>
+    </if>
+  </select>
+
+  <!--批量删除-->
+  <update id="batchDeleteKeyword" parameterType="com.xunyu.model.tactics.BlacklistKeywordModel">
+    update tbl_blacklist_keyword
+    set isabled = 0
+    where isabled = 1 and keyword in
+    <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </update>
+
+  <!-- 导入添加 -->
+  <insert id="excelAddKeyword" parameterType="java.util.List">
+    insert into tbl_blacklist_keyword  (keyword,  isabled)
+    values
+    <foreach collection="list" item="item" index="index"  separator=",">
+      (#{item.keyword,jdbcType=VARCHAR},#{item.isabled,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+</mapper>
