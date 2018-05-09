@@ -44,7 +44,7 @@ public class RmBlacklistKeywordController {
     FileService fileService;
 
     /**
-     * 添加回复加黑关键字
+     * 添加回复去黑关键字
      * @param model
      * @return Result<String>
      */
@@ -69,7 +69,7 @@ public class RmBlacklistKeywordController {
         return result;
     }
     /**
-     * 删除回复加黑关键字
+     * 删除回复去黑关键字
      * @param model
      * @return Result<String>
      */
@@ -93,13 +93,13 @@ public class RmBlacklistKeywordController {
         return result;
     }
     /**
-     * 查询回复加黑关键字列表
+     * 查询回复去黑关键字列表
      * @param model
      * @return Result<String>
      */
     @RequestMapping(value = "/getkeywordlist",method = RequestMethod.POST)
     @ResponseBody
-    public Result<String> getKeywordList(RmBlacklistKeywordModel model){
+    public Result<List<RmBlacklistKeyword>> getKeywordList(RmBlacklistKeywordModel model){
         Result result = checkLogin(new Result(),model.getSessionId());
         if(result.getMessage() != null ){
             return result;
@@ -126,7 +126,7 @@ public class RmBlacklistKeywordController {
         return result;
     }
     /**
-     * 批量删除回复加黑关键字
+     * 批量删除回复去黑关键字
      */
     @RequestMapping(value = "/batchdelkeyword",method = RequestMethod.POST)
     @ResponseBody
@@ -148,7 +148,7 @@ public class RmBlacklistKeywordController {
         return result;
     }
     /**
-     * 导入添加回复加黑关键字
+     * 导入添加回复去黑关键字
      * @param request
      * @param sessionId
      * @return Result<String>

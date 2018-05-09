@@ -98,7 +98,7 @@ public class BlacklistKeywordController {
      */
     @RequestMapping(value = "/getkeywordlist",method = RequestMethod.POST)
     @ResponseBody
-    public Result<String> getKeywordList(BlacklistKeywordModel model){
+    public Result<List<BlacklistKeyword>> getKeywordList(BlacklistKeywordModel model){
         Result result = checkLogin(new Result(),model.getSessionId());
         if(result.getMessage() != null ){
             return result;
