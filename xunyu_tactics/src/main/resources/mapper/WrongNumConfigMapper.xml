@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.xunyu_tactics.pojo.WrongNumConfig">
+  <resultMap id="BaseResultMap" type="com.xunyu.xunyu_tactics.pojo.WrongNumConfig">
+    <id column="wrong_num_config_id" jdbcType="INTEGER" property="wrongNumConfigId" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="join_time" jdbcType="TIMESTAMP" property="joinTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    wrong_num_config_id, phone_number, isabled, join_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_wrong_num_config
+    where wrong_num_config_id = #{wrongNumConfigId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_wrong_num_config
+    where wrong_num_config_id = #{wrongNumConfigId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.xunyu.xunyu_tactics.pojo.WrongNumConfig">
+    insert into tbl_wrong_num_config (wrong_num_config_id, phone_number, isabled, 
+      join_time)
+    values (#{wrongNumConfigId,jdbcType=INTEGER}, #{phoneNumber,jdbcType=VARCHAR}, #{isabled,jdbcType=INTEGER}, 
+      #{joinTime,jdbcType=TIMESTAMP})
+  </insert>
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyu.xunyu_tactics.pojo.WrongNumConfig">
+    update tbl_wrong_num_config
+    <set>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="isabled != null">
+        isabled = #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="joinTime != null">
+        join_time = #{joinTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where wrong_num_config_id = #{wrongNumConfigId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyu.xunyu_tactics.pojo.WrongNumConfig">
+    update tbl_wrong_num_config
+    set phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      isabled = #{isabled,jdbcType=INTEGER},
+      join_time = #{joinTime,jdbcType=TIMESTAMP}
+    where wrong_num_config_id = #{wrongNumConfigId,jdbcType=INTEGER}
+  </update>
+
+  <!-- 以下为自定义sql -->
+
+  <!-- 新增 -->
+  <insert id="insertWrongNumber" parameterType="com.xunyu.model.tactics.WrongNumberConfigModel">
+    insert into tbl_wrong_num_config ( phone_number,isabled)
+    values ( #{phoneNumber,jdbcType=VARCHAR},1)
+  </insert>
+
+  <!-- 删除 -->
+  <update id="deleteWrongNumber" parameterType="com.xunyu.model.tactics.WrongNumberConfigModel">
+    update tbl_wrong_num_config
+    set isabled = 0
+    where isabled = 1 and
+    phone_number = #{phoneNumber,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 导入添加 -->
+  <insert id="excelInsertWrongNumber" parameterType="java.util.List">
+    insert into tbl_wrong_num_config  (phone_number,isabled)
+    values
+    <foreach collection="list" item="item" index="index"  separator=",">
+      (#{item.phoneNumber,jdbcType=VARCHAR},1)
+    </foreach>
+  </insert>
+
+  <!-- 查询列表 -->
+  <select id="selectWrongNumberList" parameterType="com.xunyu.model.tactics.WrongNumberConfigModel" resultMap="BaseResultMap">
+    select count(distinct phone_number),wrong_num_config_id, phone_number, join_time, isabled
+    from tbl_wrong_num_config
+    where isabled = 1
+    <if test="phoneNumber != null and phoneNumber != '' ">
+      and phone_number like concat('%',#{phoneNumber,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime != null and startTime != '' ">
+      <![CDATA[and join_time >= #{startTime,jdbcType=VARCHAR}]]>
+    </if>
+    <if test="endTime != null and endTime != '' ">
+      <![CDATA[and join_time <= #{endTime,jdbcType=VARCHAR}]]>
+    </if>
+    group by phone_number
+    order by join_time desc
+    limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+  </select>
+
+  <!-- 查询总条数 -->
+  <select id="selectTotalRows" parameterType="com.xunyu.model.tactics.WrongNumberConfigModel" resultType="java.lang.Integer">
+    select count(DISTINCT phone_number)
+    from tbl_wrong_num_config
+    where isabled = 1
+    <if test="phoneNumber != null and phoneNumber != '' ">
+      and phone_number like concat('%',#{phoneNumber,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime != null and startTime != '' ">
+      <![CDATA[and join_time >= #{startTime,jdbcType=VARCHAR}]]>
+    </if>
+    <if test="endTime != null and endTime != '' ">
+      <![CDATA[and join_time <= #{endTime,jdbcType=VARCHAR}]]>
+    </if>
+  </select>
+
+  <!-- 批量删除 -->
+  <update id="batchDeleteWrongNumber" parameterType="java.util.List">
+    update tbl_wrong_num_config
+    set isabled = 0
+    where isabled = 1
+    and phone_number in
+    <foreach collection="idList" item="item" index="index" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </update>
+</mapper>
