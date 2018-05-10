@@ -23,7 +23,7 @@ public class SessionDao extends EnterpriseCacheSessionDAO {
     @Override  
     protected Serializable doCreate(Session session) {  
         Serializable sessionId = super.doCreate(session);  
-        redisUtil.set(sessionId.toString(), sessionToByte(session),12L);//设置过期时间
+        redisUtil.set(sessionId.toString(), sessionToByte(session),2L);//设置过期时间
         //把session放入缓存中
        /* MyCacheManager<Serializable,Session> myCacheManager = new MyCacheManager<Serializable,Session>();
         myCacheManager.put(sessionId,session);*/

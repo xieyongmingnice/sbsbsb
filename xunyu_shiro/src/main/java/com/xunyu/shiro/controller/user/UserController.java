@@ -1,4 +1,4 @@
-package com.xunyu.shiro.controller;
+package com.xunyu.shiro.controller.user;
 
 import com.commons.core.message.Result;
 import com.commons.core.message.ResultTypeEnum;
@@ -7,6 +7,7 @@ import com.commons.core.util.StringUtils2;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.config.redis.SessionDao;
 import com.xunyu.model.user.User;
+import com.xunyu.shiro.pojo.user.UserAll;
 import com.xunyu.shiro.service.user.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -15,6 +16,8 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +34,7 @@ import java.util.Map;
 @RestController("/")
 public class UserController {
 
+    private Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired
     RedisUtil redisUtil;
     @Autowired
@@ -56,15 +60,17 @@ public class UserController {
         } catch (IncorrectCredentialsException e) {
             map.put("code","413");
             map.put("message", "密码错误");
-            e.printStackTrace();
+            log.error(e.getMessage());
         } catch (LockedAccountException e) {
             map.put("code","412");
             map.put("message", "登录失败，该用户已被冻结");
+            log.error(e.getMessage());
         } catch (AuthenticationException e) {
             map.put("code","404");
             map.put("message", "该用户不存在");
+            log.error(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
         return map;
     }
@@ -173,7 +179,7 @@ public class UserController {
             } catch (Exception e) {
                 res.setCode("500");
                 res.setMessage("添加失败,请仔细检查提交的数据！");
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
         }else{
             res.setCode("413");
@@ -216,8 +222,7 @@ public class UserController {
             } catch (Exception e) {
                 res.setCode("500");
                 res.setMessage("修改失败,请仔细检查提交的数据！");
-                e.printStackTrace();
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
 
         return res;
@@ -228,9 +233,13 @@ public class UserController {
      */
     @RequestMapping(value = "getUserInfo",method = RequestMethod.POST)
     public Result<User> getUserInfoData(HttpServletResponse response,User user) {
-
-
         Result<User> res = new Result<User>();
+        boolean status = redisUtil.sessionStatus(user.getSessionId());
+        if(!status){
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
         try{
             if (StringUtils2.isNotEmpty(user.getAccount())) {
                 Map<String,Object> map = new HashMap<String,Object>();
@@ -244,7 +253,34 @@ public class UserController {
         }catch (Exception e){
             res.setCode("500");
             res.setMessage("系统异常");
-            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+        return res;
+    }
+
+    /**
+     * 获取用户角色权限及所在分组
+     */
+    @RequestMapping(value = "getUserRolePerGroup",method = RequestMethod.POST)
+    public Result<UserAll> getUserInfoData(User user) {
+        Result<UserAll> res = new Result<UserAll>();
+        User u = redisUtil.getCurrUser(user.getSessionId());
+        Map<String,Object> map = new HashMap<String,Object>();
+        if (u == null) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        try{
+            map.put("userId",u.getUserId());
+            UserAll ua = userService.getUserDetail(map);
+            res.setCode("200");
+            res.setMessage("success");
+            res.setRes(ua);
+        }catch (Exception e){
+            res.setCode("500");
+            res.setMessage("系统异常");
+            log.error(e.getMessage());
         }
         return res;
     }
