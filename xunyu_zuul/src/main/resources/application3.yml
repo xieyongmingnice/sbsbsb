@@ -6,8 +6,11 @@ eureka:
       defaultZone: http://47.104.190.174:8001/eureka/
       registry-fetch-interval-seconds: 5 #拉取服务注册信息时间间隔,默认为30秒
   instance:
-      lease-renewal-interval-in-seconds: 5 #心跳时间,默认为30秒
-      lease-expiration-duration-in-seconds: 10 #若eureka server在这时间内没收到心跳则移除该instance,默认为90秒
+    lease-renewal-interval-in-seconds: 5 #心跳时间,默认为30秒
+    lease-expiration-duration-in-seconds: 10 #若eureka server在这时间内没收到心跳则移除该instance,默认为90秒
+    prefer-ip-address: true  #地址使用该属性配置的IP
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+
 spring:
   application:
     name: xunyu-zuul
@@ -43,38 +46,6 @@ zuul:
     api-log-manager:
        path: /log/**
        service-id: xunyu-log-manager
-
-# 注意，这里在运行的时候有个坑，如果以树形展开写法的话，那么就会出错了，所以这个配置还是避免用树形写法
-ribbon.eureka.enabled: false  # 禁用 eureka 使用listOfServers配置外部ribbon(基于客户端的)负载
-
-#zuul  通过listOfServers配置外部服务的负载均衡
-xunyu-crm:
-  ribbon:  #IP可以写多个用逗号隔开；开启ribbon(客户端)负载
-    listOfServers: http://47.104.190.41:8004
-
-xunyu-shiro:
-  ribbon:
-     listOfServers: http://47.104.190.41:8003
-
-xunyu-system:
-  ribbon:
-     listOfServers: http://47.104.190.41:8005
-
-xunyu-log-manager:
-  ribbon:
-     listOfServers: http://47.104.190.41:8007
-
-xunyu-tactics:
-  ribbon:
-     listOfServers: http://47.104.190.174:8009
-
-xunyu-department:
-   ribbon:
-      listOfServers: http://47.104.190.174:8008
-
-api-log-manager:
-    ribbon:
-       listOfServers: http://47.104.190.41:8007,http://47.104.190.174:8007
 
 hystrix:
   command:

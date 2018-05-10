@@ -13,7 +13,7 @@ public class ProductServere extends UserModel {
 
     private Long serviceId;//主键
     private String serviceName;//产品服务名称
-    private Integer servicePayType;//付费类型
+    private Integer servicePayType;//付费模式
     private Integer isabled;//1未删除  0删除
     private String remark;//备注
     private Date createTime;//创建时间
