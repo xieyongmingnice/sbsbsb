@@ -51,7 +51,7 @@ public class PermissionDaoImpl extends BaseDao<Permissions,Long> {
     /**
      * 添加角色权限关联
      */
-    int addRolesPer(RolesPermissionsR r){
+   public int addRolesPer(RolesPermissionsR r){
 
         return super.insert("com.xunyu.shiro.pojo.permission.Permissions.addRolesPer",r);
     }

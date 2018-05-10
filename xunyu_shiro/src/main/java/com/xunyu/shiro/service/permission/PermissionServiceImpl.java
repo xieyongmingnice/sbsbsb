@@ -4,6 +4,7 @@ import com.commons.core.util.RandomUtils;
 import com.commons.core.util.StringUtils2;
 import com.xunyu.shiro.dao.permission.PermissionDaoImpl;
 import com.xunyu.shiro.pojo.permission.Permissions;
+import com.xunyu.shiro.pojo.permission.RolesPermissionsR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,5 +58,10 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public List<Permissions> permissionsList(Map<String, Object> map) {
         return permissionDaoImpl.permissionsList(map);
+    }
+
+    @Override
+    public int addRolesPer(RolesPermissionsR r) {
+        return permissionDaoImpl.addRolesPer(r);
     }
 }
