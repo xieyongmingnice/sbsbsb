@@ -4,6 +4,10 @@ import com.xunyu.model.user.UserModel;
 
 import java.util.Date;
 
+/**
+ * @author dth
+ * @date 2018/5/10 9:23
+ **/
 public class SysLogs extends UserModel {
 
     private Long logsId;
@@ -19,6 +23,15 @@ public class SysLogs extends UserModel {
 
     private String beginTime;//开始时间
     private String endTime; //结束时间
+    private String logsIds;//id组成的字符串
+
+    public String getLogsIds() {
+        return logsIds;
+    }
+
+    public void setLogsIds(String logsIds) {
+        this.logsIds = logsIds;
+    }
 
     public String getBeginTime() {
         return beginTime;

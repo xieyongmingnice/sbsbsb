@@ -23,4 +23,9 @@ public interface SysLogsService {
      * 获取日志详情
      */
     SysLogs getSysLogsDetail(Map<String,Object> map);
+
+    /**
+     * 批量删除
+     */
+    int delSysLogs(String ids);
 }

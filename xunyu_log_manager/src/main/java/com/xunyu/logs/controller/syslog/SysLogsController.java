@@ -22,7 +22,7 @@ import java.util.Map;
  * @date 2018/5/3 17:53
  **/
 @RestController
-@RequestMapping("/syslog")
+@RequestMapping("syslog/")
 public class SysLogsController {
 
     @Autowired
@@ -101,6 +101,29 @@ public class SysLogsController {
         }else{
             res.setCode("413");
             res.setMessage("logsId不能为空");
+        }
+        return res;
+    }
+
+    /**
+     * 批量删除
+     */
+    @RequestMapping(value = "delSysLogs",method = RequestMethod.POST)
+    public Result<SysLogs> delSysLogsData(SysLogs sl) throws Exception {
+        Result<SysLogs> res = new Result<SysLogs>();
+        User us = redisUtil.getCurrUser(sl.getSessionId());
+        if (us == null) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        if(StringUtils2.isNotEmpty(sl.getLogsIds())){
+           logsService.delSysLogs(sl.getLogsIds());
+           res.setMessage("success");
+           res.setCode("200");
+        }else{
+            res.setCode("413");
+            res.setMessage("logsIds不能为空");
         }
         return res;
     }

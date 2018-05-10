@@ -43,6 +43,14 @@ public class SysLogsDaoImpl extends BaseDao<SysLogs,Long> {
         return super.selectForObject("com.xunyu.model.log.syslog.SysLogs.getSysLogsDetail",map);
     }
 
+    /**
+     * 批量删除
+     */
+    public int delSysLogs(List<String> idsList){
+
+        return super.delete("com.xunyu.model.log.syslog.SysLogs.delSysLogs",idsList);
+    }
+
     public SysLogsDaoImpl(SqlSessionFactory sqlSessionFactory) {
         super(sqlSessionFactory);
     }
