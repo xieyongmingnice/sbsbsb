@@ -104,7 +104,8 @@ public class DruidConfiguration {
                 System.err.println("druid configuration initialization filter :");
                 e.printStackTrace();
             }
-            datasource.setConnectionProperties("druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrpt=true;config.decrypt.key=your public key");
+            datasource.setConnectionProperties("druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrpt=true");
+            //datasource.setConnectionProperties("druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrpt=true;config.decrypt.key=your public key");
             logger.info("DruidConfiguration init completed................");
             return datasource;
         }
@@ -127,13 +128,6 @@ public class DruidConfiguration {
         }
     }
 
-   /* @Bean(name = "multipartResolver")
-    public CommonsMultipartResolver getCommonsMultipartResolver() {
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(209715200);//配置文件最大值  200MB
-        multipartResolver.setMaxInMemorySize(1048576);//配置缓存
-        return multipartResolver;
-    }*/
    @Bean
    public ServletRegistrationBean registrationBean() {
        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet());    //添加初始化参数：initParams
