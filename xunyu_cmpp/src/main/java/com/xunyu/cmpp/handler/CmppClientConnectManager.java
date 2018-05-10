@@ -1,6 +1,7 @@
 package com.xunyu.cmpp.handler;
 
 import com.xunyu.cmpp.factory.MarshallingCodecFactory;
+import com.xunyu.cmpp.message.CmppConnectRequestMessage;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.handler.timeout.IdleStateHandler;
@@ -41,6 +42,8 @@ public abstract class CmppClientConnectManager extends ChannelHandlerAdapter imp
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         logger.info("当前链路激活");
         attempts = 0;
+        CmppConnectRequestMessage message = new CmppConnectRequestMessage();
+        message.setSourceAddr("");
         ctx.fireChannelActive();
     }
 
