@@ -9,6 +9,7 @@ import com.xunyu.xunyu_tactics.constant.TacticsConstants;
 import com.xunyu.xunyu_tactics.pojo.SysAuditKeyword;
 import com.xunyu.xunyu_tactics.service.FileService;
 import com.xunyu.xunyu_tactics.service.SysAuditKeywordService;
+import com.xunyu.xunyu_tactics.util.PoiUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -177,7 +178,7 @@ public class SysAuditKeywordController {
                 continue;
             }
             SysAuditKeyword sysAuditKeyword = new SysAuditKeyword();
-            String keyword = row.getCell(0).getStringCellValue();
+            String keyword = PoiUtil.getKeyword(row.getCell(0));
             sysAuditKeyword.setKeyword(keyword);
             sysAuditKeyword.setIsabled(TacticsConstants.Isabled.ENABLED);
             list.add(sysAuditKeyword);
@@ -225,7 +226,7 @@ public class SysAuditKeywordController {
                 continue;
             }
             SysAuditKeyword sysAuditKeyword = new SysAuditKeyword();
-            String keyword = row.getCell(0).getStringCellValue();
+            String keyword = PoiUtil.getKeyword(row.getCell(0));
             sysAuditKeyword.setKeyword(keyword);
             list.add(sysAuditKeyword);
         }

@@ -7,64 +7,7 @@
     <result column="join_time" jdbcType="TIMESTAMP" property="joinTime" />
     <result column="isabled" jdbcType="INTEGER" property="isabled" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
+
   <sql id="Base_Column_List">
     sys_whitelist_id, phone_number, join_time, isabled
   </sql>
@@ -85,83 +28,6 @@
     values (#{sysWhitelistId,jdbcType=INTEGER}, #{phoneNumber,jdbcType=VARCHAR}, #{joinTime,jdbcType=TIMESTAMP}, 
       #{isabled,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.xunyu.xunyu_tactics.pojo.SysWhitelist">
-    insert into tbl_sys_whitelist
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="sysWhitelistId != null">
-        sys_whitelist_id,
-      </if>
-      <if test="phoneNumber != null">
-        phone_number,
-      </if>
-      <if test="joinTime != null">
-        join_time,
-      </if>
-      <if test="isabled != null">
-        isabled,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="sysWhitelistId != null">
-        #{sysWhitelistId,jdbcType=INTEGER},
-      </if>
-      <if test="phoneNumber != null">
-        #{phoneNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="joinTime != null">
-        #{joinTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isabled != null">
-        #{isabled,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-
-  <update id="updateByExampleSelective" parameterType="map">
-    update tbl_sys_whitelist
-    <set>
-      <if test="record.sysWhitelistId != null">
-        sys_whitelist_id = #{record.sysWhitelistId,jdbcType=INTEGER},
-      </if>
-      <if test="record.phoneNumber != null">
-        phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="record.joinTime != null">
-        join_time = #{record.joinTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.isabled != null">
-        isabled = #{record.isabled,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update tbl_sys_whitelist
-    set sys_whitelist_id = #{record.sysWhitelistId,jdbcType=INTEGER},
-      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
-      join_time = #{record.joinTime,jdbcType=TIMESTAMP},
-      isabled = #{record.isabled,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xunyu.xunyu_tactics.pojo.SysWhitelist">
-    update tbl_sys_whitelist
-    <set>
-      <if test="phoneNumber != null">
-        phone_number = #{phoneNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="joinTime != null">
-        join_time = #{joinTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isabled != null">
-        isabled = #{isabled,jdbcType=INTEGER},
-      </if>
-    </set>
-    where sys_whitelist_id = #{sysWhitelistId,jdbcType=INTEGER}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.xunyu.xunyu_tactics.pojo.SysWhitelist">
     update tbl_sys_whitelist
     set phone_number = #{phoneNumber,jdbcType=VARCHAR},

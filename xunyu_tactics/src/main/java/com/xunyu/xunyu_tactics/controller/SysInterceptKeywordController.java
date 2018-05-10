@@ -9,6 +9,8 @@ import com.xunyu.xunyu_tactics.constant.TacticsConstants;
 import com.xunyu.xunyu_tactics.pojo.SysInterceptKeyword;
 import com.xunyu.xunyu_tactics.service.FileService;
 import com.xunyu.xunyu_tactics.service.SysInterceptKeywordService;
+import com.xunyu.xunyu_tactics.util.PoiUtil;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -166,8 +168,8 @@ public class SysInterceptKeywordController {
             if(row.getRowNum()<1){
                 continue;
             }
+            String keyword = PoiUtil.getKeyword(row.getCell(0));
             SysInterceptKeyword sysInterceptKeyword = new SysInterceptKeyword();
-            String keyword = row.getCell(0).getStringCellValue();
             sysInterceptKeyword.setKeyword(keyword);
             sysInterceptKeyword.setIsabled(TacticsConstants.Isabled.ENABLED);
             list.add(sysInterceptKeyword);
@@ -215,7 +217,7 @@ public class SysInterceptKeywordController {
                 continue;
             }
             SysInterceptKeyword sysInterceptKeyword = new SysInterceptKeyword();
-            String keyword = row.getCell(0).getStringCellValue();
+            String keyword = PoiUtil.getKeyword(row.getCell(0));
             sysInterceptKeyword.setKeyword(keyword);
             list.add(sysInterceptKeyword);
         }

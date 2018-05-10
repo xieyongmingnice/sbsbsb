@@ -12,6 +12,7 @@ import com.xunyu.xunyu_tactics.pojo.RmBlacklistKeyword;
 import com.xunyu.xunyu_tactics.service.BlacklistKeywordService;
 import com.xunyu.xunyu_tactics.service.FileService;
 import com.xunyu.xunyu_tactics.service.RmBlacklistKeywordService;
+import com.xunyu.xunyu_tactics.util.PoiUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -179,7 +180,7 @@ public class RmBlacklistKeywordController {
                 continue;
             }
             RmBlacklistKeyword rmBlacklistKeyword = new RmBlacklistKeyword();
-            String keyword = row.getCell(0).getStringCellValue();
+            String keyword = PoiUtil.getKeyword(row.getCell(0));
             rmBlacklistKeyword.setKeyword(keyword);
             rmBlacklistKeyword.setIsabled(TacticsConstants.Isabled.ENABLED);
             list.add(rmBlacklistKeyword);

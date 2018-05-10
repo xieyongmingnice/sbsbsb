@@ -9,6 +9,7 @@ import com.xunyu.xunyu_tactics.constant.TacticsConstants;
 import com.xunyu.xunyu_tactics.pojo.SysWhitelistKeyword;
 import com.xunyu.xunyu_tactics.service.FileService;
 import com.xunyu.xunyu_tactics.service.SysWhitelistKeywordService;
+import com.xunyu.xunyu_tactics.util.PoiUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -177,7 +178,7 @@ public class SysWhitelistKeywordController {
                 continue;
             }
             SysWhitelistKeyword sysInterceptKeyword = new SysWhitelistKeyword();
-            String keyword = row.getCell(0).getStringCellValue();
+            String keyword = PoiUtil.getKeyword(row.getCell(0));
             sysInterceptKeyword.setKeyword(keyword);
             sysInterceptKeyword.setIsabled(TacticsConstants.Isabled.ENABLED);
             list.add(sysInterceptKeyword);
