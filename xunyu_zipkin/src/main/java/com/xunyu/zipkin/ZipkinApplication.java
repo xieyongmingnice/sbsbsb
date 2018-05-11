@@ -3,11 +3,11 @@ package com.xunyu.zipkin;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import zipkin.server.EnableZipkinServer;
+import org.springframework.cloud.sleuth.zipkin.stream.EnableZipkinStreamServer;
 
 
 @EnableDiscoveryClient
-@EnableZipkinServer
+@EnableZipkinStreamServer//配置可以作为zipkinserver
 @SpringBootApplication
 public class ZipkinApplication {
 

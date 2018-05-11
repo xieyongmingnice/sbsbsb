@@ -53,27 +53,27 @@ zuul:
 #zuul  通过listOfServers配置外部服务的负载均衡
 xunyu-crm:
   ribbon:  #IP可以写多个用逗号隔开；开启ribbon(客户端)负载
-    listOfServers: http://localhost:8004,http://47.104.190.41:8004
+    listOfServers: http://localhost:8004,http://192.168.3.5:8004
 
 xunyu-shiro:
   ribbon:
-      listOfServers: http://localhost:8003,http://47.104.190.41:8003
+      listOfServers: http://localhost:8003,http://192.168.3.5:8003
 
 xunyu-system:
   ribbon:
-      listOfServers: http://localhost:8005,http://47.104.190.41:8005
+      listOfServers: http://localhost:8005,http://192.168.3.5:8005
 
 xunyu-log-manager:
   ribbon:
-     listOfServers: http://localhost:8007,http://47.104.190.41:8007
+     listOfServers: http://localhost:8007,http://192.168.3.5:8007
 
 xunyu-tactics:
   ribbon:
-     listOfServers: http://localhost:8009,http://47.104.190.174:8009
+     listOfServers: http://localhost:8009,http://192.168.3.5:8009
 
 xunyu-department:
    ribbon:
-      listOfServers: http://localhost:8008,http://47.104.190.174:8008
+      listOfServers: http://localhost:8008,http://192.168.3.5:8008
 
 hystrix:
   command:

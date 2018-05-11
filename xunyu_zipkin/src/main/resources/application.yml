@@ -2,8 +2,8 @@ eureka:
   enabled: true
   client:
     serviceUrl:
-      #defaultZone: http://localhost:8001/eureka/
-      defaultZone: http://47.104.190.174:8001/eureka/
+      defaultZone: http://localhost:8001/eureka/
+      #defaultZone: http://47.104.190.174:8001/eureka/
 
 spring:
   application:
@@ -11,7 +11,27 @@ spring:
     #表示当前程序不使用sleuth
   sleuth:
     enabled: false
-  ###############暂时未做日志持久化处理（也可以配置拦截具体的请求）########################
+  sampler:
+    percentage: 1.0
+  datasource:
+    name: xunyu_db
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://rm-m5e03vwf88v7vufn9ho.mysql.rds.aliyuncs.com:3306/xunyu_db?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: xunyu_db
+    password: XunYu@DEV-DB
+    schema[0]: classpath:/zipkin.sql
+    initialize: true
+    continue-on-error: true
+  cloud:
+    stream:
+      kafka:
+        binder:
+           brokers: 192.168.3.5:9092  #ip地址根据实际kafka集群地址
+           zkNodes: 192.168.3.5:2181  #zookeeper
 
 server:
   port: 8006
+
+zipkin:
+  storage:
+    type: mysql
