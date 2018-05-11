@@ -132,6 +132,14 @@
             <artifactId>spring-cloud-stream-binder-kafka</artifactId>
         </dependency>-->
 
+        <!--boot四神器之 actuator
+            对应用系统进行配置查看、相关功能统计
+            https://segmentfault.com/a/1190000004318360?_ea=568366
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <finalName>config-xunyu</finalName>
