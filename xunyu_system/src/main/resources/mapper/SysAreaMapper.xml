@@ -19,6 +19,7 @@
         <result column="area_status" property="areaStatus"></result>
         <result column="area_text" property="areaText"></result>
         <result column="price" property="price"></result>
+        <result column="cusAreaCount" property="cusAreaCount"></result>
     </resultMap>
 
     <sql id = "area_column">
@@ -42,6 +43,15 @@
     <select id = "sysAreaConfigList" parameterType="map" resultMap="area_ResultMap">
         select
             <include refid = "area_column" />
+        ,(
+            case  when area_name is not null
+            then
+        ( select count(1) from tbl_customer
+        <![CDATA[ where  locate(area_name,address) > 0 ]]>
+        )
+            else 0
+            end
+        ) as cusAreaCount
         from tbl_area_config
         where isabled = 1 <include refid = "area_where" />
         order by area_id desc

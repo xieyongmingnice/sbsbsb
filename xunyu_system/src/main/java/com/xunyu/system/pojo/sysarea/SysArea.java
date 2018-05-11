@@ -26,6 +26,15 @@ public class SysArea extends UserModel {
     private Integer areaStatus;//是否是直辖市  1是 2否
     private String areaText;//区域描述
     private Double price;//短信单价
+    private Integer cusAreaCount;//客户数
+
+    public Integer getCusAreaCount() {
+        return cusAreaCount;
+    }
+
+    public void setCusAreaCount(Integer cusAreaCount) {
+        this.cusAreaCount = cusAreaCount;
+    }
 
     public Long getAreaId() {
         return areaId;
