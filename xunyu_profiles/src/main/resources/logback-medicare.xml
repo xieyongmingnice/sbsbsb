@@ -14,7 +14,7 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.dir}/logs/config-%d{yyyy-MM-dd_HH}.%i.log
             </fileNamePattern>
-            <maxHistory>5</maxHistory> <!--日志保留5天-->
+            <maxHistory>1</maxHistory> <!--日志保留1天-->
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
