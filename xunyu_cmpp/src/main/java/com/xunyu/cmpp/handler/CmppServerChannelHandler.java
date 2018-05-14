@@ -4,20 +4,19 @@ import com.google.common.primitives.Bytes;
 import com.xunyu.cmpp.constant.GlobalConstance;
 import com.xunyu.cmpp.constant.SessionState;
 import com.xunyu.cmpp.message.CmppConnectRequestMessage;
+import com.xunyu.cmpp.message.CmppConnectResponseMessage;
 import com.xunyu.cmpp.packet.CmppPacketType;
 import com.xunyu.cmpp.packet.Message;
 import com.xunyu.cmpp.packet.PacketType;
 import com.xunyu.cmpp.utils.CachedMillisecondClock;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerAdapter;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelPromise;
+import io.netty.channel.*;
 import io.netty.handler.codec.MessageToMessageCodec;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -26,11 +25,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2018/4/18 14:40
  */
 @ChannelHandler.Sharable
-public class CmppServerChannelHandler extends ChannelHandlerAdapter {
+public class CmppServerChannelHandler extends ChannelInboundHandlerAdapter {
 
     private Logger logger = LoggerFactory.getLogger(CmppServerChannelHandler.class);
 
-    private ConcurrentHashMap<Long, MessageToMessageCodec> codecMap = new ConcurrentHashMap<Long, MessageToMessageCodec>();
+    private ConcurrentHashMap<Long, MessageToMessageCodec> codecMap = new ConcurrentHashMap<>();
+
+    String username = "901782";
+
+    String password = "ICP";
 
     /**
      * 连接状态
@@ -56,39 +59,46 @@ public class CmppServerChannelHandler extends ChannelHandlerAdapter {
         /**
          * 第一次接收到的信息应该是客户端传来的连接请求
          */
-        if (state == SessionState.DisConnect){
-//            CmppConnectRequestMessage req = new CmppConnectRequestMessage();
-//            req.setSourceAddr(cliententity.getUserName());
-//            String timestamp = DateFormatUtils.format(CachedMillisecondClock.INS.now(), "MMddHHmmss");
-//            req.setTimestamp(Long.parseLong(timestamp));
-//            byte[] userBytes = cliententity.getUserName().getBytes(GlobalConstance.DEFAULT_TRANSPORT_CHARSET);
-//            byte[] passwdBytes = cliententity.getPassword().getBytes(GlobalConstance.DEFAULT_TRANSPORT_CHARSET);
-//            byte[] timestampBytes = timestamp.getBytes(GlobalConstance.DEFAULT_TRANSPORT_CHARSET);
-//            req.setAuthenticatorSource(DigestUtils.md5(Bytes.concat(userBytes, new byte[9], passwdBytes, timestampBytes)));
-//
-//            ctx.channel().writeAndFlush(req);
-//            logger.info("session Start :Send CmppConnectRequestMessage seq :{}", req.getHeader().getSequenceId());
-        }
         logger.info("有客户端连接+{}",ctx.channel().remoteAddress());
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        long commandId = ((Message)msg).getHeader().getCommandId();
-        MessageToMessageCodec codec = codecMap.get(commandId);
-        codec.channelRead(ctx,msg);
+        logger.info("read read read ");
+        if (state == SessionState.DisConnect) {
+            if (msg instanceof CmppConnectRequestMessage) {
+                CmppConnectRequestMessage message = (CmppConnectRequestMessage) msg;
+                byte[] userBytes = username.getBytes(GlobalConstance.DEFAULT_TRANSPORT_CHARSET);
+                byte[] passwdBytes = password.getBytes(GlobalConstance.DEFAULT_TRANSPORT_CHARSET);
+
+                byte[] timestampBytes = String.format("%010d", message.getTimestamp()).getBytes(GlobalConstance.DEFAULT_TRANSPORT_CHARSET);
+                byte[] authBytes = DigestUtils.md5(Bytes.concat(userBytes, new byte[9], passwdBytes, timestampBytes));
+
+                if (Arrays.equals(authBytes, message.getAuthenticatorSource())) {
+                    logger.info("connect success");
+                    state = SessionState.Connect;
+                } else {
+                    logger.error("connect failed");
+                }
+
+            } else {
+                logger.error("channel Not Connnected, Request must be CmppConnectResponseMessage,but is {}", msg.getClass().getName());
+                ctx.close();
+                return;
+            }
+        }
     }
 
     @Override
-    public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
-        long commandId = ((Message)msg).getHeader().getCommandId();
-        MessageToMessageCodec codec = codecMap.get(commandId);
-        codec.write(ctx, msg, promise);
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        logger.info("read complete");
+        super.channelReadComplete(ctx);
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         logger.error("有异常出现，原因：{}",cause.getMessage());
+        cause.printStackTrace();
     }
 
     @Override

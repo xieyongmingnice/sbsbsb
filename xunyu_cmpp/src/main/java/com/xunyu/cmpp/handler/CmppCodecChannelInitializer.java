@@ -34,5 +34,6 @@ public class CmppCodecChannelInitializer extends ChannelInitializer<Channel> {
 
         pipeline.addBefore(pipeName(), "CmppCodecChannelInitializer", CmppServerChannelHandler.getInstance());
 
+
     }
 }

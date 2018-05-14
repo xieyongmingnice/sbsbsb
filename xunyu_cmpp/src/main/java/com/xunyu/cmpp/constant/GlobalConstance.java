@@ -43,7 +43,7 @@ public interface GlobalConstance {
 	/**
 	 * 连接情况
 	 */
-	AttributeKey<SessionState> ATTRIBUTE_KEY = AttributeKey.newInstance(SessionState.Connect.name());
+	AttributeKey<SessionState> ATTRIBUTE_KEY = AttributeKey.newInstance(SessionState.DisConnect.name());
 
 	/**
 	 * 默认传输字符集

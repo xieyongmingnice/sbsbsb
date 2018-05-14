@@ -1,5 +1,8 @@
 package com.xunyu.cmpp;
 
+import com.xunyu.cmpp.codec.CmppConnectRequestMessageCodec;
+import com.xunyu.cmpp.codec.CmppConnectResponseMessageCodec;
+import com.xunyu.cmpp.codec.CmppHeaderCodec;
 import com.xunyu.cmpp.factory.MarshallingCodecFactory;
 import com.xunyu.cmpp.handler.CmppClientChannelHandler;
 import com.xunyu.cmpp.handler.CmppClientConnectManager;
@@ -66,8 +69,8 @@ public class CmppClient {
                 return new ChannelHandler[]{
                         this,
                         new IdleStateHandler(0, 0, 5, TimeUnit.SECONDS),
-                        MarshallingCodecFactory.buildMarshallingEncoder(),
-                        MarshallingCodecFactory.buildMarshallingDecoder(),
+                        new CmppHeaderCodec(),
+                        new CmppConnectRequestMessageCodec(),
                         new CmppClientChannelHandler()
                 };
             }

@@ -1,12 +1,17 @@
 package com.xunyu.cmpp;
 
+import com.xunyu.cmpp.codec.CmppConnectRequestMessageCodec;
+import com.xunyu.cmpp.codec.CmppConnectResponseMessageCodec;
+import com.xunyu.cmpp.codec.CmppHeaderCodec;
 import com.xunyu.cmpp.factory.MarshallingCodecFactory;
 import com.xunyu.cmpp.handler.CmppCodecChannelInitializer;
+import com.xunyu.cmpp.handler.CmppServerChannelHandler;
 import com.xunyu.cmpp.handler.CmppServerIdleStateHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,10 +60,12 @@ public class CmppServer {
              .childHandler(new ChannelInitializer<Channel>() {
                  @Override
                  protected void initChannel(Channel ch) throws Exception {
-                     ch.pipeline().addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS))
-                                 .addLast(MarshallingCodecFactory.buildMarshallingDecoder())
-                                 .addLast(MarshallingCodecFactory.buildMarshallingEncoder())
-                                 .addLast(initPipeline());
+                     ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(4 * 1024 , 0, 4, -4, 0, true))
+                                 .addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS))
+                                 //消息头编解码器
+                                 .addLast(new CmppHeaderCodec())
+                                 .addLast(new CmppConnectRequestMessageCodec())
+                                 .addLast(CmppServerChannelHandler.getInstance());
                  }
              });
             /**
@@ -81,17 +88,4 @@ public class CmppServer {
         }
     }
 
-    /**
-     * @description  初始化pipeline
-     */
-    private ChannelInitializer<Channel> initPipeline(){
-        return new ChannelInitializer<Channel>() {
-            @Override
-            protected void initChannel(Channel channel) throws Exception {
-                ChannelPipeline pipeline = channel.pipeline();
-                pipeline.addLast(CmppCodecChannelInitializer.pipeName(),new CmppCodecChannelInitializer());
-//                pipeline.addLast(new CmppServerIdleStateHandler());
-            }
-        };
-    }
 }
