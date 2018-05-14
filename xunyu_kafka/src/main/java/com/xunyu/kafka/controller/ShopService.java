@@ -13,12 +13,12 @@ import javax.annotation.Resource;
 @RestController
 public class ShopService {
 
-    @Resource(name = ShopChannel.SHOP_OUTPUT)
-    private MessageChannel sendShopMessageChannel;
+    @Resource
+    private MessageChannel shop_output;
 
     @GetMapping("/sendMsg")
     public String sendShopMessage(String content) {
-        boolean isSendSuccess = sendShopMessageChannel.
+        boolean isSendSuccess = shop_output.
                 send(MessageBuilder.withPayload(content).build());
         return isSendSuccess ? "发送成功" : "发送失败";
     }
