@@ -2,8 +2,8 @@ eureka:
   enabled: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:8001/eureka/
-      #defaultZone: http://47.104.190.174:8001/eureka/
+      #defaultZone: http://localhost:8001/eureka/
+      defaultZone: http://47.104.190.174:8001/eureka/
       registry-fetch-interval-seconds: 5 #拉取服务注册信息时间间隔,默认为30秒
   instance:
     lease-renewal-interval-in-seconds: 5 #心跳时间,默认为30秒
@@ -46,34 +46,6 @@ zuul:
     api-log-manager:
        path: /log/**
        service-id: xunyu-log-manager
-
-# 注意，这里在运行的时候有个坑，如果以树形展开写法的话，那么就会出错了，所以这个配置还是避免用树形写法
-#ribbon.eureka.enabled: false  # 禁用 eureka 使用listOfServers配置外部ribbon(基于客户端的)负载
-
-#zuul  通过listOfServers配置外部服务的负载均衡
-xunyu-crm:
-  ribbon:  #IP可以写多个用逗号隔开；开启ribbon(客户端)负载
-    listOfServers: http://localhost:8004,http://192.168.3.5:8004
-
-xunyu-shiro:
-  ribbon:
-      listOfServers: http://localhost:8003,http://192.168.3.5:8003
-
-xunyu-system:
-  ribbon:
-      listOfServers: http://localhost:8005,http://192.168.3.5:8005
-
-xunyu-log-manager:
-  ribbon:
-     listOfServers: http://localhost:8007,http://192.168.3.5:8007
-
-xunyu-tactics:
-  ribbon:
-     listOfServers: http://localhost:8009,http://192.168.3.5:8009
-
-xunyu-department:
-   ribbon:
-      listOfServers: http://localhost:8008,http://192.168.3.5:8008
 
 hystrix:
   command:

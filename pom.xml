@@ -23,6 +23,8 @@
         <module>xunyu_profiles</module>
         <module>xunyu_tactics</module>
         <module>xunyu_log_manager</module>
+        <module>xunyu_kafka</module>
+        <module>xunyu_kafka_config</module>
     </modules>
     <packaging>pom</packaging>
 
