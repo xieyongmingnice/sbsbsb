@@ -10,12 +10,12 @@ public interface ShopChannel {
     /**
      * 发消息的通道名称
      */
-    String SHOP_OUTPUT = "shop_output";
+    String SHOP_OUTPUT = "shop_output5";
 
     /**
      * 消息的订阅通道名称
      */
-    String SHOP_INPUT = "shop_input";
+    String SHOP_INPUT = "shop_input5";
 
     /**
      * 发消息的通道

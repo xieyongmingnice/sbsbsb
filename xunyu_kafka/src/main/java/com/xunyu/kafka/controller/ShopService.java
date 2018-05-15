@@ -1,8 +1,7 @@
 package com.xunyu.kafka.controller;
 
-import co.xunyu.kafka.config.channel.ShopChannel;
-import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.messaging.Message;
+import co.xunyu.kafka.config.source.Source;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,20 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
+@EnableBinding(Source.class)
 public class ShopService {
 
     @Resource
-    private MessageChannel shop_output;
+    private MessageChannel customOutput1;
 
     @GetMapping("/sendMsg")
     public String sendShopMessage(String content) {
-        boolean isSendSuccess = shop_output.
+        boolean isSendSuccess = customOutput1.
                 send(MessageBuilder.withPayload(content).build());
-        return isSendSuccess ? "发送成功" : "发送失败";
+        return isSendSuccess ? content : "发送失败";
     }
 
-    @StreamListener(ShopChannel.SHOP_INPUT)
-    public void receive(Message<String> message) {
-        System.out.println(message.getPayload());
-    }
+
 }
