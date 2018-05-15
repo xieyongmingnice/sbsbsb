@@ -53,7 +53,7 @@ public class SessionDao extends EnterpriseCacheSessionDAO {
     @Override  
     protected void doUpdate(Session session) {  
         super.doUpdate(session);  
-        redisUtil.set(session.getId().toString(), sessionToByte(session),1*60L);  
+        redisUtil.set(session.getId().toString(), sessionToByte(session),2L);
     }  
   
     // 删除session  
