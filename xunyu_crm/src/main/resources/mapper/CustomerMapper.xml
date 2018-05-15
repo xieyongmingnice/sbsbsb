@@ -214,7 +214,14 @@
     <update id = "delCustomer" parameterType="map">
         update tbl_customer set
         isabled = #{isabled}
-        where customer_id in
+        where
+        <choose>
+            <when test="groupId2 == 1">
+                customer_group_id
+            </when>
+            <otherwise>customer_id</otherwise>
+        </choose>
+        in
         <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>

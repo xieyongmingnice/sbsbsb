@@ -181,7 +181,6 @@ public class CustomerServiceImpl implements CustomerService {
     public int delCustomer(String cusIds) {
         int n = 0;
         if(StringUtils2.isNotEmpty(cusIds)) {
-
             Map<String,Object> map = new HashMap<String,Object>();
             String[] idsDir = cusIds.split(",");
             String[] array = new String[idsDir.length];
@@ -208,7 +207,24 @@ public class CustomerServiceImpl implements CustomerService {
             @Override
             public void run() {
                 try {
-                    delCustomer(ids);
+                    if(StringUtils2.isNotEmpty(ids)) {
+                        Map<String,Object> map = new HashMap<String,Object>();
+                        String[] idsDir = ids.split(",");
+                        String[] array = new String[idsDir.length];
+                        for (int i = 0; i < idsDir.length; i++) {
+                            if(RandomUtils.isInteger(idsDir[i])){
+                                array[i] = idsDir[i];
+
+                            }else{
+                                continue;
+                            }
+                        }
+                        map.put("isabled",0);
+                        map.put("array",array);
+                        map.put("groupId2",1);//表示根据分组id删除
+                        int n = customerDaoImpl.delCustomer(map);
+                        System.out.println(n);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
