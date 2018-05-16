@@ -1,6 +1,6 @@
 package com.xunyu.kafka.listener;
 
-import co.xunyu.kafka.config.sink.Sink;
+import com.xunyu.kafka.config.sink.Sink;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.Message;

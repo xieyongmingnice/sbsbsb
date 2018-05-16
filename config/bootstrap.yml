@@ -6,9 +6,9 @@ spring:
         bindings:
           #配置自己定义的通道与哪个中间件交互
           customInput1: #Sink里的
-            destination: dth23 #生产主题
+            destination: xiaogege3 #生产主题
           customOutput1:
-            destination: dth23 #消费主题
+            destination: xiaogege3 #消费主题
         default-binder: kafka #默认的binder是kafka
   kafka:
     binder:

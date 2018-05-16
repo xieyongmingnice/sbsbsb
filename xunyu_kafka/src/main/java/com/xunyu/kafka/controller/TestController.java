@@ -1,6 +1,6 @@
 package com.xunyu.kafka.controller;
 
-import co.xunyu.kafka.config.source.Source;
+import com.xunyu.kafka.config.source.Source;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 
 @RestController
 @EnableBinding(Source.class)
-public class ShopService {
+public class TestController {
 
     @Resource
     private MessageChannel customOutput1;
