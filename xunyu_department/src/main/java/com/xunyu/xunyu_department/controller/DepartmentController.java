@@ -102,6 +102,7 @@ public class DepartmentController {
                 result.setTotalRows(totalRows == null ? 0 :totalRows);
             }else {
                 result.setMessage(ResultMessage.Message.NO_VALUE);
+                result.setCode(ResultMessage.Code.SUCCESS);
             }
         }catch (Exception e){
             result.setCode(ResultMessage.Code.ERROR);
@@ -171,6 +172,9 @@ public class DepartmentController {
                 result.setMessage(ResultMessage.Message.SUCCESS);
                 result.setCode(ResultMessage.Code.SUCCESS);
                 result.setTotalRows(totalRows);
+            }else{
+                result.setCode(ResultMessage.Code.SUCCESS);
+                result.setMessage(ResultMessage.Message.NO_VALUE);
             }
         }catch (Exception e){
             result.setCode(ResultMessage.Code.ERROR);

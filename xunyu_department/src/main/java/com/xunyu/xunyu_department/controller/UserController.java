@@ -147,6 +147,7 @@ public class UserController {
                 result.setTotalRows(totalRows == null?0:totalRows);
             }else {
                 result.setMessage(ResultMessage.Message.NO_VALUE);
+                result.setCode(ResultMessage.Code.SUCCESS);
             }
         }catch (Exception e){
             catchExcpetion(e,result);
