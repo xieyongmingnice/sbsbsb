@@ -1,8 +1,8 @@
 #生产环境
 #数据库配置
 db: 
-  host: rm-m5e03vwf88v7vufn9ho.mysql.rds.aliyuncs.com
-  #host: 118.190.192.244  和上面的是一个host
+  #host: rm-m5e03vwf88v7vufn9ho.mysql.rds.aliyuncs.com #阿里云外网
+  host: rm-m5e03vwf88v7vufn9.mysql.rds.aliyuncs.com   #阿里云内网
   port: 3306
   name: xunyu_db
   public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJZcCjn1viAr1f4994+1Do1i1xQnqDD3OupuyqG1Yq2EI+OV/enBB9ETdztE1ptXuU2lGq3eDHV22oat2BZXVIMCAwEAAQ==
