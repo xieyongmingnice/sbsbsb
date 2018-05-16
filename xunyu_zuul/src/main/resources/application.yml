@@ -14,8 +14,11 @@ eureka:
 spring:
   application:
     name: xunyu-zuul
-  #profiles:
-    #active: core//不需要加载xunyu_config中的配置文件
+  http:
+      multipart:
+        max-file-size: 30MB
+        max-request-size: 100MB
+
 server:
   port: 8002
 #配置zuul  服务网关
@@ -90,5 +93,5 @@ ribbon:
   MaxAutoRetriesNextServer: 1 #要重试的下一个服务器的最大数量
 
 #日志
-logging:
-   config: classpath:logback-medicare.xml
+#logging:
+   #config: classpath:logback-medicare.xml

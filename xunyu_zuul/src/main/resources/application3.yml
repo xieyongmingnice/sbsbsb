@@ -14,8 +14,11 @@ eureka:
 spring:
   application:
     name: xunyu-zuul
-  #profiles:
-    #active: core//不需要加载xunyu_config中的配置文件
+  http:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 100MB
+
 server:
   port: 8002
 #配置zuul  服务网关
