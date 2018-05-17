@@ -5,31 +5,35 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class IpAdrressUtil {
+
     /**
-     * 获取Ip地址
-     * @param request
+     * 获取客户端真实ip
+     * @time 2016年6月22日
+     * @param //req
      * @return
      */
-    public static String getIpAdrress2(HttpServletRequest request) {
-        String ipAddress = null;
-        ipAddress = request.getHeader("X-Real-Ip");
+    public static String getIpAdrress(HttpServletRequest httpRequest) {
+        String ipAddress = httpRequest.getHeader("x-forwarded-for");
         if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getHeader("Proxy-Client-IP");
-        }
-        if(ipAddress == null || ipAddress.length() == 0 ||  "unknown".equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getHeader("WL-Proxy-Client-IP");
+            ipAddress = httpRequest.getHeader("Proxy-Client-IP");
         }
         if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-            ipAddress = request.getRemoteAddr();
-            InetAddress inet=null;
-            try {
-                inet = InetAddress.getLocalHost();
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
+            ipAddress = httpRequest.getHeader("WL-Proxy-Client-IP");
+        }
+        if(ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+            ipAddress = httpRequest.getRemoteAddr();
+            if("127.0.0.1".equals(ipAddress) || "0:0:0:0:0:0:0:1".equals(ipAddress) || ipAddress == null){
+                //根据网卡取本机配置的IP
+                InetAddress inet=null;
+                try {
+                    inet = InetAddress.getLocalHost();
+
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
+                ipAddress= inet.getHostAddress();
+
             }
-            ipAddress= inet.getHostAddress();
-
-
         }
         //对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
         if(ipAddress!=null && ipAddress.length()>15){ //"***.***.***.***".length() = 15
@@ -39,7 +43,8 @@ public class IpAdrressUtil {
         }
         return ipAddress;
     }
-    public static String getIpAdrress(HttpServletRequest request) {
+
+    public static String getIpAdrress2(HttpServletRequest request) {
         String ip = request.getHeader("x-forwarded-for");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");

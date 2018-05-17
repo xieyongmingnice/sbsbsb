@@ -47,7 +47,7 @@
             case  when area_name is not null
             then
         ( select count(1) from tbl_customer
-        <![CDATA[ where  locate(area_name,address) > 0 ]]>
+        <![CDATA[ where  locate(area_name,address) > 0  and  isabled = 1 ]]>
         )
             else 0
             end
