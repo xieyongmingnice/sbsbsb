@@ -57,7 +57,7 @@ public class AreaController {
         }catch (Exception e){
             res.setCode("500");
             res.setMessage("系统异常");
-            log.error(e.getMessage());
+            log.info(e.getMessage());
         }
         return res;
     }
@@ -90,7 +90,7 @@ public class AreaController {
         }catch (Exception e){
             res.setCode("500");
             res.setMessage("系统异常");
-            log.error(e.getMessage());
+            log.info(e.getMessage());
         }
         return res;
     }

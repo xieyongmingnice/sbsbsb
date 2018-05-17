@@ -65,8 +65,8 @@ public class DepartmentController {
         }catch (Exception e){
             result.setCode(ResultMessage.Code.ERROR);
             result.setMessage(ResultMessage.Message.ERROR);
-            logger.info("系统异常");
-            e.printStackTrace();
+            logger.info(e.getMessage());
+            //e.printStackTrace();
         }
 
 
@@ -107,8 +107,8 @@ public class DepartmentController {
         }catch (Exception e){
             result.setCode(ResultMessage.Code.ERROR);
             result.setMessage(ResultMessage.Message.ERROR);
-            logger.info("系统异常");
-            e.printStackTrace();
+            logger.info(e.getMessage());
+            //e.printStackTrace();
         }
         return result;
     }
@@ -140,8 +140,8 @@ public class DepartmentController {
         }catch (Exception e){
             result.setCode(ResultMessage.Code.ERROR);
             result.setMessage(ResultMessage.Message.ERROR);
-            logger.info("系统异常");
-            e.printStackTrace();
+            logger.info(e.getMessage());
+            //e.printStackTrace();
         }
         return result;
     }
@@ -179,8 +179,8 @@ public class DepartmentController {
         }catch (Exception e){
             result.setCode(ResultMessage.Code.ERROR);
             result.setMessage(ResultMessage.Message.ERROR);
-            logger.info("系统异常");
-            e.printStackTrace();
+            logger.info(e.getMessage());
+            //e.printStackTrace();
         }
         return result;
     }
@@ -206,8 +206,8 @@ public class DepartmentController {
         }catch (Exception e){
             result.setCode(ResultMessage.Code.ERROR);
             result.setMessage(ResultMessage.Message.ERROR);
-            logger.info("系统异常");
-            e.printStackTrace();
+            logger.info(e.getMessage());
+            //e.printStackTrace();
         }
         return result;
     }
@@ -231,8 +231,8 @@ public class DepartmentController {
         }catch (Exception e){
             result.setCode(ResultMessage.Code.ERROR);
             result.setMessage(ResultMessage.Message.ERROR);
-            logger.info("系统异常");
-            e.printStackTrace();
+            logger.info(e.getMessage());
+            //e.printStackTrace();
         }
         return result;
     }
@@ -261,8 +261,8 @@ public class DepartmentController {
         }catch (Exception e){
             result.setCode(ResultMessage.Code.ERROR);
             result.setMessage(ResultMessage.Message.ERROR);
-            logger.info("系统异常");
-            e.printStackTrace();
+            logger.info(e.getMessage());
+            //e.printStackTrace();
         }
         return result;
     }

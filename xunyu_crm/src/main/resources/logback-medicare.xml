@@ -5,23 +5,23 @@
     <property name="log.dir" value="${catalina.base}"/>
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%date %level [%class:%line] %msg%n</pattern>
             <charset>utf-8</charset>
         </encoder>
     </appender>
     <appender name="xunyu_rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.dir}/logs/xunyu.log</file>
+        <file>${log.dir}/logs/department-xunyu.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.dir}/logs/config-%d{yyyy-MM-dd_HH}.%i.log
+            <fileNamePattern>${log.dir}/logs/crm-xunyu-%d{yyyy-MM-dd_HH}.%i.log
             </fileNamePattern>
-            <maxHistory>1</maxHistory> <!--日志保留1天-->
+            <maxHistory>15</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder>
-            <pattern>%date %level [%thread] %logger{36} [%file : %line] %msg%n</pattern>
+            <pattern>%date %level [%class:%line] %msg%n</pattern>
         </encoder>
     </appender>
 

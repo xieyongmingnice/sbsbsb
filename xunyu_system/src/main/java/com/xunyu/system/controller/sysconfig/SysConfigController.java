@@ -81,7 +81,7 @@ public class SysConfigController {
         User us = redisUtil.getCurrUser(sc.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
         int n = 0;
-        if (us != null) {
+        if (us == null) {
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;

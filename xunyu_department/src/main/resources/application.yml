@@ -9,8 +9,3 @@ spring:
 server:
   port: 8008
 
-logging:
-  level:
-    src.main.java.com.xunyu.xunyu_department.dao: debug
-    src.main.resources.mapper: debug
-

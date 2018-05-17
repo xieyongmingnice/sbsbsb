@@ -71,7 +71,7 @@ public class SysAreaController {
         }catch (Exception e){
             res.setCode("500");
             res.setMessage("系统异常");
-            log.error(e.getMessage());
+            log.info(e.getMessage());
             su.addSysLogs(logService,us,"添加地理区域配置"
                     ,"添加",request,"添加地理区域配置信息失败，报系统异常"
                     ,crmService,2);
@@ -114,7 +114,7 @@ public class SysAreaController {
         }catch (Exception e){
             res.setCode("500");
             res.setMessage("系统异常");
-            log.error(e.getMessage());
+            log.info(e.getMessage());
             su.addSysLogs(logService,us,"修改地理区域配置"
                     ,"修改",request,"修改地理区域配置信息失败，报系统异常"
                     ,crmService,2);
@@ -156,7 +156,7 @@ public class SysAreaController {
         }catch (Exception e){
             res.setCode("500");
             res.setMessage("系统异常");
-            log.error(e.getMessage());
+            log.info(e.getMessage());
             su.addSysLogs(logService,us,"删除地理区域配置"
                     ,"删除",request,"删除地理区域配置信息失败，报系统异常"
                     ,crmService,2);
@@ -193,7 +193,7 @@ public class SysAreaController {
         }catch (Exception e){
             res.setCode("500");
             res.setMessage("系统异常");
-            log.error(e.getMessage());
+            log.info(e.getMessage());
         }
         return res;
     }
@@ -231,7 +231,7 @@ public class SysAreaController {
         }catch (Exception e){
             res.setCode("500");
             res.setMessage("系统异常");
-            log.error(e.getMessage());
+            log.info(e.getMessage());
         }
         return res;
     }

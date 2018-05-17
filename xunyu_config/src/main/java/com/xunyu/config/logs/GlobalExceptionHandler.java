@@ -14,6 +14,7 @@ import java.util.Map;
 /**
  * @Autor dth
  * Description: 全局异常捕获
+ * ALL < TRACE < DEBUG < INFO < WARN < ERROR < FATAL < OFF 日志级别
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -39,8 +40,7 @@ public class GlobalExceptionHandler {
         }
 
         //记录到日志
-        log.error("GlobalExceptionHandler,捕获异常:"+ ex.getMessage() + ";eString:" + expMessage);
-
+        log.info("GlobalExceptionHandler,捕获异常:"+ ex.getMessage() + ";eString:" + expMessage);
         return res;
     }
 }
