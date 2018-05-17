@@ -195,6 +195,7 @@ public class CustomerServiceImpl implements CustomerService {
             map.put("isabled",0);
             map.put("array",array);
             n = customerDaoImpl.delCustomer(map);
+            n = getUserIds(map);
         }
         return n;
     }
@@ -223,7 +224,8 @@ public class CustomerServiceImpl implements CustomerService {
                         map.put("array",array);
                         map.put("groupId2",1);//表示根据分组id删除
                         int n = customerDaoImpl.delCustomer(map);
-                        System.out.println(n);
+                        n = getUserIds(map);
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -232,6 +234,29 @@ public class CustomerServiceImpl implements CustomerService {
             };
             pool.submit(run);
             pool.shutdown();//执行完之后释放该线程
+        return n;
+    }
+
+    private int getUserIds(Map<String,Object> map){
+        int n = 0;
+        //获取客户信息对应的账号信息
+        List<User> listUser = userDaoImpl.getUserIdByCustomerIds(map);
+        if(listUser != null && listUser.size() > 0) {
+            Long[] arr = new Long[listUser.size()];
+            for (int i = 0; i < listUser.size(); i++) {
+                if(listUser.get(i) != null) {
+                    arr[i] = listUser.get(i).getUserId();
+                }else{
+                    continue;
+                }
+            }
+            //清空map
+            map.clear();
+            map.put("isabled",0);
+            map.put("array",arr);
+        }
+        //也需要删除用户表中的客户账号
+        n = userDaoImpl.delUser(map);
         return n;
     }
 }

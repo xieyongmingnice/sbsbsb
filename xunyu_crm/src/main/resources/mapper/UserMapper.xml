@@ -83,6 +83,25 @@
     <select id = "getUserByAccount" parameterType="string" resultMap="user_ResultMap">
           select user_id,account,password,user_type,isabled,create_time
           from tbl_users where account = #{account}
-
     </select>
+
+    <select id = "getUserIdByCustomerIds" parameterType = "map" resultMap="user_ResultMap">
+        select user_id from tbl_customer_useraccount
+        where customer_id
+        in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <update id = "delUser" parameterType="map">
+        update tbl_users set
+        isabled = #{isabled}
+        where
+        user_id
+        in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

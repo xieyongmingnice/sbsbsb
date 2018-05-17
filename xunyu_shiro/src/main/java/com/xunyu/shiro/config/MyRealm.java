@@ -13,6 +13,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,7 +52,7 @@ public class MyRealm extends AuthorizingRealm {
      */  
     @Override  
     protected AuthenticationInfo doGetAuthenticationInfo(  
-            AuthenticationToken token) throws AuthenticationException {
+            AuthenticationToken token) {
         //获取用户的输入的账号.
         UsernamePasswordToken token2 = (UsernamePasswordToken) token;
         String account = String.valueOf(token2.getUsername());
@@ -63,21 +64,26 @@ public class MyRealm extends AuthorizingRealm {
          */
         /*MyCacheManager<String,User> cache = new MyCacheManager<String,User>();
         user = cache.get(account+pwd);*/
-            //查询数据库
+            //查询数据库 判断账号存不存在
             map.put("account",account);
-            map.put("passWord",MD5Utils.getMD5(String.valueOf(pwd)));//md5加密
             user = userService.getUserInfo(map);
             if(user != null) {
-                if (user.getIsabled() == 0) {//禁用
-                    throw new LockedAccountException();
-                } else {//做缓存
-                   // cache.put(account + pwd, user);
-                    //把用户放到session中
-                    Subject subject = SecurityUtils.getSubject();
-                    subject.getSession().setAttribute("user", user);
+                //判断密码是否正确
+                map.put("passWord",MD5Utils.getMD5(String.valueOf(pwd)));//md5加密
+                if(MD5Utils.getMD5(String.valueOf(pwd)).equals(user.getPassWord())) {
+                    if (user.getIsabled() == 0) { //禁用
+                        throw new LockedAccountException();
+                    } else { //做缓存
+                        // cache.put(account + pwd, user);
+                        //把用户放到session中
+                        Subject subject = SecurityUtils.getSubject();
+                        subject.getSession().setAttribute("user", user);
+                    }
+                }else{
+                    throw new IncorrectCredentialsException();//密码错误
                 }
             }else{
-                throw new UnknownAccountException();//没找到帐号
+                throw new AuthenticationException();//没找到帐号
             }
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 user.getAccount(), //用户名

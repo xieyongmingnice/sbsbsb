@@ -6,6 +6,7 @@ import com.xunyu.model.user.User;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,6 +45,20 @@ public class UserDaoImpl extends BaseDao<User, Long> {
      */
     public User getUserByAccount(Map<String,Object> map){
         return super.selectForObject("com.xunyu.model.user.User.getUserByAccount",map);
+    }
+    /**
+     * 批量删除用户表的客户账号
+     */
+    public int delUser(Map<String,Object> map){
+
+        return super.update("com.xunyu.model.user.User.delUser",map);
+    }
+    /**
+     * 通过客户id获取用户id
+     */
+    public List<User> getUserIdByCustomerIds(Map<String,Object> map){
+
+        return super.selectForListObject("com.xunyu.model.user.User.getUserIdByCustomerIds",map);
     }
 
     /**

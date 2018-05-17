@@ -47,6 +47,7 @@ public class CustomerGroupDaoImpl extends BaseDao<CustomerGroup, Long> {
     public List<CustomerGroup> customerGroupList(Map<String,Object> map){
         return super.selectForListObject("com.xunyu.crm.pojo.customer.CustomerGroup.customerGroupList",map);
     }
+
     /**
      * 获取分组详情
      */

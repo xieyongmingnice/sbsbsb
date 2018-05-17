@@ -59,13 +59,12 @@ public class CustomerDaoImpl extends BaseDao<CustomerTab, Long> {
     }
 
     /**
-     * 批量删除
-     */
-    /**
      * 批量删除客户信息
      */
     public int delCustomer(Map<String,Object> map){
 
         return super.update("com.xunyu.crm.pojo.customer.CustomerTab.delCustomer",map);
     }
+
+
 }
