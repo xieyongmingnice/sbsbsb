@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: xunyu-drools
+  profiles:
+    #active: pro #\u52A0\u8F7Dxunyu_profiles\u9879\u76EE\u4E2D \u7684application-core.yml\u6587\u4EF6
+    #active: dev #\u52A0\u8F7Dxunyu_profiles\u9879\u76EE\u4E2D \u7684application-dev.yml\u6587\u4EF6
+    active: local #\u52A0\u8F7Dxunyu_profiles\u9879\u76EE\u4E2D \u7684application-dev.yml\u6587\u4EF6
+
+server:
+  port: 8011
