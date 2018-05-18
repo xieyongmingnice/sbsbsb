@@ -57,7 +57,6 @@ public class SysPayController {
             sysPay.setIsabled(1);
             sysPay.setCreateTime(new Date());
             sysPay.setUserId(us.getUserId());
-            sysPay.setPayState(4);//默认全部不启用
             n = sysPayService.addSysPay(sysPay);
             res.setCode("200");
             res.setRes(sysPay);
