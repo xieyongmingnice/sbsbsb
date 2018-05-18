@@ -24,6 +24,7 @@
         <result column="contract_num" property="contractNum"></result>
         <result column="deposit" property="deposit"></result>
         <result column="file_path" property="filePath"></result>
+        <result column="origin_path" property="originPath"></result>
         <result column="isabled" property="isabled"></result>
     </resultMap>
 
@@ -40,7 +41,7 @@
         customer_id,customer_group_id,customer_name,address,telphone
         ,customer_account,customer_psw,enter_contact,mophone,qq,email,business
         ,finance,customer_service,manager,price,remark,contract_num,deposit
-        ,file_path,create_time,isabled
+        ,file_path,create_time,isabled,origin_path
     </sql>
     <select id = "customerTabCount" parameterType="map" resultType="int">
         select count(1) from tbl_customer where isabled = 1 <include refid = "customer_where"/>
@@ -108,6 +109,7 @@
             <if test='contractNum != null and contractNum != ""'>contract_num,</if>
             <if test='deposit != null'>deposit,</if>
             <if test='filePath != null and filePath != ""'>file_path,</if>
+            <if test='originPath != null and originPath != ""'>origin_path,</if>
             <if test='isabled != null'>isabled,</if>
         </trim>
         VALUES
@@ -133,6 +135,7 @@
             <if test='contractNum != null and contractNum != ""'>#{contractNum},</if>
             <if test='deposit != null'>#{deposit},</if>
             <if test='filePath != null and filePath != ""'>#{filePath},</if>
+            <if test='originPath != null and originPath != ""'>#{originPath},</if>
             <if test='isabled != null'>#{isabled},</if>
         </trim>
     </insert>
@@ -199,6 +202,9 @@
             </if>
             <if test='filePath != null and filePath != ""'>
                 <![CDATA[	file_path = #{filePath}, ]]>
+            </if>
+            <if test='originPath != null and originPath != ""'>
+                <![CDATA[	origin_path = #{originPath}, ]]>
             </if>
             <if test='isabled != null'>
                 <![CDATA[	isabled = #{isabled}, ]]>

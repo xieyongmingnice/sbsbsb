@@ -46,6 +46,10 @@ spring:
         binder:
           brokers: 192.168.3.5:9092  #ip地址根据实际kafka集群地址
           zkNodes: 192.168.3.5:2181  #zookeeper
+  http:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 100MB
 
 #mybatis配置
 mybatis:

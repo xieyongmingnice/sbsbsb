@@ -2,7 +2,6 @@ package com.xunyu.crm.pojo.customer;
 
 import com.xunyu.model.user.UserModel;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -33,7 +32,16 @@ public class CustomerTab extends UserModel{
     private String contractNum;//编号
     private Double deposit;//押金  小数点后两位
     private String filePath;//文件地址
+    private String originPath;//原文件地址
     private Integer isabled;// 1可用  其它表示不可用
+
+    public String getOriginPath() {
+        return originPath;
+    }
+
+    public void setOriginPath(String originPath) {
+        this.originPath = originPath;
+    }
 
     public Integer getIsabled() {
         return isabled;
