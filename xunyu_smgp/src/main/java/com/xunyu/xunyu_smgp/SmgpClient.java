@@ -1,4 +1,4 @@
-package com.xunyu.smgp;
+package com.xunyu.xunyu_smgp;
 
 /**
  * @author xym

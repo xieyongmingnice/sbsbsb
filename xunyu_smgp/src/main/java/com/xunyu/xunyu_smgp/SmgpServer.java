@@ -1,4 +1,4 @@
-package com.xunyu.smgp;
+package com.xunyu.xunyu_smgp;
 
 /**
  * @author xym
@@ -6,5 +6,7 @@ package com.xunyu.smgp;
  * @date 2018/4/20 14:18
  */
 public class SmgpServer {
+    public static void main(String[] args) {
 
+    }
 }
