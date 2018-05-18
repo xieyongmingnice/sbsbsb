@@ -29,6 +29,11 @@ public class SysPayServiceImpl implements SysPayService {
     }
 
     @Override
+    public int updateSysPayByUserId(Map<String, Object> map) {
+        return sysPayDaoImpl.updateSysPayByUserId(map);
+    }
+
+    @Override
     public List<SysPay> getSysPayDetail(Map<String, Object> map) {
         return sysPayDaoImpl.getSysPayDetail(map);
     }

@@ -81,26 +81,44 @@ public class SysPayController {
         Map<String, Object> map = new HashMap<String, Object>();
         Result<SysPay> res = new Result<SysPay>();
         int n = 0;
+        int n2 = 0;
         if (us == null) {
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-            if(sysPay.getPayId() != null){
-                n = sysPayService.updateSysPay(sysPay);
-                res.setCode("200");
-                res.setRes(sysPay);
-                res.setMessage("success");
+            if(sysPay.getPayId() != null && sysPay.getPayState() != null){
+                    if(sysPay.getPayState() == 3){ //全部开启
+                        map.put("userId",us.getUserId());
+                        map.put("payState",3);
+                        n2 = sysPayService.updateSysPayByUserId(map);
+                    }else if(sysPay.getPayState() == 4){ //全部开启
+                        map.put("userId",us.getUserId());
+                        map.put("payState",4);
+                        n2 = sysPayService.updateSysPayByUserId(map);
+                    }else {
+                        n = sysPayService.updateSysPay(sysPay);
+                    }
+                    res.setCode("200");
+                    res.setRes(sysPay);
+                    res.setMessage("success");
+
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
                     su.addSysLogs(logService,us,"修改支付配置信息"
                             ,"修改",request,"修改支付配置信息",crmService,1);
                 }
+                if(n2 > 0){
+                    //异步添加日志
+                    SysLogsUtil su = SysLogsUtil.getInstance();
+                    su.addSysLogs(logService,us,"修改支付配置装填"
+                            ,"修改",request,"成功修改支付配置状态",crmService,1);
+                }
             }else{
                 res.setCode("413");
                 res.setRes(sysPay);
-                res.setMessage("payId不能为空");
+                res.setMessage("payId和payState不能为空");
             }
 
         return res;

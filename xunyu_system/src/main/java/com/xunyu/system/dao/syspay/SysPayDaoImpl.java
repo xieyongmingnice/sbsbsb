@@ -28,7 +28,12 @@ public class SysPayDaoImpl extends BaseDao<SysPay,Long> {
     public int updateSysPay(SysPay syaPay){
         return super.update("com.xunyu.system.pojo.syspay.SysPay.updateSysPay",syaPay);
     }
-
+    /**
+     * 根据用户id修改支付配置状态
+     */
+    public int updateSysPayByUserId(Map<String,Object> map){
+        return super.update("com.xunyu.system.pojo.syspay.SysPay.updateSysPayByUserId",map);
+    }
     /**
      * 查询当前登录用户支付配置信息
      */
