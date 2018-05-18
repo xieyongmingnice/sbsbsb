@@ -10,7 +10,7 @@
         </encoder>
     </appender>
     <appender name="xunyu_rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.dir}/logs/tactics-xunyu.log</file>
+        <file>${log.dir}/logs/tactics/tactics-xunyu.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.dir}/logs/tactics/tactics-%d{yyyy-MM-dd_HH}.%i.log
             </fileNamePattern>
