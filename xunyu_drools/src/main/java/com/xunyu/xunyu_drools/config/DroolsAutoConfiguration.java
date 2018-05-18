@@ -36,6 +36,11 @@ public class DroolsAutoConfiguration {
         return kieFileSystem;
     }
 
+    /**
+     * 获取规则文件
+     * @return rules/ 目录下的drl规则文件
+     * @throws IOException
+     */
     private Resource[] getRuleFiles() throws IOException {
         ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
         return resourcePatternResolver.getResources("classpath*:" + RULES_PATH + "**/*.*");
