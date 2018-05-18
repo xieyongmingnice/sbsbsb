@@ -77,12 +77,17 @@
 	</dependencies>
 
 	<build>
+		<finalName>xunyu-drools</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.xunyu.xunyu_drools.XunyuDroolsApplication</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
+
 	</build>
 
 
