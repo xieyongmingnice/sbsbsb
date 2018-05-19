@@ -12,20 +12,22 @@
         <result column="pay_pid" property="payPid"></result>
         <result column="pay_key" property="payKey"></result>
         <result column="pay_text" property="payText"></result>
-        <result column="pay_state" property="payState"></result>
         <result column="userid" property="userId"></result>
         <result column="pay_type" property="payType"></result>
     </resultMap>
 
     <sql id = "sysPay_column">
         pay_id,isabled,create_time,pay_name,merchant_name,pay_account,pay_pid
-        ,pay_key,pay_text,pay_state,userid,pay_type
+        ,pay_key,pay_text,userid,pay_type
     </sql>
     <select id="getSysPayDetail" parameterType="map" resultMap="sysPay_ResultMap">
         select
           <include refid = "sysPay_column" />
         from tbl_pay_config
-        where isabled = 1 and userid = #{userId}
+        where isabled = 1
+        <if test = "userId != null">and userid = #{userId}</if>
+        <if test = "payType != null">and pay_type = #{payType}</if>
+
     </select>
 
     <insert id = "addSysPay" parameterType="com.xunyu.system.pojo.syspay.SysPay"
@@ -41,7 +43,6 @@
             <if test='payPid != null and payPid != ""'>pay_pid,</if>
             <if test='payKey != null and payKey != ""'>pay_key,</if>
             <if test='payText != null and payText != ""'>pay_text,</if>
-            <if test='payState != null'>pay_state,</if>
             <if test='userId != null'>userid,</if>
             <if test='payType != null'>pay_type,</if>
         </trim>
@@ -56,7 +57,6 @@
             <if test='payPid != null and payPid != ""'>#{payPid},</if>
             <if test='payKey != null and payKey != ""'>#{payKey},</if>
             <if test='payText != null and payText != ""'>#{payText},</if>
-            <if test='payState != null'>#{payState},</if>
             <if test='userId != null'>#{userId},</if>
             <if test='payType != null'>#{payType},</if>
         </trim>
@@ -89,9 +89,6 @@
             <if test='payText != null and payText != ""'>
                 <![CDATA[ pay_text = #{payText}, ]]>
             </if>
-            <if test='payState != null'>
-                <![CDATA[ pay_state = #{payState}, ]]>
-            </if>
             <if test='userId != null'>
                 <![CDATA[ userid = #{userId}, ]]>
             </if>
@@ -106,11 +103,5 @@
         </where>
     </update>
 
-    <update id = "updateSysPayByUserId" parameterType="map">
-        update tbl_pay_config set
-        pay_state = #{payState}
-        where userid = #{userId}
-
-    </update>
 
 </mapper>

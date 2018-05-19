@@ -20,7 +20,6 @@ public interface SysPayService {
      * 修改支付配置
      */
     int updateSysPay(SysPay syaPay);
-    int updateSysPayByUserId(Map<String,Object> map);
 
     /**
      * 查询当前登录用户支付配置信息

@@ -8,4 +8,13 @@ import com.xunyu.model.user.UserModel;
  **/
 public class SysPayModel extends UserModel {
 
+    private String payType;//1支付宝  2微信  3其它
+
+    public String getPayType() {
+        return payType;
+    }
+
+    public void setPayType(String payType) {
+        this.payType = payType;
+    }
 }
