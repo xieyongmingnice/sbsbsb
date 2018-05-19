@@ -30,7 +30,8 @@ spring:
     #事务查询超时时间
     transaction-query-timeout: 60000
     #关闭空闲连接超时时间
-    remove-abandoned-timeout: 18000
+    remove-abandoned: true #打开 removeAbandoned 功能
+    remove-abandoned-timeout: 1800 #1800 秒，也就是 30 分钟
   redis:
       hostName: 47.104.135.244
       port: 6379
