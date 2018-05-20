@@ -123,9 +123,6 @@ public class SysPayStateController {
     /**
      * 获取支付配置状态
      */
-    /**
-     * 添加支付配置状态
-     */
     @RequestMapping(value = "getSysPayStateDetail",method = RequestMethod.POST)
     public Result<SysPayState>getSysPayStateDetailData(SysPayState s){
 
