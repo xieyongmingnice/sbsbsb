@@ -4,9 +4,7 @@ import com.commons.core.exception.ExceptionCatch;
 import com.commons.core.message.Result;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.user.User;
-import com.xunyu.system.pojo.syspay.SysPay;
 import com.xunyu.system.pojo.syspay.SysPayState;
-import com.xunyu.system.service.syspay.SysPayService;
 import com.xunyu.system.service.syspay.SysPayStateService;
 import com.xunyu.system.utils.syslog.CrmService;
 import com.xunyu.system.utils.syslog.LogService2;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,7 +45,8 @@ public class SysPayStateController {
     public Result<SysPayState> addSysPayData(SysPayState s,HttpServletRequest request){
 
         User us = redisUtil.getCurrUser(s.getSessionId());
-        Map<String,Object> map = new HashMap<String,Object>();
+        StringBuilder cen = new StringBuilder();
+        cen.append(s.getPayState());
         Result<SysPayState> res = new Result<SysPayState>();
         int n = 0;
         if(us == null) {
@@ -64,14 +62,14 @@ public class SysPayStateController {
             if (n > 0) {
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService, us, "添加支付配置状态"
+                su.addSysLogs(logService, us, "添加支付配置状态值："+cen.toString()
                         , "添加", request, "成功添加支付配置状态", crmService, 1);
             }
         }catch (Exception e){
             ExceptionCatch.exceptionCatch(res,log,e);
             //异步添加日志
             SysLogsUtil su = SysLogsUtil.getInstance();
-            su.addSysLogs(logService, us, "添加支付配置状态"
+            su.addSysLogs(logService, us, "添加支付配置状态值："+cen.toString()
                     , "添加", request, "添加支付配置状态失败", crmService, 2);
         }
 
@@ -85,7 +83,8 @@ public class SysPayStateController {
     public Result<SysPayState> updateSysPayData(SysPayState s,HttpServletRequest request){
 
         User us = redisUtil.getCurrUser(s.getSessionId());
-        Map<String,Object> map = new HashMap<String,Object>();
+        StringBuilder cen = new StringBuilder();
+        cen.append(s.getPayState());
         Result<SysPayState> res = new Result<SysPayState>();
         int n = 0;
         if(us == null) {
@@ -102,7 +101,7 @@ public class SysPayStateController {
                 if (n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService, us, "修改支付配置状态"
+                    su.addSysLogs(logService, us, "修改支付配置状态值："+cen.toString()
                             , "添加", request, "成功修改支付配置状态", crmService, 1);
                 }
             }else{
@@ -113,7 +112,7 @@ public class SysPayStateController {
             ExceptionCatch.exceptionCatch(res,log,e);
             //异步添加日志
             SysLogsUtil su = SysLogsUtil.getInstance();
-            su.addSysLogs(logService, us, "修改支付配置状态"
+            su.addSysLogs(logService, us, "修改支付配置状态值："+cen.toString()
                     , "添加", request, "修改支付配置状态失败", crmService, 2);
         }
 

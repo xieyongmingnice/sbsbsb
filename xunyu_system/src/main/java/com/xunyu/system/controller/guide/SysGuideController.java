@@ -82,7 +82,9 @@ public class SysGuideController {
                     if(n > 0){
                         //异步添加日志
                         SysLogsUtil su = SysLogsUtil.getInstance();
-                        su.addSysLogs(logService,us,"添加系统基本指导内容"
+                        StringBuilder cen = new StringBuilder();
+                        cen.append(sg.getGuideName());
+                        su.addSysLogs(logService,us,"添加系统基本指导内容《"+cen.toString()+"》"
                                 ,"添加",request,"添加系统基本指导内容信息",crmService,1);
                     }
                 }

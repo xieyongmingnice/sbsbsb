@@ -46,7 +46,6 @@ public class SysPayController {
     public Result<SysPay> addSysPayData(SysPay sysPay,HttpServletRequest request) throws Exception{
 
         User us = redisUtil.getCurrUser(sysPay.getSessionId());
-        Map<String,Object> map = new HashMap<String,Object>();
         Result<SysPay> res = new Result<SysPay>();
         int n = 0;
         if(us == null) {
@@ -64,7 +63,9 @@ public class SysPayController {
             if(n > 0) {
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService,us,"添加支付配置信息"
+                StringBuilder cen = new StringBuilder();
+                cen.append(sysPay.getMerchantName());
+                su.addSysLogs(logService,us,"添加支付配置信息《"+cen.toString()+"》"
                         ,"添加",request,"添加支付配置信息",crmService,1);
             }
 
@@ -78,7 +79,6 @@ public class SysPayController {
     public Result<SysPay> updateSysPayData(SysPay sysPay,HttpServletRequest request) throws Exception{
 
         User us = redisUtil.getCurrUser(sysPay.getSessionId());
-        Map<String, Object> map = new HashMap<String, Object>();
         Result<SysPay> res = new Result<SysPay>();
         int n = 0;
         if (us == null) {
@@ -94,7 +94,9 @@ public class SysPayController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"修改支付配置信息"
+                    StringBuilder cen = new StringBuilder();
+                    cen.append(sysPay.getMerchantName());
+                    su.addSysLogs(logService,us,"修改支付配置信息《"+cen.toString()+"》"
                             ,"修改",request,"修改支付配置信息",crmService,1);
                 }
             }else{

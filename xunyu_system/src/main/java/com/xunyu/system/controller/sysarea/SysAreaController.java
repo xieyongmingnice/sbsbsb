@@ -48,7 +48,8 @@ public class SysAreaController {
     public Result<SysArea> addSysAreaConfigData(HttpServletRequest request,SysArea sa){
         Result<SysArea> res = new Result<SysArea>();
         User us = redisUtil.getCurrUser(sa.getSessionId());
-        Map<String, Object> map = new HashMap<String, Object>();
+        StringBuilder cen = new StringBuilder();
+        cen.append(sa.getAreaName()).append("-").append(sa.getAreaId());
         int flag = 0;
         //异步添加日志
         SysLogsUtil su = SysLogsUtil.getInstance();
@@ -64,7 +65,7 @@ public class SysAreaController {
             res.setCode("200");
             res.setMessage("success");
             if(flag > 0){
-                su.addSysLogs(logService,us,"添加地理区域配置"
+                su.addSysLogs(logService,us,"添加地理区域配置《"+cen.toString()+"》"
                         ,"添加",request,"成功添加地理区域配置信息"
                         ,crmService,1);
             }
@@ -72,7 +73,7 @@ public class SysAreaController {
             res.setCode("500");
             res.setMessage("系统异常");
             log.info(e.getMessage());
-            su.addSysLogs(logService,us,"添加地理区域配置"
+            su.addSysLogs(logService,us,"添加地理区域配置《"+cen.toString()+"》"
                     ,"添加",request,"添加地理区域配置信息失败，报系统异常"
                     ,crmService,2);
         }
@@ -86,7 +87,8 @@ public class SysAreaController {
     public Result<SysArea> updateSysAreaConfigData(HttpServletRequest request,SysArea sa) {
         Result<SysArea> res = new Result<SysArea>();
         User us = redisUtil.getCurrUser(sa.getSessionId());
-        Map<String, Object> map = new HashMap<String, Object>();
+        StringBuilder cen = new StringBuilder();
+        cen.append(sa.getAreaName()).append("-").append(sa.getAreaId());
         int flag = 0;
         //异步添加日志
         SysLogsUtil su = SysLogsUtil.getInstance();
@@ -102,7 +104,7 @@ public class SysAreaController {
                 res.setMessage("success");
                 res.setRes(sa);
                 if(flag > 0){
-                    su.addSysLogs(logService,us,"修改地理区域配置"
+                    su.addSysLogs(logService,us,"修改地理区域配置《"+cen.toString()+"》"
                             ,"修改",request,"成功修改地理区域配置信息"
                             ,crmService,1);
                 }
@@ -115,7 +117,7 @@ public class SysAreaController {
             res.setCode("500");
             res.setMessage("系统异常");
             log.info(e.getMessage());
-            su.addSysLogs(logService,us,"修改地理区域配置"
+            su.addSysLogs(logService,us,"修改地理区域配置《"+cen.toString()+"》"
                     ,"修改",request,"修改地理区域配置信息失败，报系统异常"
                     ,crmService,2);
         }
@@ -145,7 +147,7 @@ public class SysAreaController {
                 res.setCode("200");
                 res.setMessage("success");
                 if(flag > 0){
-                    su.addSysLogs(logService,us,"删除地理区域配置"
+                    su.addSysLogs(logService,us,"删除地理区域配置《"+sm.getAreaIds()+"》"
                             ,"删除",request,"成功删除地理区域配置信息"
                             ,crmService,1);
                 }
@@ -157,7 +159,7 @@ public class SysAreaController {
             res.setCode("500");
             res.setMessage("系统异常");
             log.info(e.getMessage());
-            su.addSysLogs(logService,us,"删除地理区域配置"
+            su.addSysLogs(logService,us,"删除地理区域配置《"+sm.getAreaIds()+"》"
                     ,"删除",request,"删除地理区域配置信息失败，报系统异常"
                     ,crmService,2);
         }
