@@ -17,6 +17,8 @@
 		<java.version>1.8</java.version>
 		<spring.version>1.5.7.RELEASE</spring.version>
 		<drools.version>6.5.0.Final</drools.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<dependencyManagement>

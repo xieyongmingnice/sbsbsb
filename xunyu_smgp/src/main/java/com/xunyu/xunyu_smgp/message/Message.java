@@ -5,6 +5,11 @@ import com.xunyu.xunyu_smgp.packet.PacketType;
 
 import java.io.Serializable;
 
+/**
+ * @author
+ * @description
+ * @date 2018/5/21 14:53
+ */
 public interface Message extends Serializable{
 
     void setPacketType(PacketType packetType);

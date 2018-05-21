@@ -20,42 +20,52 @@ public class SmgpDefaultHeader implements Header {
 
     private long sequenceId;
 
+    @Override
     public void setHeaderLength(long length) {
         this.headerLength = length;
     }
 
+    @Override
     public long getHeaderLength() {
         return headerLength;
     }
 
+    @Override
     public void setPacketLength(long length) {
         this.packetLength = length;
     }
 
+    @Override
     public long getPacketLength() {
         return packetLength;
     }
 
+    @Override
     public void setBodyLength(long length) {
         this.bodyLength = length;
     }
 
+    @Override
     public long getBodyLength() {
         return bodyLength;
     }
 
+    @Override
     public void setRequestId(long requestId) {
         this.requestId = requestId;
     }
 
+    @Override
     public long getRequestId() {
         return requestId;
     }
 
+    @Override
     public void setSequenceId(long sequenceId) {
         this.sequenceId = sequenceId & 0xffffffffL;
     }
 
+    @Override
     public long getSequenceId() {
         return sequenceId;
     }

@@ -1,4 +1,4 @@
-package com.xunyu.cmpp.handler;
+package com.xunyu.xunyu_smgp.handler;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -11,14 +11,15 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author xym
- * @description 客户端连接管理器
- * @date 2018/4/19 11:17
+ * @author
+ * @description 客户端连接管理类  断线重连
+ * @date 2018/5/21 15:15
  */
 @ChannelHandler.Sharable
-public abstract class CmppClientConnectManager extends ChannelInboundHandlerAdapter implements TimerTask,ChannelHandlerHolder{
+public abstract class SmgpClientConnectManager extends ChannelInboundHandlerAdapter implements TimerTask,ChannelHandlerHolder{
 
-    private Logger logger = LoggerFactory.getLogger(CmppClientConnectManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(SmgpClientConnectManager.class);
+
 
     private final Bootstrap bootstrap;
     private final Timer timer;
@@ -27,7 +28,7 @@ public abstract class CmppClientConnectManager extends ChannelInboundHandlerAdap
     private volatile boolean reconnect = true;
     private int attempts;
 
-    public CmppClientConnectManager(Bootstrap bootstrap,Timer timer,int port,String host,Boolean reconnect){
+    public SmgpClientConnectManager(Bootstrap bootstrap,Timer timer,int port,String host,Boolean reconnect){
         this.bootstrap = bootstrap;
         this.timer = timer;
         this.port = port;

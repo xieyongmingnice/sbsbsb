@@ -8,7 +8,7 @@ import com.xunyu.xunyu_smgp.packet.SmgpPacketType;
  * @description smgp登录消息体
  * @date 2018/5/18 18:01
  */
-public class SmgpLoginMessage extends SmgpDefaultMessage{
+public class SmgpLoginRequestMessage extends SmgpDefaultMessage{
 
 
     private static final long serialVersionUID = -205851080430813164L;
@@ -39,15 +39,15 @@ public class SmgpLoginMessage extends SmgpDefaultMessage{
      */
     private Integer clientVersion;
 
-    public SmgpLoginMessage(Header header){
+    public SmgpLoginRequestMessage(Header header){
         super(SmgpPacketType.LOGIN,header);
     }
 
-    public SmgpLoginMessage(long sequenceId){
+    public SmgpLoginRequestMessage(long sequenceId){
         super(SmgpPacketType.LOGIN,sequenceId);
     }
 
-    public SmgpLoginMessage(){
+    public SmgpLoginRequestMessage(){
         super(SmgpPacketType.LOGIN);
     }
 
