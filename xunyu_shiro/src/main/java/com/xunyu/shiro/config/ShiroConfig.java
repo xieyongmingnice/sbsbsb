@@ -1,6 +1,5 @@
 package com.xunyu.shiro.config;
 
-import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.config.redis.SessionDao;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.session.SessionListener;
@@ -19,8 +18,8 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.filter.DelegatingFilterProxy;
+
 import javax.servlet.Filter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -81,6 +80,8 @@ public class ShiroConfig {
     public SimpleCookie rememberMeCookie() {
         // 这个参数是cookie的名称，对应前端的checkbox的name = rememberMe
         SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
+        simpleCookie.setHttpOnly(false);//当httpOnly属性设置为false时，才能通过javascript获取cookie值;
+        simpleCookie.setName("currCookie");//前端通过它获取cookie
         // <!-- 记住我cookie生效时间30天 ,单位秒;-->
         simpleCookie.setMaxAge(259200);
         return simpleCookie;
