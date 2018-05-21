@@ -25,11 +25,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.xunyu</groupId>
-            <artifactId>xunyu_profiles</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.1.6</version>
@@ -129,9 +124,15 @@
             https://segmentfault.com/a/1190000004318360?_ea=568366
         -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>1.5.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.jolokia</groupId>
+            <artifactId>jolokia-core</artifactId>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>config-xunyu</finalName>

@@ -25,6 +25,7 @@
         <module>xunyu_log_manager</module>
         <module>xunyu_kafka</module>
         <module>xunyu_kafka_config</module>
+        <module>xunyu_actuator</module>
     </modules>
     <packaging>pom</packaging>
 
