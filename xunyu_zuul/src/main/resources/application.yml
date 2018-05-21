@@ -92,6 +92,7 @@ ribbon:
   MaxAutoRetries: 0 #在同一台服务器上重试的最大次数
   MaxAutoRetriesNextServer: 1 #要重试的下一个服务器的最大数量
 
-#日志
 logging:
   config: classpath:logback-medicare.xml
+  file: D:/Test/crm/crm.txt  #本地输出日志文件地址
+  #file: /opt/upload/msg-xunyu-all/catalina.base_IS_UNDEFINED/zuul.txt #计时、服务重启会被覆盖

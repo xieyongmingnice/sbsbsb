@@ -20,7 +20,6 @@
         <module>xunyu_system</module>
         <module>xunyu_smgp</module>
         <module>xunyu_zipkin</module>
-        <module>xunyu_profiles</module>
         <module>xunyu_tactics</module>
         <module>xunyu_log_manager</module>
         <module>xunyu_kafka</module>

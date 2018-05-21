@@ -1,8 +1,8 @@
-#开发环境配置
+#本地环境配置
 #数据库配置
 db: 
-  #host: rm-m5e03vwf88v7vufn9ho.mysql.rds.aliyuncs.com #阿里云外网
-  host: rm-m5e03vwf88v7vufn9.mysql.rds.aliyuncs.com   #阿里云内网
+  host: rm-m5e03vwf88v7vufn9ho.mysql.rds.aliyuncs.com
+  #host: 118.190.192.244  和上面的是一个host
   port: 3306
   name: xunyu_db
   public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJZcCjn1viAr1f4994+1Do1i1xQnqDD3OupuyqG1Yq2EI+OV/enBB9ETdztE1ptXuU2lGq3eDHV22oat2BZXVIMCAwEAAQ==
@@ -57,9 +57,7 @@ mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:mapper/*.xml,classpath*:mapper/*Mapper.xml
 
-#日志
-logging:
-  config: classpath:logback-medicare.xml
+
 
 #oss参数配置
 #oss:
@@ -76,8 +74,8 @@ eureka:
   enabled: true
   client:
     serviceUrl:
-      #defaultZone: http://localhost:8001/eureka/
-      defaultZone: http://47.104.190.174:8001/eureka/
+      defaultZone: http://localhost:8001/eureka/
+      #defaultZone: http://47.104.190.174:8001/eureka/
   instance:
     prefer-ip-address: true  #地址使用该属性配置的IP
     instance-id: ${spring.cloud.client.ipAddress}:${server.port}
@@ -127,3 +125,4 @@ endpoints:
      enabled: true
   trace: #显示跟踪信息（默认最后100个HTTP请求）。
      enabled: true
+
