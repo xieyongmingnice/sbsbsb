@@ -2,12 +2,8 @@ package com.xunyu.xunyu_smgp.handler;
 
 import com.google.common.primitives.Bytes;
 import com.xunyu.xunyu_smgp.constant.GlobalConstance;
-import com.xunyu.xunyu_smgp.head.Header;
-import com.xunyu.xunyu_smgp.head.SmgpDefaultHeader;
 import com.xunyu.xunyu_smgp.message.SmgpLoginRequestMessage;
-import com.xunyu.xunyu_smgp.packet.SmgpPacketType;
 import com.xunyu.xunyu_smgp.util.CachedMillisecondClock;
-import com.xunyu.xunyu_smgp.util.DefaultSequenceNumberUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -37,16 +33,10 @@ public class SmgpClientHandler extends ChannelInboundHandlerAdapter {
         byte[] userBytes = clientId.getBytes(GlobalConstance.DEFAULT_TRANSPORT_CHARSET);
         byte[] sharedSecretBytes = sharedSecret.getBytes(GlobalConstance.DEFAULT_TRANSPORT_CHARSET);
         byte[] timestampBytes = timestamp.getBytes(GlobalConstance.DEFAULT_TRANSPORT_CHARSET);
-        msg.setAuthenticatorClient(String.valueOf(DigestUtils.md5(Bytes.concat(userBytes, new byte[9], sharedSecretBytes, timestampBytes))));
+        msg.setAuthenticatorClient(String.valueOf(DigestUtils.md5(Bytes.concat(userBytes, new byte[7], sharedSecretBytes, timestampBytes))));
         msg.setClientId(clientId);
         msg.setTimestamp(Long.parseLong(timestamp));
         msg.setClientVersion(0X30);
-
-        Header header = new SmgpDefaultHeader();
-        header.setRequestId(SmgpPacketType.LOGIN.getRequestId());
-        header.setSequenceId(DefaultSequenceNumberUtil.getSequenceNo());
-
-
         ctx.writeAndFlush(msg);
 
         logger.info("send SmgpLoginRequestMessage");

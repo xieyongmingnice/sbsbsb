@@ -28,7 +28,7 @@ public class SmgpHeaderCodec extends MessageToMessageCodec<ByteBuf, Message> {
 
 	private ConcurrentHashMap<Long, MessageToMessageCodec> codecMap = new ConcurrentHashMap<>();
 
-	private SmgpHeaderCodec(){
+	public SmgpHeaderCodec(){
 		for (PacketType packetType : SmgpPacketType.values()) {
 			codecMap.put(packetType.getRequestId(), packetType.getCodec());
 		}
@@ -56,7 +56,6 @@ public class SmgpHeaderCodec extends MessageToMessageCodec<ByteBuf, Message> {
 			message.setBodyBuffer(GlobalConstance.EMPTY_BYTES);
 		}
 		message.setHeader(header);
-		ctx.channel().pipeline().addLast(codecMap.get(requestId));
 		list.add(message);
 	}
 

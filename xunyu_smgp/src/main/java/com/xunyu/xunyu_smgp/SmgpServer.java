@@ -1,6 +1,7 @@
 package com.xunyu.xunyu_smgp;
 
 import com.xunyu.xunyu_smgp.codec.SmgpHeaderCodec;
+import com.xunyu.xunyu_smgp.codec.SmgpLoginCodec;
 import com.xunyu.xunyu_smgp.handler.SmgpServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -23,10 +24,11 @@ public class SmgpServer {
     private static final Logger logger = LoggerFactory.getLogger(SmgpServer.class);
 
     public static void main(String[] args) {
-
+        int port = 8990;
+        open(port);
     }
 
-    private void open(int port){
+    private static void open(int port){
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -40,9 +42,9 @@ public class SmgpServer {
                             ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(4 * 1024 , 0, 4, -4, 0, true))
                                     .addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS))
                                     //消息头编解码器
+                                    .addLast(new SmgpLoginCodec())
                                     .addLast(new SmgpHeaderCodec())
                                     .addLast(new SmgpServerHandler());
-
 
                         }
                     });
