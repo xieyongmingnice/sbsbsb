@@ -41,11 +41,10 @@ public class SmgpServer {
                         protected void initChannel(Channel ch) throws Exception {
                             ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(4 * 1024 , 0, 4, -4, 0, true))
                                     .addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS))
-                                    //消息头编解码器
                                     .addLast(new SmgpLoginCodec())
+                                    //消息头编解码器
                                     .addLast(new SmgpHeaderCodec())
                                     .addLast(new SmgpServerHandler());
-
                         }
                     });
             /**

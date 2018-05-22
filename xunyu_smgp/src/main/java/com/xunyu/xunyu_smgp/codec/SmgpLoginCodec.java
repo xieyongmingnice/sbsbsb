@@ -40,8 +40,7 @@ public class SmgpLoginCodec extends MessageToMessageCodec<Message,SmgpLoginReque
     @Override
     protected void decode(ChannelHandlerContext ctx, Message msg, List<Object> list) throws Exception {
         long requestId = ((Long) msg.getHeader().getRequestId()).longValue();
-        if (SmgpPacketType.LOGIN.getRequestId() != requestId)
-        {
+        if (SmgpPacketType.LOGIN.getRequestId() != requestId) {
             //不解析，交给下一个codec
             list.add(msg);
             return;

@@ -129,4 +129,18 @@ public class SmgpDefaultMessage implements Message,Cloneable{
     public void setAttachment(Serializable attachment) {
         this.attachment = attachment;
     }
+
+    @Override
+    protected SmgpDefaultMessage clone() throws CloneNotSupportedException {
+        SmgpDefaultMessage msg =  (SmgpDefaultMessage) super.clone();
+
+        SmgpDefaultHeader newHeader = new SmgpDefaultHeader();
+        newHeader.setSequenceId(header.getSequenceId());
+        newHeader.setRequestId(packetType.getRequestId());
+        msg.setHeader(newHeader);
+
+        msg.resetRequests();
+        msg.setTimestamp(CachedMillisecondClock.INS.now());
+        return msg;
+    }
 }
