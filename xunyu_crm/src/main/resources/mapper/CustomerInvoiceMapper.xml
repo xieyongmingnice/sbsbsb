@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.crm.pojo.cusinvo.CoustomerInvoiceinfo">
+
+    <resultMap id="invoice_ResultMap" type="com.xunyu.crm.pojo.cusinvo.CoustomerInvoiceinfo">
+        <id column="invoiceinfo_id" property="invoiceinfoId"></id>
+        <result column="customer_id" property="customerId"></result>
+        <result column="company_name" property="companyName"></result>
+        <result column="tax_num" property="taxNum"></result>
+        <result column="bankname" property="bankname"></result>
+        <result column="bankaccount" property="bankaccount"></result>
+        <result column="address" property="address"></result>
+        <result column="telphone" property="telphone"></result>
+        <result column="create_time" property="createTime"></result>
+    </resultMap>
+
+    <insert id = "saveCustomerInvoice" parameterType="com.xunyu.crm.pojo.cusinvo.CoustomerInvoiceinfo"
+            useGeneratedKeys="true" keyColumn="invoiceinfo_id" keyProperty="invoiceinfoId">
+
+        insert into tbl_coustomer_invoiceinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="invoiceinfoId != null">invoiceinfo_id,</if>
+            <if test="customerId != null">customer_id,</if>
+            <if test='companyName != null and companyName !=""'>company_name,</if>
+            <if test='taxNum != null and taxNum !=""'>tax_num,</if>
+            <if test='bankname != null and bankname != ""'>bankname,</if>
+            <if test='bankaccount != null and bankaccount !=""'>bankaccount,</if>
+            <if test='address != null and address !=""'>address,</if>
+            <if test='telphone != null and telphone !=""'>telphone,</if>
+            <if test='createTime != null'>create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="invoiceinfoId != null">#{invoiceinfoId},</if>
+            <if test="customerId != null">#{customerId},</if>
+            <if test='companyName != null and companyName !=""'>#{companyName},</if>
+            <if test='taxNum != null and taxNum !=""'>#{taxNum},</if>
+            <if test='bankname != null and bankname != ""'>#{bankname},</if>
+            <if test='bankaccount != null and bankaccount !=""'>#{bankaccount},</if>
+            <if test='address != null and address !=""'>#{address},</if>
+            <if test='telphone != null and telphone !=""'>#{telphone},</if>
+            <if test='createTime != null'>#{createTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateCustomerInvoice" parameterType="com.xunyu.crm.pojo.cusinvo.CoustomerInvoiceinfo">
+        update tbl_coustomer_invoiceinfo
+        <set>
+            <if test='customerId != null'>
+                <![CDATA[	customer_id = #{customerId}, ]]>
+            </if>
+            <if test='companyName != null and companyName !=""'>
+                <![CDATA[	company_name = #{companyName}, ]]>
+            </if>
+            <if test='taxNum != null and taxNum != ""'>
+                <![CDATA[	tax_num = #{taxNum}, ]]>
+            </if>
+            <if test='bankname != null and bankname != ""'>
+                <![CDATA[	bankname = #{bankname}, ]]>
+            </if>
+            <if test='bankaccount != null and bankaccount != ""'>
+                <![CDATA[	bankaccount = #{bankaccount}, ]]>
+            </if>
+            <if test='address != null and address != ""'>
+                <![CDATA[	address = #{address}, ]]>
+            </if>
+            <if test='telphone != null and telphone != ""'>
+                <![CDATA[	telphone = #{telphone}, ]]>
+            </if>
+            <if test='createTime != null'>
+                <![CDATA[	create_time = #{createTime}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="invoiceinfoId != null">
+                invoiceinfo_id = #{invoiceinfoId}
+            </if>
+        </where>
+    </update>
+
+    <update id = "delCustomerInvoice" parameterType="map">
+        update tbl_coustomer_invoiceinfo set
+        isabled = #{isabled}
+        where
+        invoiceinfo_id
+        in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

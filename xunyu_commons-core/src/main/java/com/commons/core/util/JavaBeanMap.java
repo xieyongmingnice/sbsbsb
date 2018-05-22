@@ -9,10 +9,7 @@ import javax.persistence.Column;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/5/28.
@@ -195,4 +192,19 @@ public class JavaBeanMap {
         }
     }
 
+    public static List<String> getListByIds(String ids) {
+        List<String> list = new LinkedList<String>();
+        if (StringUtils2.isNotEmpty(ids)) {
+            String[] idsDir = ids.split(",");
+            for (int i = 0; i < idsDir.length; i++) {
+                if (RandomUtils.isInteger(idsDir[i])) {
+                    list.add(idsDir[i]);
+                } else {
+                    continue;
+                }
+            }
+        }
+
+        return list;
+    }
 }

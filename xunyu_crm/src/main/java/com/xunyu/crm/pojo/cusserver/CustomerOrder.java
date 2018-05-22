@@ -9,7 +9,7 @@ import java.util.Date;
  * @date 2018/4/26 15:13
  * 客户订购服务
  **/
-public class CustomerService extends UserModel {
+public class CustomerOrder extends UserModel {
 
     private Long orderId;//主键
     private Long customerId;//客户id
