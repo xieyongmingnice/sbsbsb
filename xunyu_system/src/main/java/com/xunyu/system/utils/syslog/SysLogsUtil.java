@@ -61,4 +61,6 @@ public class SysLogsUtil {
     public static final SysLogsUtil getInstance() {
         return LazyHolder.INSTANCE;
     }
+
+
 }

@@ -46,7 +46,7 @@ public class SysPayStateController {
 
         User us = redisUtil.getCurrUser(s.getSessionId());
         StringBuilder cen = new StringBuilder();
-        cen.append(s.getPayState());
+        cen.append(byStateReturenType(s.getPayState()));
         Result<SysPayState> res = new Result<SysPayState>();
         int n = 0;
         if(us == null) {
@@ -84,7 +84,7 @@ public class SysPayStateController {
 
         User us = redisUtil.getCurrUser(s.getSessionId());
         StringBuilder cen = new StringBuilder();
-        cen.append(s.getPayState());
+        cen.append(byStateReturenType(s.getPayState()));
         Result<SysPayState> res = new Result<SysPayState>();
         int n = 0;
         if(us == null) {
@@ -146,5 +146,23 @@ public class SysPayStateController {
         return res;
     }
 
+
+    /**
+     * 判断状态值  确定类型
+     */
+    private String byStateReturenType(int state){
+        String typeContent = "";  //1支付宝 2微信  3全部开启 4全部关闭
+        if(state == 1){
+            typeContent = "支付宝";
+        }else if(state == 2){
+            typeContent = "微信";
+        }else if(state == 3){
+            typeContent = "全部开启";
+        }else if(state == 4){
+            typeContent = "全部关闭";
+        }
+
+        return typeContent;
+    }
 
 }
