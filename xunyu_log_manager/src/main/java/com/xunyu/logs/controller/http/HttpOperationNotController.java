@@ -57,7 +57,7 @@ public class HttpOperationNotController {
           res.setRes(list);
           res.setTotalRows(total);
         }else{
-            res.setCode("412");
+            res.setCode("200");
             res.setMessage("notvalue");
         }
         return res;
