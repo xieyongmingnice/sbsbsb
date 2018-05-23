@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.model.log.link.LinkOperLogs">
+
+    <resultMap id="link_ResultMap" type="com.xunyu.model.log.link.LinkOperLogs">
+        <id column="link_id" property="linkId"></id>
+        <result column="gateway_node" property="gatewayNode"></result>
+        <result column="duiduan_node" property="duiduanNode"></result>
+        <result column="dui_node_type" property="duiNodeType"></result>
+        <result column="handle_result" property="handleResult"></result>
+        <result column="link_direction" property="linkDirection"></result>
+        <result column="link_date" property="linkDate"></result>
+        <result column="agreement" property="agreement"></result>
+        <result column="duiduan_ip" property="duiduanIp"></result>
+        <result column="duiduan_port" property="duiduanPort"></result>
+        <result column="link_status" property="linkStatus"></result>
+        <result column="disco_date" property="discoDate"></result>
+        <result column="create_time" property="createTime"></result>
+    </resultMap>
+
+    <sql id = "link_column">
+        link_id,gateway_node,duiduan_node,dui_node_type,handle_result,link_direction
+        ,link_date,agreement,duiduan_ip,duiduan_port,link_status,disco_date,create_time
+    </sql>
+
+    <select id = "countLinkOperLogs" parameterType="map" resultType="int">
+        select count(1) from link_oper_logs where 1=1 <include refid = "link_where" />
+    </select>
+
+    <select id = "listLinkOperLogs" resultMap="link_ResultMap" parameterType="map">
+        select <include refid = "link_column" /> from link_oper_logs
+        where 1=1
+        <include refid = "link_where" />
+        order by link_id desc
+        limit #{startRow},#{endRow}
+    </select>
+
+    <sql id = "link_where">
+        <if test = 'gatewayNode != null and gatewayNode !=""'>
+            and gateway_node = #{nodeType}
+        </if>
+        <if test = 'duiduanIp != null and duiduanIp !=""'>
+            and duiduan_ip = #{notifyCode}
+        </if>
+        <if test = 'agreement != null and agreement!= ""'>
+            and agreement = #{agreement}
+        </if>
+        <if test = 'linkStatus != null and linkStatus !=""'>
+            and link_status = #{linkStatus}
+        </if>
+        <if test = 'beginTime != null and endTime != null'>
+            and create_time between #{beginTime} and #{endTime}
+        </if>
+    </sql>
+
+    <delete id = "delLinkOperLogs" parameterType="list">
+        delete from link_oper_logs where link_id in
+        <foreach collection="list" item="items" separator="," open="(" close=")">
+            #{items}
+        </foreach>
+    </delete>
+</mapper>
