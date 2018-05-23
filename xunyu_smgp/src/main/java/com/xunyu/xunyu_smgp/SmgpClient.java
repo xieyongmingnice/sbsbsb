@@ -24,8 +24,8 @@ public class SmgpClient {
         //TODO host port从配置中取
         String host = "localhost";
         int port = 8990;
-        SmgpClient cmppClient = CilentInstanceGetter.instance;
-        cmppClient.doConnect(host,port);
+        SmgpClient smgpClient = CilentInstanceGetter.instance;
+        smgpClient.doConnect(host,port);
     }
     /**
      * 1、创建线程池

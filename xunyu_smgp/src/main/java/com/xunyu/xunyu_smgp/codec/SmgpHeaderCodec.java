@@ -7,8 +7,6 @@ import com.xunyu.xunyu_smgp.head.SmgpDefaultHeader;
 import com.xunyu.xunyu_smgp.head.SmgpMessageHeader;
 import com.xunyu.xunyu_smgp.message.Message;
 import com.xunyu.xunyu_smgp.message.SmgpDefaultMessage;
-import com.xunyu.xunyu_smgp.packet.PacketType;
-import com.xunyu.xunyu_smgp.packet.SmgpPacketType;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
@@ -16,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author xym
@@ -25,14 +22,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class SmgpHeaderCodec extends MessageToMessageCodec<ByteBuf, Message> {
 	private final Logger logger = LoggerFactory.getLogger(SmgpHeaderCodec.class);
-
-	private ConcurrentHashMap<Long, MessageToMessageCodec> codecMap = new ConcurrentHashMap<>();
-
-	public SmgpHeaderCodec(){
-		for (PacketType packetType : SmgpPacketType.values()) {
-			codecMap.put(packetType.getRequestId(), packetType.getCodec());
-		}
-	}
 
 	@Override
 	protected void decode(ChannelHandlerContext ctx, ByteBuf bytebuf, List<Object> list) throws Exception {

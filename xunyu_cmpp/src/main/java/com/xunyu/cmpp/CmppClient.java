@@ -1,9 +1,7 @@
 package com.xunyu.cmpp;
 
 import com.xunyu.cmpp.codec.CmppConnectRequestMessageCodec;
-import com.xunyu.cmpp.codec.CmppConnectResponseMessageCodec;
 import com.xunyu.cmpp.codec.CmppHeaderCodec;
-import com.xunyu.cmpp.factory.MarshallingCodecFactory;
 import com.xunyu.cmpp.handler.CmppClientChannelHandler;
 import com.xunyu.cmpp.handler.CmppClientConnectManager;
 import io.netty.bootstrap.Bootstrap;
@@ -12,7 +10,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.HashedWheelTimer;
-import io.netty.util.Timer;
 
 import java.util.concurrent.TimeUnit;
 
