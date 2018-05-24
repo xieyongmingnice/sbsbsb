@@ -41,7 +41,7 @@
         <if test = 'handleState != null and handleState !=""'>
             and handle_state = #{handleState}
         </if>
-        <if test = 'operaUser != null and operaUser != null'>
+        <if test = 'operaUser != null and operaUser != ""'>
             and opera_user = #{operaUser}
         </if>
     </sql>
