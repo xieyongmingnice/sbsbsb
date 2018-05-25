@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -210,7 +209,7 @@ public class WrongNumberConfigController {
             return result;
         }
         int count = wrongNumberConfigService.batchDeleteWrongNumber(model);
-        if (count == idList.size()){
+        if (count > 0){
             operationSuccess(result);
         }else {
             operationFailed(result);

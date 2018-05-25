@@ -216,7 +216,7 @@ public class SysWhitelistController {
             return result;
         }
         int count = whitelistService.batchDeleteWhitelist(model);
-        if (count == idList.size()){
+        if (count > 0 ){
             operationSuccess(result);
         }else {
             operationFailed(result);

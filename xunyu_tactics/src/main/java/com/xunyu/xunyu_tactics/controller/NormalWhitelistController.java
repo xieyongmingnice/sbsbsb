@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -219,7 +218,7 @@ public class NormalWhitelistController {
             return result;
         }
         int count = normalWhitelistService.batchDeleteWhitelist(model);
-        if (count == idList.size()){
+        if (count > 0){
             operationSuccess(result);
         }else {
             operationFailed(result);
