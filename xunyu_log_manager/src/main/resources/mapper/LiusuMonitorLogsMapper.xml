@@ -24,11 +24,11 @@
     </sql>
 
     <select id = "countLiusuMonitorLogs" parameterType="map" resultType="int">
-        select count(1) from liusu_monitor_logs where 1=1 <include refid = "liusu_where" />
+        select count(1) from tbl_liusu_monitor_logs where 1=1 <include refid = "liusu_where" />
     </select>
 
     <select id = "listLiusuMonitorLogs" resultMap="liusu_ResultMap" parameterType="map">
-        select <include refid = "liusu_column" /> from liusu_monitor_logs
+        select <include refid = "liusu_column" /> from tbl_liusu_monitor_logs
         where 1=1
         <include refid = "liusu_where" />
         order by liusu_id desc
@@ -54,7 +54,7 @@
     </sql>
 
     <delete id = "delLiusuMonitorLogs" parameterType="list">
-        delete from liusu_monitor_logs where liusu_id in
+        delete from tbl_liusu_monitor_logs where liusu_id in
         <foreach collection="list" item="items" separator="," open="(" close=")">
             #{items}
         </foreach>

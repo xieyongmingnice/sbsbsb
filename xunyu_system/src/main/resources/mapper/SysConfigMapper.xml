@@ -178,4 +178,14 @@
         </where>
     </update>
 
+    <update id = "delSysConfig" parameterType="map">
+        update tbl_sys_config c set isabled = 0
+        where c.isabled = 1
+        <if test = "sysId != null">
+            and sys_id = #{sysId}
+        </if>
+        <if test = "userId != null">
+            and userid = #{userId}
+        </if>
+    </update>
 </mapper>

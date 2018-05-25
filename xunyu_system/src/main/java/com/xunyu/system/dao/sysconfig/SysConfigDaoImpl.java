@@ -43,5 +43,11 @@ public class SysConfigDaoImpl extends BaseDao<SystemConfig, Long> {
         return super.selectForObject("com.xunyu.system.pojo.sysconfig.SystemConfig.getSysConfigDetail",map);
     }
 
+    /**
+     * 删除该用户的全局配置信息
+     */
+    public int delSysConfig(Map<String,Object> map){
 
+        return super.update("com.xunyu.system.pojo.sysconfig.SystemConfig.delSysConfig",map);
+    }
 }

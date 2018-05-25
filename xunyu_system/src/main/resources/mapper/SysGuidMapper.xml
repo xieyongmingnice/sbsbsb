@@ -18,7 +18,7 @@
     <select id = "sysGuideList" parameterType="map" resultMap="guid_ResultMap">
         select
             <include refid = "guid_column" />
-        from sys_basic_guide
+        from tbl_sys_basic_guide
         where isabled = 1 <include refid = "guid_where" />
         order by guide_id desc
     </select>
@@ -31,7 +31,7 @@
 
     <insert id = "addSysGuide" parameterType="com.xunyu.system.pojo.guide.SysGuide"
             useGeneratedKeys="true" keyColumn="guide_id" keyProperty="guideId">
-        insert into sys_basic_guide
+        insert into tbl_sys_basic_guide
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="guideId != null">guide_id,</if>
             <if test='isabled != null'>isabled,</if>
@@ -54,7 +54,7 @@
 
     <!--批量更新状态-->
     <update id = "delSysGuide" parameterType="map">
-        update sys_basic_guide set
+        update tbl_sys_basic_guide set
         isabled = #{isabled}
         where guide_id in
         <foreach collection="array" index="index" item="item" open="(" separator="," close=")">

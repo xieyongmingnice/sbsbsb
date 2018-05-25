@@ -36,5 +36,10 @@ public class SysConfigServiceImpl implements SysConfigService{
         return sysConfigDaoImpl.getSysConfigDetail(map);
     }
 
+    @Override
+    public int delSysConfig(Map<String, Object> map) {
+        return sysConfigDaoImpl.delSysConfig(map);
+    }
+
 
 }

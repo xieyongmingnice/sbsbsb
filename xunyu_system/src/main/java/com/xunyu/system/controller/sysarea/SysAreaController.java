@@ -147,7 +147,7 @@ public class SysAreaController {
                 res.setCode("200");
                 res.setMessage("success");
                 if(flag > 0){
-                    su.addSysLogs(logService,us,"删除地理区域配置《"+sm.getAreaIds()+"》"
+                    su.addSysLogs(logService,us,"删除地理区域配置 ID="+sm.getAreaIds()
                             ,"删除",request,"成功删除地理区域配置信息"
                             ,crmService,1);
                 }

@@ -21,11 +21,11 @@
     </sql>
 
     <select id = "sysLogsCount" parameterType="map" resultType="int">
-        select count(1) from sys_logs where 1=1 <include refid = "logs_where" />
+        select count(1) from tbl_sys_logs where 1=1 <include refid = "logs_where" />
     </select>
 
     <select id = "sysLogsList" resultMap="logs_ResultMap" parameterType="map">
-        select <include refid = "sysLogs_column" /> from sys_logs
+        select <include refid = "sysLogs_column" /> from tbl_sys_logs
         where 1=1
         <include refid = "logs_where" />
         order by logs_id desc
@@ -33,7 +33,7 @@
     </select>
 
     <select id = "getSysLogsDetail" parameterType="map" resultMap="logs_ResultMap">
-        select <include refid = "sysLogs_column" />  from sys_logs
+        select <include refid = "sysLogs_column" />  from tbl_sys_logs
         where 1=1
         <include refid = "logs_where" />
     </select>
@@ -55,7 +55,7 @@
 
     <insert id = "addSysLog" parameterType="com.xunyu.model.log.syslog.SysLogs"
             useGeneratedKeys="true" keyColumn="logs_id" keyProperty="logsId">
-        insert into sys_logs
+        insert into tbl_sys_logs
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="logsId != null">logs_id,</if>
             <if test='operTime != null'>oper_time,</if>
@@ -84,7 +84,7 @@
     </insert>
 
     <delete id = "delSysLogs" parameterType="list">
-        delete from sys_logs where logs_id in
+        delete from tbl_sys_logs where logs_id in
         <foreach collection="list" item="logsId" separator="," open="(" close=")">
             #{logsId}
         </foreach>

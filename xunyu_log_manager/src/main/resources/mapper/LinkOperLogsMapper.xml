@@ -24,11 +24,11 @@
     </sql>
 
     <select id = "countLinkOperLogs" parameterType="map" resultType="int">
-        select count(1) from link_oper_logs where 1=1 <include refid = "link_where" />
+        select count(1) from tbl_link_oper_logs where 1=1 <include refid = "link_where" />
     </select>
 
     <select id = "listLinkOperLogs" resultMap="link_ResultMap" parameterType="map">
-        select <include refid = "link_column" /> from link_oper_logs
+        select <include refid = "link_column" /> from tbl_link_oper_logs
         where 1=1
         <include refid = "link_where" />
         order by link_id desc
@@ -54,7 +54,7 @@
     </sql>
 
     <delete id = "delLinkOperLogs" parameterType="list">
-        delete from link_oper_logs where link_id in
+        delete from tbl_link_oper_logs where link_id in
         <foreach collection="list" item="items" separator="," open="(" close=")">
             #{items}
         </foreach>

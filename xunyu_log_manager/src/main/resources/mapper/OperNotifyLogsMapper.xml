@@ -17,11 +17,11 @@
     </sql>
 
     <select id = "countOperNotifyLogs" parameterType="map" resultType="int">
-        select count(1) from oper_notify_logs where 1=1 <include refid = "oper_where" />
+        select count(1) from tbl_oper_notify_logs where 1=1 <include refid = "oper_where" />
     </select>
 
     <select id = "listOperNotifyLogs" resultMap="oper_ResultMap" parameterType="map">
-        select <include refid = "oper_column" /> from oper_notify_logs
+        select <include refid = "oper_column" /> from tbl_oper_notify_logs
         where 1=1
         <include refid = "oper_where" />
         order by notify_id desc
@@ -50,7 +50,7 @@
     </sql>
 
     <delete id = "delOperNotifyLogs" parameterType="list">
-        delete from oper_notify_logs where notify_id in
+        delete from tbl_oper_notify_logs where notify_id in
         <foreach collection="list" item="items" separator="," open="(" close=")">
             #{items}
         </foreach>

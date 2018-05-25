@@ -211,7 +211,7 @@ public class OperatorController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"删除运营商配置《"+op.getOperIds()+"》"
+                    su.addSysLogs(logService,us,"删除运营商配置 ID="+op.getOperIds()
                             ,"删除",request,"删除运营商配置信息",crmService,1);
 
                 }

@@ -17,11 +17,11 @@
     </sql>
 
     <select id = "countHttpOperationNotice" parameterType="map" resultType="int">
-        select count(1) from http_operation_notice where 1=1 <include refid = "http_where" />
+        select count(1) from tbl_http_operation_notice where 1=1 <include refid = "http_where" />
     </select>
 
     <select id = "listHttpOperationNotice" resultMap="http_ResultMap" parameterType="map">
-        select <include refid = "http_column" /> from http_operation_notice
+        select <include refid = "http_column" /> from tbl_http_operation_notice
         where 1=1
         <include refid = "http_where" />
         order by notice_id desc
@@ -47,7 +47,7 @@
     </sql>
 
     <delete id = "delHttpOperationNotice" parameterType="list">
-        delete from http_operation_notice where notice_id in
+        delete from tbl_http_operation_notice where notice_id in
         <foreach collection="list" item="items" separator="," open="(" close=")">
             #{items}
         </foreach>

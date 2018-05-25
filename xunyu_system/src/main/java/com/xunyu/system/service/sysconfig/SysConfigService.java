@@ -25,6 +25,10 @@ public interface SysConfigService {
      */
     SystemConfig getSysConfigDetail(Map<String,Object> map);
 
+    /**
+     * 删除该用户的全局配置信息
+     */
+    int delSysConfig(Map<String,Object> map);
 
 
 }
