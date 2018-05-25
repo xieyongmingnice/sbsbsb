@@ -153,6 +153,7 @@ public class SysConfigController {
         User us = redisUtil.getCurrUser(sm.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
         SysLogsUtil su = SysLogsUtil.getInstance();
+        int n = 0;
         if (us == null) {
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
@@ -162,12 +163,17 @@ public class SysConfigController {
             if(sm.getSysId() != null || sm.getUserId() != null){
                 map.put("sysId",sm.getSysId());
                 map.put("userId",us.getUserId());
-                sysConfigService.delSysConfig(map);
-                res.setCode("200");
-                res.setMessage("success");
-                //异步添加日志
-                su.addSysLogs(logService, us, "删除全局配置信息 ID="+sm.getSysId()
-                        , "删除", request, "成功删除本用户的全局配置信息", crmService, 1);
+                n = sysConfigService.delSysConfig(map);
+                if(n > 0) {
+                    res.setCode("200");
+                    res.setMessage("success");
+                    //异步添加日志
+                    su.addSysLogs(logService, us, "删除全局配置信息 ID=" + sm.getSysId()
+                            , "删除", request, "成功删除本用户的全局配置信息", crmService, 1);
+                }else{
+                    res.setCode("204");
+                    res.setMessage("当前登录用户没有配置该系统信息,不需要删除");
+                }
             }else{
                 res.setCode("413");
                 res.setMessage("sysId或者userId不能为空");
