@@ -84,8 +84,8 @@ public class SysGuideController {
                         SysLogsUtil su = SysLogsUtil.getInstance();
                         StringBuilder cen = new StringBuilder();
                         cen.append(sg.getGuideName());
-                        su.addSysLogs(logService,us,"添加系统基本指导内容《"+cen.toString()+"》"
-                                ,"添加",request,"添加系统基本指导内容信息",crmService,1);
+                        su.addSysLogs(logService,us,"系统基本指导内容"
+                                ,"添加",request,"成功添加系统基本指导内容信息《"+cen.toString()+"》",crmService,1);
                     }
                 }
             }else{
@@ -131,7 +131,7 @@ public class SysGuideController {
             if(n > 0){
                 //异步添加日志
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService,us,"删除系统基本指导内容"
+                su.addSysLogs(logService,us,"系统基本指导内容"
                         ,"删除",request,"删除系统基本指导内容信息",crmService,1);
             }
         }else{

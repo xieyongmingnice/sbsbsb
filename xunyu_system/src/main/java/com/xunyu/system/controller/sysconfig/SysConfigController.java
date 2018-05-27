@@ -67,12 +67,12 @@ public class SysConfigController {
             res.setRes(sc);
             if (n > 0) {
                 //异步添加日志
-                su.addSysLogs(logService, us, sc.getSysIp()
-                        , "添加", request, "成功添加全局配置信息", crmService, 1);
+                su.addSysLogs(logService, us, "全局配置信息"
+                        , "添加", request, "成功添加全局配置信息，系统IP："+sc.getSysIp(), crmService, 1);
             }
         }catch (Exception e){
             log.info(e.getMessage());
-            su.addSysLogs(logService, us, sc.getSysIp()
+            su.addSysLogs(logService, us, "全局配置信息"
                     , "添加", request, e.getMessage(), crmService, 2);
         }
         return res;
@@ -101,7 +101,7 @@ public class SysConfigController {
                     res.setRes(sc);
                     if (n > 0) {
                         //异步添加日志
-                        su.addSysLogs(logService, us, "修改全局配置信息"
+                        su.addSysLogs(logService, us, "全局配置信息"
                                 , "修改", request, "成功修改全局配置信息", crmService, 1);
                     }
                 }catch (Exception e){
@@ -168,8 +168,8 @@ public class SysConfigController {
                     res.setCode("200");
                     res.setMessage("success");
                     //异步添加日志
-                    su.addSysLogs(logService, us, "删除全局配置信息 ID=" + sm.getSysId()
-                            , "删除", request, "成功删除本用户的全局配置信息", crmService, 1);
+                    su.addSysLogs(logService, us, "全局配置信息"
+                            , "删除", request, "成功删除本用户的全局配置信息ID="+ sm.getSysId(), crmService, 1);
                 }else{
                     res.setCode("204");
                     res.setMessage("当前登录用户没有配置该系统信息,不需要删除");

@@ -62,11 +62,11 @@ public class ErrCodeController {
             res.setRes(ec);
         if(n > 0) {
             //异步添加日志
-            cen.append(ec.getErrId()).append("|")
-                    .append(ec.getErrCode()).append("|")
-                    .append(ec.getErrText());
+            cen.append("成功添加错误码配置").append(", ")
+                    .append("错误码为：").append(ec.getErrCode()).append("| ")
+                    .append("错误描述为：").append(ec.getErrText());
             SysLogsUtil su = SysLogsUtil.getInstance();
-            su.addSysLogs(logService,us,"添加错误码配置","添加",
+            su.addSysLogs(logService,us,"错误码配置","添加",
                     request,cen.toString(),crmService,1);
 
         }
@@ -95,10 +95,10 @@ public class ErrCodeController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    cen.append(ec.getErrId()).append("|")
-                            .append(ec.getErrCode()).append("|")
-                            .append(ec.getErrText());
-                    su.addSysLogs(logService,us,"修改错误码配置"
+                    cen.append("成功修改错误码配置ID=").append(ec.getErrId()).append("| ")
+                            .append("错误码为：").append(ec.getErrCode()).append("| ")
+                            .append("错误描述为：").append(ec.getErrText());
+                    su.addSysLogs(logService,us,"错误码配置"
                             ,"修改",request, cen.toString(),crmService,1);
 
                 }
@@ -196,8 +196,8 @@ public class ErrCodeController {
                 if(n > 0) {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
-                    su.addSysLogs(logService,us,"删除错误码配置"
-                            ,"删除",request,"删除错误码配置信息 "+ec.getErrIds(),crmService,1);
+                    su.addSysLogs(logService,us,"错误码配置"
+                            ,"删除",request,"删除错误码配置信息IDS="+ec.getErrIds(),crmService,1);
 
                 }
             }else {

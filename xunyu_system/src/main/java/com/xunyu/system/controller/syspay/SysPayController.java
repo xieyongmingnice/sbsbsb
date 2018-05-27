@@ -65,8 +65,8 @@ public class SysPayController {
                 SysLogsUtil su = SysLogsUtil.getInstance();
                 StringBuilder cen = new StringBuilder();
                 cen.append(sysPay.getMerchantName());
-                su.addSysLogs(logService,us,"添加支付配置信息《"+cen.toString()+"》"
-                        ,"添加",request,"添加支付配置信息",crmService,1);
+                su.addSysLogs(logService,us,"支付配置信息"
+                        ,"添加",request,"添加支付配置信息《"+cen.toString()+"》",crmService,1);
             }
 
         return res;
@@ -96,8 +96,8 @@ public class SysPayController {
                     SysLogsUtil su = SysLogsUtil.getInstance();
                     StringBuilder cen = new StringBuilder();
                     cen.append(sysPay.getMerchantName());
-                    su.addSysLogs(logService,us,"修改支付配置信息《"+cen.toString()+"》"
-                            ,"修改",request,"修改支付配置信息",crmService,1);
+                    su.addSysLogs(logService,us,"支付配置信息"
+                            ,"修改",request,"修改支付配置信息《"+cen.toString()+"》",crmService,1);
                 }
             }else{
                 res.setCode("413");
