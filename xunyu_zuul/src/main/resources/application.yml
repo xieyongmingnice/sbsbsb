@@ -21,12 +21,19 @@ spring:
 
 server:
   port: 8002
+  tomcat:
+    accept-count: 1000  #承受并发量
+    max-threads: 1000
+    max-connections: 2000
+
 #配置zuul  服务网关
 zuul:
   host:
       socket-timeout-millis: 60000
       connect-timeout-millis: 60000
       add-host-header: true #表示API网关在进行请求路由转发前为请求设置Host头信息。
+      max-per-route-connections: 1000
+      max-total-connections: 1000 #连接池
   routes:
     api-shiro:
       path: /shiro/**
