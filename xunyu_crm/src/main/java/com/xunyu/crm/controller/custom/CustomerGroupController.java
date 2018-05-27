@@ -61,13 +61,10 @@ public class CustomerGroupController {
         if(flag > 0){
             SysLogsUtil su = SysLogsUtil.getInstance();
             StringBuilder cen = new StringBuilder();
-            cen.append(cg.getCustomerName())
-                    .append("-")
-                    .append(cg.getCustomerGroupId());
-            su.addSysLogs(logService2,us,"添加客户分组《"+cen.toString()+"》","添加"
-                    ,request,"成功添加客户分组",customerService,1);
+            cen.append(cg.getCustomerName());
+            su.addSysLogs(logService2,us,"客户分组","添加"
+                    ,request,"成功添加客户分组《"+cen.toString()+"》",customerService,1);
         }
-
         return res;
     }
 
@@ -95,10 +92,10 @@ public class CustomerGroupController {
                 SysLogsUtil su = SysLogsUtil.getInstance();
                 StringBuilder cen = new StringBuilder();
                 cen.append(cg.getCustomerName())
-                        .append("-")
+                        .append("-ID=")
                         .append(cg.getCustomerGroupId());
-                su.addSysLogs(logService2,us,"修改客户分组《"+cen.toString()+"》","修改"
-                        ,request,"成功修改客户分组",customerService,1);
+                su.addSysLogs(logService2,us,"客户分组","修改"
+                        ,request,"《"+cen.toString()+"》",customerService,1);
             }
         }else{
             res.setCode("413");
@@ -196,8 +193,8 @@ public class CustomerGroupController {
             res.setMessage("success");
             if(flag > 0){
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService2,us,"删除客户分组《"+cm.getCustomerGroupIds()+"》","删除"
-                        ,request,"成功删除客户分组",customerService,1);
+                su.addSysLogs(logService2,us,"客户分组","删除"
+                        ,request,"成功删除客户分组IDS=《"+cm.getCustomerGroupIds()+"》",customerService,1);
             }
         }
         return res;

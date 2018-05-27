@@ -66,8 +66,8 @@ public class CustomerController {
             res.setRes(ct);
             if(flag > 0){
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService2,us,"添加客户信息《"+ct.getCustomerAccount()+"》","添加"
-                ,request,"成功添加客户信息",customerService,1);
+                su.addSysLogs(logService2,us,"客户信息","添加"
+                ,request,"成功添加客户信息《"+ct.getCustomerAccount()+"》",customerService,1);
             }
         }else{
             res.setCode("412");
@@ -99,8 +99,8 @@ public class CustomerController {
             res.setRes(ct);
             if(flag > 0){
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService2,us,"修改客户信息《"+ct.getCustomerAccount()+"》","修改"
-                        ,request,"成功修改客户信息",customerService,1);
+                su.addSysLogs(logService2,us,"客户信息","修改"
+                        ,request,"成功修改客户信息《"+ct.getCustomerAccount()+"》",customerService,1);
             }
         }else{
             res.setCode("413");
@@ -204,8 +204,8 @@ public class CustomerController {
             res.setMessage("success");
             if(flag > 0){
                 SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService2,us,"删除客户信息《"+cm.getCustomerIds()+"》","删除"
-                        ,request,"成功删除客户信息",customerService,1);
+                su.addSysLogs(logService2,us,"客户信息","删除"
+                        ,request,"成功删除客户信息IDS=《"+cm.getCustomerIds()+"》",customerService,1);
             }
         }else{
             res.setCode("413");
