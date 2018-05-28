@@ -104,7 +104,7 @@ public class SysAreaController {
                 res.setMessage("success");
                 res.setRes(sa);
                 if(flag > 0){
-                    su.addSysLogs(logService,us,"地理区域配置《"+cen.toString()+"》"
+                    su.addSysLogs(logService,us,"地理区域配置"
                             ,"修改",request,"成功修改地理区域配置信息《"+cen.toString()+"》"
                             ,crmService,1);
                 }
