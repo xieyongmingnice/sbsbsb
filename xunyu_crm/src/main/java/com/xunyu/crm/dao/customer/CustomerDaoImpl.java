@@ -69,8 +69,8 @@ public class CustomerDaoImpl extends BaseDao<CustomerTab, Long> {
     /**
      * 根据客户分组id获取客户id
      */
-    public Long[] getCustomerIdByGroupIds(Map<String,Object> map){
+    public List<String> getCustomerIdByGroupIds(Map<String,Object> map){
 
-        return super.selectForObject("com.xunyu.crm.pojo.customer.CustomerTab.getCustomerIdByGroupIds",map);
+        return super.selectList("com.xunyu.crm.pojo.customer.CustomerTab.getCustomerIdByGroupIds",map);
     }
 }

@@ -233,7 +233,7 @@
         </foreach>
     </update>
 
-    <select id = "getCustomerIdByGroupIds" parameterType="map" resultType="long">
+    <select id = "getCustomerIdByGroupIds" parameterType="map" resultType="string">
         select customer_id from tbl_customer
         where customer_group_id
         in

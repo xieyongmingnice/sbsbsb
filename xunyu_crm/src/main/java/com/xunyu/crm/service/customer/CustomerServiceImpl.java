@@ -14,10 +14,7 @@ import com.xunyu.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -225,8 +222,10 @@ public class CustomerServiceImpl implements CustomerService {
                         map.put("groupId2",1);//表示根据分组id删除
                         int n = customerDaoImpl.delCustomer(map);
                         //根据分组id获取客户id
-                        Long[] customerIds = customerDaoImpl.getCustomerIdByGroupIds(map);
+                        List<String> list = customerDaoImpl.getCustomerIdByGroupIds(map);
                         map.clear();
+                        String[] customerIds = new String[list.size()];
+                        customerIds = list.toArray(customerIds);
                         map.put("array",customerIds);//客户信息id组成的数组
                         n = getUserIds(map);
 
