@@ -1,0 +1,25 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/inspectionProfiles/
+.idea/libraries/
+.idea/modules.xml
+.idea/uiDesigner.xml
+xunyu-eureka/xunyu_eureka.iml
+xunyu_cmpp/target/
+xunyu_cmpp/xunyu_cmpp.iml
+xunyu_commons-core/xunyu_commons-core.iml
+xunyu_crm/xunyu_crm.iml
+xunyu_department/xunyu_department.iml
+xunyu_drools/xunyu_drools.iml
+xunyu_kafka_config/xunyu_kafka_config.iml
+xunyu_log_manager/xunyu_log_manager.iml
+xunyu_sgip/xunyu_sgip.iml
+xunyu_shiro/xunyu_shiro.iml
+xunyu_smgp/target/
+xunyu_smgp/xunyu_smgp.iml
+xunyu_system/xunyu_system.iml
+xunyu_tactics/target/
+xunyu_tactics/xunyu_tactics.iml
+xunyu_zipkin/xunyu_zipkin.iml
+xunyu_zuul/xunyu_zuul.iml
+/.idea/workspace.xml
