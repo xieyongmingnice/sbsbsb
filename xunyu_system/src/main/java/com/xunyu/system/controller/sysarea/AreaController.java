@@ -1,5 +1,6 @@
 package com.xunyu.system.controller.sysarea;
 
+import com.commons.core.exception.ExceptionCatch;
 import com.commons.core.message.Result;
 import com.commons.core.util.StringUtils2;
 import com.xunyu.config.redis.RedisUtil;
@@ -55,9 +56,7 @@ public class AreaController {
                 res.setMessage("country不能为空");
             }
         }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            log.info(e.getMessage());
+            ExceptionCatch.exceptionCatch(res,log,e);
         }
         return res;
     }
@@ -88,9 +87,7 @@ public class AreaController {
                 res.setMessage("country和provinces不能为空");
             }
         }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            log.info(e.getMessage());
+            ExceptionCatch.exceptionCatch(res,log,e);
         }
         return res;
     }

@@ -1,5 +1,6 @@
 package com.xunyu.system.controller.sysarea;
 
+import com.commons.core.exception.ExceptionCatch;
 import com.commons.core.message.Result;
 import com.commons.core.util.StringUtils2;
 import com.xunyu.config.redis.RedisUtil;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -70,9 +72,7 @@ public class SysAreaController {
                         ,crmService,1);
             }
         }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            log.info(e.getMessage());
+            ExceptionCatch.exceptionCatch(res,log,e);
             su.addSysLogs(logService,us,"地理区域配置《"+cen.toString()+"》"
                     ,"添加",request,e.getMessage()
                     ,crmService,2);
@@ -114,9 +114,7 @@ public class SysAreaController {
                 res.setRes(sa);
             }
         }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            log.info(e.getMessage());
+            ExceptionCatch.exceptionCatch(res,log,e);
             su.addSysLogs(logService,us,"地理区域配置"
                     ,"修改",request,e.getMessage()
                     ,crmService,2);
@@ -156,9 +154,7 @@ public class SysAreaController {
                 res.setMessage("areaIds不能为空");
             }
         }catch (Exception e){
-            res.setCode("500");
-            res.setMessage("系统异常");
-            log.info(e.getMessage());
+            ExceptionCatch.exceptionCatch(res,log,e);
             su.addSysLogs(logService,us,"删除地理区域配置《"+sm.getAreaIds()+"》"
                     ,"删除",request,e.getMessage()
                     ,crmService,2);

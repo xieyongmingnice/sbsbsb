@@ -1,5 +1,6 @@
 package com.xunyu.system.controller.sysconfig;
 
+import com.commons.core.exception.ExceptionCatch;
 import com.commons.core.message.Result;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.system.sysconfig.SysConfigModel;
@@ -71,7 +72,7 @@ public class SysConfigController {
                         , "添加", request, "成功添加全局配置信息，系统IP："+sc.getSysIp(), crmService, 1);
             }
         }catch (Exception e){
-            log.info(e.getMessage());
+            ExceptionCatch.exceptionCatch(res,log,e);
             su.addSysLogs(logService, us, "全局配置信息"
                     , "添加", request, e.getMessage(), crmService, 2);
         }
@@ -105,7 +106,7 @@ public class SysConfigController {
                                 , "修改", request, "成功修改全局配置信息", crmService, 1);
                     }
                 }catch (Exception e){
-                    log.info(e.getMessage());
+                    ExceptionCatch.exceptionCatch(res,log,e);
                     su.addSysLogs(logService, us, "修改全局配置信息"
                             , "修改", request, e.getMessage(), crmService, 2);
                 }
@@ -179,7 +180,7 @@ public class SysConfigController {
                 res.setMessage("sysId或者userId不能为空");
             }
         }catch (Exception e){
-            log.info(e.getMessage());
+            ExceptionCatch.exceptionCatch(res,log,e);
             su.addSysLogs(logService, us, "删除本用户的全局配置信息"
                     , "删除", request, e.getMessage(), crmService, 2);
         }
