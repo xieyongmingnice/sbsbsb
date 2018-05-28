@@ -1,5 +1,6 @@
 package com.xunyu.crm.controller.custom;
 
+import com.commons.core.exception.ExceptionCatch;
 import com.commons.core.message.Result;
 import com.commons.core.util.StringUtils2;
 import com.xunyu.config.redis.RedisUtil;
@@ -10,6 +11,8 @@ import com.xunyu.crm.utils.syslog.LogService2;
 import com.xunyu.crm.utils.syslog.SysLogsUtil;
 import com.xunyu.model.crm.customer.CustomerModel;
 import com.xunyu.model.user.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +24,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author dth
@@ -29,7 +34,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
-
+    private Logger log = LoggerFactory.getLogger(CustomerController.class);
     @Autowired
     private RedisUtil redisUtil;
     @Autowired
@@ -43,12 +48,12 @@ public class CustomerController {
      * 添加客户信息
      */
     @RequestMapping(value = "addCustomer",method = RequestMethod.POST)
-    public Result<CustomerTab> addCustomerData(HttpServletRequest request, CustomerTab ct) throws Exception{
-
+    public Result<CustomerTab> addCustomerData(HttpServletRequest request, CustomerTab ct){
         //验证session是否失效
         Result<CustomerTab> res = new Result<CustomerTab>();
         User us = redisUtil.getCurrUser(ct.getSessionId());
         Map<String, Object> map = new HashMap<String, Object>();
+        SysLogsUtil su = SysLogsUtil.getInstance();
         if (us == null) {
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
@@ -58,22 +63,31 @@ public class CustomerController {
         ct.setCreateTime(new Date());
         ct.setIsabled(1);//默认有效
         map.put("account",ct.getCustomerAccount());
-        User us2 = userDaoImpl.getUserByAccount(map);
-        if(us2 == null) {
-            flag = customerService.addCustomer(ct);
-            res.setCode("200");
-            res.setMessage("success");
-            res.setRes(ct);
-            if(flag > 0){
-                SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService2,us,"客户信息","添加"
-                ,request,"成功添加客户信息《"+ct.getCustomerAccount()+"》",customerService,1);
+        Lock lock = new ReentrantLock(); //定义一个锁，Lock是个接口，需实例化一个具体的Lock
+        lock.lock();//加锁
+        try {
+            User us2 = userDaoImpl.getUserByAccount(map);
+            if (us2 == null) {
+                flag = customerService.addCustomer(ct);
+                res.setCode("200");
+                res.setMessage("success");
+                res.setRes(ct);
+                if (flag > 0) {
+                    su.addSysLogs(logService2, us, "客户信息", "添加"
+                            , request, "成功添加客户信息《" + ct.getCustomerAccount() + "》", customerService, 1);
+                }
+            } else {
+                res.setCode("412");
+                res.setMessage("该账号已存在");
             }
-        }else{
-            res.setCode("412");
-            res.setMessage("该账号已存在");
+        }catch (Exception e){
+            ExceptionCatch.exceptionCatch(res,log,e);
+            su.addSysLogs(logService2, us, "客户信息", "添加"
+                    , request, e.getMessage(), customerService, 2);
+        }finally {
+            //try起来的原因是万一一个线程进去了然后挂了或者抛异常了，那么这个锁根本没有释放
+            lock.unlock();
         }
-
         return res;
     }
 
@@ -81,31 +95,36 @@ public class CustomerController {
      * 修改客户信息
      */
     @RequestMapping(value = "updateCustomer",method = RequestMethod.POST)
-    public Result<CustomerTab> updateCustomerData(HttpServletRequest request,CustomerTab ct) throws Exception{
+    public Result<CustomerTab> updateCustomerData(HttpServletRequest request,CustomerTab ct){
 
         Result<CustomerTab> res = new Result<CustomerTab>();
         User us = redisUtil.getCurrUser(ct.getSessionId());
-        Map<String, Object> map = new HashMap<String, Object>();
+        SysLogsUtil su = SysLogsUtil.getInstance();
         if (us == null) {
             res.setCode("404");
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
         int flag = 0;
-        if(ct.getCustomerId() != null){
-            flag = customerService.updateCustomer(ct);
-            res.setCode("200");
-            res.setMessage("success");
-            res.setRes(ct);
-            if(flag > 0){
-                SysLogsUtil su = SysLogsUtil.getInstance();
-                su.addSysLogs(logService2,us,"客户信息","修改"
-                        ,request,"成功修改客户信息《"+ct.getCustomerAccount()+"》",customerService,1);
+        try {
+            if (ct.getCustomerId() != null) {
+                flag = customerService.updateCustomer(ct);
+                res.setCode("200");
+                res.setMessage("success");
+                res.setRes(ct);
+                if (flag > 0) {
+                    su.addSysLogs(logService2, us, "客户信息", "修改"
+                            , request, "成功修改客户信息《" + ct.getCustomerAccount() + "》", customerService, 1);
+                }
+            } else {
+                res.setCode("413");
+                res.setMessage("CustomerId 不能为空");
+                res.setRes(ct);
             }
-        }else{
-            res.setCode("413");
-            res.setMessage("CustomerId 不能为空");
-            res.setRes(ct);
+        }catch (Exception e){
+            ExceptionCatch.exceptionCatch(res,log,e);
+            su.addSysLogs(logService2, us, "客户信息", "修改"
+                    , request, e.getMessage(), customerService, 2);
         }
 
         return res;

@@ -22,7 +22,8 @@
 
     <select id = "customerGroupList" parameterType="map" resultMap="cg_ResultMap">
         select <include refid = "cg_column" />
-        ,(select count(1) from tbl_customer cc where cc.customer_group_id = cg.customer_group_id) as userNum
+        ,(select count(1) from tbl_customer cc where cc.isabled = 1
+          and cc.customer_group_id = cg.customer_group_id) as userNum
         from tbl_customer_group cg
         where cg.isabled = 1 <include refid = "cg_where" /> order by customer_group_id desc
         limit #{startRow},#{endRow}

@@ -221,9 +221,13 @@ public class CustomerServiceImpl implements CustomerService {
                             }
                         }
                         map.put("isabled",0);
-                        map.put("array",array);
+                        map.put("array",array); //分组id组成的数据
                         map.put("groupId2",1);//表示根据分组id删除
                         int n = customerDaoImpl.delCustomer(map);
+                        //根据分组id获取客户id
+                        Long[] customerIds = customerDaoImpl.getCustomerIdByGroupIds(map);
+                        map.clear();
+                        map.put("array",customerIds);//客户信息id组成的数组
                         n = getUserIds(map);
 
                     }
