@@ -81,9 +81,16 @@ public class CustomerController {
                 res.setMessage("该账号已存在");
             }
         }catch (Exception e){
-            ExceptionCatch.exceptionCatch(res,log,e);
-            su.addSysLogs(logService2, us, "客户信息", "添加"
-                    , request, e.getMessage(), customerService, 2);
+            //分布式环境下基于数据库中的(account唯一)，解决并发
+            User us2 = userDaoImpl.getUserByAccount(map);
+            if(us2 == null) {
+                ExceptionCatch.exceptionCatch(res, log, e);
+                su.addSysLogs(logService2, us, "客户信息", "添加"
+                        , request, e.getMessage(), customerService, 2);
+            }else {
+                res.setCode("412");
+                res.setMessage("该账号已存在");
+            }
         }finally {
             //try起来的原因是万一一个线程进去了然后挂了或者抛异常了，那么这个锁根本没有释放
             lock.unlock();
