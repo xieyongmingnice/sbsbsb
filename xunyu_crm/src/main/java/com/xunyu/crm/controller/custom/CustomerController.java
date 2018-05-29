@@ -182,6 +182,7 @@ public class CustomerController {
                 map.put("customerAccount",cm.getCustomerAccount());
                 map.put("enterContact",cm.getEnterContact());//联系人
                 map.put("business",cm.getBusiness());
+                map.put("customerGroupId",cm.getCustomerGroupId());
                 total = customerService.customerTabCount(map);
                 if(total > 0){
                     list = customerService.customerTabList(map);
