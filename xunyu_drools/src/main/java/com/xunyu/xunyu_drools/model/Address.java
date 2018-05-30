@@ -1,8 +1,14 @@
 package com.xunyu.xunyu_drools.model;
 
 
-public class Address {
+import java.io.Serializable;
 
+/**
+ * @author 13017
+ */
+public class Address implements Serializable{
+
+	private static final long serialVersionUID = -1269737912517341469L;
 	private String postcode;
 	
 	private String street;

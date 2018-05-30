@@ -1,0 +1,20 @@
+package com.xunyu.xunyu_drools;
+
+import com.xunyu.xunyu_drools.model.PaymentInfo
+no-loop
+
+rule "approval decision by general manager"
+    when
+        m : PaymentInfo( moneyAmount>5000 );
+    then
+         m.setDecisionPath("GM");
+         System.out.println(">5000");
+end
+
+rule "approval decision by manager"
+    when
+        m : PaymentInfo( moneyAmount<=5000 );
+    then
+         m.setDecisionPath("M");
+         System.out.println("<5000");
+end

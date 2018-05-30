@@ -1,4 +1,4 @@
-package plausibcheck.adress
+package com.xunyu.xunyu_drools.address
 
 import com.xunyu.xunyu_drools.model.Address;
 import com.xunyu.xunyu_drools.model.fact.AddressCheckResult;
