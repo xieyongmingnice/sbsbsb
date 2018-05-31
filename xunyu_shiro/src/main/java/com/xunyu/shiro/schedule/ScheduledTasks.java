@@ -1,6 +1,8 @@
 package com.xunyu.shiro.schedule;
 
 import com.xunyu.config.redis.RedisUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -12,14 +14,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduledTasks {
 
-    protected org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(getClass());
+    /*protected Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
-    RedisUtil redisUtil;
+    RedisUtil redisUtil;*/
 
-    @Scheduled(cron="0 0/30 * * * ?") //每30分钟执行一次
+   /* @Scheduled(cron="0 0/30 * * * ?") //每30分钟执行一次
     public void reportCurrentTime() {
         logger.info("reportCurrentTime");
-    }
+    }*/
 
     /*@Scheduled(fixedDelay=500000)//可使用多个
 
