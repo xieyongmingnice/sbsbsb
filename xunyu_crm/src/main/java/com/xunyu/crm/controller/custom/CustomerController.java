@@ -66,6 +66,7 @@ public class CustomerController {
         Lock lock = new ReentrantLock(); //定义一个锁，Lock是个接口，需实例化一个具体的Lock
         lock.lock();//加锁
         try {
+            //直接查用户表的原因是，用户账号也有可能在其它地方注册，比如添加员工信息时
             User us2 = userDaoImpl.getUserByAccount(map);
             if (us2 == null) {
                 flag = customerService.addCustomer(ct);
