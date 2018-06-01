@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 @EnableZuulProxy
 @SpringBootApplication
 public class ZuulApiGatewayStarter {
-    private static final Logger log = LoggerFactory.getLogger(ZuulApiGatewayStarter.class);
+
     public static void main(String[] args) {
         SpringApplication.run(ZuulApiGatewayStarter.class, args);
     }

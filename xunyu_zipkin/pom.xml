@@ -18,8 +18,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
-
-
         <!--zipkin依赖-->
         <!--此依赖会自动引入spring-cloud-sleuth-stream并且引入zipkin的依赖包-->
         <!--加入zipkin依赖-->
