@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<artifactId>xunyu_all</artifactId>
-		<groupId>com.xunyu</groupId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.xunyu</groupId>
 	<artifactId>xunyu_drools</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,6 +16,16 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot</artifactId>
+			<version>1.5.7.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>1.5.7.RELEASE</version>
+		</dependency>
 		<dependency>
 			<groupId>com.xunyu</groupId>
 			<artifactId>xunyu_commons-core</artifactId>
@@ -32,22 +37,6 @@
 			<version>6.5.0.Final</version>
 			<exclusions>
 				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-tx</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-				<exclusion>
 					<groupId>org.drools</groupId>
 					<artifactId>drools-compiler</artifactId>
 				</exclusion>
@@ -57,28 +46,6 @@
 			<groupId>org.drools</groupId>
 			<artifactId>drools-compiler</artifactId>
 			<version>6.5.0.Final</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-tx</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.drools</groupId>
-					<artifactId>drools-compiler</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 	</dependencies>
 
