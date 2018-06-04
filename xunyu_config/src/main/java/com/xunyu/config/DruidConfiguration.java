@@ -54,7 +54,12 @@ public class DruidConfiguration {
     @Value("${spring.datasource.query-timeout}")
     private Integer maxWait;
     //@Value("${db.encrypt.flag}")
-    private String encryptFlag;
+    @Value("${login-username}")
+    private String loginUsername;
+    @Value("${login-password}")
+    private String loginPassword;
+
+
 
     @ConditionalOnClass(DruidDataSource.class)
     @ConditionalOnProperty(name = "spring.datasource.type", havingValue = "com.alibaba.druid.pool.DruidDataSource", matchIfMissing = true)
@@ -137,8 +142,8 @@ public class DruidConfiguration {
        //IP黑名单 (存在共同时，deny优先于allow) : 如果满足deny的话提示:Sorry, you are not permitted to view this page.
       // servletRegistrationBean.addInitParameter("deny", "47.104.190.41");
        //登录查看信息的账号密码.
-       servletRegistrationBean.addInitParameter("loginUsername", "admin");
-       servletRegistrationBean.addInitParameter("loginPassword", "123456");
+       servletRegistrationBean.addInitParameter("loginUsername", loginUsername);
+       servletRegistrationBean.addInitParameter("loginPassword", loginPassword);
        //是否能够重置数据.
        servletRegistrationBean.addInitParameter("resetEnable", "false");
        return servletRegistrationBean;

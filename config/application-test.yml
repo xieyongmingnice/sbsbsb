@@ -1,4 +1,7 @@
 #开发环境配置
+#durid账号配置
+login-username: xykj
+login-password: xykj123
 #数据库配置
 db: 
   #host: rm-m5e03vwf88v7vufn9ho.mysql.rds.aliyuncs.com #阿里云外网
