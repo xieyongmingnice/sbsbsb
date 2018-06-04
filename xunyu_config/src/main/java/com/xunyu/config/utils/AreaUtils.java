@@ -17,7 +17,8 @@ import java.util.List;
 public class AreaUtils {
 
     //各地区xml文件路径
-    private static final String LOCAL_LIST_PATH = "config/area-list.xml";
+    private static final String LOCAL_LIST_PATH = "/opt/upload/msg-xunyu-all/config/area-list.xml";
+    //private static final String LOCAL_LIST_PATH = "config/area-list.xml";
     //所有国家名称List
     private static final List<String> COUNTRY_REGION = new ArrayList<String>();
     private static AreaUtils localutil;
