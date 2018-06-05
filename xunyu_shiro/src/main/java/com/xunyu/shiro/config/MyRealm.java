@@ -43,7 +43,7 @@ public class MyRealm extends AuthorizingRealm {
         //从数据库中获取对应角色字符串并存储roles
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         simpleAuthorizationInfo.addStringPermissions(permissions);  
-        simpleAuthorizationInfo.addRoles(roles);//角色类型  
+        simpleAuthorizationInfo.addRoles(roles);//角色类型
         return simpleAuthorizationInfo;  
     }  
   
