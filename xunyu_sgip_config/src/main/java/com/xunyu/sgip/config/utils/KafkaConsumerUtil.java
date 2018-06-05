@@ -13,25 +13,29 @@ public class KafkaConsumerUtil {
     	if(null == props)
     		props = getConfig();
 
-    	Consumer<String, String> consumer = new KafkaConsumer<String, String>(props);  
+    	Consumer<String, byte[]> consumer = new KafkaConsumer<String, byte[]>(props);
     	//订阅主题列表topic
-    	consumer.subscribe(Lists.newArrayList(topic));   
+    	consumer.subscribe(Lists.newArrayList(topic));
 
 	    //不断监听新消息
 	    while (true) {
-	        ConsumerRecords<String, String> records = consumer.poll(100);
-	        for (ConsumerRecord<String, String> record : records) {
-				//　正常这里应该使用线程池处理，不应该在这里处理
-				System.out.printf("offset = %d, key = %s, value = %s", record.offset(), record.key(), record.value() + "\n");
-			}
+	        ConsumerRecords<String, byte[]> records = consumer.poll(100);
+	        for (ConsumerRecord<String, byte[]> record : records) {
+				/**
+				 * 稍后处理逻辑如下：
+				 * 做个线程池做消息的策略效验、入库
+				 */
+				//System.out.printf("offset = %d, key = %s, value = %c", record.offset(), record.key(), record.value() + "\n");
+				System.out.println("offset="+record.offset()+" key="+record.key()+" value="+record.value());
+	        }
 	    }
     }  
     
     private static Properties getConfig() {
     	Properties props = new Properties();  
-    	props.put("bootstrap.servers", "localhost:9092");  
+    	props.put("bootstrap.servers", "192.168.3.5:9092");
     	props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");  
-    	props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");  
+    	props.put("value.deserializer", "org.apache.kafka.common.serialization.ByteArrayDeserializer");
 
     	//消费者的组id
     	props.setProperty("group.id", "0");  
@@ -56,8 +60,4 @@ public class KafkaConsumerUtil {
 		return LazyHolder.INSTANCE;
 	}
 
-	public static void main(String[]args) {
-		KafkaConsumerUtil consumer = KafkaConsumerUtil.getInstance();
-		consumer.consume("dingtonghao2");
-	}
 }  

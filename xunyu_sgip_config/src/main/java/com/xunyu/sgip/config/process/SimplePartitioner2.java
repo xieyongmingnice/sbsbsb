@@ -7,7 +7,9 @@ import org.apache.kafka.common.PartitionInfo;
 import java.util.List;
 import java.util.Map;
 
- 
+/**
+ * 策略 、分区
+ */
 public class SimplePartitioner2 implements Partitioner {
  
     @Override

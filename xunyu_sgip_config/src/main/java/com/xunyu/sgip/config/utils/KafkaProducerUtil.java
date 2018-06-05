@@ -5,14 +5,14 @@ import java.util.Properties;
 
 public class KafkaProducerUtil {
 	private Properties props = null;
-	public void produce(String topic,String key,String msgValue) {
-		if(null == props)
+	public void produce(String topic,String key,byte[] msgValue) {
+		if(null == props) {
 			props = getConfig();
-
+		}
 		//创建kafka的生产者
-		Producer<String, String> producer = new KafkaProducer<String, String>(props);  
+		Producer<String, byte[]> producer = new KafkaProducer<String,byte[]>(props);
 		//producer.send(new ProducerRecord<String, String>(topic, "Hello5"));
-		producer.send(new ProducerRecord<String, String>(topic,key, msgValue), new Callback() {
+		producer.send(new ProducerRecord<String, byte[]>(topic,key, msgValue), new Callback() {
 		    @Override  
 		    public void onCompletion(RecordMetadata metadata, Exception e) {  
 		        if (e != null) {  
@@ -35,18 +35,17 @@ public class KafkaProducerUtil {
 		Properties props = new Properties();
 		/*
 		 * 参数说明
-		 * */
+		 */
 		props.put("bootstrap.servers", "192.168.3.5:9092");
 		props.put("zk.connect", "192.168.3.5:2181");
 		// 配置metadata.broker.list, 为了高可用, 最好配两个broker实例
-		props.put("metadata.broker.list", "192.168.3.5:9092");
-		
+		props.put("metadata.broker.list", "192.168.3.5:9092");//192.168.3.5:9092,192.168.3.6:9092,192.168.3.7:9092
 		// serializer.class为消息的序列化类:
 		// 可选：kafka.serializer.StringEncoder; 默认：kafka.serializer.DefaultEncoder
 		props.put("serializer.class", "kafka.serializer.StringEncoder");
 		// serializer详细配置
-		props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");  
-		props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+		props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+		props.put("value.serializer", "org.apache.kafka.common.serialization.ByteArraySerializer");
 		//“所有”设置将导致记录的完整提交阻塞，最慢的，但最持久的设置。
 		props.put("acks", "all"); 
 		// ACK机制, 消息发送需要kafka服务端确认
@@ -69,7 +68,10 @@ public class KafkaProducerUtil {
         // 设置缓冲区大小，默认10KB
         props.put("send.buffer.bytes", "102400");
 		props.put("num.partitions", "10");
-		/**/
+		/*自定义分区
+		* 配置partitioner选择策略
+		* */
+		//props.put("partitioner.class", "com.xunyu.sgip.config.process.SimplePartitioner2");
 		return props;
 	}
 
@@ -83,9 +85,4 @@ public class KafkaProducerUtil {
 	public static final KafkaProducerUtil getInstance() {
 		return LazyHolder.INSTANCE;
 	}
-    public static void main(String[]args) {
-
-    	KafkaProducerUtil producer = KafkaProducerUtil.getInstance();
-    	producer.produce("dingtonghao2","This is key","This is value");
-    }
 }

@@ -17,10 +17,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class SGIPServer {
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
 
         SGIPServer.getServerSingle().SGIPSer(SGIPUtils.port);
-    }*/
+    }
 
     public void SGIPSer(int port) {
 

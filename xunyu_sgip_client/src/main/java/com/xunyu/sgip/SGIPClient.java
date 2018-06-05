@@ -23,9 +23,9 @@ import java.util.concurrent.TimeUnit;
 public class SGIPClient {
 
 
-   /* public static void main(String[] args) {
+    public static void main(String[] args) {
         SGIPClient.getClientSingle().sgipCli(SGIPUtils.host, SGIPUtils.port);
-    }*/
+    }
 
     public void sgipCli(String host, int port) {
 

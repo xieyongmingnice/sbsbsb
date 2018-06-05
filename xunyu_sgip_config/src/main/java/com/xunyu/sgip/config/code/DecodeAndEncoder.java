@@ -3,9 +3,12 @@ package com.xunyu.sgip.config.code;
 import com.xunyu.sgip.config.dto.Bind;
 import com.xunyu.sgip.config.dto.BindResp;
 import com.xunyu.sgip.config.dto.SGIPCommend;
+import com.xunyu.sgip.config.utils.KafkaConsumerUtil;
+import com.xunyu.sgip.config.utils.KafkaProducerUtil;
 import com.xunyu.sgip.config.utils.SGIPUtils;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
+
 import java.util.List;
 
 
@@ -29,9 +32,10 @@ public class DecodeAndEncoder extends MessageToMessageCodec<SGIPCommend, SGIPCom
                 //登录类型
                 b.setLoginTypeByte(SGIPUtils.IntToByteArray2(b.getLoginType()));
                 //放到缓存通道中
-                //out.add(b);
+                out.add(b);
                 //放到kafka中
-
+                KafkaProducerUtil producer = KafkaProducerUtil.getInstance();
+                producer.produce("bind","loginType",SGIPUtils.IntToByteArray2(b.getLoginType()));
             } else if (obj.getCommandID() == SGIPCommend.SGIP_BIND_RESP) {//BindResp
                 //强制转换
                 BindResp br = (BindResp) getSGIPCommendEncode(obj);
@@ -73,8 +77,9 @@ public class DecodeAndEncoder extends MessageToMessageCodec<SGIPCommend, SGIPCom
                 BindResp br = (BindResp) getSGIPCommendDecode(msg);
                 br.setResult(SGIPUtils.ByteArrayToInt2(br.getResultByte()));
                 //放到缓存通道中
-               // out.add(br);
-
+                out.add(br);
+                KafkaConsumerUtil consumer = KafkaConsumerUtil.getInstance();
+                consumer.consume("bind");
             }
 
         } catch (Exception e) {
