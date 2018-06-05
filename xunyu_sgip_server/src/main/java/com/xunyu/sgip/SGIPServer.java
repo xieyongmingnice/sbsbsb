@@ -2,7 +2,6 @@ package com.xunyu.sgip;
 
 import com.xunyu.sgip.config.code.DecodeAndEncoder;
 import com.xunyu.sgip.config.factory.MarshallingCodeCFactory;
-import com.xunyu.sgip.config.utils.SGIPUtils;
 import com.xunyu.sgip.handler.SGIPServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -17,10 +16,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class SGIPServer {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         SGIPServer.getServerSingle().SGIPSer(SGIPUtils.port);
-    }
+    }*/
 
     public void SGIPSer(int port) {
 

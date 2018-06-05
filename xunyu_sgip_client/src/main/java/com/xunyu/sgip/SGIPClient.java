@@ -3,7 +3,6 @@ package com.xunyu.sgip;
 import com.xunyu.sgip.config.check.ConnectionWatchdog;
 import com.xunyu.sgip.config.code.DecodeAndEncoder;
 import com.xunyu.sgip.config.factory.MarshallingCodeCFactory;
-import com.xunyu.sgip.config.utils.SGIPUtils;
 import com.xunyu.sgip.handler.SGIPClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -21,11 +20,6 @@ import java.util.concurrent.TimeUnit;
  * @author 13520
  */
 public class SGIPClient {
-
-
-    public static void main(String[] args) {
-        SGIPClient.getClientSingle().sgipCli(SGIPUtils.host, SGIPUtils.port);
-    }
 
     public void sgipCli(String host, int port) {
 

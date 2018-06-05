@@ -11,7 +11,6 @@
         <module>xunyu_commons-core</module>
         <module>xunyu_zuul</module>
         <module>xunyu_commons_model</module>
-        <module>xunyu_sgip</module>
         <module>xunyu-eureka</module>
         <module>xunyu_cmpp</module>
         <module>xunyu_shiro</module>
@@ -22,10 +21,11 @@
         <module>xunyu_zipkin</module>
         <module>xunyu_tactics</module>
         <module>xunyu_log_manager</module>
-        <module>xunyu_kafka</module>
-        <module>xunyu_kafka_config</module>
         <module>xunyu_actuator</module>
         <module>xunyu_drools</module>
+        <module>xunyu_sgip_server</module>
+        <module>xunyu_sgip_config</module>
+        <module>xunyu_sgip_client</module>
     </modules>
     <packaging>pom</packaging>
 

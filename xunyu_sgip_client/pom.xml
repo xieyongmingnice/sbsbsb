@@ -26,7 +26,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.xunyu.sgip.server.SGIPServer</mainClass>
+                    <mainClass>com.xunyu.sgip.SGIPClient</mainClass>
                 </configuration>
             </plugin>
         </plugins>

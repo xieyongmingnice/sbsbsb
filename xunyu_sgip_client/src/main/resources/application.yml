@@ -1,29 +1,20 @@
 spring:
   application:
     name: sgip-client
-  cloud:
-      stream:
-        bindings:
-          #配置自己定义的通道与哪个中间件交互
-          customInput1: #Sink里的
-            destination: xiaogege9 #生产主题
-          customOutput1:
-            destination: xiaogege9 #消费主题
-        default-binder: kafka #默认的binder是kafka
-  kafka:
-    binder:
-      brokers: localhost:9094
-      zkNodes: localhost:2181
-      minPartitionCount: 1 #最小分区
-      autoCreateTopics: true
-      autoAddPartitions: true #自动扩展分区
-    consumer:
-      group-id: consumer1
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-      client-id: ""
+  profiles:
+    #active: sgiptest #加载xunyu_sgip_config项目中 的application-sgiptest.yml文件  #测试
+    active: sgipdev #加载xunyu_profiles项目中 的application-sgipdev.yml文件    #本地开发
 
 server:
-  port: 8099
+  port: 8014
+  tomcat:
+    tomcat:
+      accept-count: 1000  #承受并发量
+      max-threads: 1000
+      max-connections: 2000
 
+#日志
+logging:
+  config: classpath:logback.xml
+  #file: D:/Test/sgip-client.log  #本地输出日志文件地址
+  file: /opt/upload/msg-xunyu-all/catalina.base_IS_UNDEFINED/sgip-server.log
