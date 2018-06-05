@@ -12,14 +12,14 @@ spring:
   sleuth:
     enabled: false
   sampler:
-    percentage: 1.0
+    percentage: 0.1
   datasource:
     name: xunyu_db
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://rm-m5e03vwf88v7vufn9ho.mysql.rds.aliyuncs.com:3306/xunyu_db?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: xunyu_db
     password: XunYu@DEV-DB
-    schema[0]: classpath:/zipkin.sql
+    #schema[0]: classpath:/zipkin.sql
     initialize: true
     continue-on-error: true
   cloud:

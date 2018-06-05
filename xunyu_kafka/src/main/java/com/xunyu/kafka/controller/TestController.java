@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
-@EnableBinding(Source.class)
+//@EnableBinding(Source.class)
 public class TestController {
 
-    @Resource
+   /* @Resource
     private MessageChannel customOutput1;
 
     @GetMapping("/sendMsg")
@@ -22,6 +22,6 @@ public class TestController {
                 send(MessageBuilder.withPayload(content).build());
         return isSendSuccess ? content : "发送失败";
     }
-
+*/
 
 }

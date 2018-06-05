@@ -10,11 +10,11 @@ import org.springframework.messaging.Message;
  * @author dth
  * @date 2018/5/15 14:05
  **/
-@EnableBinding(Sink.class)
+//@EnableBinding(Sink.class)
 public class ConsumerNews {
 
-    @StreamListener(Sink.INPUT_1)
+   /* @StreamListener(Sink.INPUT_1)
     public void receive(Message<String> message) {
         System.out.println(message.getPayload());
-    }
+    }*/
 }
