@@ -40,7 +40,9 @@ public class SmgpClient {
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();
-            b.group(eventLoopGroup).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true);
+            b.group(eventLoopGroup)
+             .channel(NioSocketChannel.class)
+             .option(ChannelOption.TCP_NODELAY, true);
             final SmgpClientConnectManager manager = getManager(b,timer,port,host,true);
             b.handler(new ChannelInitializer<Channel>() {
                 @Override
@@ -67,8 +69,8 @@ public class SmgpClient {
                         this,
                         new LengthFieldBasedFrameDecoder(4 * 1024 , 0, 4, -4, 0, true),
                         new IdleStateHandler(0, 0, 5, TimeUnit.SECONDS),
-                        new SmgpLoginCodec(),
                         new SmgpHeaderCodec(),
+                        new SmgpLoginCodec(),
                         new SmgpClientHandler()
                 };
             }

@@ -40,6 +40,7 @@ public class SmgpClientHandler extends ChannelInboundHandlerAdapter {
         ctx.writeAndFlush(msg);
 
         logger.info("send SmgpLoginRequestMessage");
+        super.channelActive(ctx);
     }
 
     @Override

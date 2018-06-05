@@ -17,6 +17,7 @@ public class SmgpServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         logger.info("有链路连接：{}",ctx.channel().remoteAddress());
+        super.channelActive(ctx);
     }
 
     @Override
