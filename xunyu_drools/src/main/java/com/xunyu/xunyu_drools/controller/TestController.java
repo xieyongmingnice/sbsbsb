@@ -64,7 +64,6 @@ public class TestController {
         } else {
             System.out.println("数额>5000需要总经理审批");
         }
-
     }
 
     /**
@@ -81,4 +80,5 @@ public class TestController {
         }
         return number.toString();
     }
+
 }

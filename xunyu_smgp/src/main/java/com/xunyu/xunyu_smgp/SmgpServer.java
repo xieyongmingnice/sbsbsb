@@ -1,18 +1,12 @@
 package com.xunyu.xunyu_smgp;
 
-import com.xunyu.xunyu_smgp.codec.SmgpHeaderCodec;
-import com.xunyu.xunyu_smgp.codec.SmgpLoginCodec;
-import com.xunyu.xunyu_smgp.handler.SmgpServerHandler;
+import com.xunyu.xunyu_smgp.handler.SmgpServerInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author xym
@@ -36,17 +30,7 @@ public class SmgpServer {
             b.group(bossGroup,workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .option(ChannelOption.SO_BACKLOG,1024)
-                    .childHandler(new ChannelInitializer<Channel>() {
-                        @Override
-                        protected void initChannel(Channel ch) throws Exception {
-                            ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(4 * 1024 , 0, 4, -4, 0, true))
-                                    .addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS))
-                                    .addLast(new SmgpLoginCodec())
-                                    //消息头编解码器
-                                    .addLast(new SmgpHeaderCodec())
-                                    .addLast(new SmgpServerHandler());
-                        }
-                    });
+                    .childHandler(new SmgpServerInitializer());
             /**
              * 绑定端口、同步等待
              */
