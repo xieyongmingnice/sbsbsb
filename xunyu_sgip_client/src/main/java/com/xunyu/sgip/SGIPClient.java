@@ -22,7 +22,6 @@ import java.util.concurrent.TimeUnit;
 public class SGIPClient {
 
     public void sgipCli(String host, int port) {
-
         /**
          * 1、创建线程池
          * 2、创建通道、注册选择器

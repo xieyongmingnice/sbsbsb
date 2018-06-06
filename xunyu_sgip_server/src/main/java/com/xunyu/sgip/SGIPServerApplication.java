@@ -1,6 +1,8 @@
 package com.xunyu.sgip;
 
 
+import com.xunyu.sgip.config.utils.GetProperties;
+import com.xunyu.sgip.config.utils.KafkaProducerUtil;
 import com.xunyu.sgip.config.utils.SGIPUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +18,11 @@ public class SGIPServerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SGIPServerApplication.class, args);
-		SGIPServer.getServerSingle().SGIPSer(SGIPUtils.port);
+		GetProperties.getInstance();//加载配置
+		//SGIPServer.getServerSingle().SGIPSer(SGIPUtils.port);
+
+		//生产
+		KafkaProducerUtil producer = KafkaProducerUtil.getInstance();
+		producer.produce("b1","loginType",SGIPUtils.IntToByteArray2(1));
 	}
 }
