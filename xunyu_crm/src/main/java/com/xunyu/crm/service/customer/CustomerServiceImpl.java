@@ -1,8 +1,8 @@
 package com.xunyu.crm.service.customer;
 
-import com.commons.core.util.MD5Utils;
 import com.commons.core.util.RandomUtils;
 import com.commons.core.util.StringUtils2;
+import com.commons.core.util.Base64Utils;
 import com.xunyu.crm.dao.customer.CustomerDaoImpl;
 import com.xunyu.crm.dao.customer.CustomerGroupDaoImpl;
 import com.xunyu.crm.dao.customer.user.UserDaoImpl;
@@ -14,7 +14,10 @@ import com.xunyu.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -98,7 +101,7 @@ public class CustomerServiceImpl implements CustomerService {
                     try {
                         User user = new User();
                         user.setAccount(customerTab.getCustomerAccount());
-                        user.setPassWord(MD5Utils.getMD5(customerTab.getCustomerPsw()));
+                        user.setPassWord(Base64Utils.encoderX(customerTab.getCustomerPsw()));
                         user.setIsabled(1);//未删除
                         user.setUserType(2);//2是客户
                         user.setUserCreateTime(new Date());
@@ -134,7 +137,7 @@ public class CustomerServiceImpl implements CustomerService {
                     try {
                         User user = new User();
                         user.setAccount(customerTab.getCustomerAccount());
-                        user.setPassWord(MD5Utils.getMD5(customerTab.getCustomerPsw()));
+                        user.setPassWord(Base64Utils.encoderX(customerTab.getCustomerPsw()));
                         int n = userDaoImpl.updateUser(user);
                     } catch (Exception e) {
                         e.printStackTrace();

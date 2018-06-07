@@ -25,7 +25,7 @@ public class SGIPClientApplication {
 		//消费
 		KafkaConsumerUtil consumer = KafkaConsumerUtil.getInstance();
 		List<String> list = new ArrayList<String>();
-		list.add("b1");
+		list.add("send016");
 		consumer.consume(list);
 	}
 }

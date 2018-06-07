@@ -3,6 +3,7 @@ package com.xunyu.crm.controller.custom;
 import com.commons.core.exception.ExceptionCatch;
 import com.commons.core.message.Result;
 import com.commons.core.util.StringUtils2;
+import com.commons.core.util.Base64Utils;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.crm.dao.customer.user.UserDaoImpl;
 import com.xunyu.crm.pojo.customer.CustomerTab;
@@ -262,6 +263,9 @@ public class CustomerController {
         map.put("customerAccount",us.getAccount());
         CustomerModel cg = customerService.getCusDetailFeign(map);
         CustomerUser cu = new CustomerUser();
+        if(StringUtils2.isNotEmpty(us.getPassWord())){
+            us.setPassWord(Base64Utils.decoderX(us.getPassWord()));
+        }
         cu.setUs(us);
         if(cg != null) {
             cu.setEnterContact(cg.getEnterContact());

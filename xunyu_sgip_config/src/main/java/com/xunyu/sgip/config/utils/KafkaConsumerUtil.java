@@ -17,7 +17,7 @@ public class KafkaConsumerUtil {
 
     	Consumer<String, byte[]> consumer = new KafkaConsumer<String, byte[]>(props);
     	//订阅主题列表topic
-    	consumer.subscribe(Lists.newArrayList("b1"));
+    	consumer.subscribe(Lists.newArrayList(topics));
 
 	    //不断监听新消息
 	    while (true) {

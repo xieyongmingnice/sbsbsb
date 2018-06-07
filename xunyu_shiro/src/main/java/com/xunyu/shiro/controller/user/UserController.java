@@ -2,8 +2,8 @@ package com.xunyu.shiro.controller.user;
 
 import com.commons.core.message.Result;
 import com.commons.core.message.ResultTypeEnum;
-import com.commons.core.util.MD5Utils;
 import com.commons.core.util.StringUtils2;
+import com.commons.core.util.Base64Utils;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.config.redis.SessionDao;
 import com.xunyu.model.user.User;
@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
@@ -161,7 +162,7 @@ public class UserController {
                 if(user2 == null) { //说明该账号不存在，可以添加
                     user.setIsabled(1);//显示状态
                     user.setUserCreateTime(new Date());
-                    user.setPassWord(MD5Utils.getMD5(user.getPassWord()));
+                    user.setPassWord(Base64Utils.encoderX(user.getPassWord()));
                     flag = userService.addUser(user);
                     if (flag > 0) {
                         res.setCode("200");
@@ -207,7 +208,7 @@ public class UserController {
         }
             try {
                 if(StringUtils2.isNotEmpty(user.getPassWord())){
-                    user.setPassWord(MD5Utils.getMD5(user.getPassWord()));
+                    user.setPassWord(Base64Utils.encoderX(user.getPassWord()));
                 }
                 flag = userService.updateUser(user);
                 if (flag > 0) {

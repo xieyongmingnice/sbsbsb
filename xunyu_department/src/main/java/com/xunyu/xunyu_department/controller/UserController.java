@@ -2,7 +2,7 @@ package com.xunyu.xunyu_department.controller;
 
 import com.commons.core.message.Result;
 import com.commons.core.message.ResultMessage;
-import com.commons.core.util.MD5Utils;
+import com.commons.core.util.Base64Utils;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.department.UsersModel;
 import com.xunyu.xunyu_department.pojo.Users;
@@ -56,7 +56,7 @@ public class UserController {
                 result.setCode(ResultMessage.Code.USER_EXIST);
                 return result;
             }
-            model.setPassword(MD5Utils.getMD5(model.getPassword()));
+            model.setPassword(Base64Utils.encoderX(model.getPassword()));
             int count = userService.addUser(model);
             if (count > 0){
                 operationSuccess(result);
@@ -82,7 +82,7 @@ public class UserController {
         }
         try {
             if (model.getPassword() != null){
-                model.setPassword(MD5Utils.getMD5(model.getPassword()));
+                model.setPassword(Base64Utils.encoderX(model.getPassword()));
             }
             int count = userService.updateUserInfo(model);
             if (count>0){

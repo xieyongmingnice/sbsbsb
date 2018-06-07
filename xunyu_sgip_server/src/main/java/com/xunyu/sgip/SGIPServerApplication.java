@@ -23,6 +23,6 @@ public class SGIPServerApplication {
 
 		//生产
 		KafkaProducerUtil producer = KafkaProducerUtil.getInstance();
-		producer.produce("b1","loginType",SGIPUtils.IntToByteArray2(1));
+		producer.produce("send016","loginType",SGIPUtils.IntToByteArray2(1));
 	}
 }

@@ -1,7 +1,7 @@
 package com.xunyu.shiro.config;
 
-import com.commons.core.util.MD5Utils;
 import com.commons.core.util.RandomUtils;
+import com.commons.core.util.Base64Utils;
 import com.xunyu.model.user.User;
 import com.xunyu.shiro.service.user.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -69,8 +69,8 @@ public class MyRealm extends AuthorizingRealm {
             user = userService.getUserInfo(map);
             if(user != null) {
                 //判断密码是否正确
-                map.put("passWord",MD5Utils.getMD5(String.valueOf(pwd)));//md5加密
-                if(MD5Utils.getMD5(String.valueOf(pwd)).equals(user.getPassWord())) {
+                map.put("passWord", Base64Utils.encoderX(String.valueOf(pwd)));//base64 加密
+                if(pwd.equals(Base64Utils.decoderX(user.getPassWord()))) {
                     if (user.getIsabled() == 0) { //禁用
                         throw new LockedAccountException();
                     } else { //做缓存

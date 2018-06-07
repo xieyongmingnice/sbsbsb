@@ -11,11 +11,11 @@ public class KafkaProducerUtil {
 		}
 		//创建kafka的生产者
 		Producer<String, byte[]> producer = new KafkaProducer<String,byte[]>(props);
-		/*for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 9; i++) {
 			producer.send(new ProducerRecord<String, byte[]>(topic,"key"+i, msgValue));
-
-		}*/
-		producer.send(new ProducerRecord<String, byte[]>(topic,key, msgValue), new Callback() {
+			System.out.println("发送消息"+i);
+		}
+		/*producer.send(new ProducerRecord<String, byte[]>(topic,key, msgValue), new Callback() {
 		    @Override  
 		    public void onCompletion(RecordMetadata metadata, Exception e) {  
 		        if (e != null) {  
@@ -26,7 +26,7 @@ public class KafkaProducerUtil {
 		            System.out.println("分区 = "+metadata.partition());//1
 		        }
 		    }  
-		});
+		});*/
 		
 		//生产者的主要方法
         // close(long timeout, TimeUnit timeUnit);
@@ -43,7 +43,7 @@ public class KafkaProducerUtil {
 		props.put("bootstrap.servers", GetProperties.bootstrapServers);
 		props.put("zk.connect", GetProperties.zkConnect);
 		// 配置metadata.broker.list, 为了高可用, 最好配两个broker实例
-		props.put("metadata.broker.list", GetProperties.metadataBrokerList);//192.168.3.5:9092,192.168.3.6:9092,192.168.3.7:9092
+		//props.put("metadata.broker.list", GetProperties.metadataBrokerList);//192.168.3.5:9092,192.168.3.6:9092,192.168.3.7:9092
 		// serializer.class为消息的序列化类:
 		// 可选：kafka.serializer.StringEncoder; 默认：kafka.serializer.DefaultEncoder
 		props.put("serializer.class", GetProperties.serializerClass);
