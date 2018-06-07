@@ -6,6 +6,7 @@ import com.commons.core.util.StringUtils2;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.crm.dao.customer.user.UserDaoImpl;
 import com.xunyu.crm.pojo.customer.CustomerTab;
+import com.xunyu.crm.pojo.customer.CustomerUser;
 import com.xunyu.crm.service.customer.CustomerService;
 import com.xunyu.crm.utils.syslog.LogService2;
 import com.xunyu.crm.utils.syslog.SysLogsUtil;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -240,6 +242,33 @@ public class CustomerController {
             res.setMessage("CustomerIds 不能为空");
         }
 
+        return res;
+    }
+
+    /**
+     * 获取当前登录用户信息
+     */
+    @RequestMapping(value = "getCustomerUser",method = RequestMethod.POST)
+    public Result<CustomerUser> getCustomerUserData(CustomerModel cm) throws Exception {
+
+        Result<CustomerUser> res = new Result<CustomerUser>();
+        User us = redisUtil.getCurrUser(cm.getSessionId());
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (us == null) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        map.put("customerAccount",us.getAccount());
+        CustomerModel cg = customerService.getCusDetailFeign(map);
+        CustomerUser cu = new CustomerUser();
+        cu.setUs(us);
+        if(cg != null) {
+            cu.setEnterContact(cg.getEnterContact());
+        }
+        res.setCode("200");
+        res.setMessage("success");
+        res.setRes(cu);
         return res;
     }
 
