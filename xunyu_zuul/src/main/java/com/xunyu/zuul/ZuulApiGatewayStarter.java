@@ -1,8 +1,8 @@
 package com.xunyu.zuul;
 
+import com.netflix.loadbalancer.IRule;
+import com.netflix.loadbalancer.WeightedResponseTimeRule;
 import com.xunyu.zuul.filter.AccessFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -26,6 +26,15 @@ public class ZuulApiGatewayStarter {
     @Bean
     public AccessFilter preRequestLogFilter() {
         return new AccessFilter();
+    }
+
+    /**
+     * 开启ribbon 负载均衡的权重策略
+     * 其它策略请参考https://blog.csdn.net/rickiyeat/article/details/64918756
+     */
+    @Bean
+    public IRule ribbonRule() {
+        return new WeightedResponseTimeRule();//这里配置策略，和配置文件对应
     }
 }
 
