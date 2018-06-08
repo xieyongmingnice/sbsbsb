@@ -58,7 +58,7 @@ zuul:
        service-id: xunyu-log-manager
 
 #ribbon的权重负载策略 默认是轮询策略 com.netflix.loadbalancer.RoundRobinRule
-NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
+NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
 
 hystrix:
   command:
