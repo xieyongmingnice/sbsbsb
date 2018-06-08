@@ -38,6 +38,9 @@ public class GetProperties {
     public static String groupId;
     public static String enableAutoCommit;
     public static String autoOffsetReset;
+    public static String autoCommitIntervalMs;
+    public static String autoCreateTopicsEnable;
+
 
     /**
      *
@@ -99,6 +102,10 @@ public class GetProperties {
                 zkConnect = props.getProperty(key);
             }else if("bootstrap.servers".equals(key)){
                 bootstrapServers = props.getProperty(key);
+            }else if("auto.commit.interval.ms".equals(key)){
+                autoCommitIntervalMs = props.getProperty(key);
+            }else if("auto.create.topics.enable".equals(key)){
+                autoCreateTopicsEnable = props.getProperty(key);
             }
         }
     }
