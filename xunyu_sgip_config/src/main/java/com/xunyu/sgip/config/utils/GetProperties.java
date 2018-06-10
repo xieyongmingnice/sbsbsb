@@ -13,7 +13,8 @@ import java.util.Properties;
  * @version: 1.0.0
  */
 public class GetProperties {
-    
+
+    public static int THREAD_NUM = 10;//线程数目
     private final static String FILEPATH = "sgip-config.properties";
     public static String bootstrapServers;
     public static String zkConnect;

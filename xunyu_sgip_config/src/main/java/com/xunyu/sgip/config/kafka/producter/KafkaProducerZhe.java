@@ -5,14 +5,19 @@ import com.xunyu.sgip.config.utils.GetProperties;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * 消息提供者
  */
 public class KafkaProducerZhe {
+    private Logger log = LoggerFactory.getLogger(KafkaProducerZhe.class);
     private Properties properties = null;
     /**
      * 消息发送
@@ -26,22 +31,26 @@ public class KafkaProducerZhe {
         if(AdminClientLocal.describeTopics(adminClient,topic)) {//判断主题是否已经存在
             AdminClientLocal.createTopics(adminClient, topic, numPartitions, factor);
         }
-        KafkaProducer<String, byte[]> producer = new KafkaProducer<String, byte[]>(properties);
-
-            for (int i = 0;i < 6;i++) {
+        ExecutorService ex = Executors.newFixedThreadPool(GetProperties.THREAD_NUM);
+        KafkaProducer<String, byte[]> producer = null;
+        try {
+            producer = new KafkaProducer<String, byte[]>(properties);
+            for (int i = 0; i < 6; i++) {
                 // 发送
-                ProducerRecord<String, byte[]> record = new ProducerRecord<String, byte[]>(topic, key+i, msgValue);
-                //producer.send(record, new CallBackFuntion(topic, message));
-                producer.send(record, (recordMetadata, e) -> {
-                    if (e != null) {
-                        System.err.println(topic + " key=" + key + ": " + msgValue + "--消息发送失败");
-                    } else {
-                        System.err.println(topic + " key=" + key + ": " + msgValue + "分区=" + recordMetadata.partition() + "偏移量=" + recordMetadata.offset());
-                    }
-                });
+                ProducerRecord<String, byte[]> record =
+                        new ProducerRecord<String, byte[]>(topic, key + i, msgValue);
+                ex.submit(new ProductThread(producer,record,topic,msgValue));
+
             }
-        producer.flush();
-        producer.close();
+        }catch (Exception e){
+            log.info(e.getMessage());
+        }finally {
+            producer.flush();
+            producer.close();
+            ex.shutdown();
+
+        }
+
     }
 
     private static Properties getConfig() {
