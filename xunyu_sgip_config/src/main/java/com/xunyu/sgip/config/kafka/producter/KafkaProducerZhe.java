@@ -19,6 +19,7 @@ import java.util.concurrent.Executors;
 public class KafkaProducerZhe {
     private Logger log = LoggerFactory.getLogger(KafkaProducerZhe.class);
     private Properties properties = null;
+    private final int NUM = 12;
     /**
      * 消息发送
      */
@@ -35,11 +36,14 @@ public class KafkaProducerZhe {
         KafkaProducer<String, byte[]> producer = null;
         try {
             producer = new KafkaProducer<String, byte[]>(properties);
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < NUM; i++) {
                 // 发送
                 ProducerRecord<String, byte[]> record =
                         new ProducerRecord<String, byte[]>(topic, key + i, msgValue);
-                ex.submit(new ProductThread(producer,record,topic,msgValue));
+                ex.submit(new ProductThread(producer, record, topic, msgValue));
+                if(i % 2 == 0) {
+                    Thread.sleep(3000L); //睡眠3秒钟
+                }
 
             }
         }catch (Exception e){
