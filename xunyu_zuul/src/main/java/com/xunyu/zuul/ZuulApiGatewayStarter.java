@@ -1,7 +1,5 @@
 package com.xunyu.zuul;
 
-import com.netflix.loadbalancer.IRule;
-import com.netflix.loadbalancer.RoundRobinRule;
 import com.xunyu.zuul.filter.AccessFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,10 +30,10 @@ public class ZuulApiGatewayStarter {
      * 开启ribbon 负载均衡的权重策略
      * 其它策略请参考https://blog.csdn.net/rickiyeat/article/details/64918756
      */
-    @Bean
+    /*@Bean
     public IRule ribbonRule() {
         return new RoundRobinRule();//这里配置策略，和配置文件对应
-    }
+    }*/
 }
 
 

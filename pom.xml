@@ -26,6 +26,7 @@
         <module>xunyu_sgip_server</module>
         <module>xunyu_sgip_config</module>
         <module>xunyu_sgip_client</module>
+        <module>xunyu_operator</module>
     </modules>
     <packaging>pom</packaging>
 
