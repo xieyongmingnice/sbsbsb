@@ -4,11 +4,15 @@ import com.xunyu.operator.dao.access.OperAccessDaoImpl;
 import com.xunyu.operator.pojo.access.OperAccessCoreConfig;
 import com.xunyu.operator.pojo.access.OperExtendConfig;
 import com.xunyu.operator.pojo.access.OperMarkConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author dth
@@ -16,39 +20,72 @@ import java.util.Map;
  **/
 @Service
 public class OperAccessServiceImpl implements OperAccessService {
-
+    private Logger log = LoggerFactory.getLogger(OperAccessServiceImpl.class);
     @Autowired
     private OperAccessDaoImpl operAccessDao;
 
     @Override
-    public int saveOperAccess(OperAccessCoreConfig occ) {
-        return operAccessDao.saveOperAccess(occ);
-    }
-
-    @Override
-    public int saveOperExtend(OperExtendConfig oec) {
-        return operAccessDao.saveOperExtend(oec);
-    }
-
-    @Override
-    public int saveOperMark(OperMarkConfig omc) {
-        return operAccessDao.saveOperMark(omc);
+    public int saveOperAccess(OperAccessCoreConfig occ){
+        int n = 0;
+        n = operAccessDao.saveOperAccess(occ);
+        ExecutorService ex = Executors.newCachedThreadPool();
+        if(n > 0){
+            try {
+                Runnable ru = new Runnable() {
+                    @Override
+                    public void run() {
+                        OperExtendConfig oec = occ.getOperExtendConfig();
+                        if (oec != null) {
+                            oec.setConfigId(occ.getConfigId());
+                            operAccessDao.saveOperExtend(oec);
+                        }
+                        OperMarkConfig omc = occ.getOperMarkConfig();
+                        if (omc != null) {
+                            omc.setConfigId(occ.getConfigId());
+                            operAccessDao.saveOperMark(omc);
+                        }
+                    }
+                };
+                ex.submit(ru);
+            }catch (Exception e){
+                log.info(e.getMessage());
+            }finally {
+                ex.shutdown();
+            }
+        }
+        return n;
     }
 
     @Override
     public int updateOperAccess(OperAccessCoreConfig occ) {
-        return operAccessDao.updateOperAccess(occ);
+        int n = 0;
+        n = operAccessDao.updateOperAccess(occ);
+        ExecutorService ex = Executors.newCachedThreadPool();
+        if(n > 0){
+            try {
+                Runnable ru = new Runnable() {
+                    @Override
+                    public void run() {
+                        OperExtendConfig oec = occ.getOperExtendConfig();
+                        if (oec != null) {
+                            operAccessDao.updateOperExtend(oec);
+                        }
+                        OperMarkConfig omc = occ.getOperMarkConfig();
+                        if (omc != null) {
+                            operAccessDao.updateOperMark(omc);
+                        }
+                    }
+                };
+                ex.submit(ru);
+            }catch (Exception e){
+                log.info(e.getMessage());
+            }finally {
+                ex.shutdown();
+            }
+        }
+        return n;
     }
 
-    @Override
-    public int updateOperExtend(OperExtendConfig oec) {
-        return operAccessDao.updateOperExtend(oec);
-    }
-
-    @Override
-    public int updateOperMark(OperMarkConfig omc) {
-        return operAccessDao.updateOperMark(omc);
-    }
 
     @Override
     public OperAccessCoreConfig getOperAccessCoreConfig(Map<String, Object> map) {

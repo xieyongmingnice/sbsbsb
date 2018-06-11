@@ -1,13 +1,11 @@
 package com.xunyu.operator.pojo.access;
 
-import com.xunyu.model.user.UserModel;
-
 /**
  * @author dth
  * @date 2018/6/11 11:12
  * 网关入口 扩展配置
  **/
-public class OperExtendConfig extends UserModel {
+public class OperExtendConfig{
 
     private Long extendId;//扩展id
     private Long configId;//核心配置id
@@ -28,7 +26,7 @@ public class OperExtendConfig extends UserModel {
     private int codeFormat;//编码格式1、8-UCS2； 2、15-GBK; 3、25-UCS2B25
     private int unsignaFormat;//去签名格式 1、正常 2、去前置 3、去后置
     private int ascllSupport;//ASCLL支持 1支持 2不支持
-    private int ascll_length;//ASCII长度限制
+    private int ascllLength;//ASCII长度限制
     private int lenMsgCode;//长短信额外编码 1、8-UCS2； 2、15-GBK; 3、25-UCS2B25
     private int maxLength;//下发最大号长度
     private int isDef;//号码是否需要86
@@ -98,12 +96,12 @@ public class OperExtendConfig extends UserModel {
         this.ascllSupport = ascllSupport;
     }
 
-    public int getAscll_length() {
-        return ascll_length;
+    public int getAscllLength() {
+        return ascllLength;
     }
 
-    public void setAscll_length(int ascll_length) {
-        this.ascll_length = ascll_length;
+    public void setAscllLength(int ascllLength) {
+        this.ascllLength = ascllLength;
     }
 
     public int getLenMsgCode() {

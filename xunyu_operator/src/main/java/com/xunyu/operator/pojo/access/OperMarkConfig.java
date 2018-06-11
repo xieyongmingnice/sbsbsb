@@ -1,12 +1,10 @@
 package com.xunyu.operator.pojo.access;
 
-import com.xunyu.model.user.UserModel;
-
 /**
  * @author dth
  * @date 2018/6/11 11:28
  **/
-public class OperMarkConfig extends UserModel {
+public class OperMarkConfig{
 
     private Long markId;//主键
     private Long configId;//核心配置id

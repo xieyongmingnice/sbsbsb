@@ -28,7 +28,7 @@ public class OperAccessCoreConfig extends UserModel {
     private int ordinaryMsgNum;//普通短信字节数
     private int extendNum;//扩展位数
     private int whetherExtend;//是否启用签名扩展
-    private int isable;//1启用 2停用 3作废
+    private Integer isable;//1启用 2停用 3作废
     private Date createTime;//创建时间
     private OperExtendConfig operExtendConfig;//网关扩展属性配置
     private OperMarkConfig operMarkConfig;//网关备注信息
@@ -185,11 +185,11 @@ public class OperAccessCoreConfig extends UserModel {
         this.whetherExtend = whetherExtend;
     }
 
-    public int getIsable() {
+    public Integer getIsable() {
         return isable;
     }
 
-    public void setIsable(int isable) {
+    public void setIsable(Integer isable) {
         this.isable = isable;
     }
 
