@@ -1,7 +1,11 @@
 package com.xunyu.cmpp.handler;
 
+import com.xunyu.cmpp.codec.CmppConnectRequestMessageCodec;
+import com.xunyu.cmpp.codec.CmppHeaderCodec;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.Timeout;
 import io.netty.util.Timer;
 import io.netty.util.TimerTask;
@@ -33,6 +37,18 @@ public abstract class CmppClientConnectManager extends ChannelInboundHandlerAdap
         this.port = port;
         this.host = host;
         this.reconnect = reconnect;
+    }
+
+    @Override
+    public ChannelHandler[] handlers() {
+        return new ChannelHandler[]{
+                this,
+                new LengthFieldBasedFrameDecoder(4 * 1024 , 0, 4, -4, 0, true),
+                new IdleStateHandler(0, 0, 5, TimeUnit.SECONDS),
+                new CmppHeaderCodec(),
+                new CmppConnectRequestMessageCodec(),
+                new CmppClientChannelHandler()
+        };
     }
 
     @Override

@@ -1,17 +1,11 @@
 package com.xunyu.cmpp;
 
-import com.xunyu.cmpp.codec.CmppConnectRequestMessageCodec;
-import com.xunyu.cmpp.codec.CmppHeaderCodec;
-import com.xunyu.cmpp.handler.CmppClientChannelHandler;
 import com.xunyu.cmpp.handler.CmppClientConnectManager;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.HashedWheelTimer;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author xym
@@ -60,18 +54,7 @@ public class CmppClient {
     }
 
     private CmppClientConnectManager getManager(Bootstrap bootstrap, HashedWheelTimer timer, int port, String host, Boolean reconnect){
-        CmppClientConnectManager manager = new CmppClientConnectManager(bootstrap,timer,port,host,reconnect) {
-            @Override
-            public ChannelHandler[] handlers() {
-                return new ChannelHandler[]{
-                        this,
-                        new IdleStateHandler(0, 0, 5, TimeUnit.SECONDS),
-                        new CmppHeaderCodec(),
-                        new CmppConnectRequestMessageCodec(),
-                        new CmppClientChannelHandler()
-                };
-            }
-        };
+        CmppClientConnectManager manager = new CmppClientConnectManager(bootstrap,timer,port,host,reconnect){};
         return manager;
     }
 
