@@ -6,13 +6,11 @@ import com.xunyu.cmpp.constant.SessionState;
 import com.xunyu.cmpp.message.CmppConnectRequestMessage;
 import com.xunyu.cmpp.message.CmppConnectResponseMessage;
 import com.xunyu.cmpp.packet.CmppPacketType;
-import com.xunyu.cmpp.packet.Message;
 import com.xunyu.cmpp.packet.PacketType;
-import com.xunyu.cmpp.utils.CachedMillisecondClock;
-import io.netty.channel.*;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.MessageToMessageCodec;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +22,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @description 服务端handler
  * @date 2018/4/18 14:40
  */
-@ChannelHandler.Sharable
 public class CmppServerChannelHandler extends ChannelInboundHandlerAdapter {
 
     private Logger logger = LoggerFactory.getLogger(CmppServerChannelHandler.class);
@@ -77,6 +74,12 @@ public class CmppServerChannelHandler extends ChannelInboundHandlerAdapter {
                 if (Arrays.equals(authBytes, message.getAuthenticatorSource())) {
                     logger.info("connect success");
                     state = SessionState.Connect;
+                    ctx.channel().attr(GlobalConstance.ATTRIBUTE_KEY).set(SessionState.Connect);
+                    //发送response消息给客户端
+                    CmppConnectResponseMessage responseMessage = new CmppConnectResponseMessage( message.getHeader().getSequenceId());
+                    responseMessage.setStatus(0);
+                    responseMessage.setVersion((short) 0X30);
+                    ctx.channel().writeAndFlush(null);
                 } else {
                     logger.error("connect failed");
                 }
