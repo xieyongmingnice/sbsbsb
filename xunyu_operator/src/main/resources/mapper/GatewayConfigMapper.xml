@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.operator.pojo.out.GatewayOutConfig">
+    <resultMap id="BaseResultMap" type="com.xunyu.operator.pojo.out.GatewayOutConfig">
+        <id column="tbl_gateway_out_config_id" jdbcType="INTEGER" property="tblGatewayOutConfigId" />
+        <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+        <result column="customer_type" jdbcType="INTEGER" property="customerType" />
+        <result column="enterprise_code" jdbcType="VARCHAR" property="enterpriseCode" />
+        <result column="access_type" jdbcType="INTEGER" property="accessType" />
+        <result column="agree_type" jdbcType="INTEGER" property="agreeType" />
+        <result column="gateway_node" jdbcType="VARCHAR" property="gatewayNode" />
+        <result column="enterprise_ip" jdbcType="VARCHAR" property="enterpriseIp" />
+        <result column="enterprise_port" jdbcType="INTEGER" property="enterprisePort" />
+        <result column="enterprise_account" jdbcType="VARCHAR" property="enterpriseAccount" />
+        <result column="enterprise_pwd" jdbcType="VARCHAR" property="enterprisePwd" />
+        <result column="gateway_access_code" jdbcType="VARCHAR" property="gatewayAccessCode" />
+        <result column="sp_access_code" jdbcType="VARCHAR" property="spAccessCode" />
+        <result column="msg_access_code" jdbcType="VARCHAR" property="msgAccessCode" />
+        <result column="trans_access_code" jdbcType="VARCHAR" property="transAccessCode" />
+        <result column="binary_msg_len_limit" jdbcType="INTEGER" property="binaryMsgLenLimit" />
+        <result column="sp_msg_len_limit" jdbcType="INTEGER" property="spMsgLenLimit" />
+        <result column="fixed_sign_location" jdbcType="INTEGER" property="fixedSignLocation" />
+        <result column="long_msg_extra_num" jdbcType="INTEGER" property="longMsgExtraNum" />
+        <result column="is_ascll_supported" jdbcType="INTEGER" property="isAscllSupported" />
+        <result column="ascll_len_limit" jdbcType="INTEGER" property="ascllLenLimit" />
+        <result column="ascll_sign_len" jdbcType="INTEGER" property="ascllSignLen" />
+        <result column="ascll_sign" jdbcType="VARCHAR" property="ascllSign" />
+        <result column="service_code" jdbcType="VARCHAR" property="serviceCode" />
+        <result column="is_send_without_sign" jdbcType="INTEGER" property="isSendWithoutSign" />
+        <result column="content_without_sign" jdbcType="VARCHAR" property="contentWithoutSign" />
+        <result column="is_need_prefix" jdbcType="INTEGER" property="isNeedPrefix" />
+        <result column="mo_pattern" jdbcType="INTEGER" property="moPattern" />
+        <result column="mo_gateway_id" jdbcType="INTEGER" property="moGatewayId" />
+        <result column="report_msg_type" jdbcType="INTEGER" property="reportMsgType" />
+        <result column="send_flow_threshold" jdbcType="INTEGER" property="sendFlowThreshold" />
+        <result column="reply_flow_threshold" jdbcType="INTEGER" property="replyFlowThreshold" />
+        <result column="is_used" jdbcType="INTEGER" property="isUsed" />
+        <result column="pay_type" jdbcType="INTEGER" property="payType" />
+        <result column="deposit" jdbcType="DECIMAL" property="deposit" />
+        <result column="rate" jdbcType="DECIMAL" property="rate" />
+        <result column="recharge_num_limit" jdbcType="INTEGER" property="rechargeNumLimit" />
+        <result column="is_online_recharge_used" jdbcType="INTEGER" property="isOnlineRechargeUsed" />
+        <result column="remainder_msg_num" jdbcType="INTEGER" property="remainderMsgNum" />
+        <result column="pledge_num" jdbcType="INTEGER" property="pledgeNum" />
+        <result column="credit_rate" jdbcType="DECIMAL" property="creditRate" />
+        <result column="audit_type" jdbcType="INTEGER" property="auditType" />
+        <result column="priority" jdbcType="INTEGER" property="priority" />
+        <result column="max_connect_num" jdbcType="INTEGER" property="maxConnectNum" />
+        <result column="use_time" jdbcType="TIMESTAMP" property="useTime" />
+        <result column="invalid_time" jdbcType="TIMESTAMP" property="invalidTime" />
+        <result column="is_forced_sign" jdbcType="INTEGER" property="isForcedSign" />
+        <result column="sign_content" jdbcType="VARCHAR" property="signContent" />
+        <result column="sign_location" jdbcType="INTEGER" property="signLocation" />
+        <result column="is_must_sign" jdbcType="INTEGER" property="isMustSign" />
+        <result column="audit_num" jdbcType="INTEGER" property="auditNum" />
+        <result column="is_use_blacklist" jdbcType="INTEGER" property="isUseBlacklist" />
+        <result column="is_use_whitelist" jdbcType="INTEGER" property="isUseWhitelist" />
+        <result column="is_use_sys_redlist_whitelist" jdbcType="INTEGER" property="isUseSysRedlistWhitelist" />
+        <result column="is_use_keyword_incpt" jdbcType="INTEGER" property="isUseKeywordIncpt" />
+        <result column="long_msg_pack_type" jdbcType="INTEGER" property="longMsgPackType" />
+        <result column="is_auto_return" jdbcType="INTEGER" property="isAutoReturn" />
+        <result column="is_incpt_long_access_code" jdbcType="INTEGER" property="isIncptLongAccessCode" />
+        <result column="sp_desc" jdbcType="VARCHAR" property="spDesc" />
+        <result column="min_sale_cost" jdbcType="DECIMAL" property="minSaleCost" />
+        <result column="actual_sale_price" jdbcType="DECIMAL" property="actualSalePrice" />
+        <result column="sale_commission_prop" jdbcType="DECIMAL" property="saleCommissionProp" />
+        <result column="is_use_platform_handle" jdbcType="INTEGER" property="isUsePlatformHandle" />
+        <result column="platform_handle_prop" jdbcType="DECIMAL" property="platformHandleProp" />
+        <result column="handle_rep_prop" jdbcType="DECIMAL" property="handleRepProp" />
+        <result column="handle_rep_realtime_prop" jdbcType="DECIMAL" property="handleRepRealtimeProp" />
+        <result column="handle_rep_return_time" jdbcType="INTEGER" property="handleRepReturnTime" />
+        <result column="platform_handle_unknow_prop" jdbcType="DECIMAL" property="platformHandleUnknowProp" />
+        <result column="wrong_num_suc_porp" jdbcType="DECIMAL" property="wrongNumSucPorp" />
+        <result column="wrong_num_unknow_porp" jdbcType="DECIMAL" property="wrongNumUnknowPorp" />
+        <result column="wrong_report_suc_prop" jdbcType="DECIMAL" property="wrongReportSucProp" />
+        <result column="is_use_overtime_change" jdbcType="INTEGER" property="isUseOvertimeChange" />
+        <result column="change_overtime_prop" jdbcType="DECIMAL" property="changeOvertimeProp" />
+        <result column="change_overtime_start_time" jdbcType="INTEGER" property="changeOvertimeStartTime" />
+        <result column="change_overtime_end_time" jdbcType="INTEGER" property="changeOvertimeEndTime" />
+        <result column="is_use_audit_keyword" jdbcType="INTEGER" property="isUseAuditKeyword" />
+        <result column="user_send_limit" jdbcType="INTEGER" property="userSendLimit" />
+        <result column="is_use_num_shunt" jdbcType="INTEGER" property="isUseNumShunt" />
+        <result column="is_use_balance_notice" jdbcType="INTEGER" property="isUseBalanceNotice" />
+        <result column="bal_notice_num" jdbcType="INTEGER" property="balNoticeNum" />
+        <result column="bal_notice_content" jdbcType="VARCHAR" property="balNoticeContent" />
+        <result column="bal_notice_interval" jdbcType="INTEGER" property="balNoticeInterval" />
+        <result column="bal_notice_time" jdbcType="TIMESTAMP" property="balNoticeTime" />
+        <result column="is_use_http" jdbcType="INTEGER" property="isUseHttp" />
+        <result column="http_bind_ip" jdbcType="VARCHAR" property="httpBindIp" />
+        <result column="is_use_push" jdbcType="INTEGER" property="isUsePush" />
+        <result column="http_reply_address" jdbcType="VARCHAR" property="httpReplyAddress" />
+        <result column="http_report_address" jdbcType="VARCHAR" property="httpReportAddress" />
+        <result column="http_report_reply_address" jdbcType="VARCHAR" property="httpReportReplyAddress" />
+        <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+        <result column="isabled" jdbcType="INTEGER" property="isabled" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        tbl_gateway_out_config_id, customer_id, customer_type, enterprise_code, access_type,
+        agree_type, gateway_node, enterprise_ip, enterprise_port, enterprise_account, enterprise_pwd,
+        gateway_access_code, sp_access_code, msg_access_code, trans_access_code, binary_msg_len_limit,
+        sp_msg_len_limit, fixed_sign_location, long_msg_extra_num, is_ascll_supported, ascll_len_limit,
+        ascll_sign_len, ascll_sign, service_code, is_send_without_sign, content_without_sign,
+        is_need_prefix, mo_pattern, mo_gateway_id, report_msg_type, send_flow_threshold,
+        reply_flow_threshold, is_used, pay_type, deposit, rate, recharge_num_limit, is_online_recharge_used,
+        remainder_msg_num, pledge_num, credit_rate, audit_type, priority, max_connect_num,
+        use_time, invalid_time, is_forced_sign, sign_content, sign_location, is_must_sign,
+        audit_num, is_use_blacklist, is_use_whitelist, is_use_sys_redlist_whitelist, is_use_keyword_incpt,
+        long_msg_pack_type, is_auto_return, is_incpt_long_access_code, sp_desc, min_sale_cost,
+        actual_sale_price, sale_commission_prop, is_use_platform_handle, platform_handle_prop,
+        handle_rep_prop, handle_rep_realtime_prop, handle_rep_return_time, platform_handle_unknow_prop,
+        wrong_num_suc_porp, wrong_num_unknow_porp, wrong_report_suc_prop, is_use_overtime_change,
+        change_overtime_prop, change_overtime_start_time, change_overtime_end_time, is_use_audit_keyword,
+        user_send_limit, is_use_num_shunt, is_use_balance_notice, bal_notice_num, bal_notice_content,
+        bal_notice_interval, bal_notice_time, is_use_http, http_bind_ip, is_use_push, http_reply_address,
+        http_report_address, http_report_reply_address, operator_id, isabled, create_time
+    </sql>
+
+    <insert id="insert" parameterType="com.xunyu.operator.pojo.out.GatewayOutConfig">
+        insert into tbl_gateway_out_config (tbl_gateway_out_config_id, customer_id,
+        customer_type, enterprise_code, access_type,
+        agree_type, gateway_node, enterprise_ip,
+        enterprise_port, enterprise_account, enterprise_pwd,
+        gateway_access_code, sp_access_code, msg_access_code,
+        trans_access_code, binary_msg_len_limit, sp_msg_len_limit,
+        fixed_sign_location, long_msg_extra_num, is_ascll_supported,
+        ascll_len_limit, ascll_sign_len, ascll_sign,
+        service_code, is_send_without_sign, content_without_sign,
+        is_need_prefix, mo_pattern, mo_gateway_id,
+        report_msg_type, send_flow_threshold, reply_flow_threshold,
+        is_used, pay_type, deposit,
+        rate, recharge_num_limit, is_online_recharge_used,
+        remainder_msg_num, pledge_num, credit_rate,
+        audit_type, priority, max_connect_num,
+        use_time, invalid_time, is_forced_sign,
+        sign_content, sign_location, is_must_sign,
+        audit_num, is_use_blacklist, is_use_whitelist,
+        is_use_sys_redlist_whitelist, is_use_keyword_incpt,
+        long_msg_pack_type, is_auto_return, is_incpt_long_access_code,
+        sp_desc, min_sale_cost, actual_sale_price,
+        sale_commission_prop, is_use_platform_handle,
+        platform_handle_prop, handle_rep_prop, handle_rep_realtime_prop,
+        handle_rep_return_time, platform_handle_unknow_prop,
+        wrong_num_suc_porp, wrong_num_unknow_porp, wrong_report_suc_prop,
+        is_use_overtime_change, change_overtime_prop,
+        change_overtime_start_time, change_overtime_end_time,
+        is_use_audit_keyword, user_send_limit, is_use_num_shunt,
+        is_use_balance_notice, bal_notice_num, bal_notice_content,
+        bal_notice_interval, bal_notice_time, is_use_http,
+        http_bind_ip, is_use_push, http_reply_address,
+        http_report_address, http_report_reply_address, operator_id,
+        isabled, create_time)
+        values (#{tblGatewayOutConfigId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER},
+        #{customerType,jdbcType=INTEGER}, #{enterpriseCode,jdbcType=VARCHAR}, #{accessType,jdbcType=INTEGER},
+        #{agreeType,jdbcType=INTEGER}, #{gatewayNode,jdbcType=VARCHAR}, #{enterpriseIp,jdbcType=VARCHAR},
+        #{enterprisePort,jdbcType=INTEGER}, #{enterpriseAccount,jdbcType=VARCHAR}, #{enterprisePwd,jdbcType=VARCHAR},
+        #{gatewayAccessCode,jdbcType=VARCHAR}, #{spAccessCode,jdbcType=VARCHAR}, #{msgAccessCode,jdbcType=VARCHAR},
+        #{transAccessCode,jdbcType=VARCHAR}, #{binaryMsgLenLimit,jdbcType=INTEGER}, #{spMsgLenLimit,jdbcType=INTEGER},
+        #{fixedSignLocation,jdbcType=INTEGER}, #{longMsgExtraNum,jdbcType=INTEGER}, #{isAscllSupported,jdbcType=INTEGER},
+        #{ascllLenLimit,jdbcType=INTEGER}, #{ascllSignLen,jdbcType=INTEGER}, #{ascllSign,jdbcType=VARCHAR},
+        #{serviceCode,jdbcType=VARCHAR}, #{isSendWithoutSign,jdbcType=INTEGER}, #{contentWithoutSign,jdbcType=VARCHAR},
+        #{isNeedPrefix,jdbcType=INTEGER}, #{moPattern,jdbcType=INTEGER}, #{moGatewayId,jdbcType=INTEGER},
+        #{reportMsgType,jdbcType=INTEGER}, #{sendFlowThreshold,jdbcType=INTEGER}, #{replyFlowThreshold,jdbcType=INTEGER},
+        #{isUsed,jdbcType=INTEGER}, #{payType,jdbcType=INTEGER}, #{deposit,jdbcType=DECIMAL},
+        #{rate,jdbcType=DECIMAL}, #{rechargeNumLimit,jdbcType=INTEGER}, #{isOnlineRechargeUsed,jdbcType=INTEGER},
+        #{remainderMsgNum,jdbcType=INTEGER}, #{pledgeNum,jdbcType=INTEGER}, #{creditRate,jdbcType=DECIMAL},
+        #{auditType,jdbcType=INTEGER}, #{priority,jdbcType=INTEGER}, #{maxConnectNum,jdbcType=INTEGER},
+        #{useTime,jdbcType=TIMESTAMP}, #{invalidTime,jdbcType=TIMESTAMP}, #{isForcedSign,jdbcType=INTEGER},
+        #{signContent,jdbcType=VARCHAR}, #{signLocation,jdbcType=INTEGER}, #{isMustSign,jdbcType=INTEGER},
+        #{auditNum,jdbcType=INTEGER}, #{isUseBlacklist,jdbcType=INTEGER}, #{isUseWhitelist,jdbcType=INTEGER},
+        #{isUseSysRedlistWhitelist,jdbcType=INTEGER}, #{isUseKeywordIncpt,jdbcType=INTEGER},
+        #{longMsgPackType,jdbcType=INTEGER}, #{isAutoReturn,jdbcType=INTEGER}, #{isIncptLongAccessCode,jdbcType=INTEGER},
+        #{spDesc,jdbcType=VARCHAR}, #{minSaleCost,jdbcType=DECIMAL}, #{actualSalePrice,jdbcType=DECIMAL},
+        #{saleCommissionProp,jdbcType=DECIMAL}, #{isUsePlatformHandle,jdbcType=INTEGER},
+        #{platformHandleProp,jdbcType=DECIMAL}, #{handleRepProp,jdbcType=DECIMAL}, #{handleRepRealtimeProp,jdbcType=DECIMAL},
+        #{handleRepReturnTime,jdbcType=INTEGER}, #{platformHandleUnknowProp,jdbcType=DECIMAL},
+        #{wrongNumSucPorp,jdbcType=DECIMAL}, #{wrongNumUnknowPorp,jdbcType=DECIMAL}, #{wrongReportSucProp,jdbcType=DECIMAL},
+        #{isUseOvertimeChange,jdbcType=INTEGER}, #{changeOvertimeProp,jdbcType=DECIMAL},
+        #{changeOvertimeStartTime,jdbcType=INTEGER}, #{changeOvertimeEndTime,jdbcType=INTEGER},
+        #{isUseAuditKeyword,jdbcType=INTEGER}, #{userSendLimit,jdbcType=INTEGER}, #{isUseNumShunt,jdbcType=INTEGER},
+        #{isUseBalanceNotice,jdbcType=INTEGER}, #{balNoticeNum,jdbcType=INTEGER}, #{balNoticeContent,jdbcType=VARCHAR},
+        #{balNoticeInterval,jdbcType=INTEGER}, #{balNoticeTime,jdbcType=TIMESTAMP}, #{isUseHttp,jdbcType=INTEGER},
+        #{httpBindIp,jdbcType=VARCHAR}, #{isUsePush,jdbcType=INTEGER}, #{httpReplyAddress,jdbcType=VARCHAR},
+        #{httpReportAddress,jdbcType=VARCHAR}, #{httpReportReplyAddress,jdbcType=VARCHAR}, #{operatorId,jdbcType=INTEGER},
+        #{isabled,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.xunyu.operator.pojo.out.GatewayOutConfig">
+        insert into tbl_gateway_out_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tblGatewayOutConfigId != null">
+                tbl_gateway_out_config_id,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="customerType != null">
+                customer_type,
+            </if>
+            <if test="enterpriseCode != null">
+                enterprise_code,
+            </if>
+            <if test="accessType != null">
+                access_type,
+            </if>
+            <if test="agreeType != null">
+                agree_type,
+            </if>
+            <if test="gatewayNode != null">
+                gateway_node,
+            </if>
+            <if test="enterpriseIp != null">
+                enterprise_ip,
+            </if>
+            <if test="enterprisePort != null">
+                enterprise_port,
+            </if>
+            <if test="enterpriseAccount != null">
+                enterprise_account,
+            </if>
+            <if test="enterprisePwd != null">
+                enterprise_pwd,
+            </if>
+            <if test="gatewayAccessCode != null">
+                gateway_access_code,
+            </if>
+            <if test="spAccessCode != null">
+                sp_access_code,
+            </if>
+            <if test="msgAccessCode != null">
+                msg_access_code,
+            </if>
+            <if test="transAccessCode != null">
+                trans_access_code,
+            </if>
+            <if test="binaryMsgLenLimit != null">
+                binary_msg_len_limit,
+            </if>
+            <if test="spMsgLenLimit != null">
+                sp_msg_len_limit,
+            </if>
+            <if test="fixedSignLocation != null">
+                fixed_sign_location,
+            </if>
+            <if test="longMsgExtraNum != null">
+                long_msg_extra_num,
+            </if>
+            <if test="isAscllSupported != null">
+                is_ascll_supported,
+            </if>
+            <if test="ascllLenLimit != null">
+                ascll_len_limit,
+            </if>
+            <if test="ascllSignLen != null">
+                ascll_sign_len,
+            </if>
+            <if test="ascllSign != null">
+                ascll_sign,
+            </if>
+            <if test="serviceCode != null">
+                service_code,
+            </if>
+            <if test="isSendWithoutSign != null">
+                is_send_without_sign,
+            </if>
+            <if test="contentWithoutSign != null">
+                content_without_sign,
+            </if>
+            <if test="isNeedPrefix != null">
+                is_need_prefix,
+            </if>
+            <if test="moPattern != null">
+                mo_pattern,
+            </if>
+            <if test="moGatewayId != null">
+                mo_gateway_id,
+            </if>
+            <if test="reportMsgType != null">
+                report_msg_type,
+            </if>
+            <if test="sendFlowThreshold != null">
+                send_flow_threshold,
+            </if>
+            <if test="replyFlowThreshold != null">
+                reply_flow_threshold,
+            </if>
+            <if test="isUsed != null">
+                is_used,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+            <if test="deposit != null">
+                deposit,
+            </if>
+            <if test="rate != null">
+                rate,
+            </if>
+            <if test="rechargeNumLimit != null">
+                recharge_num_limit,
+            </if>
+            <if test="isOnlineRechargeUsed != null">
+                is_online_recharge_used,
+            </if>
+            <if test="remainderMsgNum != null">
+                remainder_msg_num,
+            </if>
+            <if test="pledgeNum != null">
+                pledge_num,
+            </if>
+            <if test="creditRate != null">
+                credit_rate,
+            </if>
+            <if test="auditType != null">
+                audit_type,
+            </if>
+            <if test="priority != null">
+                priority,
+            </if>
+            <if test="maxConnectNum != null">
+                max_connect_num,
+            </if>
+            <if test="useTime != null">
+                use_time,
+            </if>
+            <if test="invalidTime != null">
+                invalid_time,
+            </if>
+            <if test="isForcedSign != null">
+                is_forced_sign,
+            </if>
+            <if test="signContent != null">
+                sign_content,
+            </if>
+            <if test="signLocation != null">
+                sign_location,
+            </if>
+            <if test="isMustSign != null">
+                is_must_sign,
+            </if>
+            <if test="auditNum != null">
+                audit_num,
+            </if>
+            <if test="isUseBlacklist != null">
+                is_use_blacklist,
+            </if>
+            <if test="isUseWhitelist != null">
+                is_use_whitelist,
+            </if>
+            <if test="isUseSysRedlistWhitelist != null">
+                is_use_sys_redlist_whitelist,
+            </if>
+            <if test="isUseKeywordIncpt != null">
+                is_use_keyword_incpt,
+            </if>
+            <if test="longMsgPackType != null">
+                long_msg_pack_type,
+            </if>
+            <if test="isAutoReturn != null">
+                is_auto_return,
+            </if>
+            <if test="isIncptLongAccessCode != null">
+                is_incpt_long_access_code,
+            </if>
+            <if test="spDesc != null">
+                sp_desc,
+            </if>
+            <if test="minSaleCost != null">
+                min_sale_cost,
+            </if>
+            <if test="actualSalePrice != null">
+                actual_sale_price,
+            </if>
+            <if test="saleCommissionProp != null">
+                sale_commission_prop,
+            </if>
+            <if test="isUsePlatformHandle != null">
+                is_use_platform_handle,
+            </if>
+            <if test="platformHandleProp != null">
+                platform_handle_prop,
+            </if>
+            <if test="handleRepProp != null">
+                handle_rep_prop,
+            </if>
+            <if test="handleRepRealtimeProp != null">
+                handle_rep_realtime_prop,
+            </if>
+            <if test="handleRepReturnTime != null">
+                handle_rep_return_time,
+            </if>
+            <if test="platformHandleUnknowProp != null">
+                platform_handle_unknow_prop,
+            </if>
+            <if test="wrongNumSucPorp != null">
+                wrong_num_suc_porp,
+            </if>
+            <if test="wrongNumUnknowPorp != null">
+                wrong_num_unknow_porp,
+            </if>
+            <if test="wrongReportSucProp != null">
+                wrong_report_suc_prop,
+            </if>
+            <if test="isUseOvertimeChange != null">
+                is_use_overtime_change,
+            </if>
+            <if test="changeOvertimeProp != null">
+                change_overtime_prop,
+            </if>
+            <if test="changeOvertimeStartTime != null">
+                change_overtime_start_time,
+            </if>
+            <if test="changeOvertimeEndTime != null">
+                change_overtime_end_time,
+            </if>
+            <if test="isUseAuditKeyword != null">
+                is_use_audit_keyword,
+            </if>
+            <if test="userSendLimit != null">
+                user_send_limit,
+            </if>
+            <if test="isUseNumShunt != null">
+                is_use_num_shunt,
+            </if>
+            <if test="isUseBalanceNotice != null">
+                is_use_balance_notice,
+            </if>
+            <if test="balNoticeNum != null">
+                bal_notice_num,
+            </if>
+            <if test="balNoticeContent != null">
+                bal_notice_content,
+            </if>
+            <if test="balNoticeInterval != null">
+                bal_notice_interval,
+            </if>
+            <if test="balNoticeTime != null">
+                bal_notice_time,
+            </if>
+            <if test="isUseHttp != null">
+                is_use_http,
+            </if>
+            <if test="httpBindIp != null">
+                http_bind_ip,
+            </if>
+            <if test="isUsePush != null">
+                is_use_push,
+            </if>
+            <if test="httpReplyAddress != null">
+                http_reply_address,
+            </if>
+            <if test="httpReportAddress != null">
+                http_report_address,
+            </if>
+            <if test="httpReportReplyAddress != null">
+                http_report_reply_address,
+            </if>
+            <if test="operatorId != null">
+                operator_id,
+            </if>
+            <if test="isabled != null">
+                isabled,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tblGatewayOutConfigId != null">
+                #{tblGatewayOutConfigId,jdbcType=INTEGER},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="customerType != null">
+                #{customerType,jdbcType=INTEGER},
+            </if>
+            <if test="enterpriseCode != null">
+                #{enterpriseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="accessType != null">
+                #{accessType,jdbcType=INTEGER},
+            </if>
+            <if test="agreeType != null">
+                #{agreeType,jdbcType=INTEGER},
+            </if>
+            <if test="gatewayNode != null">
+                #{gatewayNode,jdbcType=VARCHAR},
+            </if>
+            <if test="enterpriseIp != null">
+                #{enterpriseIp,jdbcType=VARCHAR},
+            </if>
+            <if test="enterprisePort != null">
+                #{enterprisePort,jdbcType=INTEGER},
+            </if>
+            <if test="enterpriseAccount != null">
+                #{enterpriseAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="enterprisePwd != null">
+                #{enterprisePwd,jdbcType=VARCHAR},
+            </if>
+            <if test="gatewayAccessCode != null">
+                #{gatewayAccessCode,jdbcType=VARCHAR},
+            </if>
+            <if test="spAccessCode != null">
+                #{spAccessCode,jdbcType=VARCHAR},
+            </if>
+            <if test="msgAccessCode != null">
+                #{msgAccessCode,jdbcType=VARCHAR},
+            </if>
+            <if test="transAccessCode != null">
+                #{transAccessCode,jdbcType=VARCHAR},
+            </if>
+            <if test="binaryMsgLenLimit != null">
+                #{binaryMsgLenLimit,jdbcType=INTEGER},
+            </if>
+            <if test="spMsgLenLimit != null">
+                #{spMsgLenLimit,jdbcType=INTEGER},
+            </if>
+            <if test="fixedSignLocation != null">
+                #{fixedSignLocation,jdbcType=INTEGER},
+            </if>
+            <if test="longMsgExtraNum != null">
+                #{longMsgExtraNum,jdbcType=INTEGER},
+            </if>
+            <if test="isAscllSupported != null">
+                #{isAscllSupported,jdbcType=INTEGER},
+            </if>
+            <if test="ascllLenLimit != null">
+                #{ascllLenLimit,jdbcType=INTEGER},
+            </if>
+            <if test="ascllSignLen != null">
+                #{ascllSignLen,jdbcType=INTEGER},
+            </if>
+            <if test="ascllSign != null">
+                #{ascllSign,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceCode != null">
+                #{serviceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="isSendWithoutSign != null">
+                #{isSendWithoutSign,jdbcType=INTEGER},
+            </if>
+            <if test="contentWithoutSign != null">
+                #{contentWithoutSign,jdbcType=VARCHAR},
+            </if>
+            <if test="isNeedPrefix != null">
+                #{isNeedPrefix,jdbcType=INTEGER},
+            </if>
+            <if test="moPattern != null">
+                #{moPattern,jdbcType=INTEGER},
+            </if>
+            <if test="moGatewayId != null">
+                #{moGatewayId,jdbcType=INTEGER},
+            </if>
+            <if test="reportMsgType != null">
+                #{reportMsgType,jdbcType=INTEGER},
+            </if>
+            <if test="sendFlowThreshold != null">
+                #{sendFlowThreshold,jdbcType=INTEGER},
+            </if>
+            <if test="replyFlowThreshold != null">
+                #{replyFlowThreshold,jdbcType=INTEGER},
+            </if>
+            <if test="isUsed != null">
+                #{isUsed,jdbcType=INTEGER},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="deposit != null">
+                #{deposit,jdbcType=DECIMAL},
+            </if>
+            <if test="rate != null">
+                #{rate,jdbcType=DECIMAL},
+            </if>
+            <if test="rechargeNumLimit != null">
+                #{rechargeNumLimit,jdbcType=INTEGER},
+            </if>
+            <if test="isOnlineRechargeUsed != null">
+                #{isOnlineRechargeUsed,jdbcType=INTEGER},
+            </if>
+            <if test="remainderMsgNum != null">
+                #{remainderMsgNum,jdbcType=INTEGER},
+            </if>
+            <if test="pledgeNum != null">
+                #{pledgeNum,jdbcType=INTEGER},
+            </if>
+            <if test="creditRate != null">
+                #{creditRate,jdbcType=DECIMAL},
+            </if>
+            <if test="auditType != null">
+                #{auditType,jdbcType=INTEGER},
+            </if>
+            <if test="priority != null">
+                #{priority,jdbcType=INTEGER},
+            </if>
+            <if test="maxConnectNum != null">
+                #{maxConnectNum,jdbcType=INTEGER},
+            </if>
+            <if test="useTime != null">
+                #{useTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="invalidTime != null">
+                #{invalidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isForcedSign != null">
+                #{isForcedSign,jdbcType=INTEGER},
+            </if>
+            <if test="signContent != null">
+                #{signContent,jdbcType=VARCHAR},
+            </if>
+            <if test="signLocation != null">
+                #{signLocation,jdbcType=INTEGER},
+            </if>
+            <if test="isMustSign != null">
+                #{isMustSign,jdbcType=INTEGER},
+            </if>
+            <if test="auditNum != null">
+                #{auditNum,jdbcType=INTEGER},
+            </if>
+            <if test="isUseBlacklist != null">
+                #{isUseBlacklist,jdbcType=INTEGER},
+            </if>
+            <if test="isUseWhitelist != null">
+                #{isUseWhitelist,jdbcType=INTEGER},
+            </if>
+            <if test="isUseSysRedlistWhitelist != null">
+                #{isUseSysRedlistWhitelist,jdbcType=INTEGER},
+            </if>
+            <if test="isUseKeywordIncpt != null">
+                #{isUseKeywordIncpt,jdbcType=INTEGER},
+            </if>
+            <if test="longMsgPackType != null">
+                #{longMsgPackType,jdbcType=INTEGER},
+            </if>
+            <if test="isAutoReturn != null">
+                #{isAutoReturn,jdbcType=INTEGER},
+            </if>
+            <if test="isIncptLongAccessCode != null">
+                #{isIncptLongAccessCode,jdbcType=INTEGER},
+            </if>
+            <if test="spDesc != null">
+                #{spDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="minSaleCost != null">
+                #{minSaleCost,jdbcType=DECIMAL},
+            </if>
+            <if test="actualSalePrice != null">
+                #{actualSalePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="saleCommissionProp != null">
+                #{saleCommissionProp,jdbcType=DECIMAL},
+            </if>
+            <if test="isUsePlatformHandle != null">
+                #{isUsePlatformHandle,jdbcType=INTEGER},
+            </if>
+            <if test="platformHandleProp != null">
+                #{platformHandleProp,jdbcType=DECIMAL},
+            </if>
+            <if test="handleRepProp != null">
+                #{handleRepProp,jdbcType=DECIMAL},
+            </if>
+            <if test="handleRepRealtimeProp != null">
+                #{handleRepRealtimeProp,jdbcType=DECIMAL},
+            </if>
+            <if test="handleRepReturnTime != null">
+                #{handleRepReturnTime,jdbcType=INTEGER},
+            </if>
+            <if test="platformHandleUnknowProp != null">
+                #{platformHandleUnknowProp,jdbcType=DECIMAL},
+            </if>
+            <if test="wrongNumSucPorp != null">
+                #{wrongNumSucPorp,jdbcType=DECIMAL},
+            </if>
+            <if test="wrongNumUnknowPorp != null">
+                #{wrongNumUnknowPorp,jdbcType=DECIMAL},
+            </if>
+            <if test="wrongReportSucProp != null">
+                #{wrongReportSucProp,jdbcType=DECIMAL},
+            </if>
+            <if test="isUseOvertimeChange != null">
+                #{isUseOvertimeChange,jdbcType=INTEGER},
+            </if>
+            <if test="changeOvertimeProp != null">
+                #{changeOvertimeProp,jdbcType=DECIMAL},
+            </if>
+            <if test="changeOvertimeStartTime != null">
+                #{changeOvertimeStartTime,jdbcType=INTEGER},
+            </if>
+            <if test="changeOvertimeEndTime != null">
+                #{changeOvertimeEndTime,jdbcType=INTEGER},
+            </if>
+            <if test="isUseAuditKeyword != null">
+                #{isUseAuditKeyword,jdbcType=INTEGER},
+            </if>
+            <if test="userSendLimit != null">
+                #{userSendLimit,jdbcType=INTEGER},
+            </if>
+            <if test="isUseNumShunt != null">
+                #{isUseNumShunt,jdbcType=INTEGER},
+            </if>
+            <if test="isUseBalanceNotice != null">
+                #{isUseBalanceNotice,jdbcType=INTEGER},
+            </if>
+            <if test="balNoticeNum != null">
+                #{balNoticeNum,jdbcType=INTEGER},
+            </if>
+            <if test="balNoticeContent != null">
+                #{balNoticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="balNoticeInterval != null">
+                #{balNoticeInterval,jdbcType=INTEGER},
+            </if>
+            <if test="balNoticeTime != null">
+                #{balNoticeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isUseHttp != null">
+                #{isUseHttp,jdbcType=INTEGER},
+            </if>
+            <if test="httpBindIp != null">
+                #{httpBindIp,jdbcType=VARCHAR},
+            </if>
+            <if test="isUsePush != null">
+                #{isUsePush,jdbcType=INTEGER},
+            </if>
+            <if test="httpReplyAddress != null">
+                #{httpReplyAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="httpReportAddress != null">
+                #{httpReportAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="httpReportReplyAddress != null">
+                #{httpReportReplyAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorId != null">
+                #{operatorId,jdbcType=INTEGER},
+            </if>
+            <if test="isabled != null">
+                #{isabled,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.operator.pojo.out.Customer">
+    <resultMap id="BaseResultMap" type="com.xunyu.operator.pojo.out.Customer">
+        <!--
+          WARNING - @mbg.generated  This element was generated on Tue Jun 12 16:23:59 CST 2018. by MyBatis Generator, do not modify.
+        -->
+        <id column="customer_id" jdbcType="INTEGER" property="customerId" />
+        <result column="customer_group_id" jdbcType="INTEGER" property="customerGroupId" />
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+        <result column="customer_account" jdbcType="VARCHAR" property="customerAccount" />
+        <result column="customer_psw" jdbcType="VARCHAR" property="customerPsw" />
+        <result column="enter_contact" jdbcType="VARCHAR" property="enterContact" />
+        <result column="mophone" jdbcType="VARCHAR" property="mophone" />
+        <result column="qq" jdbcType="VARCHAR" property="qq" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="business" jdbcType="VARCHAR" property="business" />
+        <result column="finance" jdbcType="VARCHAR" property="finance" />
+        <result column="customer_service" jdbcType="VARCHAR" property="customerService" />
+        <result column="manager" jdbcType="VARCHAR" property="manager" />
+        <result column="price" jdbcType="DOUBLE" property="price" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="contract_num" jdbcType="VARCHAR" property="contractNum" />
+        <result column="deposit" jdbcType="DOUBLE" property="deposit" />
+        <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+        <result column="isabled" jdbcType="TINYINT" property="isabled" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="origin_path" jdbcType="VARCHAR" property="originPath" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--
+          WARNING - @mbg.generated  This element was generated on Tue Jun 12 16:23:59 CST 2018. by MyBatis Generator, do not modify.
+        -->
+        customer_id, customer_group_id, customer_name, address, telphone, customer_account,
+        customer_psw, enter_contact, mophone, qq, email, business, finance, customer_service,
+        manager, price, remark, contract_num, deposit, file_path, isabled, create_time, origin_path
+    </sql>
+
+    <select id="selectCustomerList" resultMap="BaseResultMap">
+        select customer_id,customer_name from tbl_customer
+        where isabled = 1
+    </select>
+
+</mapper>
