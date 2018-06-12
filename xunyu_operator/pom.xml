@@ -35,7 +35,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.xunyu.crm.XunyuCrmApplication</mainClass>
+                    <mainClass>com.xunyu.operator.OperApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

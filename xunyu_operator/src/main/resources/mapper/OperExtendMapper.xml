@@ -8,7 +8,7 @@
         insert into tbl_gateway_extend
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="extendId != null">extend_id,</if>
-            <if test="configId != null">config_id,</if>
+            <if test="configId != null">ex_config_id,</if>
             <if test='chargUser != null'>charg_user,</if>
             <if test='chargType != null'>charg_type,</if>
             <if test='localPort != null and localPort !=""'>local_port,</if>
@@ -19,7 +19,7 @@
             <if test='lenMsgCode != null'>len_msg_code,</if>
             <if test='maxLength != null'>max_length,</if>
             <if test='isDef != null'>is_def,</if>
-            <if test='pushLoginUser != null and pushLoginUser != ""'>push_login_user,</if>
+
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -35,7 +35,7 @@
             <if test='lenMsgCode != null'>#{lenMsgCode},</if>
             <if test='maxLength != null'>#{maxLength},</if>
             <if test='isDef != null'>#{isDef},</if>
-            <if test='pushLoginUser != null and pushLoginUser != ""'>#{pushLoginUser},</if>
+
         </trim>
     </insert>
 
@@ -43,7 +43,7 @@
         update tbl_gateway_extend
         <set>
             <if test='configId != null'>
-                <![CDATA[	config_id = #{configId}, ]]>
+                <![CDATA[	ex_config_id = #{configId}, ]]>
             </if>
             <if test='chargUser != null'>
                 <![CDATA[	charg_user = #{chargUser}, ]]>
@@ -75,9 +75,7 @@
             <if test='isDef != null'>
                 <![CDATA[	is_def = #{isDef}, ]]>
             </if>
-            <if test='pushLoginUser != null and pushLoginUser != ""'>
-                <![CDATA[	push_login_user = #{pushLoginUser}, ]]>
-            </if>
+
         </set>
         <where>
             <if test = 'extendId != null'>

@@ -8,7 +8,7 @@
         insert into tbl_gateway_mark
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="markId != null">mark_id,</if>
-            <if test="configId != null">config_id,</if>
+            <if test="configId != null">m_config_id,</if>
             <if test='gatewayText != null'>gateway_text,</if>
             <if test='purchasePrice != null'>purchase_price,</if>
             <if test='salesCost != null'>sales_cost,</if>
@@ -29,7 +29,7 @@
         update tbl_gateway_mark
         <set>
             <if test='configId != null'>
-                <![CDATA[	config_id = #{configId}, ]]>
+                <![CDATA[	m_config_id = #{configId}, ]]>
             </if>
             <if test='gatewayText != null and gatewayText != ""'>
                 <![CDATA[	gateway_text = #{gatewayText}, ]]>

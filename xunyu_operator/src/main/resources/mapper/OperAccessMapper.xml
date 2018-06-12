@@ -4,7 +4,7 @@
 
     <resultMap id="oper_ResultMap" type="com.xunyu.operator.pojo.access.OperAccessCoreConfig">
         <id column="config_id" property="configId"></id>
-        <result column="operator_id" property="operatorId"></result>
+        <result column="operator_name" property="operatorName"></result>
         <result column="channel_code" property="channelCode"></result>
         <result column="channel_name" property="channelName"></result>
         <result column="agree_type" property="agreeType"></result>
@@ -25,7 +25,7 @@
     </resultMap>
     <resultMap id="oper_Zuhe_ResultMap" type="com.xunyu.operator.pojo.access.OperAccessCoreConfig">
         <id column="config_id" property="configId"></id>
-        <result column="operator_id" property="operatorId"></result>
+        <result column="operator_name" property="operatorName"></result>
         <result column="channel_code" property="channelCode"></result>
         <result column="channel_name" property="channelName"></result>
         <result column="agree_type" property="agreeType"></result>
@@ -43,7 +43,7 @@
         <result column="whether_extend" property="whetherExtend"></result>
         <result column="isable" property="isable"></result>
         <result column="create_time" property="createTime"></result>
-        <association property="operExtendConfig" column="config_id" javaType="com.xunyu.operator.pojo.access.OperExtendConfig">
+        <association property="operExtendConfig" column="ex_config_id" javaType="com.xunyu.operator.pojo.access.OperExtendConfig">
             <id column="extend_id" property="extendId"></id>
             <result column="charg_user" property="chargUser"></result>
             <result column="charg_type" property="chargType"></result>
@@ -57,7 +57,14 @@
             <result column="is_def" property="isDef"></result>
             <result column="push_login_user" property="pushLoginUser"></result>
         </association>
-        <association property="operMarkConfig" column="config_id" javaType="com.xunyu.operator.pojo.access.OperMarkConfig">
+        <association property="operAttributeConfig" column="a_config_id" javaType="com.xunyu.operator.pojo.access.OperMarkConfig">
+            <id column="mark_id" property="markId"></id>
+            <result column="gateway_text" property="gatewayText"></result>
+            <result column="purchase_price" property="purchasePrice"></result>
+            <result column="sales_cost" property="salesCost"></result>
+            <result column="gateway_number" property="gatewayNumber"></result>
+        </association>
+        <association property="operMarkConfig" column="m_config_id" javaType="com.xunyu.operator.pojo.access.OperMarkConfig">
             <id column="mark_id" property="markId"></id>
             <result column="gateway_text" property="gatewayText"></result>
             <result column="purchase_price" property="purchasePrice"></result>
@@ -67,7 +74,7 @@
     </resultMap>
 
     <sql id = "oper_access_cloumn">
-        config_id,operator_id,channel_code,channel_name,agree_type,children_agree_type
+        config_id,operator_name,channel_code,channel_name,agree_type,children_agree_type
         ,service_ip,service_port,enterprise_code,enter_account,enter_pwd,node_code
         ,access_code,service_code,ordinary_msg_num,extend_num,whether_extend,isable,create_time
     </sql>
@@ -115,6 +122,9 @@
                 <![CDATA[  ac.isable != 3 ]]>
             </otherwise>
         </choose>
+        <if test = 'agreeType != null'>
+            and ac.agree_type = #{agreeType}
+        </if>
         <if test="configId != null">
            and ac.config_id = #{configId}
         </if>
@@ -131,7 +141,7 @@
             and ac.access_code = #{accessCode}
         </if>
         <if test = 'gatewayNumber != null and gatewayNumber !=""'>
-             and m.gateway_number like  concat("%", #{gatewayNumber},"%")
+             and m.gateway_number like  concat("%",concat(#{gatewayNumber},"%"))
         </if>
     </sql>
 
@@ -141,7 +151,7 @@
         insert into tbl_gateway_access_config
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="configId != null">config_id,</if>
-            <if test="operatorId != null">operator_id,</if>
+            <if test="operatorName != null">operator_name,</if>
             <if test='channelCode != null and channelCode != ""'>channel_code,</if>
             <if test='channelName != null and channelName != ""'>channel_name,</if>
             <if test="agreeType != null">agree_type,</if>
@@ -163,7 +173,7 @@
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="configId != null">#{configId},</if>
-            <if test="operatorId != null">#{operatorId},</if>
+            <if test="operatorName != null">#{operatorName},</if>
             <if test='channelCode != null and channelCode != ""'>#{channelCode},</if>
             <if test='channelName != null and channelName != ""'>#{channelName},</if>
             <if test="agreeType != null">#{agreeType},</if>
@@ -187,8 +197,8 @@
     <update id="updateOperAccess" parameterType="com.xunyu.operator.pojo.access.OperAccessCoreConfig">
         update tbl_gateway_access_config
         <set>
-            <if test='operatorId != null'>
-                <![CDATA[	operator_id = #{operatorId}, ]]>
+            <if test='operatorName != null'>
+                <![CDATA[	operator_name = #{operatorName}, ]]>
             </if>
             <if test='channelCode != null and channelCode != ""'>
                 <![CDATA[	channel_code = #{channelCode}, ]]>
@@ -247,5 +257,16 @@
                 config_id = #{configId}
             </if>
         </where>
+    </update>
+
+    <update id = "delOperAccessCoreConfig" parameterType="map">
+        update tbl_gateway_access_config set
+        isable = #{isabled}
+        where
+        config_id
+        in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </update>
 </mapper>

@@ -12,11 +12,11 @@ import java.util.Date;
 public class OperAccessCoreConfig extends UserModel {
 
     private Long configId;//主键
-    private Long operatorId;//运营商配置id
+    private String operatorName;//运营商配置名称
     private String channelCode;//自定义通道编码
     private String channelName;//自定义通道名称
     private int agreeType;//协议类型  1、移动、2联通、3电信
-    private String childrenAgreeType;//自协议类型
+    private String childrenAgreeType;//子协议类型
     private String serviceIp;//服务端ip
     private String servicePort;//服务端端口
     private String enterpriseCode;//企业代码
@@ -30,8 +30,26 @@ public class OperAccessCoreConfig extends UserModel {
     private int whetherExtend;//是否启用签名扩展
     private Integer isable;//1启用 2停用 3作废
     private Date createTime;//创建时间
-    private OperExtendConfig operExtendConfig;//网关扩展属性配置
+    private Integer spAccessNum;//sp接入个数，通过网关名称查询对应接出表的记录数
+    private OperExtendConfig operExtendConfig;//网关扩展配置
+    private OperAttributeConfig operAttributeConfig;//属性配置
     private OperMarkConfig operMarkConfig;//网关备注信息
+
+    public OperAttributeConfig getOperAttributeConfig() {
+        return operAttributeConfig;
+    }
+
+    public void setOperAttributeConfig(OperAttributeConfig operAttributeConfig) {
+        this.operAttributeConfig = operAttributeConfig;
+    }
+
+    public Integer getSpAccessNum() {
+        return spAccessNum;
+    }
+
+    public void setSpAccessNum(Integer spAccessNum) {
+        this.spAccessNum = spAccessNum;
+    }
 
     public OperExtendConfig getOperExtendConfig() {
         return operExtendConfig;
@@ -57,12 +75,12 @@ public class OperAccessCoreConfig extends UserModel {
         this.configId = configId;
     }
 
-    public Long getOperatorId() {
-        return operatorId;
+    public String getOperatorName() {
+        return operatorName;
     }
 
-    public void setOperatorId(Long operatorId) {
-        this.operatorId = operatorId;
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName;
     }
 
     public String getChannelCode() {

@@ -33,6 +33,7 @@ public interface OperAccessService {
     List<OperAccessCoreConfig> listOperAccessCoreConfig(Map<String,Object> map);
 
     /**
-     *
+     *修改状态
      */
+    int delOperAccessCoreConfig(String ids,int isabled);
 }

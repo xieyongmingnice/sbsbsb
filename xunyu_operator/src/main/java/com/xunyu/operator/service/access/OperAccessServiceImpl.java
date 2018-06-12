@@ -1,5 +1,6 @@
 package com.xunyu.operator.service.access;
 
+import com.commons.core.util.JavaBeanMap;
 import com.xunyu.operator.dao.access.OperAccessDaoImpl;
 import com.xunyu.operator.pojo.access.OperAccessCoreConfig;
 import com.xunyu.operator.pojo.access.OperExtendConfig;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -100,5 +102,19 @@ public class OperAccessServiceImpl implements OperAccessService {
     @Override
     public List<OperAccessCoreConfig> listOperAccessCoreConfig(Map<String, Object> map) {
         return operAccessDao.listOperAccessCoreConfig(map);
+    }
+
+    @Override
+    public int delOperAccessCoreConfig(String ids,int isabled) {
+
+        int n = 0;
+        Map<String,Object> map = new HashMap<String,Object>();
+        List<String> list =  JavaBeanMap.getListByIds(ids);
+        if(list != null && list.size() > 0){
+            map.put("isabled",isabled);
+            map.put("list",list);
+            n = operAccessDao.delOperAccessCoreConfig(map);
+        }
+        return n;
     }
 }

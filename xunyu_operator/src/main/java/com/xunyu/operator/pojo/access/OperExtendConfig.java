@@ -30,7 +30,6 @@ public class OperExtendConfig{
     private int lenMsgCode;//长短信额外编码 1、8-UCS2； 2、15-GBK; 3、25-UCS2B25
     private int maxLength;//下发最大号长度
     private int isDef;//号码是否需要86
-    private String pushLoginUser;//推送登录用户名
 
     public Long getExtendId() {
         return extendId;
@@ -128,11 +127,4 @@ public class OperExtendConfig{
         this.isDef = isDef;
     }
 
-    public String getPushLoginUser() {
-        return pushLoginUser;
-    }
-
-    public void setPushLoginUser(String pushLoginUser) {
-        this.pushLoginUser = pushLoginUser;
-    }
 }

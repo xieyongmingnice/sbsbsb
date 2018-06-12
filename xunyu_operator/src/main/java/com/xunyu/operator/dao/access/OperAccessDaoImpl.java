@@ -2,6 +2,7 @@ package com.xunyu.operator.dao.access;
 
 import com.commons.core.dao.impl.BaseDao;
 import com.xunyu.operator.pojo.access.OperAccessCoreConfig;
+import com.xunyu.operator.pojo.access.OperAttributeConfig;
 import com.xunyu.operator.pojo.access.OperExtendConfig;
 import com.xunyu.operator.pojo.access.OperMarkConfig;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -28,6 +29,10 @@ public class OperAccessDaoImpl extends BaseDao<OperAccessCoreConfig,Long> {
 
         return super.insert("com.xunyu.operator.pojo.access.OperExtendConfig.saveOperExtend",oec);
     }
+    public int saveAttribute(OperAttributeConfig oac){
+
+        return super.insert("com.xunyu.operator.pojo.access.OperAttributeConfig.saveAttribute",oac);
+    }
     public int saveOperMark(OperMarkConfig omc){
 
         return super.insert("com.xunyu.operator.pojo.access.OperMarkConfig.saveOperMark",omc);
@@ -43,6 +48,10 @@ public class OperAccessDaoImpl extends BaseDao<OperAccessCoreConfig,Long> {
     public int updateOperExtend(OperExtendConfig oec){
 
         return super.update("com.xunyu.operator.pojo.access.OperExtendConfig.updateOperExtend",oec);
+    }
+    public int updateAttribute(OperAttributeConfig oac){
+
+        return super.update("com.xunyu.operator.pojo.access.OperAttributeConfig.updateAttribute",oac);
     }
     public int updateOperMark(OperMarkConfig omc){
 
@@ -67,6 +76,14 @@ public class OperAccessDaoImpl extends BaseDao<OperAccessCoreConfig,Long> {
     public  List<OperAccessCoreConfig> listOperAccessCoreConfig(Map<String,Object> map){
 
         return super.selectForListObject("com.xunyu.operator.pojo.access.OperAccessCoreConfig.listOperAccessCoreConfig",map);
+    }
+
+    /**
+     *修改状态
+     */
+    public int delOperAccessCoreConfig(Map<String,Object> map){
+
+        return super.update("com.xunyu.operator.pojo.access.OperAccessCoreConfig.delOperAccessCoreConfig",map);
     }
 
     public OperAccessDaoImpl(SqlSessionFactory sqlSessionFactory) {

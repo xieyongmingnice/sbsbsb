@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.operator.pojo.access.OperAttributeConfig">
+
+    <insert id = "saveAttribute" parameterType="com.xunyu.operator.pojo.access.OperAttributeConfig"
+            useGeneratedKeys="true" keyColumn="attr_id" keyProperty="attrId">
+
+        insert into tbl_gateway_attribute
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="attrId != null">attr_id,</if>
+            <if test="aConfigId != null">a_config_id,</if>
+            <if test="attrPriority != null">attr_priority,</if>
+            <if test='attrLimit != null'>attr_limit,</if>
+            <if test='attrThreshold != null'>attr_threshold,</if>
+            <if test='msgNumber != null'>msg_number,</if>
+            <if test='channelState != null'>channel_state,</if>
+            <if test='maxConn != null'>max_conn,</if>
+            <if test='witeRes != null'>wite_res,</if>
+            <if test='witeTime != null'>wite_time,</if>
+            <if test='pushLoginUser != null and pushLoginUser!=""'>push_login_user,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="attrId != null">#{attrId},</if>
+            <if test="aConfigId != null">#{aConfigId},</if>
+            <if test="attrPriority != null">#{attrPriority},</if>
+            <if test='attrLimit != null'>#{attrLimit},</if>
+            <if test='attrThreshold != null'>#{attrThreshold},</if>
+            <if test='msgNumber != null'>#{msgNumber},</if>
+            <if test='channelState != null'>#{channelState},</if>
+            <if test='maxConn != null'>#{maxConn},</if>
+            <if test='witeRes != null'>#{witeRes},</if>
+            <if test='witeTime != null'>#{witeTime},</if>
+            <if test='pushLoginUser != null and pushLoginUser!=""'>#{pushLoginUser},</if>
+
+        </trim>
+    </insert>
+
+    <update id="updateAttribute" parameterType="com.xunyu.operator.pojo.access.OperAttributeConfig">
+        update tbl_gateway_attribute
+        <set>
+            <if test = 'aConfigId != null'>
+                <![CDATA[	a_config_id = #{aConfigId}, ]]>
+            </if>
+            <if test='attrPriority != null'>
+                <![CDATA[	attr_priority = #{attrPriority}, ]]>
+            </if>
+            <if test='attrLimit != null'>
+                <![CDATA[	attr_limit = #{attrLimit}, ]]>
+            </if>
+            <if test='attrThreshold != null'>
+                <![CDATA[	attr_threshold = #{attrThreshold}, ]]>
+            </if>
+            <if test='msgNumber != null'>
+                <![CDATA[	msg_number = #{msgNumber}, ]]>
+            </if>
+            <if test='channelState != null'>
+                <![CDATA[	channel_state = #{channelState}, ]]>
+            </if>
+            <if test='maxConn != null'>
+                <![CDATA[	max_conn = #{maxConn}, ]]>
+            </if>
+            <if test='witeRes != null'>
+                <![CDATA[	wite_res = #{witeRes}, ]]>
+            </if>
+            <if test='witeTime != null'>
+                <![CDATA[	wite_time = #{witeTime}, ]]>
+            </if>
+            <if test='pushLoginUser != null and pushLoginUser !=""'>
+                <![CDATA[	push_login_user = #{pushLoginUser}, ]]>
+            </if>
+
+        </set>
+        <where>
+            <if test = 'attrId != null'>
+                extend_id = #{attrId}
+            </if>
+        </where>
+    </update>
+</mapper>

@@ -2,6 +2,7 @@ package com.xunyu.operator.controller;
 
 import com.commons.core.exception.ExceptionCatch;
 import com.commons.core.message.Result;
+import com.commons.core.util.StringUtils2;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.operator.access.OperAccessModel;
 import com.xunyu.model.user.User;
@@ -11,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
@@ -80,11 +80,9 @@ public class OperAccessController {
         }
         try{
             if(ct.getConfigId() != null){
-                n = operAccessService.updateOperAccess(ct);
-                if(n > 0) {
-                    res.setCode("200");
-                    res.setMessage("success");
-                }
+                operAccessService.updateOperAccess(ct);
+                res.setCode("200");
+                res.setMessage("success");
             }else{
                 res.setCode("413");
                 res.setMessage("configId 不能为空");
@@ -151,6 +149,7 @@ public class OperAccessController {
             map.put("accessCode",ct.getAccessCode());
             map.put("isable",ct.getIsable());
             map.put("gatewayNumber",ct.getGatewayNumber());
+            map.put("agreeType",ct.getAgreeType());
             total = operAccessService.countOperAccessCoreConfig(map);
             List<OperAccessCoreConfig> list = null;
             if(total > 0){
@@ -170,4 +169,29 @@ public class OperAccessController {
         return res;
     }
 
+    /**
+     * 修改状态
+     */
+    @RequestMapping(value = "delOperAccess",method = RequestMethod.POST)
+    public Result<OperAccessCoreConfig> delOperAccessData(HttpServletRequest request, OperAccessModel ct) {
+        //验证session是否失效
+        Result<OperAccessCoreConfig> res = new Result<OperAccessCoreConfig>();
+        User us = redisUtil.getCurrUser(ct.getSessionId());
+        //SysLogsUtil su = SysLogsUtil.getInstance();
+        if (us == null) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        try{
+            if(StringUtils2.isNotEmpty(ct.getConfigIds()) && ct.getIsable() != null){
+                operAccessService.delOperAccessCoreConfig(ct.getConfigIds(),ct.getIsable());
+                res.setCode("200");
+                res.setMessage("success");
+            }
+        }catch (Exception e){
+            ExceptionCatch.exceptionCatch(res,log,e);
+        }
+        return res;
+    }
 }
