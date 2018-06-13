@@ -29,7 +29,8 @@ public class KafkaProducerZhe {
         }
         AdminClient adminClient = AdminClient.create(properties);
         //创建主题并指定分区
-        if(AdminClientLocal.describeTopics(adminClient,topic)) {//判断主题是否已经存在
+        boolean flag = AdminClientLocal.describeTopics(adminClient,topic);
+        if(!flag) {//判断主题是否已经存在
             AdminClientLocal.createTopics(adminClient, topic, numPartitions, factor);
         }
         ExecutorService ex = Executors.newFixedThreadPool(GetProperties.THREAD_NUM);
@@ -42,7 +43,7 @@ public class KafkaProducerZhe {
                         new ProducerRecord<String, byte[]>(topic, key + i, msgValue);
                 ex.submit(new ProductThread(producer, record, topic, msgValue));
                 if(i % 2 == 0) {
-                    Thread.sleep(3000L); //睡眠3秒钟
+                    Thread.sleep(2000L); //睡眠2秒钟
                 }
 
             }
@@ -107,7 +108,7 @@ public class KafkaProducerZhe {
         GetProperties.getInstance();
         KafkaProducerZhe kk = new KafkaProducerZhe();
         try {
-          kk.sendMessage("http_ding7","http_ding11",new byte[5],6,1);
+          kk.sendMessage("ding13","http_ding",new byte[5],2,2);
         }catch (Exception e){
             e.printStackTrace();
         }

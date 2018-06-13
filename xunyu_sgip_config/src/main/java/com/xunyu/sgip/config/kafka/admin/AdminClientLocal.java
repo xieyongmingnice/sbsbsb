@@ -14,25 +14,6 @@ import java.util.concurrent.ExecutionException;
 public class AdminClientLocal {
     private static Logger log = LoggerFactory.getLogger(AdminClientLocal.class);
 
-   /* public static void main(String[] args) throws Exception {
-        GetProperties.getInstance();
-        Properties props = new Properties();
-        props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, GetProperties.bootstrapServers);
-        try  {
-            AdminClient client = AdminClient.create(props);
-            *//*describeCluster(client);
-            createTopics(client);
-            listAllTopics(client);
-
-            alterConfigs(client);
-            describeConfig(client);
-            deleteTopics(client);*//*
-            System.out.println(describeTopics(client,"http_ding88"));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }*/
-
     /**
      * 查询 kafka 集群节点信息
      * @param client
