@@ -45,8 +45,8 @@
             </if>
         </set>
         <where>
-            <if test = 'markId != null'>
-                mark_id = #{markId}
+            <if test='configId != null'>
+                <![CDATA[	m_config_id = #{configId} ]]>
             </if>
         </where>
     </update>

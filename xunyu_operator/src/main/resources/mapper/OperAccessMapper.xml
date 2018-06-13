@@ -55,14 +55,19 @@
             <result column="len_msg_code" property="lenMsgCode"></result>
             <result column="max_length" property="maxLength"></result>
             <result column="is_def" property="isDef"></result>
-            <result column="push_login_user" property="pushLoginUser"></result>
         </association>
-        <association property="operAttributeConfig" column="a_config_id" javaType="com.xunyu.operator.pojo.access.OperMarkConfig">
-            <id column="mark_id" property="markId"></id>
-            <result column="gateway_text" property="gatewayText"></result>
-            <result column="purchase_price" property="purchasePrice"></result>
-            <result column="sales_cost" property="salesCost"></result>
-            <result column="gateway_number" property="gatewayNumber"></result>
+        <association property="operAttributeConfig" column="a_config_id" javaType="com.xunyu.operator.pojo.access.OperAttributeConfig">
+            <id column="attr_id" property="attrId"></id>
+            <result column="a_config_id" property="aConfigId"></result>
+            <result column="attr_priority" property="attrPriority"></result>
+            <result column="attr_limit" property="attrLimit"></result>
+            <result column="attr_threshold" property="attrThreshold"></result>
+            <result column="msg_number" property="msgNumber"></result>
+            <result column="channel_state" property="channelState"></result>
+            <result column="max_conn" property="maxConn"></result>
+            <result column="wite_res" property="witeRes"></result>
+            <result column="wite_time" property="witeTime"></result>
+            <result column="push_login_user" property="pushLoginUser"></result>
         </association>
         <association property="operMarkConfig" column="m_config_id" javaType="com.xunyu.operator.pojo.access.OperMarkConfig">
             <id column="mark_id" property="markId"></id>
@@ -80,19 +85,25 @@
     </sql>
     <sql id = "extend_access_cloumn">
         extend_id,charg_user,charg_type,local_port,code_format,unsigna_format
-        ,ascll_support,ascll_length,len_msg_code,max_length,is_def,push_login_user
+        ,ascll_support,ascll_length,len_msg_code,max_length,is_def
     </sql>
     <sql id = "mark_access_cloumn">
         mark_id,gateway_text,purchase_price,sales_cost,gateway_number
+    </sql>
+    <sql id = "attr_access_cloumn">
+        attr_id,attr_priority,attr_limit,attr_threshold,msg_number,channel_state
+        ,max_conn,wite_res,wite_time,push_login_user
     </sql>
 
     <select id = "getOperAccessCoreConfig" parameterType="map" resultMap="oper_Zuhe_ResultMap">
         select
         <include refid = "oper_access_cloumn" />,
         <include refid = "extend_access_cloumn" />,
-        <include refid = "mark_access_cloumn" />
+        <include refid = "mark_access_cloumn" />,
+        <include refid = "attr_access_cloumn" />
         from tbl_gateway_access_config ac
         left join tbl_gateway_extend e on ac.config_id = e.ex_config_id
+        left join tbl_gateway_attribute a on ac.config_id = a.a_config_id
         left join tbl_gateway_mark m on ac.config_id = m.m_config_id
         where ac.config_id = #{configId}
     </select>

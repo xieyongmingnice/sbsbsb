@@ -1,0 +1,58 @@
+package com.xunyu.crm.service.department.impl;
+
+import com.xunyu.crm.dao.department.UserGroupDaoImpl;
+import com.xunyu.crm.pojo.department.UserGroup;
+import com.xunyu.crm.service.department.UserGroupService;
+import com.xunyu.crm.vo.UserGroupVO;
+import com.xunyu.model.department.UserGroupModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
+ * @author xym
+ * @description 员工分组service实现
+ * @date 2018/4/25 15:16
+ */
+@Service
+public class UserGroupServiceImpl implements UserGroupService {
+
+    @Autowired
+    UserGroupDaoImpl userGroupDao;
+
+    @Override
+    public int addUserGroup(UserGroupModel model) {
+        return userGroupDao.addUserGroup(model);
+    }
+
+    @Override
+    public int updateUserGroupInfo(UserGroupModel model) {
+        return userGroupDao.updateUserGroupInfo(model);
+    }
+
+    @Override
+    public int deleteUserGroup(UserGroupModel model) {
+        return userGroupDao.deleteUserGroup(model);
+    }
+
+    @Override
+    public List<UserGroupVO> selectUserGroupList(UserGroupModel model) {
+        return userGroupDao.selectUserGroupList(model);
+    }
+
+    @Override
+    public int batchDeleteUserGroup(List<Long> idList) {
+        return userGroupDao.batchDeleteUserGroup(idList);
+    }
+
+    @Override
+    public Integer selectTotalRows(UserGroupModel model) {
+        return userGroupDao.selectTotalRows(model);
+    }
+
+    @Override
+    public UserGroup selectByPrimaryKey(Long id) {
+        return userGroupDao.selectByPrimaryKey(id);
+    }
+}

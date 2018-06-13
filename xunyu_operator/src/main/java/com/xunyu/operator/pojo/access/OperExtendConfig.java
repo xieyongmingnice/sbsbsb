@@ -29,7 +29,7 @@ public class OperExtendConfig{
     private int ascllLength;//ASCII长度限制
     private int lenMsgCode;//长短信额外编码 1、8-UCS2； 2、15-GBK; 3、25-UCS2B25
     private int maxLength;//下发最大号长度
-    private int isDef;//号码是否需要86
+    private int isDef;//号码是否需要86 1需要 2不需要
 
     public Long getExtendId() {
         return extendId;

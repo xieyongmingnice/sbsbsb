@@ -36,7 +36,9 @@ public class CustomerInvoServiceImpl implements  CustomerInvoiceService {
         Map<String,Object> map = new HashMap<String,Object>();
         List<String> list =  JavaBeanMap.getListByIds(ids);
         if(list != null && list.size() > 0){
-           n = customerInvoiceDao.delCustomerInvoice(map);
+            map.put("isabled",0);
+            map.put("list",list);
+            n = customerInvoiceDao.delCustomerInvoice(map);
         }
         return n;
     }

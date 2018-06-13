@@ -3,6 +3,7 @@ package com.xunyu.operator.service.access;
 import com.commons.core.util.JavaBeanMap;
 import com.xunyu.operator.dao.access.OperAccessDaoImpl;
 import com.xunyu.operator.pojo.access.OperAccessCoreConfig;
+import com.xunyu.operator.pojo.access.OperAttributeConfig;
 import com.xunyu.operator.pojo.access.OperExtendConfig;
 import com.xunyu.operator.pojo.access.OperMarkConfig;
 import org.slf4j.Logger;
@@ -46,6 +47,11 @@ public class OperAccessServiceImpl implements OperAccessService {
                             omc.setConfigId(occ.getConfigId());
                             operAccessDao.saveOperMark(omc);
                         }
+                        OperAttributeConfig oac = occ.getOperAttributeConfig();
+                        if(oac != null){
+                            oac.setaConfigId(occ.getConfigId());
+                            operAccessDao.saveAttribute(oac);
+                        }
                     }
                 };
                 ex.submit(ru);
@@ -70,11 +76,18 @@ public class OperAccessServiceImpl implements OperAccessService {
                     public void run() {
                         OperExtendConfig oec = occ.getOperExtendConfig();
                         if (oec != null) {
+                            oec.setConfigId(occ.getConfigId());
                             operAccessDao.updateOperExtend(oec);
                         }
                         OperMarkConfig omc = occ.getOperMarkConfig();
                         if (omc != null) {
+                            omc.setConfigId(occ.getConfigId());
                             operAccessDao.updateOperMark(omc);
+                        }
+                        OperAttributeConfig oac = occ.getOperAttributeConfig();
+                        if(oac != null){
+                            oac.setaConfigId(occ.getConfigId());
+                            operAccessDao.updateAttribute(oac);
                         }
                     }
                 };

@@ -39,9 +39,7 @@
     <update id="updateAttribute" parameterType="com.xunyu.operator.pojo.access.OperAttributeConfig">
         update tbl_gateway_attribute
         <set>
-            <if test = 'aConfigId != null'>
-                <![CDATA[	a_config_id = #{aConfigId}, ]]>
-            </if>
+
             <if test='attrPriority != null'>
                 <![CDATA[	attr_priority = #{attrPriority}, ]]>
             </if>
@@ -72,8 +70,8 @@
 
         </set>
         <where>
-            <if test = 'attrId != null'>
-                extend_id = #{attrId}
+            <if test = 'aConfigId != null'>
+                <![CDATA[	a_config_id = #{aConfigId} ]]>
             </if>
         </where>
     </update>

@@ -15,6 +15,24 @@ public class OperAccessModel extends UserModel {
     private String accessCode;//接入码
     private Integer isable;//1启用 2停用 3作废
     private String gatewayNumber;//网关号段
+    private Integer agreeType;//协议类型  1、移动、2联通、3电信
+    private String configIds;//批量操作是id组成的字符串
+
+    public String getConfigIds() {
+        return configIds;
+    }
+
+    public void setConfigIds(String configIds) {
+        this.configIds = configIds;
+    }
+
+    public Integer getAgreeType() {
+        return agreeType;
+    }
+
+    public void setAgreeType(Integer agreeType) {
+        this.agreeType = agreeType;
+    }
 
     public Long getConfigId() {
         return configId;

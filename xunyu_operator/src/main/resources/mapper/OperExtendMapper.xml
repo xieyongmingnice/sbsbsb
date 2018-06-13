@@ -42,9 +42,7 @@
     <update id="updateOperExtend" parameterType="com.xunyu.operator.pojo.access.OperExtendConfig">
         update tbl_gateway_extend
         <set>
-            <if test='configId != null'>
-                <![CDATA[	ex_config_id = #{configId}, ]]>
-            </if>
+
             <if test='chargUser != null'>
                 <![CDATA[	charg_user = #{chargUser}, ]]>
             </if>
@@ -78,8 +76,8 @@
 
         </set>
         <where>
-            <if test = 'extendId != null'>
-                extend_id = #{extendId}
+            <if test='configId != null'>
+                <![CDATA[	ex_config_id = #{configId} ]]>
             </if>
         </where>
     </update>
