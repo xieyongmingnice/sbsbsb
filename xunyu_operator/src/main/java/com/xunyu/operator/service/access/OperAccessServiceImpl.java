@@ -74,19 +74,50 @@ public class OperAccessServiceImpl implements OperAccessService {
                 Runnable ru = new Runnable() {
                     @Override
                     public void run() {
+                        Map<String,Object> map = new HashMap<String,Object>();
                         OperExtendConfig oec = occ.getOperExtendConfig();
                         if (oec != null) {
+                            //进一步判断该表中有没有congid存在的记录有则更新，没有则添加
+                            map.put("configId",occ.getConfigId());
+                            OperExtendConfig cec2 = operAccessDao.getOperExtendConfig(map);
                             oec.setConfigId(occ.getConfigId());
-                            operAccessDao.updateOperExtend(oec);
+                            if(cec2 != null) {
+                                operAccessDao.updateOperExtend(oec);
+                            }else{
+                                operAccessDao.saveOperExtend(oec);
+                            }
+                        }else{
+                            OperExtendConfig oec3 = new OperExtendConfig();
+                            oec3.setConfigId(occ.getConfigId());
+                            operAccessDao.updateOperExtend(oec3);
                         }
                         OperMarkConfig omc = occ.getOperMarkConfig();
                         if (omc != null) {
                             omc.setConfigId(occ.getConfigId());
+                            map.put("configId",occ.getConfigId());
+                            OperMarkConfig cmc2 = operAccessDao.getOperMarkConfig(map);
+                            if(cmc2 != null) {
+                                operAccessDao.updateOperMark(omc);
+                            }else{
+                                operAccessDao.saveOperMark(omc);
+                            }
+                        }else{
+                            OperMarkConfig cmc3 = new OperMarkConfig();
+                            cmc3.setConfigId(occ.getConfigId());
                             operAccessDao.updateOperMark(omc);
                         }
                         OperAttributeConfig oac = occ.getOperAttributeConfig();
                         if(oac != null){
                             oac.setaConfigId(occ.getConfigId());
+                            OperAttributeConfig oac2 = operAccessDao.getOperAttributeConfig(map);
+                            if(oac2 != null) {
+                                operAccessDao.updateAttribute(oac);
+                            }else{
+                                operAccessDao.saveAttribute(oac);
+                            }
+                        }else{
+                            OperAttributeConfig oac3 = new OperAttributeConfig();
+                            oac3.setaConfigId(occ.getConfigId());
                             operAccessDao.updateAttribute(oac);
                         }
                     }

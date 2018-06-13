@@ -2,6 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xunyu.operator.pojo.access.OperExtendConfig">
 
+    <resultMap id="extend_ResultMap" type="com.xunyu.operator.pojo.access.OperExtendConfig">
+        <id column="extend_id" property="extendId"></id>
+        <result column="ex_config_id" property="configId"></result>
+        <result column="charg_user" property="chargUser"></result>
+        <result column="charg_type" property="chargType"></result>
+        <result column="local_port" property="localPort"></result>
+        <result column="code_format" property="codeFormat"></result>
+        <result column="unsigna_format" property="unsignaFormat"></result>
+        <result column="ascll_support" property="ascllSupport"></result>
+        <result column="ascll_length" property="ascllLength"></result>
+        <result column="len_msg_code" property="lenMsgCode"></result>
+        <result column="max_length" property="maxLength"></result>
+        <result column="is_def" property="isDef"></result>
+    </resultMap>
+
+    <sql id = "extend_access_cloumn">
+        extend_id,ex_config_id,charg_user,charg_type,local_port,code_format,unsigna_format
+        ,ascll_support,ascll_length,len_msg_code,max_length,is_def
+    </sql>
+
+    <select id = "getOperExtendConfig" parameterType="map" resultMap="extend_ResultMap">
+        select <include refid = "extend_access_cloumn"/>
+        from tbl_gateway_extend where ex_config_id = #{configId}
+    </select>
+
     <insert id = "saveOperExtend" parameterType="com.xunyu.operator.pojo.access.OperExtendConfig"
             useGeneratedKeys="true" keyColumn="extend_id" keyProperty="extendId">
 
@@ -42,38 +67,16 @@
     <update id="updateOperExtend" parameterType="com.xunyu.operator.pojo.access.OperExtendConfig">
         update tbl_gateway_extend
         <set>
-
-            <if test='chargUser != null'>
-                <![CDATA[	charg_user = #{chargUser}, ]]>
-            </if>
-            <if test='chargType != null'>
-                <![CDATA[	charg_type = #{chargType}, ]]>
-            </if>
-            <if test='localPort != null and localPort != ""'>
-                <![CDATA[	local_port = #{localPort}, ]]>
-            </if>
-            <if test='codeFormat != null'>
-                <![CDATA[	code_format = #{codeFormat}, ]]>
-            </if>
-            <if test='unsignaFormat != null'>
-                <![CDATA[	unsigna_format = #{unsignaFormat}, ]]>
-            </if>
-            <if test='ascllSupport != null'>
-                <![CDATA[	ascll_support = #{ascllSupport}, ]]>
-            </if>
-            <if test='ascllLength != null'>
-                <![CDATA[	ascll_length = #{ascllLength}, ]]>
-            </if>
-            <if test='lenMsgCode != null'>
-                <![CDATA[	len_msg_code = #{lenMsgCode}, ]]>
-            </if>
-            <if test='maxLength != null'>
-                <![CDATA[	max_length = #{maxLength}, ]]>
-            </if>
-            <if test='isDef != null'>
-                <![CDATA[	is_def = #{isDef}, ]]>
-            </if>
-
+            <![CDATA[	charg_user = #{chargUser}, ]]>
+            <![CDATA[	charg_type = #{chargType}, ]]>
+            <![CDATA[	local_port = #{localPort}, ]]>
+            <![CDATA[	code_format = #{codeFormat}, ]]>
+            <![CDATA[	unsigna_format = #{unsignaFormat}, ]]>
+            <![CDATA[	ascll_support = #{ascllSupport}, ]]>
+            <![CDATA[	ascll_length = #{ascllLength}, ]]>
+            <![CDATA[	len_msg_code = #{lenMsgCode}, ]]>
+            <![CDATA[	max_length = #{maxLength}, ]]>
+            <![CDATA[	is_def = #{isDef}, ]]>
         </set>
         <where>
             <if test='configId != null'>

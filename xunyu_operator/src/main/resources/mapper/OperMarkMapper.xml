@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xunyu.operator.pojo.access.OperMarkConfig">
 
+    <resultMap id="attr_ResultMap" type="com.xunyu.operator.pojo.access.OperMarkConfig">
+        <id column="mark_id" property="markId"></id>
+        <result column="gateway_text" property="gatewayText"></result>
+        <result column="m_config_id" property="configId"></result>
+        <result column="purchase_price" property="purchasePrice"></result>
+        <result column="sales_cost" property="salesCost"></result>
+        <result column="gateway_number" property="gatewayNumber"></result>
+    </resultMap>
+
+    <sql id = "mark_access_cloumn">
+        mark_id,m_config_id,gateway_text,purchase_price,sales_cost,gateway_number
+    </sql>
+
+    <select id = "getOperMarkConfig" parameterType="map" resultMap="attr_ResultMap">
+
+        select <include refid = "mark_access_cloumn" />
+        from tbl_gateway_mark where m_config_id = #{configId}
+    </select>
+
     <insert id = "saveOperMark" parameterType="com.xunyu.operator.pojo.access.OperMarkConfig"
             useGeneratedKeys="true" keyColumn="mark_id" keyProperty="markId">
 
@@ -28,21 +47,11 @@
     <update id="updateOperMark" parameterType="com.xunyu.operator.pojo.access.OperMarkConfig">
         update tbl_gateway_mark
         <set>
-            <if test='configId != null'>
-                <![CDATA[	m_config_id = #{configId}, ]]>
-            </if>
-            <if test='gatewayText != null and gatewayText != ""'>
-                <![CDATA[	gateway_text = #{gatewayText}, ]]>
-            </if>
-            <if test='purchasePrice != null'>
-                <![CDATA[	purchase_price = #{purchasePrice}, ]]>
-            </if>
-            <if test='salesCost != null'>
-                <![CDATA[	sales_cost = #{salesCost}, ]]>
-            </if>
-            <if test='gatewayNumber != null and gatewayNumber != ""'>
-                <![CDATA[	gateway_number = #{gatewayNumber}, ]]>
-            </if>
+            <![CDATA[	m_config_id = #{configId}, ]]>
+            <![CDATA[	gateway_text = #{gatewayText}, ]]>
+            <![CDATA[	purchase_price = #{purchasePrice}, ]]>
+            <![CDATA[	sales_cost = #{salesCost}, ]]>
+            <![CDATA[	gateway_number = #{gatewayNumber}, ]]>
         </set>
         <where>
             <if test='configId != null'>

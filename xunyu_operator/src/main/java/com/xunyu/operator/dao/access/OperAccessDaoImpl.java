@@ -65,6 +65,18 @@ public class OperAccessDaoImpl extends BaseDao<OperAccessCoreConfig,Long> {
 
         return super.selectForObject("com.xunyu.operator.pojo.access.OperAccessCoreConfig.getOperAccessCoreConfig",map);
     }
+    public OperExtendConfig getOperExtendConfig(Map<String,Object> map){
+
+        return super.selectForObject("com.xunyu.operator.pojo.access.OperExtendConfig.getOperExtendConfig",map);
+    }
+    public OperAttributeConfig getOperAttributeConfig(Map<String,Object> map){
+
+        return super.selectForObject("com.xunyu.operator.pojo.access.OperAttributeConfig.getOperAttributeConfig",map);
+    }
+
+    public OperMarkConfig getOperMarkConfig(Map<String,Object> map){
+        return super.selectForObject("com.xunyu.operator.pojo.access.OperMarkConfig.getOperMarkConfig",map);
+    }
 
     /**
      * 获取网关接入配置列表
