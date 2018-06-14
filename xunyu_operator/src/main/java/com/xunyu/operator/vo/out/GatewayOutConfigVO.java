@@ -1,10 +1,11 @@
-package com.xunyu.operator.vo;
+package com.xunyu.operator.vo.out;
 
 import com.xunyu.operator.pojo.access.OperAccessCoreConfig;
 import com.xunyu.operator.pojo.out.CarrierAgree;
 import com.xunyu.operator.pojo.out.Customer;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,12 @@ public class GatewayOutConfigVO implements Serializable {
     /**
      *
      */
-    private Integer tblGatewayOutConfigId;
+    private Integer gatewayOutConfigId;
+
+    /**
+     * 运营商类型
+     */
+    private Integer carrierType;
 
     /**
      *   客户id
@@ -47,9 +53,9 @@ public class GatewayOutConfigVO implements Serializable {
     private Integer agreeType;
 
     /**
-     *   网关节点
+     *   网关接入配置id
      */
-    private String gatewayNode;
+    private Integer configId;
 
     /**
      *   企业IP
@@ -189,12 +195,12 @@ public class GatewayOutConfigVO implements Serializable {
     /**
      *   押金
      */
-    private Long deposit;
+    private BigDecimal deposit;
 
     /**
      *   费率
      */
-    private Long rate;
+    private BigDecimal rate;
 
     /**
      *   在线充值起充条数
@@ -219,7 +225,7 @@ public class GatewayOutConfigVO implements Serializable {
     /**
      *   信用率
      */
-    private Long creditRate;
+    private BigDecimal creditRate;
 
     /**
      *   审核模式
@@ -314,17 +320,17 @@ public class GatewayOutConfigVO implements Serializable {
     /**
      *   业务最低销售成本
      */
-    private Long minSaleCost;
+    private BigDecimal minSaleCost;
 
     /**
      *   业务销售实际价格
      */
-    private Long actualSalePrice;
+    private BigDecimal actualSalePrice;
 
     /**
      *   业务销售提成比例
      */
-    private Long saleCommissionProp;
+    private BigDecimal saleCommissionProp;
 
     /**
      *   是否启用平台处理
@@ -334,17 +340,17 @@ public class GatewayOutConfigVO implements Serializable {
     /**
      *   平台处理比例
      */
-    private Long platformHandleProp;
+    private BigDecimal platformHandleProp;
 
     /**
      *   平台处理成功报告比例
      */
-    private Long handleRepProp;
+    private BigDecimal handleRepProp;
 
     /**
      *   平台处理成功报告实时比例
      */
-    private Long handleRepRealtimeProp;
+    private BigDecimal handleRepRealtimeProp;
 
     /**
      *   平台处理成功报告回传时间
@@ -354,22 +360,22 @@ public class GatewayOutConfigVO implements Serializable {
     /**
      *   平台处理未知报告比例
      */
-    private Long platformHandleUnknowProp;
+    private BigDecimal platformHandleUnknowProp;
 
     /**
      *   错号空号等成功比例
      */
-    private Long wrongNumSucPorp;
+    private BigDecimal wrongNumSucPorp;
 
     /**
      *   错号空号等未知比例
      */
-    private Long wrongNumUnknowPorp;
+    private BigDecimal wrongNumUnknowPorp;
 
     /**
      *   错误报告转成功比例
      */
-    private Long wrongReportSucProp;
+    private BigDecimal wrongReportSucProp;
 
     /**
      *   是否启用超时改变状态，1：是，0：否，默认0
@@ -379,7 +385,7 @@ public class GatewayOutConfigVO implements Serializable {
     /**
      *   改变状态超时比例
      */
-    private Long changeOvertimeProp;
+    private BigDecimal changeOvertimeProp;
 
     /**
      *   改变状态超时时间开始，单位分钟
@@ -477,6 +483,11 @@ public class GatewayOutConfigVO implements Serializable {
     private Date createTime;
 
     /**
+     * 节点代码
+     */
+    private String nodeCode;
+
+    /**
      * 以上为数据库基本字段
      * 以下为扩展字段
      */
@@ -495,36 +506,21 @@ public class GatewayOutConfigVO implements Serializable {
      */
     private List<CarrierAgree> carrierAgreeList;
 
-    public List<Customer> getCustomerList() {
-        return customerList;
+
+    public Integer getGatewayOutConfigId() {
+        return gatewayOutConfigId;
     }
 
-    public void setCustomerList(List<Customer> customerList) {
-        this.customerList = customerList;
+    public void setGatewayOutConfigId(Integer gatewayOutConfigId) {
+        this.gatewayOutConfigId = gatewayOutConfigId;
     }
 
-    public List<OperAccessCoreConfig> getOperAccessCoreConfigList() {
-        return operAccessCoreConfigList;
+    public Integer getCarrierType() {
+        return carrierType;
     }
 
-    public void setOperAccessCoreConfigList(List<OperAccessCoreConfig> operAccessCoreConfigList) {
-        this.operAccessCoreConfigList = operAccessCoreConfigList;
-    }
-
-    public List<CarrierAgree> getCarrierAgreeList() {
-        return carrierAgreeList;
-    }
-
-    public void setCarrierAgreeList(List<CarrierAgree> carrierAgreeList) {
-        this.carrierAgreeList = carrierAgreeList;
-    }
-
-    public Integer getTblGatewayOutConfigId() {
-        return tblGatewayOutConfigId;
-    }
-
-    public void setTblGatewayOutConfigId(Integer tblGatewayOutConfigId) {
-        this.tblGatewayOutConfigId = tblGatewayOutConfigId;
+    public void setCarrierType(Integer carrierType) {
+        this.carrierType = carrierType;
     }
 
     public Integer getCustomerId() {
@@ -567,12 +563,12 @@ public class GatewayOutConfigVO implements Serializable {
         this.agreeType = agreeType;
     }
 
-    public String getGatewayNode() {
-        return gatewayNode;
+    public Integer getConfigId() {
+        return configId;
     }
 
-    public void setGatewayNode(String gatewayNode) {
-        this.gatewayNode = gatewayNode;
+    public void setConfigId(Integer configId) {
+        this.configId = configId;
     }
 
     public String getEnterpriseIp() {
@@ -791,19 +787,19 @@ public class GatewayOutConfigVO implements Serializable {
         this.payType = payType;
     }
 
-    public Long getDeposit() {
+    public BigDecimal getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(Long deposit) {
+    public void setDeposit(BigDecimal deposit) {
         this.deposit = deposit;
     }
 
-    public Long getRate() {
+    public BigDecimal getRate() {
         return rate;
     }
 
-    public void setRate(Long rate) {
+    public void setRate(BigDecimal rate) {
         this.rate = rate;
     }
 
@@ -839,11 +835,11 @@ public class GatewayOutConfigVO implements Serializable {
         this.pledgeNum = pledgeNum;
     }
 
-    public Long getCreditRate() {
+    public BigDecimal getCreditRate() {
         return creditRate;
     }
 
-    public void setCreditRate(Long creditRate) {
+    public void setCreditRate(BigDecimal creditRate) {
         this.creditRate = creditRate;
     }
 
@@ -991,27 +987,27 @@ public class GatewayOutConfigVO implements Serializable {
         this.spDesc = spDesc;
     }
 
-    public Long getMinSaleCost() {
+    public BigDecimal getMinSaleCost() {
         return minSaleCost;
     }
 
-    public void setMinSaleCost(Long minSaleCost) {
+    public void setMinSaleCost(BigDecimal minSaleCost) {
         this.minSaleCost = minSaleCost;
     }
 
-    public Long getActualSalePrice() {
+    public BigDecimal getActualSalePrice() {
         return actualSalePrice;
     }
 
-    public void setActualSalePrice(Long actualSalePrice) {
+    public void setActualSalePrice(BigDecimal actualSalePrice) {
         this.actualSalePrice = actualSalePrice;
     }
 
-    public Long getSaleCommissionProp() {
+    public BigDecimal getSaleCommissionProp() {
         return saleCommissionProp;
     }
 
-    public void setSaleCommissionProp(Long saleCommissionProp) {
+    public void setSaleCommissionProp(BigDecimal saleCommissionProp) {
         this.saleCommissionProp = saleCommissionProp;
     }
 
@@ -1023,27 +1019,27 @@ public class GatewayOutConfigVO implements Serializable {
         this.isUsePlatformHandle = isUsePlatformHandle;
     }
 
-    public Long getPlatformHandleProp() {
+    public BigDecimal getPlatformHandleProp() {
         return platformHandleProp;
     }
 
-    public void setPlatformHandleProp(Long platformHandleProp) {
+    public void setPlatformHandleProp(BigDecimal platformHandleProp) {
         this.platformHandleProp = platformHandleProp;
     }
 
-    public Long getHandleRepProp() {
+    public BigDecimal getHandleRepProp() {
         return handleRepProp;
     }
 
-    public void setHandleRepProp(Long handleRepProp) {
+    public void setHandleRepProp(BigDecimal handleRepProp) {
         this.handleRepProp = handleRepProp;
     }
 
-    public Long getHandleRepRealtimeProp() {
+    public BigDecimal getHandleRepRealtimeProp() {
         return handleRepRealtimeProp;
     }
 
-    public void setHandleRepRealtimeProp(Long handleRepRealtimeProp) {
+    public void setHandleRepRealtimeProp(BigDecimal handleRepRealtimeProp) {
         this.handleRepRealtimeProp = handleRepRealtimeProp;
     }
 
@@ -1055,35 +1051,35 @@ public class GatewayOutConfigVO implements Serializable {
         this.handleRepReturnTime = handleRepReturnTime;
     }
 
-    public Long getPlatformHandleUnknowProp() {
+    public BigDecimal getPlatformHandleUnknowProp() {
         return platformHandleUnknowProp;
     }
 
-    public void setPlatformHandleUnknowProp(Long platformHandleUnknowProp) {
+    public void setPlatformHandleUnknowProp(BigDecimal platformHandleUnknowProp) {
         this.platformHandleUnknowProp = platformHandleUnknowProp;
     }
 
-    public Long getWrongNumSucPorp() {
+    public BigDecimal getWrongNumSucPorp() {
         return wrongNumSucPorp;
     }
 
-    public void setWrongNumSucPorp(Long wrongNumSucPorp) {
+    public void setWrongNumSucPorp(BigDecimal wrongNumSucPorp) {
         this.wrongNumSucPorp = wrongNumSucPorp;
     }
 
-    public Long getWrongNumUnknowPorp() {
+    public BigDecimal getWrongNumUnknowPorp() {
         return wrongNumUnknowPorp;
     }
 
-    public void setWrongNumUnknowPorp(Long wrongNumUnknowPorp) {
+    public void setWrongNumUnknowPorp(BigDecimal wrongNumUnknowPorp) {
         this.wrongNumUnknowPorp = wrongNumUnknowPorp;
     }
 
-    public Long getWrongReportSucProp() {
+    public BigDecimal getWrongReportSucProp() {
         return wrongReportSucProp;
     }
 
-    public void setWrongReportSucProp(Long wrongReportSucProp) {
+    public void setWrongReportSucProp(BigDecimal wrongReportSucProp) {
         this.wrongReportSucProp = wrongReportSucProp;
     }
 
@@ -1095,11 +1091,11 @@ public class GatewayOutConfigVO implements Serializable {
         this.isUseOvertimeChange = isUseOvertimeChange;
     }
 
-    public Long getChangeOvertimeProp() {
+    public BigDecimal getChangeOvertimeProp() {
         return changeOvertimeProp;
     }
 
-    public void setChangeOvertimeProp(Long changeOvertimeProp) {
+    public void setChangeOvertimeProp(BigDecimal changeOvertimeProp) {
         this.changeOvertimeProp = changeOvertimeProp;
     }
 
@@ -1253,5 +1249,37 @@ public class GatewayOutConfigVO implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getNodeCode() {
+        return nodeCode;
+    }
+
+    public void setNodeCode(String nodeCode) {
+        this.nodeCode = nodeCode;
+    }
+
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(List<Customer> customerList) {
+        this.customerList = customerList;
+    }
+
+    public List<OperAccessCoreConfig> getOperAccessCoreConfigList() {
+        return operAccessCoreConfigList;
+    }
+
+    public void setOperAccessCoreConfigList(List<OperAccessCoreConfig> operAccessCoreConfigList) {
+        this.operAccessCoreConfigList = operAccessCoreConfigList;
+    }
+
+    public List<CarrierAgree> getCarrierAgreeList() {
+        return carrierAgreeList;
+    }
+
+    public void setCarrierAgreeList(List<CarrierAgree> carrierAgreeList) {
+        this.carrierAgreeList = carrierAgreeList;
     }
 }

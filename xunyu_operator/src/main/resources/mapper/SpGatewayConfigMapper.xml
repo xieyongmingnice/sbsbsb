@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.operator.pojo.out.SpGatewayConfig">
+  <resultMap id="BaseResultMap" type="com.xunyu.operator.pojo.out.SpGatewayConfig">
+    <id column="sp_gateway_config_id" jdbcType="INTEGER" property="spGatewayConfigId" />
+    <result column="agree_type" jdbcType="INTEGER" property="agreeType" />
+    <result column="gateway_out_config_id" jdbcType="CHAR" property="gatewayOutConfigId" />
+    <result column="config_id" jdbcType="INTEGER" property="configId" />
+    <result column="gateway_access_code" jdbcType="VARCHAR" property="gatewayAccessCode" />
+    <result column="binary_msg_len_limit" jdbcType="INTEGER" property="binaryMsgLenLimit" />
+    <result column="sp_msg_len_limit" jdbcType="INTEGER" property="spMsgLenLimit" />
+    <result column="fixed_sign_location" jdbcType="INTEGER" property="fixedSignLocation" />
+    <result column="long_msg_extra_num" jdbcType="INTEGER" property="longMsgExtraNum" />
+    <result column="is_ascll_supported" jdbcType="INTEGER" property="isAscllSupported" />
+    <result column="ascll_len_limit" jdbcType="INTEGER" property="ascllLenLimit" />
+    <result column="ascll_sign_len" jdbcType="INTEGER" property="ascllSignLen" />
+    <result column="is_send_without_sign" jdbcType="INTEGER" property="isSendWithoutSign" />
+    <result column="content_without_sign" jdbcType="VARCHAR" property="contentWithoutSign" />
+    <result column="min_sale_cost" jdbcType="DECIMAL" property="minSaleCost" />
+    <result column="actual_sale_price" jdbcType="DECIMAL" property="actualSalePrice" />
+    <result column="sale_commission_prop" jdbcType="DECIMAL" property="saleCommissionProp" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    sp_gateway_config_id, agree_type, gateway_out_config_id, config_id, gateway_access_code,
+    binary_msg_len_limit, sp_msg_len_limit, fixed_sign_location, long_msg_extra_num, 
+    is_ascll_supported, ascll_len_limit, ascll_sign_len, is_send_without_sign, content_without_sign, 
+    min_sale_cost, actual_sale_price, sale_commission_prop, isabled, create_time
+  </sql>
+
+  <insert id="insertSpGatewayConfig" parameterType="com.xunyu.operator.pojo.out.SpGatewayConfig">
+    insert into tbl_sp_gateway_conifg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="agreeType != null">
+        agree_type,
+      </if>
+      <if test="gatewayOutConfigId != null">
+        gateway_out_config_id,
+      </if>
+      <if test="configId != null">
+        config_id,
+      </if>
+      <if test="gatewayAccessCode != null">
+        gateway_access_code,
+      </if>
+      <if test="binaryMsgLenLimit != null">
+        binary_msg_len_limit,
+      </if>
+      <if test="spMsgLenLimit != null">
+        sp_msg_len_limit,
+      </if>
+      <if test="fixedSignLocation != null">
+        fixed_sign_location,
+      </if>
+      <if test="longMsgExtraNum != null">
+        long_msg_extra_num,
+      </if>
+      <if test="isAscllSupported != null">
+        is_ascll_supported,
+      </if>
+      <if test="ascllLenLimit != null">
+        ascll_len_limit,
+      </if>
+      <if test="ascllSignLen != null">
+        ascll_sign_len,
+      </if>
+      <if test="isSendWithoutSign != null">
+        is_send_without_sign,
+      </if>
+      <if test="contentWithoutSign != null">
+        content_without_sign,
+      </if>
+      <if test="minSaleCost != null">
+        min_sale_cost,
+      </if>
+      <if test="actualSalePrice != null">
+        actual_sale_price,
+      </if>
+      <if test="saleCommissionProp != null">
+        sale_commission_prop,
+      </if>
+      <if test="isabled != null">
+        isabled,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="agreeType != null">
+        #{agreeType,jdbcType=INTEGER},
+      </if>
+      <if test="gatewayOutConfigId != null">
+        #{gatewayOutConfigId,jdbcType=CHAR},
+      </if>
+      <if test="configId != null">
+        #{configId,jdbcType=INTEGER},
+      </if>
+      <if test="gatewayAccessCode != null">
+        #{gatewayAccessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="binaryMsgLenLimit != null">
+        #{binaryMsgLenLimit,jdbcType=INTEGER},
+      </if>
+      <if test="spMsgLenLimit != null">
+        #{spMsgLenLimit,jdbcType=INTEGER},
+      </if>
+      <if test="fixedSignLocation != null">
+        #{fixedSignLocation,jdbcType=INTEGER},
+      </if>
+      <if test="longMsgExtraNum != null">
+        #{longMsgExtraNum,jdbcType=INTEGER},
+      </if>
+      <if test="isAscllSupported != null">
+        #{isAscllSupported,jdbcType=INTEGER},
+      </if>
+      <if test="ascllLenLimit != null">
+        #{ascllLenLimit,jdbcType=INTEGER},
+      </if>
+      <if test="ascllSignLen != null">
+        #{ascllSignLen,jdbcType=INTEGER},
+      </if>
+      <if test="isSendWithoutSign != null">
+        #{isSendWithoutSign,jdbcType=INTEGER},
+      </if>
+      <if test="contentWithoutSign != null">
+        #{contentWithoutSign,jdbcType=VARCHAR},
+      </if>
+      <if test="minSaleCost != null">
+        #{minSaleCost,jdbcType=DECIMAL},
+      </if>
+      <if test="actualSalePrice != null">
+        #{actualSalePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="saleCommissionProp != null">
+        #{saleCommissionProp,jdbcType=DECIMAL},
+      </if>
+      <if test="isabled != null">
+        #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

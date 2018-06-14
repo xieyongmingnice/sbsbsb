@@ -15,8 +15,8 @@ import java.util.List;
 @Repository
 public class CarrierAgreeDaoImpl extends BaseDao {
 
-    public List<CarrierAgree> selectCarrierAgreeList(){
-        return selectList("com.xunyu.operator.pojo.out.CarrierAgree.selectCarrierAgreeList");
+    public List<CarrierAgree> selectCarrierAgreeList(Integer carrierType){
+        return selectList("com.xunyu.operator.pojo.out.CarrierAgree.selectCarrierAgreeList",carrierType);
     }
 
     public CarrierAgreeDaoImpl(SqlSessionFactory sqlSessionFactory) {

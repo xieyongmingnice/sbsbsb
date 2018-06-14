@@ -6,7 +6,7 @@
           WARNING - @mbg.generated  This element was generated on Tue Jun 12 16:23:40 CST 2018. by MyBatis Generator, do not modify.
         -->
         <id column="carrier_agree_id" jdbcType="INTEGER" property="carrierAgreeId" />
-        <result column="carrier_id" jdbcType="INTEGER" property="carrierId" />
+        <result column="carrier_type" jdbcType="INTEGER" property="carrierType" />
         <result column="agree_name" jdbcType="VARCHAR" property="agreeName" />
         <result column="isabled" jdbcType="INTEGER" property="isabled" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -16,13 +16,16 @@
         <!--
           WARNING - @mbg.generated  This element was generated on Tue Jun 12 16:23:40 CST 2018. by MyBatis Generator, do not modify.
         -->
-        carrier_agree_id, carrier_id, agree_name, isabled, create_time
+        carrier_agree_id, carrier_type, agree_name, isabled, create_time
     </sql>
 
-    <select id="selectCarrierAgreeList" resultMap="BaseResultMap">
+    <select id="selectCarrierAgreeList" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
         from tbl_carrier_agree
         where isabled = 1
+        <if test="_parameter != null and _parameter != 0">
+            and carrier_type = #{_parameter}
+        </if>
     </select>
 </mapper>

@@ -16,9 +16,9 @@ public class CarrierAgree  implements Serializable {
     private Integer carrierAgreeId;
 
     /**
-     *   运营商ID
+     *   运营商类型
      */
-    private Integer carrierId;
+    private Integer carrierType;
 
     /**
      *   协议名称
@@ -68,35 +68,12 @@ public class CarrierAgree  implements Serializable {
         this.carrierAgreeId = carrierAgreeId;
     }
 
-    /**
-     * This method returns the value of the database column tbl_carrier_agree.carrier_id
-     *
-     * @return the value of tbl_carrier_agree.carrier_id
-     *
-     * @mbg.generated Tue Jun 12 16:23:40 CST 2018
-     */
-    public Integer getCarrierId() {
-        return carrierId;
+    public Integer getCarrierType() {
+        return carrierType;
     }
 
-    /**
-     *
-     * @mbg.generated Tue Jun 12 16:23:40 CST 2018
-     */
-    public CarrierAgree withCarrierId(Integer carrierId) {
-        this.setCarrierId(carrierId);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_carrier_agree.carrier_id
-     *
-     * @param carrierId the value for tbl_carrier_agree.carrier_id
-     *
-     * @mbg.generated Tue Jun 12 16:23:40 CST 2018
-     */
-    public void setCarrierId(Integer carrierId) {
-        this.carrierId = carrierId;
+    public void setCarrierType(Integer carrierType) {
+        this.carrierType = carrierType;
     }
 
     /**
@@ -203,7 +180,7 @@ public class CarrierAgree  implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", carrierAgreeId=").append(carrierAgreeId);
-        sb.append(", carrierId=").append(carrierId);
+        sb.append(", carrierType=").append(carrierType);
         sb.append(", agreeName=").append(agreeName);
         sb.append(", isabled=").append(isabled);
         sb.append(", createTime=").append(createTime);
@@ -228,7 +205,7 @@ public class CarrierAgree  implements Serializable {
         }
         CarrierAgree other = (CarrierAgree) that;
         return (this.getCarrierAgreeId() == null ? other.getCarrierAgreeId() == null : this.getCarrierAgreeId().equals(other.getCarrierAgreeId()))
-            && (this.getCarrierId() == null ? other.getCarrierId() == null : this.getCarrierId().equals(other.getCarrierId()))
+            && (this.getCarrierType() == null ? other.getCarrierType() == null : this.getCarrierType().equals(other.getCarrierType()))
             && (this.getAgreeName() == null ? other.getAgreeName() == null : this.getAgreeName().equals(other.getAgreeName()))
             && (this.getIsabled() == null ? other.getIsabled() == null : this.getIsabled().equals(other.getIsabled()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
@@ -243,7 +220,7 @@ public class CarrierAgree  implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getCarrierAgreeId() == null) ? 0 : getCarrierAgreeId().hashCode());
-        result = prime * result + ((getCarrierId() == null) ? 0 : getCarrierId().hashCode());
+        result = prime * result + ((getCarrierType() == null) ? 0 : getCarrierType().hashCode());
         result = prime * result + ((getAgreeName() == null) ? 0 : getAgreeName().hashCode());
         result = prime * result + ((getIsabled() == null) ? 0 : getIsabled().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());

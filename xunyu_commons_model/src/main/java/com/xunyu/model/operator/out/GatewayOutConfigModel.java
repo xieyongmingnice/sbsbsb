@@ -3,6 +3,7 @@ package com.xunyu.model.operator.out;
 import com.xunyu.model.user.UserModel;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -13,10 +14,16 @@ import java.util.Date;
 public class GatewayOutConfigModel extends UserModel implements Serializable {
 
     private static final long serialVersionUID = 7055384099306513477L;
+
     /**
-     * 主键
+     *
      */
-    private Integer tblGatewayOutConfigId;
+    private Integer gatewayOutConfigId;
+
+    /**
+     * 运营商类型
+     */
+    private Integer carrierType;
 
     /**
      *   客户id
@@ -38,15 +45,6 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
      */
     private Integer accessType;
 
-    /**
-     *   协议类型
-     */
-    private Integer agreeType;
-
-    /**
-     *   网关节点
-     */
-    private String gatewayNode;
 
     /**
      *   企业IP
@@ -68,10 +66,6 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
      */
     private String enterprisePwd;
 
-    /**
-     *   网关接入码
-     */
-    private String gatewayAccessCode;
 
     /**
      *   赋给SP接入码
@@ -88,40 +82,7 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
      */
     private String transAccessCode;
 
-    /**
-     *   二进制短信长度限制
-     */
-    private Integer binaryMsgLenLimit;
 
-    /**
-     *   SP短信长度限制
-     */
-    private Integer spMsgLenLimit;
-
-    /**
-     *   网关固定签名位置 1：签名后置，2：签名前置，默认为1
-     */
-    private Integer fixedSignLocation;
-
-    /**
-     *   SP长短信额外可发字数
-     */
-    private Integer longMsgExtraNum;
-
-    /**
-     *   是否ASCII支持  1：支持，0：不支持，默认为0
-     */
-    private Integer isAscllSupported;
-
-    /**
-     *   ASCII长度限制
-     */
-    private Integer ascllLenLimit;
-
-    /**
-     *   ASCII签名长度
-     */
-    private Integer ascllSignLen;
 
     /**
      *   ASCII签名
@@ -133,15 +94,6 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
      */
     private String serviceCode;
 
-    /**
-     *   是否去签名发送，1：是，0：否，默认否
-     */
-    private Integer isSendWithoutSign;
-
-    /**
-     *   发送去签名内容
-     */
-    private String contentWithoutSign;
 
     /**
      *   号码是否需要86，1：是，0：否，默认否
@@ -186,12 +138,12 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   押金
      */
-    private Long deposit;
+    private BigDecimal deposit;
 
     /**
      *   费率
      */
-    private Long rate;
+    private BigDecimal rate;
 
     /**
      *   在线充值起充条数
@@ -216,7 +168,7 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   信用率
      */
-    private Long creditRate;
+    private BigDecimal creditRate;
 
     /**
      *   审核模式
@@ -309,21 +261,6 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     private String spDesc;
 
     /**
-     *   业务最低销售成本
-     */
-    private Long minSaleCost;
-
-    /**
-     *   业务销售实际价格
-     */
-    private Long actualSalePrice;
-
-    /**
-     *   业务销售提成比例
-     */
-    private Long saleCommissionProp;
-
-    /**
      *   是否启用平台处理
      */
     private Integer isUsePlatformHandle;
@@ -331,17 +268,17 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   平台处理比例
      */
-    private Long platformHandleProp;
+    private BigDecimal platformHandleProp;
 
     /**
      *   平台处理成功报告比例
      */
-    private Long handleRepProp;
+    private BigDecimal handleRepProp;
 
     /**
      *   平台处理成功报告实时比例
      */
-    private Long handleRepRealtimeProp;
+    private BigDecimal handleRepRealtimeProp;
 
     /**
      *   平台处理成功报告回传时间
@@ -351,22 +288,22 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   平台处理未知报告比例
      */
-    private Long platformHandleUnknowProp;
+    private BigDecimal platformHandleUnknowProp;
 
     /**
      *   错号空号等成功比例
      */
-    private Long wrongNumSucPorp;
+    private BigDecimal wrongNumSucPorp;
 
     /**
      *   错号空号等未知比例
      */
-    private Long wrongNumUnknowPorp;
+    private BigDecimal wrongNumUnknowPorp;
 
     /**
      *   错误报告转成功比例
      */
-    private Long wrongReportSucProp;
+    private BigDecimal wrongReportSucProp;
 
     /**
      *   是否启用超时改变状态，1：是，0：否，默认0
@@ -376,7 +313,7 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   改变状态超时比例
      */
-    private Long changeOvertimeProp;
+    private BigDecimal changeOvertimeProp;
 
     /**
      *   改变状态超时时间开始，单位分钟
@@ -473,20 +410,119 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
      */
     private Date createTime;
 
-    public Integer getTblGatewayOutConfigId() {
-        return tblGatewayOutConfigId;
+    /**
+     * 节点代码
+     */
+    private String nodeCode;
+
+    /**
+     * 以下为sp网关接出配置的字段
+     */
+    /**
+     *   运营商类型
+     */
+    private Integer agreeType;
+
+    /**
+     *   网关接入配置id
+     */
+    private Integer configId;
+
+    /**
+     *   网关接入码
+     */
+    private String gatewayAccessCode;
+
+    /**
+     *   二进制短信长度限制
+     */
+    private Integer binaryMsgLenLimit;
+
+    /**
+     *   SP短信长度限制
+     */
+    private Integer spMsgLenLimit;
+
+    /**
+     *   网关固定签名位置 1：签名后置，2：签名前置，默认为1
+     */
+    private Integer fixedSignLocation;
+
+    /**
+     *   SP长短信额外可发字数
+     */
+    private Integer longMsgExtraNum;
+
+    /**
+     *   是否ASCII支持  1：支持，0：不支持，默认为0
+     */
+    private Integer isAscllSupported;
+
+    /**
+     *   ASCII长度限制
+     */
+    private Integer ascllLenLimit;
+
+    /**
+     *   ASCII签名长度
+     */
+    private Integer ascllSignLen;
+
+    /**
+     *   是否去签名发送，1：是，0：否，默认否
+     */
+    private Integer isSendWithoutSign;
+
+    /**
+     *   发送去签名内容
+     */
+    private String contentWithoutSign;
+
+    /**
+     *   业务最低销售成本
+     */
+    private BigDecimal minSaleCost;
+
+    /**
+     *   业务销售实际价格
+     */
+    private BigDecimal actualSalePrice;
+
+    /**
+     *   业务销售提成比例
+     */
+    private BigDecimal saleCommissionProp;
+
+    /**
+     * 以下为自定义字段
+     */
+    /**
+     * 接入码
+     */
+    private String accessCode;
+
+    public String getAccessCode() {
+        return accessCode;
     }
 
-    public void setTblGatewayOutConfigId(Integer tblGatewayOutConfigId) {
-        this.tblGatewayOutConfigId = tblGatewayOutConfigId;
+    public void setAccessCode(String accessCode) {
+        this.accessCode = accessCode;
     }
 
-    public Integer getOperatorId() {
-        return operatorId;
+    public Integer getGatewayOutConfigId() {
+        return gatewayOutConfigId;
     }
 
-    public void setOperatorId(Integer operatorId) {
-        this.operatorId = operatorId;
+    public void setGatewayOutConfigId(Integer gatewayOutConfigId) {
+        this.gatewayOutConfigId = gatewayOutConfigId;
+    }
+
+    public Integer getCarrierType() {
+        return carrierType;
+    }
+
+    public void setCarrierType(Integer carrierType) {
+        this.carrierType = carrierType;
     }
 
     public Integer getCustomerId() {
@@ -529,12 +565,12 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
         this.agreeType = agreeType;
     }
 
-    public String getGatewayNode() {
-        return gatewayNode;
+    public Integer getConfigId() {
+        return configId;
     }
 
-    public void setGatewayNode(String gatewayNode) {
-        this.gatewayNode = gatewayNode;
+    public void setConfigId(Integer configId) {
+        this.configId = configId;
     }
 
     public String getEnterpriseIp() {
@@ -753,19 +789,19 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
         this.payType = payType;
     }
 
-    public Long getDeposit() {
+    public BigDecimal getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(Long deposit) {
+    public void setDeposit(BigDecimal deposit) {
         this.deposit = deposit;
     }
 
-    public Long getRate() {
+    public BigDecimal getRate() {
         return rate;
     }
 
-    public void setRate(Long rate) {
+    public void setRate(BigDecimal rate) {
         this.rate = rate;
     }
 
@@ -801,11 +837,11 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
         this.pledgeNum = pledgeNum;
     }
 
-    public Long getCreditRate() {
+    public BigDecimal getCreditRate() {
         return creditRate;
     }
 
-    public void setCreditRate(Long creditRate) {
+    public void setCreditRate(BigDecimal creditRate) {
         this.creditRate = creditRate;
     }
 
@@ -953,27 +989,27 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
         this.spDesc = spDesc;
     }
 
-    public Long getMinSaleCost() {
+    public BigDecimal getMinSaleCost() {
         return minSaleCost;
     }
 
-    public void setMinSaleCost(Long minSaleCost) {
+    public void setMinSaleCost(BigDecimal minSaleCost) {
         this.minSaleCost = minSaleCost;
     }
 
-    public Long getActualSalePrice() {
+    public BigDecimal getActualSalePrice() {
         return actualSalePrice;
     }
 
-    public void setActualSalePrice(Long actualSalePrice) {
+    public void setActualSalePrice(BigDecimal actualSalePrice) {
         this.actualSalePrice = actualSalePrice;
     }
 
-    public Long getSaleCommissionProp() {
+    public BigDecimal getSaleCommissionProp() {
         return saleCommissionProp;
     }
 
-    public void setSaleCommissionProp(Long saleCommissionProp) {
+    public void setSaleCommissionProp(BigDecimal saleCommissionProp) {
         this.saleCommissionProp = saleCommissionProp;
     }
 
@@ -985,27 +1021,27 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
         this.isUsePlatformHandle = isUsePlatformHandle;
     }
 
-    public Long getPlatformHandleProp() {
+    public BigDecimal getPlatformHandleProp() {
         return platformHandleProp;
     }
 
-    public void setPlatformHandleProp(Long platformHandleProp) {
+    public void setPlatformHandleProp(BigDecimal platformHandleProp) {
         this.platformHandleProp = platformHandleProp;
     }
 
-    public Long getHandleRepProp() {
+    public BigDecimal getHandleRepProp() {
         return handleRepProp;
     }
 
-    public void setHandleRepProp(Long handleRepProp) {
+    public void setHandleRepProp(BigDecimal handleRepProp) {
         this.handleRepProp = handleRepProp;
     }
 
-    public Long getHandleRepRealtimeProp() {
+    public BigDecimal getHandleRepRealtimeProp() {
         return handleRepRealtimeProp;
     }
 
-    public void setHandleRepRealtimeProp(Long handleRepRealtimeProp) {
+    public void setHandleRepRealtimeProp(BigDecimal handleRepRealtimeProp) {
         this.handleRepRealtimeProp = handleRepRealtimeProp;
     }
 
@@ -1017,35 +1053,35 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
         this.handleRepReturnTime = handleRepReturnTime;
     }
 
-    public Long getPlatformHandleUnknowProp() {
+    public BigDecimal getPlatformHandleUnknowProp() {
         return platformHandleUnknowProp;
     }
 
-    public void setPlatformHandleUnknowProp(Long platformHandleUnknowProp) {
+    public void setPlatformHandleUnknowProp(BigDecimal platformHandleUnknowProp) {
         this.platformHandleUnknowProp = platformHandleUnknowProp;
     }
 
-    public Long getWrongNumSucPorp() {
+    public BigDecimal getWrongNumSucPorp() {
         return wrongNumSucPorp;
     }
 
-    public void setWrongNumSucPorp(Long wrongNumSucPorp) {
+    public void setWrongNumSucPorp(BigDecimal wrongNumSucPorp) {
         this.wrongNumSucPorp = wrongNumSucPorp;
     }
 
-    public Long getWrongNumUnknowPorp() {
+    public BigDecimal getWrongNumUnknowPorp() {
         return wrongNumUnknowPorp;
     }
 
-    public void setWrongNumUnknowPorp(Long wrongNumUnknowPorp) {
+    public void setWrongNumUnknowPorp(BigDecimal wrongNumUnknowPorp) {
         this.wrongNumUnknowPorp = wrongNumUnknowPorp;
     }
 
-    public Long getWrongReportSucProp() {
+    public BigDecimal getWrongReportSucProp() {
         return wrongReportSucProp;
     }
 
-    public void setWrongReportSucProp(Long wrongReportSucProp) {
+    public void setWrongReportSucProp(BigDecimal wrongReportSucProp) {
         this.wrongReportSucProp = wrongReportSucProp;
     }
 
@@ -1057,11 +1093,11 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
         this.isUseOvertimeChange = isUseOvertimeChange;
     }
 
-    public Long getChangeOvertimeProp() {
+    public BigDecimal getChangeOvertimeProp() {
         return changeOvertimeProp;
     }
 
-    public void setChangeOvertimeProp(Long changeOvertimeProp) {
+    public void setChangeOvertimeProp(BigDecimal changeOvertimeProp) {
         this.changeOvertimeProp = changeOvertimeProp;
     }
 
@@ -1193,6 +1229,14 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
         this.httpReportReplyAddress = httpReportReplyAddress;
     }
 
+    public Integer getOperatorId() {
+        return operatorId;
+    }
+
+    public void setOperatorId(Integer operatorId) {
+        this.operatorId = operatorId;
+    }
+
     public Integer getIsabled() {
         return isabled;
     }
@@ -1207,5 +1251,13 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getNodeCode() {
+        return nodeCode;
+    }
+
+    public void setNodeCode(String nodeCode) {
+        this.nodeCode = nodeCode;
     }
 }

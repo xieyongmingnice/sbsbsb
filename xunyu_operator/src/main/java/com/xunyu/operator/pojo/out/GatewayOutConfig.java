@@ -1,18 +1,25 @@
 package com.xunyu.operator.pojo.out;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
+
 /**
  * @author xym
- * @description 网关接出配置实体类（sp接入到运营商）
- * @date 2018/6/12 11:12
+ * @description
+ * @date 2018/6/14 15:46
  */
-public class GatewayOutConfig implements Serializable {
-    private static final long serialVersionUID = 2288667566351766102L;
+public class GatewayOutConfig implements Serializable{
+    private static final long serialVersionUID = 4754596805871079157L;
     /**
-     *
+     * 主键
      */
-    private Integer tblGatewayOutConfigId;
+    private Integer gatewayOutConfigId;
+
+    /**
+     *   运营商类型
+     */
+    private Integer carrierType;
 
     /**
      *   客户id
@@ -20,7 +27,7 @@ public class GatewayOutConfig implements Serializable {
     private Integer customerId;
 
     /**
-     *   用户类型 1：预付费，2：后付费
+     *   用户类型  1：预付费，2：后付费
      */
     private Integer customerType;
 
@@ -33,16 +40,6 @@ public class GatewayOutConfig implements Serializable {
      *   接入类型
      */
     private Integer accessType;
-
-    /**
-     *   协议类型
-     */
-    private Integer agreeType;
-
-    /**
-     *   网关节点
-     */
-    private String gatewayNode;
 
     /**
      *   企业IP
@@ -65,11 +62,6 @@ public class GatewayOutConfig implements Serializable {
     private String enterprisePwd;
 
     /**
-     *   网关接入码
-     */
-    private String gatewayAccessCode;
-
-    /**
      *   赋给SP接入码
      */
     private String spAccessCode;
@@ -85,39 +77,13 @@ public class GatewayOutConfig implements Serializable {
     private String transAccessCode;
 
     /**
-     *   二进制短信长度限制
+     *   节点代码
      */
-    private Integer binaryMsgLenLimit;
-
+    private String nodeCode;
     /**
-     *   SP短信长度限制
-     */
-    private Integer spMsgLenLimit;
-
-    /**
-     *   网关固定签名位置 1：签名后置，2：签名前置，默认为1
+     *   网关固定签名位置  1：签名后置，2：签名前置，默认为1
      */
     private Integer fixedSignLocation;
-
-    /**
-     *   SP长短信额外可发字数
-     */
-    private Integer longMsgExtraNum;
-
-    /**
-     *   是否ASCII支持  1：支持，0：不支持，默认为0
-     */
-    private Integer isAscllSupported;
-
-    /**
-     *   ASCII长度限制
-     */
-    private Integer ascllLenLimit;
-
-    /**
-     *   ASCII签名长度
-     */
-    private Integer ascllSignLen;
 
     /**
      *   ASCII签名
@@ -128,16 +94,6 @@ public class GatewayOutConfig implements Serializable {
      *   服务代码
      */
     private String serviceCode;
-
-    /**
-     *   是否去签名发送，1：是，0：否，默认否
-     */
-    private Integer isSendWithoutSign;
-
-    /**
-     *   发送去签名内容
-     */
-    private String contentWithoutSign;
 
     /**
      *   号码是否需要86，1：是，0：否，默认否
@@ -182,12 +138,12 @@ public class GatewayOutConfig implements Serializable {
     /**
      *   押金
      */
-    private Long deposit;
+    private BigDecimal deposit;
 
     /**
      *   费率
      */
-    private Long rate;
+    private BigDecimal rate;
 
     /**
      *   在线充值起充条数
@@ -212,7 +168,7 @@ public class GatewayOutConfig implements Serializable {
     /**
      *   信用率
      */
-    private Long creditRate;
+    private BigDecimal creditRate;
 
     /**
      *   审核模式
@@ -305,21 +261,6 @@ public class GatewayOutConfig implements Serializable {
     private String spDesc;
 
     /**
-     *   业务最低销售成本
-     */
-    private Long minSaleCost;
-
-    /**
-     *   业务销售实际价格
-     */
-    private Long actualSalePrice;
-
-    /**
-     *   业务销售提成比例
-     */
-    private Long saleCommissionProp;
-
-    /**
      *   是否启用平台处理
      */
     private Integer isUsePlatformHandle;
@@ -327,7 +268,7 @@ public class GatewayOutConfig implements Serializable {
     /**
      *   平台处理比例
      */
-    private Long platformHandleProp;
+    private BigDecimal platformHandleProp;
 
     /**
      *   平台处理成功报告比例
@@ -455,12 +396,12 @@ public class GatewayOutConfig implements Serializable {
     private String httpReportReplyAddress;
 
     /**
-     * 归属业务人员id
+     *   归属业务人员id
      */
     private Integer operatorId;
 
     /**
-     *   是否有效标志。1：是，0：否，默认1
+     *   可用状态标签。1：是，0：否，默认1
      */
     private Integer isabled;
 
@@ -470,37 +411,55 @@ public class GatewayOutConfig implements Serializable {
     private Date createTime;
 
 
-    public Integer getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(Integer operatorId) {
-        this.operatorId = operatorId;
-    }
 
     /**
-     * This method returns the value of the database column tbl_gateway_out_config.tbl_gateway_out_config_id
+     * This method returns the value of the database column tbl_gateway_out_config.gateway_out_config_id
      *
-     * @return the value of tbl_gateway_out_config.tbl_gateway_out_config_id
+     * @return the value of tbl_gateway_out_config.gateway_out_config_id
      */
-    public Integer getTblGatewayOutConfigId() {
-        return tblGatewayOutConfigId;
+    public Integer getGatewayOutConfigId() {
+        return gatewayOutConfigId;
     }
 
     /**
      */
-    public GatewayOutConfig withTblGatewayOutConfigId(Integer tblGatewayOutConfigId) {
-        this.setTblGatewayOutConfigId(tblGatewayOutConfigId);
+    public GatewayOutConfig withGatewayOutConfigId(Integer gatewayOutConfigId) {
+        this.setGatewayOutConfigId(gatewayOutConfigId);
         return this;
     }
 
     /**
-     * This method sets the value of the database column tbl_gateway_out_config.tbl_gateway_out_config_id
+     * This method sets the value of the database column tbl_gateway_out_config.gateway_out_config_id
      *
-     * @param tblGatewayOutConfigId the value for tbl_gateway_out_config.tbl_gateway_out_config_id
+     * @param gatewayOutConfigId the value for tbl_gateway_out_config.gateway_out_config_id
      */
-    public void setTblGatewayOutConfigId(Integer tblGatewayOutConfigId) {
-        this.tblGatewayOutConfigId = tblGatewayOutConfigId;
+    public void setGatewayOutConfigId(Integer gatewayOutConfigId) {
+        this.gatewayOutConfigId = gatewayOutConfigId;
+    }
+
+    /**
+     * This method returns the value of the database column tbl_gateway_out_config.carrier_type
+     *
+     * @return the value of tbl_gateway_out_config.carrier_type
+     */
+    public Integer getCarrierType() {
+        return carrierType;
+    }
+
+    /**
+     */
+    public GatewayOutConfig withCarrierType(Integer carrierType) {
+        this.setCarrierType(carrierType);
+        return this;
+    }
+
+    /**
+     * This method sets the value of the database column tbl_gateway_out_config.carrier_type
+     *
+     * @param carrierType the value for tbl_gateway_out_config.carrier_type
+     */
+    public void setCarrierType(Integer carrierType) {
+        this.carrierType = carrierType;
     }
 
     /**
@@ -604,56 +563,6 @@ public class GatewayOutConfig implements Serializable {
     }
 
     /**
-     * This method returns the value of the database column tbl_gateway_out_config.agree_type
-     *
-     * @return the value of tbl_gateway_out_config.agree_type
-     */
-    public Integer getAgreeType() {
-        return agreeType;
-    }
-
-    /**
-     */
-    public GatewayOutConfig withAgreeType(Integer agreeType) {
-        this.setAgreeType(agreeType);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.agree_type
-     *
-     * @param agreeType the value for tbl_gateway_out_config.agree_type
-     */
-    public void setAgreeType(Integer agreeType) {
-        this.agreeType = agreeType;
-    }
-
-    /**
-     * This method returns the value of the database column tbl_gateway_out_config.gateway_node
-     *
-     * @return the value of tbl_gateway_out_config.gateway_node
-     */
-    public String getGatewayNode() {
-        return gatewayNode;
-    }
-
-    /**
-     */
-    public GatewayOutConfig withGatewayNode(String gatewayNode) {
-        this.setGatewayNode(gatewayNode);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.gateway_node
-     *
-     * @param gatewayNode the value for tbl_gateway_out_config.gateway_node
-     */
-    public void setGatewayNode(String gatewayNode) {
-        this.gatewayNode = gatewayNode;
-    }
-
-    /**
      * This method returns the value of the database column tbl_gateway_out_config.enterprise_ip
      *
      * @return the value of tbl_gateway_out_config.enterprise_ip
@@ -754,31 +663,6 @@ public class GatewayOutConfig implements Serializable {
     }
 
     /**
-     * This method returns the value of the database column tbl_gateway_out_config.gateway_access_code
-     *
-     * @return the value of tbl_gateway_out_config.gateway_access_code
-     */
-    public String getGatewayAccessCode() {
-        return gatewayAccessCode;
-    }
-
-    /**
-     */
-    public GatewayOutConfig withGatewayAccessCode(String gatewayAccessCode) {
-        this.setGatewayAccessCode(gatewayAccessCode);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.gateway_access_code
-     *
-     * @param gatewayAccessCode the value for tbl_gateway_out_config.gateway_access_code
-     */
-    public void setGatewayAccessCode(String gatewayAccessCode) {
-        this.gatewayAccessCode = gatewayAccessCode;
-    }
-
-    /**
      * This method returns the value of the database column tbl_gateway_out_config.sp_access_code
      *
      * @return the value of tbl_gateway_out_config.sp_access_code
@@ -854,54 +738,30 @@ public class GatewayOutConfig implements Serializable {
     }
 
     /**
-     * This method returns the value of the database column tbl_gateway_out_config.binary_msg_len_limit
+     * This method returns the value of the database column tbl_gateway_out_config.node_code
      *
-     * @return the value of tbl_gateway_out_config.binary_msg_len_limit
+     * @return the value of tbl_gateway_out_config.node_code
      */
-    public Integer getBinaryMsgLenLimit() {
-        return binaryMsgLenLimit;
+    public String getNodeCode() {
+        return nodeCode;
     }
 
     /**
      */
-    public GatewayOutConfig withBinaryMsgLenLimit(Integer binaryMsgLenLimit) {
-        this.setBinaryMsgLenLimit(binaryMsgLenLimit);
+    public GatewayOutConfig withNodeCode(String nodeCode) {
+        this.setNodeCode(nodeCode);
         return this;
     }
 
     /**
-     * This method sets the value of the database column tbl_gateway_out_config.binary_msg_len_limit
+     * This method sets the value of the database column tbl_gateway_out_config.node_code
      *
-     * @param binaryMsgLenLimit the value for tbl_gateway_out_config.binary_msg_len_limit
+     * @param nodeCode the value for tbl_gateway_out_config.node_code
      */
-    public void setBinaryMsgLenLimit(Integer binaryMsgLenLimit) {
-        this.binaryMsgLenLimit = binaryMsgLenLimit;
+    public void setNodeCode(String nodeCode) {
+        this.nodeCode = nodeCode;
     }
 
-    /**
-     * This method returns the value of the database column tbl_gateway_out_config.sp_msg_len_limit
-     *
-     * @return the value of tbl_gateway_out_config.sp_msg_len_limit
-     */
-    public Integer getSpMsgLenLimit() {
-        return spMsgLenLimit;
-    }
-
-    /**
-     */
-    public GatewayOutConfig withSpMsgLenLimit(Integer spMsgLenLimit) {
-        this.setSpMsgLenLimit(spMsgLenLimit);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.sp_msg_len_limit
-     *
-     * @param spMsgLenLimit the value for tbl_gateway_out_config.sp_msg_len_limit
-     */
-    public void setSpMsgLenLimit(Integer spMsgLenLimit) {
-        this.spMsgLenLimit = spMsgLenLimit;
-    }
 
     /**
      * This method returns the value of the database column tbl_gateway_out_config.fixed_sign_location
@@ -926,106 +786,6 @@ public class GatewayOutConfig implements Serializable {
      */
     public void setFixedSignLocation(Integer fixedSignLocation) {
         this.fixedSignLocation = fixedSignLocation;
-    }
-
-    /**
-     * This method returns the value of the database column tbl_gateway_out_config.long_msg_extra_num
-     *
-     * @return the value of tbl_gateway_out_config.long_msg_extra_num
-     */
-    public Integer getLongMsgExtraNum() {
-        return longMsgExtraNum;
-    }
-
-    /**
-     */
-    public GatewayOutConfig withLongMsgExtraNum(Integer longMsgExtraNum) {
-        this.setLongMsgExtraNum(longMsgExtraNum);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.long_msg_extra_num
-     *
-     * @param longMsgExtraNum the value for tbl_gateway_out_config.long_msg_extra_num
-     */
-    public void setLongMsgExtraNum(Integer longMsgExtraNum) {
-        this.longMsgExtraNum = longMsgExtraNum;
-    }
-
-    /**
-     * This method returns the value of the database column tbl_gateway_out_config.is_ascll_supported
-     *
-     * @return the value of tbl_gateway_out_config.is_ascll_supported
-     */
-    public Integer getIsAscllSupported() {
-        return isAscllSupported;
-    }
-
-    /**
-     */
-    public GatewayOutConfig withIsAscllSupported(Integer isAscllSupported) {
-        this.setIsAscllSupported(isAscllSupported);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.is_ascll_supported
-     *
-     * @param isAscllSupported the value for tbl_gateway_out_config.is_ascll_supported
-     */
-    public void setIsAscllSupported(Integer isAscllSupported) {
-        this.isAscllSupported = isAscllSupported;
-    }
-
-    /**
-     * This method returns the value of the database column tbl_gateway_out_config.ascll_len_limit
-     *
-     * @return the value of tbl_gateway_out_config.ascll_len_limit
-     */
-    public Integer getAscllLenLimit() {
-        return ascllLenLimit;
-    }
-
-    /**
-     */
-    public GatewayOutConfig withAscllLenLimit(Integer ascllLenLimit) {
-        this.setAscllLenLimit(ascllLenLimit);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.ascll_len_limit
-     *
-     * @param ascllLenLimit the value for tbl_gateway_out_config.ascll_len_limit
-     */
-    public void setAscllLenLimit(Integer ascllLenLimit) {
-        this.ascllLenLimit = ascllLenLimit;
-    }
-
-    /**
-     * This method returns the value of the database column tbl_gateway_out_config.ascll_sign_len
-     *
-     * @return the value of tbl_gateway_out_config.ascll_sign_len
-     */
-    public Integer getAscllSignLen() {
-        return ascllSignLen;
-    }
-
-    /**
-     */
-    public GatewayOutConfig withAscllSignLen(Integer ascllSignLen) {
-        this.setAscllSignLen(ascllSignLen);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.ascll_sign_len
-     *
-     * @param ascllSignLen the value for tbl_gateway_out_config.ascll_sign_len
-     */
-    public void setAscllSignLen(Integer ascllSignLen) {
-        this.ascllSignLen = ascllSignLen;
     }
 
     /**
@@ -1076,56 +836,6 @@ public class GatewayOutConfig implements Serializable {
      */
     public void setServiceCode(String serviceCode) {
         this.serviceCode = serviceCode;
-    }
-
-    /**
-     * This method returns the value of the database column tbl_gateway_out_config.is_send_without_sign
-     *
-     * @return the value of tbl_gateway_out_config.is_send_without_sign
-     */
-    public Integer getIsSendWithoutSign() {
-        return isSendWithoutSign;
-    }
-
-    /**
-     */
-    public GatewayOutConfig withIsSendWithoutSign(Integer isSendWithoutSign) {
-        this.setIsSendWithoutSign(isSendWithoutSign);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.is_send_without_sign
-     *
-     * @param isSendWithoutSign the value for tbl_gateway_out_config.is_send_without_sign
-     */
-    public void setIsSendWithoutSign(Integer isSendWithoutSign) {
-        this.isSendWithoutSign = isSendWithoutSign;
-    }
-
-    /**
-     * This method returns the value of the database column tbl_gateway_out_config.content_without_sign
-     *
-     * @return the value of tbl_gateway_out_config.content_without_sign
-     */
-    public String getContentWithoutSign() {
-        return contentWithoutSign;
-    }
-
-    /**
-     */
-    public GatewayOutConfig withContentWithoutSign(String contentWithoutSign) {
-        this.setContentWithoutSign(contentWithoutSign);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.content_without_sign
-     *
-     * @param contentWithoutSign the value for tbl_gateway_out_config.content_without_sign
-     */
-    public void setContentWithoutSign(String contentWithoutSign) {
-        this.contentWithoutSign = contentWithoutSign;
     }
 
     /**
@@ -1333,13 +1043,13 @@ public class GatewayOutConfig implements Serializable {
      *
      * @return the value of tbl_gateway_out_config.deposit
      */
-    public Long getDeposit() {
+    public BigDecimal getDeposit() {
         return deposit;
     }
 
     /**
      */
-    public GatewayOutConfig withDeposit(Long deposit) {
+    public GatewayOutConfig withDeposit(BigDecimal deposit) {
         this.setDeposit(deposit);
         return this;
     }
@@ -1349,7 +1059,7 @@ public class GatewayOutConfig implements Serializable {
      *
      * @param deposit the value for tbl_gateway_out_config.deposit
      */
-    public void setDeposit(Long deposit) {
+    public void setDeposit(BigDecimal deposit) {
         this.deposit = deposit;
     }
 
@@ -1358,13 +1068,13 @@ public class GatewayOutConfig implements Serializable {
      *
      * @return the value of tbl_gateway_out_config.rate
      */
-    public Long getRate() {
+    public BigDecimal getRate() {
         return rate;
     }
 
     /**
      */
-    public GatewayOutConfig withRate(Long rate) {
+    public GatewayOutConfig withRate(BigDecimal rate) {
         this.setRate(rate);
         return this;
     }
@@ -1374,7 +1084,7 @@ public class GatewayOutConfig implements Serializable {
      *
      * @param rate the value for tbl_gateway_out_config.rate
      */
-    public void setRate(Long rate) {
+    public void setRate(BigDecimal rate) {
         this.rate = rate;
     }
 
@@ -1483,13 +1193,13 @@ public class GatewayOutConfig implements Serializable {
      *
      * @return the value of tbl_gateway_out_config.credit_rate
      */
-    public Long getCreditRate() {
+    public BigDecimal getCreditRate() {
         return creditRate;
     }
 
     /**
      */
-    public GatewayOutConfig withCreditRate(Long creditRate) {
+    public GatewayOutConfig withCreditRate(BigDecimal creditRate) {
         this.setCreditRate(creditRate);
         return this;
     }
@@ -1499,7 +1209,7 @@ public class GatewayOutConfig implements Serializable {
      *
      * @param creditRate the value for tbl_gateway_out_config.credit_rate
      */
-    public void setCreditRate(Long creditRate) {
+    public void setCreditRate(BigDecimal creditRate) {
         this.creditRate = creditRate;
     }
 
@@ -1954,81 +1664,6 @@ public class GatewayOutConfig implements Serializable {
     }
 
     /**
-     * This method returns the value of the database column tbl_gateway_out_config.min_sale_cost
-     *
-     * @return the value of tbl_gateway_out_config.min_sale_cost
-     */
-    public Long getMinSaleCost() {
-        return minSaleCost;
-    }
-
-    /**
-     */
-    public GatewayOutConfig withMinSaleCost(Long minSaleCost) {
-        this.setMinSaleCost(minSaleCost);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.min_sale_cost
-     *
-     * @param minSaleCost the value for tbl_gateway_out_config.min_sale_cost
-     */
-    public void setMinSaleCost(Long minSaleCost) {
-        this.minSaleCost = minSaleCost;
-    }
-
-    /**
-     * This method returns the value of the database column tbl_gateway_out_config.actual_sale_price
-     *
-     * @return the value of tbl_gateway_out_config.actual_sale_price
-     */
-    public Long getActualSalePrice() {
-        return actualSalePrice;
-    }
-
-    /**
-     */
-    public GatewayOutConfig withActualSalePrice(Long actualSalePrice) {
-        this.setActualSalePrice(actualSalePrice);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.actual_sale_price
-     *
-     * @param actualSalePrice the value for tbl_gateway_out_config.actual_sale_price
-     */
-    public void setActualSalePrice(Long actualSalePrice) {
-        this.actualSalePrice = actualSalePrice;
-    }
-
-    /**
-     * This method returns the value of the database column tbl_gateway_out_config.sale_commission_prop
-     *
-     * @return the value of tbl_gateway_out_config.sale_commission_prop
-     */
-    public Long getSaleCommissionProp() {
-        return saleCommissionProp;
-    }
-
-    /**
-     */
-    public GatewayOutConfig withSaleCommissionProp(Long saleCommissionProp) {
-        this.setSaleCommissionProp(saleCommissionProp);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.sale_commission_prop
-     *
-     * @param saleCommissionProp the value for tbl_gateway_out_config.sale_commission_prop
-     */
-    public void setSaleCommissionProp(Long saleCommissionProp) {
-        this.saleCommissionProp = saleCommissionProp;
-    }
-
-    /**
      * This method returns the value of the database column tbl_gateway_out_config.is_use_platform_handle
      *
      * @return the value of tbl_gateway_out_config.is_use_platform_handle
@@ -2058,13 +1693,13 @@ public class GatewayOutConfig implements Serializable {
      *
      * @return the value of tbl_gateway_out_config.platform_handle_prop
      */
-    public Long getPlatformHandleProp() {
+    public BigDecimal getPlatformHandleProp() {
         return platformHandleProp;
     }
 
     /**
      */
-    public GatewayOutConfig withPlatformHandleProp(Long platformHandleProp) {
+    public GatewayOutConfig withPlatformHandleProp(BigDecimal platformHandleProp) {
         this.setPlatformHandleProp(platformHandleProp);
         return this;
     }
@@ -2074,7 +1709,7 @@ public class GatewayOutConfig implements Serializable {
      *
      * @param platformHandleProp the value for tbl_gateway_out_config.platform_handle_prop
      */
-    public void setPlatformHandleProp(Long platformHandleProp) {
+    public void setPlatformHandleProp(BigDecimal platformHandleProp) {
         this.platformHandleProp = platformHandleProp;
     }
 
@@ -2704,6 +2339,31 @@ public class GatewayOutConfig implements Serializable {
     }
 
     /**
+     * This method returns the value of the database column tbl_gateway_out_config.operator_id
+     *
+     * @return the value of tbl_gateway_out_config.operator_id
+     */
+    public Integer getOperatorId() {
+        return operatorId;
+    }
+
+    /**
+     */
+    public GatewayOutConfig withOperatorId(Integer operatorId) {
+        this.setOperatorId(operatorId);
+        return this;
+    }
+
+    /**
+     * This method sets the value of the database column tbl_gateway_out_config.operator_id
+     *
+     * @param operatorId the value for tbl_gateway_out_config.operator_id
+     */
+    public void setOperatorId(Integer operatorId) {
+        this.operatorId = operatorId;
+    }
+
+    /**
      * This method returns the value of the database column tbl_gateway_out_config.isabled
      *
      * @return the value of tbl_gateway_out_config.isabled
@@ -2755,107 +2415,7 @@ public class GatewayOutConfig implements Serializable {
 
     /**
      */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", tblGatewayOutConfigId=").append(tblGatewayOutConfigId);
-        sb.append(", customerId=").append(customerId);
-        sb.append(", customerType=").append(customerType);
-        sb.append(", enterpriseCode=").append(enterpriseCode);
-        sb.append(", accessType=").append(accessType);
-        sb.append(", agreeType=").append(agreeType);
-        sb.append(", gatewayNode=").append(gatewayNode);
-        sb.append(", enterpriseIp=").append(enterpriseIp);
-        sb.append(", enterprisePort=").append(enterprisePort);
-        sb.append(", enterpriseAccount=").append(enterpriseAccount);
-        sb.append(", enterprisePwd=").append(enterprisePwd);
-        sb.append(", gatewayAccessCode=").append(gatewayAccessCode);
-        sb.append(", spAccessCode=").append(spAccessCode);
-        sb.append(", msgAccessCode=").append(msgAccessCode);
-        sb.append(", transAccessCode=").append(transAccessCode);
-        sb.append(", binaryMsgLenLimit=").append(binaryMsgLenLimit);
-        sb.append(", spMsgLenLimit=").append(spMsgLenLimit);
-        sb.append(", fixedSignLocation=").append(fixedSignLocation);
-        sb.append(", longMsgExtraNum=").append(longMsgExtraNum);
-        sb.append(", isAscllSupported=").append(isAscllSupported);
-        sb.append(", ascllLenLimit=").append(ascllLenLimit);
-        sb.append(", ascllSignLen=").append(ascllSignLen);
-        sb.append(", ascllSign=").append(ascllSign);
-        sb.append(", serviceCode=").append(serviceCode);
-        sb.append(", isSendWithoutSign=").append(isSendWithoutSign);
-        sb.append(", contentWithoutSign=").append(contentWithoutSign);
-        sb.append(", isNeedPrefix=").append(isNeedPrefix);
-        sb.append(", moPattern=").append(moPattern);
-        sb.append(", moGatewayId=").append(moGatewayId);
-        sb.append(", reportMsgType=").append(reportMsgType);
-        sb.append(", sendFlowThreshold=").append(sendFlowThreshold);
-        sb.append(", replyFlowThreshold=").append(replyFlowThreshold);
-        sb.append(", isUsed=").append(isUsed);
-        sb.append(", payType=").append(payType);
-        sb.append(", deposit=").append(deposit);
-        sb.append(", rate=").append(rate);
-        sb.append(", rechargeNumLimit=").append(rechargeNumLimit);
-        sb.append(", isOnlineRechargeUsed=").append(isOnlineRechargeUsed);
-        sb.append(", remainderMsgNum=").append(remainderMsgNum);
-        sb.append(", pledgeNum=").append(pledgeNum);
-        sb.append(", creditRate=").append(creditRate);
-        sb.append(", auditType=").append(auditType);
-        sb.append(", priority=").append(priority);
-        sb.append(", maxConnectNum=").append(maxConnectNum);
-        sb.append(", useTime=").append(useTime);
-        sb.append(", invalidTime=").append(invalidTime);
-        sb.append(", isForcedSign=").append(isForcedSign);
-        sb.append(", signContent=").append(signContent);
-        sb.append(", signLocation=").append(signLocation);
-        sb.append(", isMustSign=").append(isMustSign);
-        sb.append(", auditNum=").append(auditNum);
-        sb.append(", isUseBlacklist=").append(isUseBlacklist);
-        sb.append(", isUseWhitelist=").append(isUseWhitelist);
-        sb.append(", isUseSysRedlistWhitelist=").append(isUseSysRedlistWhitelist);
-        sb.append(", isUseKeywordIncpt=").append(isUseKeywordIncpt);
-        sb.append(", longMsgPackType=").append(longMsgPackType);
-        sb.append(", isAutoReturn=").append(isAutoReturn);
-        sb.append(", isIncptLongAccessCode=").append(isIncptLongAccessCode);
-        sb.append(", spDesc=").append(spDesc);
-        sb.append(", minSaleCost=").append(minSaleCost);
-        sb.append(", actualSalePrice=").append(actualSalePrice);
-        sb.append(", saleCommissionProp=").append(saleCommissionProp);
-        sb.append(", isUsePlatformHandle=").append(isUsePlatformHandle);
-        sb.append(", platformHandleProp=").append(platformHandleProp);
-        sb.append(", handleRepProp=").append(handleRepProp);
-        sb.append(", handleRepRealtimeProp=").append(handleRepRealtimeProp);
-        sb.append(", handleRepReturnTime=").append(handleRepReturnTime);
-        sb.append(", platformHandleUnknowProp=").append(platformHandleUnknowProp);
-        sb.append(", wrongNumSucPorp=").append(wrongNumSucPorp);
-        sb.append(", wrongNumUnknowPorp=").append(wrongNumUnknowPorp);
-        sb.append(", wrongReportSucProp=").append(wrongReportSucProp);
-        sb.append(", isUseOvertimeChange=").append(isUseOvertimeChange);
-        sb.append(", changeOvertimeProp=").append(changeOvertimeProp);
-        sb.append(", changeOvertimeStartTime=").append(changeOvertimeStartTime);
-        sb.append(", changeOvertimeEndTime=").append(changeOvertimeEndTime);
-        sb.append(", isUseAuditKeyword=").append(isUseAuditKeyword);
-        sb.append(", userSendLimit=").append(userSendLimit);
-        sb.append(", isUseNumShunt=").append(isUseNumShunt);
-        sb.append(", isUseBalanceNotice=").append(isUseBalanceNotice);
-        sb.append(", balNoticeNum=").append(balNoticeNum);
-        sb.append(", balNoticeContent=").append(balNoticeContent);
-        sb.append(", balNoticeInterval=").append(balNoticeInterval);
-        sb.append(", balNoticeTime=").append(balNoticeTime);
-        sb.append(", isUseHttp=").append(isUseHttp);
-        sb.append(", httpBindIp=").append(httpBindIp);
-        sb.append(", isUsePush=").append(isUsePush);
-        sb.append(", httpReplyAddress=").append(httpReplyAddress);
-        sb.append(", httpReportAddress=").append(httpReportAddress);
-        sb.append(", httpReportReplyAddress=").append(httpReportReplyAddress);
-        sb.append(", operatorId=").append(operatorId);
-        sb.append(", isabled=").append(isabled);
-        sb.append(", createTime=").append(createTime);
-        sb.append("]");
-        return sb.toString();
-    }
+
 
 
 }

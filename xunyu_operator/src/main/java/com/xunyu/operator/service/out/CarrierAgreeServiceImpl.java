@@ -19,7 +19,7 @@ public class CarrierAgreeServiceImpl implements CarrierAgreeService{
     CarrierAgreeDaoImpl dao;
 
     @Override
-    public List<CarrierAgree> selectCarrierAgree() {
-        return dao.selectCarrierAgreeList();
+    public List<CarrierAgree> selectCarrierAgree(Integer carrierType) {
+        return dao.selectCarrierAgreeList(carrierType);
     }
 }

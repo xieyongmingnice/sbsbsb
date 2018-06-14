@@ -10,5 +10,10 @@ import java.util.List;
  * @date 2018/6/12 17:13
  */
 public interface CarrierAgreeService {
-    List<CarrierAgree> selectCarrierAgree();
+    /**
+     * 根据{运营商类型}查找协议
+     * @param carrierType 运营商类型
+     * @return 协议列表
+     */
+    List<CarrierAgree> selectCarrierAgree(Integer carrierType);
 }
