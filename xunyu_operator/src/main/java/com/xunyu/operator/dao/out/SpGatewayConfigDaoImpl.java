@@ -22,6 +22,15 @@ public class SpGatewayConfigDaoImpl extends BaseDao{
         return insert("com.xunyu.operator.pojo.out.SpGatewayConfig.insertSpGatewayConfig",model);
     }
 
+    /**
+     * 新增sp网关接出配置
+     * @param model
+     * @return
+     */
+    public int deleteSpGatewayConfig(GatewayOutConfigModel model){
+        return update("com.xunyu.operator.pojo.out.SpGatewayConfig.deleteSpGatewayConfig",model);
+    }
+
 
     public SpGatewayConfigDaoImpl(SqlSessionFactory sqlSessionFactory) {
         super(sqlSessionFactory);

@@ -18,7 +18,7 @@ public class SpGatewayConfig implements Serializable {
     /**
      *   运营商类型
      */
-    private Integer agreeType;
+    private Integer carrierAgreeId;
 
     /**
      * 网关接出配置id
@@ -130,29 +130,12 @@ public class SpGatewayConfig implements Serializable {
         this.spGatewayConifgId = spGatewayConifgId;
     }
 
-    /**
-     * This method returns the value of the database column tbl_sp_gateway_conifg.agree_type
-     *
-     * @return the value of tbl_sp_gateway_conifg.agree_type
-     */
-    public Integer getAgreeType() {
-        return agreeType;
+    public Integer getCarrierAgreeId() {
+        return carrierAgreeId;
     }
 
-    /**
-     */
-    public SpGatewayConfig withAgreeType(Integer agreeType) {
-        this.setAgreeType(agreeType);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_sp_gateway_conifg.agree_type
-     *
-     * @param agreeType the value for tbl_sp_gateway_conifg.agree_type
-     */
-    public void setAgreeType(Integer agreeType) {
-        this.agreeType = agreeType;
+    public void setCarrierAgreeId(Integer carrierAgreeId) {
+        this.carrierAgreeId = carrierAgreeId;
     }
 
     /**
@@ -589,7 +572,7 @@ public class SpGatewayConfig implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", spGatewayConifgId=").append(spGatewayConifgId);
-        sb.append(", agreeType=").append(agreeType);
+        sb.append(", carrierAgreeId=").append(carrierAgreeId);
         sb.append(", gatewayOutConfigId=").append(gatewayOutConfigId);
         sb.append(", configId=").append(configId);
         sb.append(", gatewayAccessCode=").append(gatewayAccessCode);
@@ -611,66 +594,5 @@ public class SpGatewayConfig implements Serializable {
         return sb.toString();
     }
 
-    /**
-     */
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        SpGatewayConfig other = (SpGatewayConfig) that;
-        return (this.getSpGatewayConifgId() == null ? other.getSpGatewayConifgId() == null : this.getSpGatewayConifgId().equals(other.getSpGatewayConifgId()))
-            && (this.getAgreeType() == null ? other.getAgreeType() == null : this.getAgreeType().equals(other.getAgreeType()))
-            && (this.getGatewayOutConfigId() == null ? other.getGatewayOutConfigId() == null : this.getGatewayOutConfigId().equals(other.getGatewayOutConfigId()))
-            && (this.getConfigId() == null ? other.getConfigId() == null : this.getConfigId().equals(other.getConfigId()))
-            && (this.getGatewayAccessCode() == null ? other.getGatewayAccessCode() == null : this.getGatewayAccessCode().equals(other.getGatewayAccessCode()))
-            && (this.getBinaryMsgLenLimit() == null ? other.getBinaryMsgLenLimit() == null : this.getBinaryMsgLenLimit().equals(other.getBinaryMsgLenLimit()))
-            && (this.getSpMsgLenLimit() == null ? other.getSpMsgLenLimit() == null : this.getSpMsgLenLimit().equals(other.getSpMsgLenLimit()))
-            && (this.getFixedSignLocation() == null ? other.getFixedSignLocation() == null : this.getFixedSignLocation().equals(other.getFixedSignLocation()))
-            && (this.getLongMsgExtraNum() == null ? other.getLongMsgExtraNum() == null : this.getLongMsgExtraNum().equals(other.getLongMsgExtraNum()))
-            && (this.getIsAscllSupported() == null ? other.getIsAscllSupported() == null : this.getIsAscllSupported().equals(other.getIsAscllSupported()))
-            && (this.getAscllLenLimit() == null ? other.getAscllLenLimit() == null : this.getAscllLenLimit().equals(other.getAscllLenLimit()))
-            && (this.getAscllSignLen() == null ? other.getAscllSignLen() == null : this.getAscllSignLen().equals(other.getAscllSignLen()))
-            && (this.getIsSendWithoutSign() == null ? other.getIsSendWithoutSign() == null : this.getIsSendWithoutSign().equals(other.getIsSendWithoutSign()))
-            && (this.getContentWithoutSign() == null ? other.getContentWithoutSign() == null : this.getContentWithoutSign().equals(other.getContentWithoutSign()))
-            && (this.getMinSaleCost() == null ? other.getMinSaleCost() == null : this.getMinSaleCost().equals(other.getMinSaleCost()))
-            && (this.getActualSalePrice() == null ? other.getActualSalePrice() == null : this.getActualSalePrice().equals(other.getActualSalePrice()))
-            && (this.getSaleCommissionProp() == null ? other.getSaleCommissionProp() == null : this.getSaleCommissionProp().equals(other.getSaleCommissionProp()))
-            && (this.getIsabled() == null ? other.getIsabled() == null : this.getIsabled().equals(other.getIsabled()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
-    }
 
-    /**
-     */
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getSpGatewayConifgId() == null) ? 0 : getSpGatewayConifgId().hashCode());
-        result = prime * result + ((getAgreeType() == null) ? 0 : getAgreeType().hashCode());
-        result = prime * result + ((getGatewayOutConfigId() == null) ? 0 : getGatewayOutConfigId().hashCode());
-        result = prime * result + ((getConfigId() == null) ? 0 : getConfigId().hashCode());
-        result = prime * result + ((getGatewayAccessCode() == null) ? 0 : getGatewayAccessCode().hashCode());
-        result = prime * result + ((getBinaryMsgLenLimit() == null) ? 0 : getBinaryMsgLenLimit().hashCode());
-        result = prime * result + ((getSpMsgLenLimit() == null) ? 0 : getSpMsgLenLimit().hashCode());
-        result = prime * result + ((getFixedSignLocation() == null) ? 0 : getFixedSignLocation().hashCode());
-        result = prime * result + ((getLongMsgExtraNum() == null) ? 0 : getLongMsgExtraNum().hashCode());
-        result = prime * result + ((getIsAscllSupported() == null) ? 0 : getIsAscllSupported().hashCode());
-        result = prime * result + ((getAscllLenLimit() == null) ? 0 : getAscllLenLimit().hashCode());
-        result = prime * result + ((getAscllSignLen() == null) ? 0 : getAscllSignLen().hashCode());
-        result = prime * result + ((getIsSendWithoutSign() == null) ? 0 : getIsSendWithoutSign().hashCode());
-        result = prime * result + ((getContentWithoutSign() == null) ? 0 : getContentWithoutSign().hashCode());
-        result = prime * result + ((getMinSaleCost() == null) ? 0 : getMinSaleCost().hashCode());
-        result = prime * result + ((getActualSalePrice() == null) ? 0 : getActualSalePrice().hashCode());
-        result = prime * result + ((getSaleCommissionProp() == null) ? 0 : getSaleCommissionProp().hashCode());
-        result = prime * result + ((getIsabled() == null) ? 0 : getIsabled().hashCode());
-        result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
-        return result;
-    }
 }

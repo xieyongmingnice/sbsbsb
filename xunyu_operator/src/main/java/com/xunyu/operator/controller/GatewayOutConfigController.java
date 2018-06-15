@@ -172,7 +172,7 @@ public class GatewayOutConfigController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/getList")
+    @RequestMapping(value = "/getConfigList")
     @ResponseBody
     public Result<List<GatewayOutConfigListVO>> getGatewayOutListConfig(GatewayOutConfigModel model){
         User user = redisUtil.getCurrUser(model.getSessionId());
@@ -180,8 +180,44 @@ public class GatewayOutConfigController {
         if (result.getMessage() != null){
             return result;
         }
+        int currPage = model.getCurrPage();
+        if (currPage == 0){
+            result.setMessage(ResultMessage.Message.PRAMA_LOSS);
+            result.setCode(ResultMessage.Code.PRAMA_LOSS);
+            return result;
+        }
+        model.setOffset(model.getStartRows());
+        int totalRows = gatewayOutConfigService.selectConfigListCount(model);
+        List<GatewayOutConfigListVO> list = gatewayOutConfigService.selectConfigList(model);
+        if (list != null && list.size() > 0){
+            result.setCode(ResultMessage.Code.SUCCESS);
+            result.setMessage(ResultMessage.Message.SUCCESS);
+            result.setRes(list);
+            result.setTotalRows(totalRows);
+        }else {
+            result.setCode(ResultMessage.Code.SUCCESS);
+            result.setMessage(ResultMessage.Message.NO_VALUE);
+        }
         return result;
     }
+
+    /**
+     * 删除
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/deleteConfig")
+    @ResponseBody
+    public Result<String> deleteGatewayOutConfig(GatewayOutConfigModel model){
+        User user = redisUtil.getCurrUser(model.getSessionId());
+        Result result = checkLogin(new Result(),user);
+        if (result.getMessage() != null){
+            return result;
+        }
+
+        return null;
+    }
+
 
     /**
      * 检查是否登录或会话是否过期

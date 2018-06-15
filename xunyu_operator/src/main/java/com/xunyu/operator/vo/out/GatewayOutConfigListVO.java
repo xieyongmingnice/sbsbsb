@@ -2,6 +2,7 @@ package com.xunyu.operator.vo.out;
 
 import com.xunyu.operator.pojo.access.OperAccessCoreConfig;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,8 @@ import java.util.List;
  * @description 网关接出配置列表VO
  * @date 2018/6/14 12:03
  */
-public class GatewayOutConfigListVO {
+public class GatewayOutConfigListVO implements Serializable{
+    private static final long serialVersionUID = -1938592598948089150L;
     /**
      * 主键
      */
@@ -23,7 +25,7 @@ public class GatewayOutConfigListVO {
     /**
      * 接出网关名称(网关接入码)
      */
-    private String accessCode;
+    private String channelName;
 
     /**
      * 用户类型str
@@ -66,6 +68,11 @@ public class GatewayOutConfigListVO {
     private String operatorName;
 
     /**
+     * 是否有效
+     */
+    private Integer isabled;
+
+    /**
      * 网关节点列表
      */
     private List<OperAccessCoreConfig> operAccessCoreConfigList;
@@ -86,12 +93,12 @@ public class GatewayOutConfigListVO {
         this.agreeTypeStr = agreeTypeStr;
     }
 
-    public String getAccessCode() {
-        return accessCode;
+    public String getChannelName() {
+        return channelName;
     }
 
-    public void setAccessCode(String accessCode) {
-        this.accessCode = accessCode;
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
     }
 
     public String getCustomerType() {
@@ -164,5 +171,13 @@ public class GatewayOutConfigListVO {
 
     public void setOperAccessCoreConfigList(List<OperAccessCoreConfig> operAccessCoreConfigList) {
         this.operAccessCoreConfigList = operAccessCoreConfigList;
+    }
+
+    public Integer getIsabled() {
+        return isabled;
+    }
+
+    public void setIsabled(Integer isabled) {
+        this.isabled = isabled;
     }
 }

@@ -6,6 +6,7 @@
     <result column="carrier_type" jdbcType="INTEGER" property="carrierType" />
     <result column="customer_id" jdbcType="INTEGER" property="customerId" />
     <result column="customer_type" jdbcType="INTEGER" property="customerType" />
+    <result column="carrier_agree_id" jdbcType="INTEGER" property="carrierAgreeId" />
     <result column="enterprise_code" jdbcType="VARCHAR" property="enterpriseCode" />
     <result column="access_type" jdbcType="INTEGER" property="accessType" />
     <result column="enterprise_ip" jdbcType="VARCHAR" property="enterpriseIp" />
@@ -86,21 +87,22 @@
 
   <resultMap id="ListResultMap" type="com.xunyu.operator.vo.out.GatewayOutConfigListVO">
     <id column="gateway_out_config_id" jdbcType="INTEGER" property="gatewayOutConfigId" />
-    <id column="agreeName" jdbcType="INTEGER" property="agreeTypeStr" />
-    <id column="access_code" jdbcType="INTEGER" property="accessCode" />
-    <id column="customer_type" jdbcType="INTEGER" property="customerType" />
-    <id column="enterprise_ip" jdbcType="INTEGER" property="enterpriseIp" />
-    <id column="enter_contact" jdbcType="INTEGER" property="enterContact" />
-    <id column="customer_name" jdbcType="INTEGER" property="customerName" />
-    <id column="sp_access_code" jdbcType="INTEGER" property="spAccessCode" />
-    <id column="remainder_msg_num" jdbcType="INTEGER" property="remainderMsgNum" />
-    <id column="is_used" jdbcType="INTEGER" property="isUsed" />
-    <!--<id column="gateway_out_config_id" jdbcType="INTEGER" property="operatorName" />-->
+    <result column="agree_name" jdbcType="INTEGER" property="agreeTypeStr" />
+    <result column="channel_name" jdbcType="VARCHAR" property="channelName" />
+    <result column="customer_type" jdbcType="INTEGER" property="customerType" />
+    <result column="enterprise_ip" jdbcType="INTEGER" property="enterpriseIp" />
+    <result column="enter_contact" jdbcType="INTEGER" property="enterContact" />
+    <result column="customer_name" jdbcType="INTEGER" property="customerName" />
+    <result column="sp_access_code" jdbcType="INTEGER" property="spAccessCode" />
+    <result column="remainder_msg_num" jdbcType="INTEGER" property="remainderMsgNum" />
+    <result column="is_used" jdbcType="INTEGER" property="isUsed" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <!--<result column="operator_name" jdbcType="INTEGER" property="operatorName" />-->
   </resultMap>
 
 
   <sql id="Base_Column_List">
-    gateway_out_config_id, carrier_type, customer_id, customer_type, enterprise_code, 
+    gateway_out_config_id, carrier_type, customer_id, customer_type, enterprise_code, carrier_agree_id,
     access_type, enterprise_ip, enterprise_port, enterprise_account, enterprise_pwd, 
     sp_access_code, msg_access_code, trans_access_code, node_code,
     fixed_sign_location, ascll_sign, service_code, is_need_prefix, mo_pattern, mo_gateway_id, 
@@ -124,22 +126,89 @@
   </select>
 
   <!-- 查询列表 -->
-  <!-- <resultMap id="ListResultMap" type="com.xunyu.operator.vo.out.GatewayOutConfigListVO">
-    <id column="gateway_out_config_id" jdbcType="INTEGER" property="gatewayOutConfigId" />
-    <id column="agreeName" jdbcType="INTEGER" property="agreeTypeStr" />
-    <id column="access_code" jdbcType="INTEGER" property="accessCode" />
-    <id column="customer_type" jdbcType="INTEGER" property="customerType" />
-    <id column="enterprise_ip" jdbcType="INTEGER" property="enterpriseIp" />
-    <id column="enter_contact" jdbcType="INTEGER" property="enterContact" />
-    <id column="customer_name" jdbcType="INTEGER" property="customerName" />
-    <id column="sp_access_code" jdbcType="INTEGER" property="spAccessCode" />
-    <id column="remainder_msg_num" jdbcType="INTEGER" property="remainderMsgNum" />
-    <id column="is_used" jdbcType="INTEGER" property="isUsed" />
-    <id column="gateway_out_config_id" jdbcType="INTEGER" property="operatorName" />-->
-  <!--<select id="selectConfigList" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel" resultMap="ListResultMap">-->
-    <!--select from tbl_gateway_out_config out , tbl_carrier_agree,tbl_users,-->
+  <select id="selectConfigList" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel" resultMap="ListResultMap">
+    select
+      o.gateway_out_config_id,a.agree_name,c.channel_name,o.customer_type,o.enterprise_ip,cus.enter_contact,
+      cus.customer_name,o.sp_access_code,o.remainder_msg_num,o.is_used,o.isabled
+    from tbl_gateway_out_config o
+    LEFT JOIN tbl_sp_gateway_config s on s.gateway_out_config_id = o.gateway_out_config_id
+    LEFT JOIN tbl_gateway_access_config c on s.config_id = c.config_id
+    LEFT JOIN tbl_carrier_agree a on o.carrier_agree_id = a.carrier_agree_id
+    LEFT JOIN tbl_customer cus on o.customer_id = cus.customer_id
+    where 1=1
+    <if test="configId != null and configId != 0">
+      and c.config_id = #{configId,jdbcType=INTEGER}
+    </if>
+    <if test="customerType != null and customerType != 0">
+      and out.customer_type = #{customerType,jdbcType=INTEGER}
+    </if>
+    <if test="carrierAgreeId != null and carrierAgreeId != 0">
+      and out.carrier_agree_id = #{carrierAgreeId,jdbcType=INTEGER}
+    </if>
+    <if test="spAccessCode != null and spAccessCode != '' ">
+      and out.sp_access_code like concat('%',#{spAccessCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="enterpriseIp != null and enterpriseIp != '' ">
+      and out.enterprise_ip like concat('%',#{enterpriseIp,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="enterpriseCode != null and enterpriseCode != '' ">
+      and out.enterprise_code like concat('%',#{enterpriseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="enterContact != null and enterContact != '' ">
+      and cus.enter_contact like concat('%',#{enterContact,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="customerName != null and customerName != ''">
+      and cus.customer_name like concat('%',#{customerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="isUsed != null">
+      and out.is_used = #{isUsed,jdbcType=INTEGER}
+    </if>
+    limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+    <!--<if test="operatorId != null and operatorId != 0">-->
+      <!---->
+    <!--</if>-->
+  </select>
 
-  <!--</select>-->
+  <!-- 查询列表记录总条数 -->
+  <select id="selectConfigListCount" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel" resultType="java.lang.Integer">
+    select count(1)
+    from tbl_gateway_out_config
+    where 1=1
+    <if test="configId != null and configId != 0">
+      and c.config_id = #{configId,jdbcType=INTEGER}
+    </if>
+    <if test="customerType != null and customerType != 0">
+      and out.customer_type = #{customerType,jdbcType=INTEGER}
+    </if>
+    <if test="carrierAgreeId != null and carrierAgreeId != 0">
+      and out.carrier_agree_id = #{carrierAgreeId,jdbcType=INTEGER}
+    </if>
+    <if test="spAccessCode != null and spAccessCode != '' ">
+      and out.sp_access_code like concat('%',#{spAccessCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="enterpriseIp != null and enterpriseIp != '' ">
+      and out.enterprise_ip like concat('%',#{enterpriseIp,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="enterpriseCode != null and enterpriseCode != '' ">
+      and out.enterprise_code like concat('%',#{enterpriseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="enterContact != null and enterContact != '' ">
+      and cus.enter_contact like concat('%',#{enterContact,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="customerName != null and customerName != ''">
+      and cus.customer_name like concat('%',#{customerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="isUsed != null">
+      and out.is_used = #{isUsed,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <!-- 删除 -->
+  <update id="deleteGatewayOutConfig" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel">
+    update tbl_gateway_out_config
+    set isabled = 0
+    where gateway_out_config_id = #{gatewayOutConfigId,jdbcType=INTEGER}
+  </update>
 
   <!-- 插入 -->
   <insert id="insertGatewayOutConfig" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel" useGeneratedKeys="true" keyProperty="gatewayOutConfigId">
@@ -151,12 +220,16 @@
       <if test="carrierType != null">
         carrier_type,
       </if>
+      <if test="carrierAgreeId != null">
+        carrier_agree_id,
+      </if>
       <if test="customerId != null">
         customer_id,
       </if>
       <if test="customerType != null">
         customer_type,
       </if>
+
       <if test="enterpriseCode != null">
         enterprise_code,
       </if>
@@ -394,12 +467,16 @@
       <if test="carrierType != null">
         #{carrierType,jdbcType=INTEGER},
       </if>
+      <if test="carrierAgreeId != null">
+        #{carrierAgreeId,jdbcType=VARCHAR},
+      </if>
       <if test="customerId != null">
         #{customerId,jdbcType=INTEGER},
       </if>
       <if test="customerType != null">
         #{customerType,jdbcType=INTEGER},
       </if>
+
       <if test="enterpriseCode != null">
         #{enterpriseCode,jdbcType=VARCHAR},
       </if>

@@ -2,8 +2,11 @@ package com.xunyu.operator.dao.out;
 
 import com.commons.core.dao.impl.BaseDao;
 import com.xunyu.model.operator.out.GatewayOutConfigModel;
+import com.xunyu.operator.vo.out.GatewayOutConfigListVO;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author xym
@@ -32,6 +35,32 @@ public class GatewayOutConfigDaoImpl extends BaseDao {
         return insert("com.xunyu.operator.pojo.out.GatewayOutConfig.insertGatewayOutConfig",model);
     }
 
+    /**
+     * 查询网关接出配置列表
+     * @param model 参数类
+     * @return
+     */
+    public List<GatewayOutConfigListVO> selectConfigList(GatewayOutConfigModel model){
+        return selectList("com.xunyu.operator.pojo.out.GatewayOutConfig.selectConfigList",model);
+    }
+
+    /**
+     * 查询 查询列表时符合条件的总条数 便于分页
+     * @param model
+     * @return  条数
+     */
+    public int selectConfigListCount(GatewayOutConfigModel model){
+        return selectOne("com.xunyu.operator.pojo.out.GatewayOutConfig.selectConfigListCount",model);
+    }
+
+    /**
+     * 删除
+     * @param model
+     * @return
+     */
+    public int deleteGatewayOutConfig(GatewayOutConfigModel model){
+        return update("com.xunyu.operator.pojo.out.GatewayOutConfig.deleteGatewayOutConfig",model);
+    }
 
     public GatewayOutConfigDaoImpl(SqlSessionFactory sqlSessionFactory) {
         super(sqlSessionFactory);

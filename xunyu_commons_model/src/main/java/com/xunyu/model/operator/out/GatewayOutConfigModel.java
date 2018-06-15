@@ -96,6 +96,10 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
 
 
     /**
+     * 协议类型
+     */
+    private Integer carrierAgreeId;
+    /**
      *   号码是否需要86，1：是，0：否，默认否
      */
     private Integer isNeedPrefix;
@@ -500,6 +504,24 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
      * 接入码
      */
     private String accessCode;
+
+    /**
+     * 企业联系人
+     */
+    private String enterContact;
+
+    /**
+     * 企业名称
+     */
+    private String customerName;
+
+    public Integer getCarrierAgreeId() {
+        return carrierAgreeId;
+    }
+
+    public void setCarrierAgreeId(Integer carrierAgreeId) {
+        this.carrierAgreeId = carrierAgreeId;
+    }
 
     public String getAccessCode() {
         return accessCode;
@@ -1259,5 +1281,21 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
 
     public void setNodeCode(String nodeCode) {
         this.nodeCode = nodeCode;
+    }
+
+    public String getEnterContact() {
+        return enterContact;
+    }
+
+    public void setEnterContact(String enterContact) {
+        this.enterContact = enterContact;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 }

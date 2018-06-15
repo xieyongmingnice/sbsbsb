@@ -32,6 +32,11 @@ public class GatewayOutConfig implements Serializable{
     private Integer customerType;
 
     /**
+     * 协议类型
+     */
+    private Integer carrierAgreeId;
+
+    /**
      *   企业代码
      */
     private String enterpriseCode;
@@ -2127,6 +2132,14 @@ public class GatewayOutConfig implements Serializable{
     public GatewayOutConfig withBalNoticeContent(String balNoticeContent) {
         this.setBalNoticeContent(balNoticeContent);
         return this;
+    }
+
+    public Integer getCarrierAgreeId() {
+        return carrierAgreeId;
+    }
+
+    public void setCarrierAgreeId(Integer carrierAgreeId) {
+        this.carrierAgreeId = carrierAgreeId;
     }
 
     /**

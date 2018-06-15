@@ -3,8 +3,8 @@
 <mapper namespace="com.xunyu.operator.pojo.out.SpGatewayConfig">
   <resultMap id="BaseResultMap" type="com.xunyu.operator.pojo.out.SpGatewayConfig">
     <id column="sp_gateway_config_id" jdbcType="INTEGER" property="spGatewayConfigId" />
-    <result column="agree_type" jdbcType="INTEGER" property="agreeType" />
-    <result column="gateway_out_config_id" jdbcType="CHAR" property="gatewayOutConfigId" />
+    <result column="carrier_agree_id" jdbcType="INTEGER" property="carrierAgreeId" />
+    <result column="gateway_out_config_id" jdbcType="INTEGER" property="gatewayOutConfigId" />
     <result column="config_id" jdbcType="INTEGER" property="configId" />
     <result column="gateway_access_code" jdbcType="VARCHAR" property="gatewayAccessCode" />
     <result column="binary_msg_len_limit" jdbcType="INTEGER" property="binaryMsgLenLimit" />
@@ -24,18 +24,28 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    sp_gateway_config_id, agree_type, gateway_out_config_id, config_id, gateway_access_code,
+    sp_gateway_config_id, carrier_agree_id, gateway_out_config_id, config_id, gateway_access_code,
     binary_msg_len_limit, sp_msg_len_limit, fixed_sign_location, long_msg_extra_num, 
     is_ascll_supported, ascll_len_limit, ascll_sign_len, is_send_without_sign, content_without_sign, 
     min_sale_cost, actual_sale_price, sale_commission_prop, isabled, create_time
   </sql>
 
+  
+  
+  
+  <!-- 删除 -->
+  <update id="deleteSpGatewayConfig" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel">
+    update tbl_sp_gateway_config
+    set isabled = 0
+    where gateway_out_config_id = #{gatewayOutConfigId,jdbcType=INTEGER}
+  </update>
+  <!--新增-->
   <insert id="insertSpGatewayConfig" parameterType="com.xunyu.operator.pojo.out.SpGatewayConfig">
-    insert into tbl_sp_gateway_conifg
+    insert into tbl_sp_gateway_config
     <trim prefix="(" suffix=")" suffixOverrides=",">
 
-      <if test="agreeType != null">
-        agree_type,
+      <if test="carrierAgreeId != null">
+        carrier_agree_id,
       </if>
       <if test="gatewayOutConfigId != null">
         gateway_out_config_id,
@@ -91,11 +101,11 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
 
-      <if test="agreeType != null">
-        #{agreeType,jdbcType=INTEGER},
+      <if test="carrierAgreeId != null">
+        #{carrierAgreeId,jdbcType=INTEGER},
       </if>
       <if test="gatewayOutConfigId != null">
-        #{gatewayOutConfigId,jdbcType=CHAR},
+        #{gatewayOutConfigId,jdbcType=INTEGER},
       </if>
       <if test="configId != null">
         #{configId,jdbcType=INTEGER},
