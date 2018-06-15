@@ -139,7 +139,7 @@ public class KafkaConsumerZhe {
         KafkaConsumerZhe kk = new KafkaConsumerZhe();
         ArrayList<String> topics = new ArrayList<>();
         try {
-            topics.add("ding9");
+            topics.add("test2");
             kk.commitAuto(topics);
            // kk.commitControl(topics);
             //kk.setOffSet(topics);

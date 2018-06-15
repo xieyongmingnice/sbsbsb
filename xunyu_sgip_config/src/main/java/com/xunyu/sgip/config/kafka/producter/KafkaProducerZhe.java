@@ -2,13 +2,14 @@ package com.xunyu.sgip.config.kafka.producter;
 
 import com.xunyu.sgip.config.kafka.admin.AdminClientLocal;
 import com.xunyu.sgip.config.utils.GetProperties;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
+import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,7 +18,7 @@ import java.util.concurrent.Executors;
  * 消息提供者
  */
 public class KafkaProducerZhe {
-    private Logger log = LoggerFactory.getLogger(KafkaProducerZhe.class);
+    private static Log log = LogFactory.getLog(KafkaProducerZhe.class);
     private Properties properties = null;
     private final int NUM = 12;
     /**
@@ -105,13 +106,25 @@ public class KafkaProducerZhe {
     }
 
     public static void main(String[] args) {
-        GetProperties.getInstance();
-        KafkaProducerZhe kk = new KafkaProducerZhe();
+        // TODO Auto-generated method stub
+        while (true) {
+            // 每隔两秒log输出一下当前系统时间戳
+            try {
+                log.info("搜嘎-"+new Date().getTime());
+                Thread.sleep(2000);
+                //throw new Exception("exception msg");
+            }
+            catch (Exception e) {
+                log.error("error:" + e.getMessage());
+            }
+        }
+        //GetProperties.getInstance();
+        /*KafkaProducerZhe kk = new KafkaProducerZhe();
         try {
-          kk.sendMessage("ding13","http_ding",new byte[5],2,2);
+          kk.sendMessage("test2","http_ding",new byte[5],4,2);
         }catch (Exception e){
             e.printStackTrace();
         }
-        System.exit(0);
+        System.exit(0);*/
     }
 }
