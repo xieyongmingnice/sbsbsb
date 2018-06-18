@@ -107,12 +107,13 @@ public class KafkaProducerZhe {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        while (true) {
+        for (int i = 0; i < 5; i++) {
+
             // 每隔两秒log输出一下当前系统时间戳
             try {
-                log.info("搜嘎-"+new Date().getTime());
+                log.info("-info级别"+new Date().getTime());
                 Thread.sleep(2000);
-                //throw new Exception("exception msg");
+                log.error("error级别"+new Date().getTime());
             }
             catch (Exception e) {
                 log.error("error:" + e.getMessage());
