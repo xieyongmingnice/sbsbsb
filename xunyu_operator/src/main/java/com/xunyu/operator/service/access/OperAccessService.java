@@ -36,4 +36,9 @@ public interface OperAccessService {
      *修改状态
      */
     int delOperAccessCoreConfig(String ids,int isabled);
+
+    /**
+     * 删除、恢复
+     */
+    int delOperAccessConfigDelState(String ids,int delState);
 }

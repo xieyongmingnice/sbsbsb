@@ -150,6 +150,7 @@ public class OperAccessController {
             map.put("isable",ct.getIsable());
             map.put("gatewayNumber",ct.getGatewayNumber());
             map.put("agreeType",ct.getAgreeType());
+            map.put("channelName",ct.getChannelName());
             total = operAccessService.countOperAccessCoreConfig(map);
             List<OperAccessCoreConfig> list = null;
             if(total > 0){
@@ -186,6 +187,32 @@ public class OperAccessController {
         try{
             if(StringUtils2.isNotEmpty(ct.getConfigIds()) && ct.getIsable() != null){
                 operAccessService.delOperAccessCoreConfig(ct.getConfigIds(),ct.getIsable());
+                res.setCode("200");
+                res.setMessage("success");
+            }
+        }catch (Exception e){
+            ExceptionCatch.exceptionCatch(res,log,e);
+        }
+        return res;
+    }
+
+    /**
+     * 修改状态
+     */
+    @RequestMapping(value = "updateOperAccessDelState",method = RequestMethod.POST)
+    public Result<OperAccessCoreConfig> updateOperAccessDelStateData(HttpServletRequest request, OperAccessModel ct) {
+        //验证session是否失效
+        Result<OperAccessCoreConfig> res = new Result<OperAccessCoreConfig>();
+        User us = redisUtil.getCurrUser(ct.getSessionId());
+        //SysLogsUtil su = SysLogsUtil.getInstance();
+        if (us == null) {
+            res.setCode("404");
+            res.setMessage("当前会话失效，请跳转到登录页");
+            return res;
+        }
+        try{
+            if(StringUtils2.isNotEmpty(ct.getConfigIds()) && ct.getDelState() != null){
+                operAccessService.delOperAccessConfigDelState(ct.getConfigIds(),ct.getDelState());
                 res.setCode("200");
                 res.setMessage("success");
             }

@@ -161,4 +161,17 @@ public class OperAccessServiceImpl implements OperAccessService {
         }
         return n;
     }
+
+    @Override
+    public int delOperAccessConfigDelState(String ids, int delState) {
+        int n = 0;
+        Map<String,Object> map = new HashMap<String,Object>();
+        List<String> list =  JavaBeanMap.getListByIds(ids);
+        if(list != null && list.size() > 0){
+            map.put("delState",delState);
+            map.put("list",list);
+            n = operAccessDao.delOperAccessConfigDelState(map);
+        }
+        return n;
+    }
 }

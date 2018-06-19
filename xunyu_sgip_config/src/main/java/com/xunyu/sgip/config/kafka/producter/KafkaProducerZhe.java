@@ -2,14 +2,12 @@ package com.xunyu.sgip.config.kafka.producter;
 
 import com.xunyu.sgip.config.kafka.admin.AdminClientLocal;
 import com.xunyu.sgip.config.utils.GetProperties;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.log4j.Logger;
 
 import java.io.FileNotFoundException;
-import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,7 +16,7 @@ import java.util.concurrent.Executors;
  * 消息提供者
  */
 public class KafkaProducerZhe {
-    private static Log log = LogFactory.getLog(KafkaProducerZhe.class);
+    private static Logger log = Logger.getLogger(KafkaProducerZhe.class);
     private Properties properties = null;
     private final int NUM = 12;
     /**
@@ -106,17 +104,13 @@ public class KafkaProducerZhe {
     }
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        for (int i = 0; i < 5; i++) {
-
-            // 每隔两秒log输出一下当前系统时间戳
+        int index = 0;
+        while (true) {
             try {
-                log.info("-info级别"+new Date().getTime());
-                Thread.sleep(2000);
-                log.error("error级别"+new Date().getTime());
-            }
-            catch (Exception e) {
-                log.error("error:" + e.getMessage());
+                Thread.sleep(1000);
+                log.info("当前值是：" + index++);
+            }catch (Exception e){
+                log.error(e.getMessage());
             }
         }
         //GetProperties.getInstance();

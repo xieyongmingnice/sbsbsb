@@ -29,6 +29,7 @@ public class OperAccessCoreConfig extends UserModel {
     private int extendNum;//扩展位数
     private int whetherExtend;//是否启用签名扩展
     private Integer isable;//1启用 2停用 3作废
+    private Integer delState;//1 正常(恢复)  2删除
     private Date createTime;//创建时间
     private Integer spAccessNum;//sp接入个数，通过网关名称查询对应接出表的记录数
     private OperExtendConfig operExtendConfig;//网关扩展配置
@@ -37,6 +38,14 @@ public class OperAccessCoreConfig extends UserModel {
 
     public OperAttributeConfig getOperAttributeConfig() {
         return operAttributeConfig;
+    }
+
+    public Integer getDelState() {
+        return delState;
+    }
+
+    public void setDelState(Integer delState) {
+        this.delState = delState;
     }
 
     public void setOperAttributeConfig(OperAttributeConfig operAttributeConfig) {

@@ -47,22 +47,21 @@
             <artifactId>spring-core</artifactId>
             <version>2.5.6</version>
         </dependency>
-        <!--log4j + kafka-->
+        <!--log4j + flume-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.10</version>
+            <version>1.7.5</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-log4j-appender</artifactId>
-            <version>1.0.0</version>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.14</version>
         </dependency>
-
         <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
+            <groupId>org.apache.flume.flume-ng-clients</groupId>
+            <artifactId>flume-ng-log4jappender</artifactId>
+            <version>1.6.0</version>
         </dependency>
     </dependencies>
 

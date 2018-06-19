@@ -14,9 +14,18 @@ public class OperAccessModel extends UserModel {
     private String enterpriseCode;//企业代码
     private String accessCode;//接入码
     private Integer isable;//1启用 2停用 3作废
+    private Integer delState;//1 正常(恢复)  2删除
     private String gatewayNumber;//网关号段
     private Integer agreeType;//协议类型  1、移动、2联通、3电信
     private String configIds;//批量操作是id组成的字符串
+
+    public Integer getDelState() {
+        return delState;
+    }
+
+    public void setDelState(Integer delState) {
+        this.delState = delState;
+    }
 
     public String getConfigIds() {
         return configIds;
