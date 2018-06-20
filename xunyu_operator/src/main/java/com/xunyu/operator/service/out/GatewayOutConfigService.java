@@ -1,7 +1,9 @@
 package com.xunyu.operator.service.out;
 
 import com.xunyu.model.operator.out.GatewayOutConfigModel;
+import com.xunyu.model.operator.out.RechargeRecordModel;
 import com.xunyu.operator.vo.out.GatewayOutConfigListVO;
+import com.xunyu.operator.vo.out.GatewayOutConfigVO;
 
 import java.util.List;
 
@@ -47,4 +49,68 @@ public interface GatewayOutConfigService {
      */
     int deleteGatewayOutConfig(GatewayOutConfigModel model);
 
+
+    /**
+     * 编辑网关接出配置
+     * @param model
+     * @return 影响条数
+     */
+    int updateGatewayOutConfig(GatewayOutConfigModel model);
+
+    /**
+     * 充值
+     * @param model
+     * @return 影响条数
+     */
+    int recharge(RechargeRecordModel model);
+
+    /**
+     * 启用
+     * @param idList
+     * @return
+     */
+    int startUsing(List<Integer> idList);
+
+    /**
+     * 停用
+     * @param idList
+     * @return
+     */
+    int stopUsing(List<Integer> idList);
+
+    /**
+     * 恢复
+     * @param idList
+     * @return
+     */
+    int recover(List<Integer> idList);
+
+    /**
+     * 废弃
+     * @param idList
+     * @return
+     */
+    int abandon(List<Integer> idList);
+
+    /**
+     * 查看详情
+     * @param model 参数类
+     * @return 结果
+     */
+    GatewayOutConfigVO viewDetail(GatewayOutConfigModel model);
+
+    /**
+     * 增加网关配置
+     */
+    int addGatewayConfig(GatewayOutConfigModel model);
+
+    /**
+     * 删除网关配置
+     */
+    int deleteGatewayConfig(GatewayOutConfigModel model);
+
+    /**
+     * 清除网关配置（全部删除）
+     */
+    int clearGatewayConfig(GatewayOutConfigModel model);
 }

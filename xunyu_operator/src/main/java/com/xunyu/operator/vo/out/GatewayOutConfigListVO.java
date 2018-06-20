@@ -73,9 +73,21 @@ public class GatewayOutConfigListVO implements Serializable{
     private Integer isabled;
 
     /**
+     * 是否有效 字符串
+     */
+    private String isUsedStr;
+    /**
      * 网关节点列表
      */
     private List<OperAccessCoreConfig> operAccessCoreConfigList;
+
+    public String getIsUsedStr() {
+        return isUsedStr;
+    }
+
+    public void setIsUsedStr(String isUsedStr) {
+        this.isUsedStr = isUsedStr;
+    }
 
     public Integer getGatewayOutConfigId() {
         return gatewayOutConfigId;

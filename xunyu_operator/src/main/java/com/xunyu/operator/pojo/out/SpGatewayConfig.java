@@ -13,7 +13,7 @@ public class SpGatewayConfig implements Serializable {
     /**
      *   主键
      */
-    private Integer spGatewayConifgId;
+    private Integer spGatewayConfigId;
 
     /**
      *   运营商类型
@@ -105,29 +105,12 @@ public class SpGatewayConfig implements Serializable {
      */
     private Date createTime;
 
-    /**
-     * This method returns the value of the database column tbl_sp_gateway_conifg.sp_gateway_conifg_id
-     *
-     * @return the value of tbl_sp_gateway_conifg.sp_gateway_conifg_id
-     */
-    public Integer getSpGatewayConifgId() {
-        return spGatewayConifgId;
+    public Integer getSpGatewayConfigId() {
+        return spGatewayConfigId;
     }
 
-    /**
-     */
-    public SpGatewayConfig withSpGatewayConifgId(Integer spGatewayConifgId) {
-        this.setSpGatewayConifgId(spGatewayConifgId);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_sp_gateway_conifg.sp_gateway_conifg_id
-     *
-     * @param spGatewayConifgId the value for tbl_sp_gateway_conifg.sp_gateway_conifg_id
-     */
-    public void setSpGatewayConifgId(Integer spGatewayConifgId) {
-        this.spGatewayConifgId = spGatewayConifgId;
+    public void setSpGatewayConfigId(Integer spGatewayConfigId) {
+        this.spGatewayConfigId = spGatewayConfigId;
     }
 
     public Integer getCarrierAgreeId() {
@@ -571,7 +554,7 @@ public class SpGatewayConfig implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", spGatewayConifgId=").append(spGatewayConifgId);
+        sb.append(", spGatewayConfigId=").append(spGatewayConfigId);
         sb.append(", carrierAgreeId=").append(carrierAgreeId);
         sb.append(", gatewayOutConfigId=").append(gatewayOutConfigId);
         sb.append(", configId=").append(configId);

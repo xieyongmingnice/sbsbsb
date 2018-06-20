@@ -6,6 +6,7 @@ import com.xunyu.operator.pojo.out.Customer;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,10 @@ public class GatewayOutConfigVO implements Serializable {
      *   客户id
      */
     private Integer customerId;
+    /**
+     * 协议id
+     */
+    private Integer carrierAgreeId;
 
     /**
      *   用户类型 1：预付费，2：后付费
@@ -435,7 +440,7 @@ public class GatewayOutConfigVO implements Serializable {
     /**
      *   余额提醒时间
      */
-    private Date balNoticeTime;
+    private Time balNoticeTime;
 
     /**
      *   是否启用HTTP接口，1：是，0：否，默认0
@@ -506,6 +511,27 @@ public class GatewayOutConfigVO implements Serializable {
      */
     private List<CarrierAgree> carrierAgreeList;
 
+    /**
+     * 网关分流配置list
+     */
+    private List<SpGatewayConfigVO> spGatewayConfigVOList;
+
+
+    public Integer getCarrierAgreeId() {
+        return carrierAgreeId;
+    }
+
+    public void setCarrierAgreeId(Integer carrierAgreeId) {
+        this.carrierAgreeId = carrierAgreeId;
+    }
+
+    public List<SpGatewayConfigVO> getSpGatewayConfigVOList() {
+        return spGatewayConfigVOList;
+    }
+
+    public void setSpGatewayConfigVOList(List<SpGatewayConfigVO> spGatewayConfigVOList) {
+        this.spGatewayConfigVOList = spGatewayConfigVOList;
+    }
 
     public Integer getGatewayOutConfigId() {
         return gatewayOutConfigId;
@@ -1171,11 +1197,11 @@ public class GatewayOutConfigVO implements Serializable {
         this.balNoticeInterval = balNoticeInterval;
     }
 
-    public Date getBalNoticeTime() {
+    public Time getBalNoticeTime() {
         return balNoticeTime;
     }
 
-    public void setBalNoticeTime(Date balNoticeTime) {
+    public void setBalNoticeTime(Time balNoticeTime) {
         this.balNoticeTime = balNoticeTime;
     }
 

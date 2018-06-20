@@ -1,10 +1,17 @@
 package com.xunyu.model.operator.out;
 
+import com.xunyu.model.operator.out.group.GatewayOutConfigGroup;
+import com.xunyu.model.operator.out.group.SpConfigGroup;
+import com.xunyu.model.operator.out.group.GatewayOutConfigShuntGroup;
 import com.xunyu.model.user.UserModel;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author xym
@@ -18,37 +25,43 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *
      */
+    @NotNull(message = "网关接触配置id不可为空，请重新填写后提交",groups = SpConfigGroup.class)
     private Integer gatewayOutConfigId;
 
     /**
      * 运营商类型
      */
+    @NotNull(message = "运营商类型不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer carrierType;
 
     /**
      *   客户id
      */
+    @NotNull(message = "客户id不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer customerId;
 
     /**
      *   用户类型 1：预付费，2：后付费
      */
+    @NotNull(message = "用户类型不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer customerType;
 
     /**
      *   企业代码
      */
+    @NotNull(message = "企业代码不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private String enterpriseCode;
 
     /**
      *   接入类型
      */
+    @NotNull(message = "接入类型不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer accessType;
-
 
     /**
      *   企业IP
      */
+    @NotBlank(message = "企业IP不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private String enterpriseIp;
 
     /**
@@ -64,17 +77,20 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   企业密码
      */
+    @NotBlank(message = "企业密码不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private String enterprisePwd;
 
 
     /**
      *   赋给SP接入码
      */
+    @NotBlank(message = "sp接入码不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private String spAccessCode;
 
     /**
      *   上行短信接入码
      */
+    @NotBlank(message = "上行短信接入码不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private String msgAccessCode;
 
     /**
@@ -98,15 +114,18 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      * 协议类型
      */
+    @NotNull(message = "协议类型不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class, SpConfigGroup.class})
     private Integer carrierAgreeId;
     /**
      *   号码是否需要86，1：是，0：否，默认否
      */
+    @NotNull(message = "号码是否需要86不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isNeedPrefix;
 
     /**
      *   MO模式，1：需要，0：不需要，默认0
      */
+    @NotNull(message = "MO模式不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer moPattern;
 
     /**
@@ -117,46 +136,55 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   报告消息ID模式
      */
+    @NotNull(message = "报告消息ID模式不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer reportMsgType;
 
     /**
      *   下发流量门限
      */
+    @NotNull(message = "下发流量门限不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer sendFlowThreshold;
 
     /**
      *   报告回复推送流量门限
      */
+    @NotNull(message = "报告回复推送流量门限不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer replyFlowThreshold;
 
     /**
      *   是否启用，1：是，0：否，默认1
      */
+    @NotNull(message = "是否启用不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isUsed;
 
     /**
      *   付费模式，1：预付费，2：后付费，默认1
      */
+    @NotNull(message = "付费模式不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer payType;
 
     /**
      *   押金
      */
+    @NotNull(message = "押金不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private BigDecimal deposit;
 
     /**
      *   费率
      */
+    @NotNull(message = "费率不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private BigDecimal rate;
 
     /**
      *   在线充值起充条数
      */
+    @NotNull(message = "在线充值起充条数不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer rechargeNumLimit;
 
     /**
      *   是否启用在线充值，1：是，0：否，默认1
      */
+    @NotNull(message = "是否启用在线充值不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isOnlineRechargeUsed;
 
     /**
@@ -167,26 +195,31 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   质押条数
      */
+    @NotNull(message = "质押条数不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer pledgeNum;
 
     /**
      *   信用率
      */
+    @NotNull(message = "信用率不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private BigDecimal creditRate;
 
     /**
      *   审核模式
      */
+    @NotNull(message = "审核模式不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer auditType;
 
     /**
      *   优先级
      */
+    @NotNull(message = "优先级不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer priority;
 
     /**
      *   最大连接数
      */
+    @NotNull(message = "最大连接数不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer maxConnectNum;
 
     /**
@@ -202,61 +235,73 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   是否强制签名，1：是，0：否，默认0
      */
+    @NotNull(message = "是否强制签名不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isForcedSign;
 
     /**
      *   签名内容
      */
+    @NotBlank(message = "签名内容不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private String signContent;
 
     /**
      *   签名位置，1：签名后置，0：签名前置，默认1
      */
+    @NotNull(message = "签名位置不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer signLocation;
 
     /**
      *   是否必须签名，1：是，0：否，默认0
      */
+    @NotNull(message = "是否必须签名不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isMustSign;
 
     /**
      *   审核条数
      */
+    @NotNull(message = "审核条数不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer auditNum;
 
     /**
      *   是否启用黑名单，1：是，0：否，默认0
      */
+    @NotNull(message = "是否启用黑名单不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isUseBlacklist;
 
     /**
      *   是否启用白名单，1：是，0：否，默认0
      */
+    @NotNull(message = "是否启用白名单不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isUseWhitelist;
 
     /**
      *   是否启用系统红白名单，1：是，0：否，默认0
      */
+    @NotNull(message = "是否启用系统红白名单不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isUseSysRedlistWhitelist;
 
     /**
      *   是否启用网关关键字拦截，1：是，0：否，默认0
      */
+    @NotNull(message = "是否启用网关关键字拦截不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isUseKeywordIncpt;
 
     /**
      *   SP长短信组包方式
      */
+    @NotNull(message = "SP长短信组包方式不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer longMsgPackType;
 
     /**
      *   是否自动返还，1:是，0：否，默认0
      */
+    @NotNull(message = "是否自动返还不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isAutoReturn;
 
     /**
      *   下发接入号超长是否截断，1：是，0：否，默认1
      */
+    @NotNull(message = "下发接入号超长是否截断不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isIncptLongAccessCode;
 
     /**
@@ -267,111 +312,133 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   是否启用平台处理
      */
+    @NotNull(message = "是否启用平台处理不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isUsePlatformHandle;
 
     /**
      *   平台处理比例
      */
+    @NotNull(message = "平台处理比例不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private BigDecimal platformHandleProp;
 
     /**
      *   平台处理成功报告比例
      */
+    @NotNull(message = "平台处理成功报告比例不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private BigDecimal handleRepProp;
 
     /**
      *   平台处理成功报告实时比例
      */
+    @NotNull(message = "平台处理成功报告实时比例不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private BigDecimal handleRepRealtimeProp;
 
     /**
      *   平台处理成功报告回传时间
      */
+    @NotNull(message = "平台处理成功报告回传时间不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer handleRepReturnTime;
 
     /**
      *   平台处理未知报告比例
      */
+    @NotNull(message = "平台处理未知报告比例不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private BigDecimal platformHandleUnknowProp;
 
     /**
      *   错号空号等成功比例
      */
+    @NotNull(message = "错号空号等成功比例不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private BigDecimal wrongNumSucPorp;
 
     /**
      *   错号空号等未知比例
      */
+    @NotNull(message = "错号空号等未知比例不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private BigDecimal wrongNumUnknowPorp;
 
     /**
      *   错误报告转成功比例
      */
+    @NotNull(message = "错误报告转成功比例不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private BigDecimal wrongReportSucProp;
 
     /**
      *   是否启用超时改变状态，1：是，0：否，默认0
      */
+    @NotNull(message = "是否启用超时改变状态不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isUseOvertimeChange;
 
     /**
      *   改变状态超时比例
      */
+    @NotNull(message = "改变状态超时比例不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private BigDecimal changeOvertimeProp;
 
     /**
      *   改变状态超时时间开始，单位分钟
      */
+    @NotNull(message = "改变状态超时时间开始不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer changeOvertimeStartTime;
 
     /**
      *   改变状态超时时间结束，单位：分钟
      */
+    @NotNull(message = "改变状态超时时间结束不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer changeOvertimeEndTime;
 
     /**
      *   是否启用审核关键字，1：是，0：否，默认0
      */
+    @NotNull(message = "是否启用审核关键字不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isUseAuditKeyword;
 
     /**
      *   用户号码发送限制条数
      */
+    @NotNull(message = "用户号码发送限制条数不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer userSendLimit;
 
     /**
      *   是否启用号段分流，1：是，0：否，默认0
      */
+    @NotNull(message = "是否启用号段分流不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isUseNumShunt;
 
     /**
      *   是否启用余额短信提醒，1：是，0：否，默认0
      */
+    @NotNull(message = "是否启用余额短信提醒不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isUseBalanceNotice;
 
     /**
      *   余额提醒条数
      */
+    @NotNull(message = "余额提醒条数不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer balNoticeNum;
 
     /**
      *   余额提醒内容
      */
+    @NotBlank(message = "余额提醒内容不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private String balNoticeContent;
 
     /**
      *   余额提醒间隔，单位：天
      */
+    @NotNull(message = "余额提醒间隔不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer balNoticeInterval;
 
     /**
      *   余额提醒时间
      */
-    private Date balNoticeTime;
+    @NotNull(message = "余额提醒时间不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
+    private Time balNoticeTime;
 
     /**
      *   是否启用HTTP接口，1：是，0：否，默认0
      */
+    @NotNull(message = "是否启用HTTP接口不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer isUseHttp;
 
     /**
@@ -382,6 +449,7 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   是否启用推送，1：是，0：否，默认0
      */
+    @NotNull(message = "是否启用推送不可为空，请重新填写后提交",groups = { GatewayOutConfigGroup.class,GatewayOutConfigShuntGroup.class})
     private Integer isUsePush;
 
     /**
@@ -430,36 +498,43 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   网关接入配置id
      */
+    @NotNull(message = "网关接入配置id不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class,SpConfigGroup.class})
     private Integer configId;
 
     /**
      *   网关接入码
      */
+    @NotBlank(message = "网关接入码不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class,SpConfigGroup.class})
     private String gatewayAccessCode;
 
     /**
      *   二进制短信长度限制
      */
+    @NotNull(message = "二进制短信长度限制不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class,SpConfigGroup.class})
     private Integer binaryMsgLenLimit;
 
     /**
      *   SP短信长度限制
      */
+    @NotNull(message = "SP短信长度限制不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class,SpConfigGroup.class})
     private Integer spMsgLenLimit;
 
     /**
      *   网关固定签名位置 1：签名后置，2：签名前置，默认为1
      */
+    @NotNull(message = "网关固定签名位置不可为空，请重新填写后提交",groups ={GatewayOutConfigGroup.class,SpConfigGroup.class})
     private Integer fixedSignLocation;
 
     /**
      *   SP长短信额外可发字数
      */
+    @NotNull(message = "SP长短信额外可发字数不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class,SpConfigGroup.class})
     private Integer longMsgExtraNum;
 
     /**
      *   是否ASCII支持  1：支持，0：不支持，默认为0
      */
+    @NotNull(message = "是否ASCII支持不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class,SpConfigGroup.class})
     private Integer isAscllSupported;
 
     /**
@@ -475,6 +550,7 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   是否去签名发送，1：是，0：否，默认否
      */
+    @NotNull(message = "是否去签名发送不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class,SpConfigGroup.class})
     private Integer isSendWithoutSign;
 
     /**
@@ -485,16 +561,19 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   业务最低销售成本
      */
+    @NotNull(message = "业务最低销售成本不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class,SpConfigGroup.class})
     private BigDecimal minSaleCost;
 
     /**
      *   业务销售实际价格
      */
+    @NotNull(message = "业务销售实际价格不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class,SpConfigGroup.class})
     private BigDecimal actualSalePrice;
 
     /**
      *   业务销售提成比例
      */
+    @NotNull(message = "业务销售提成比例不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class,SpConfigGroup.class})
     private BigDecimal saleCommissionProp;
 
     /**
@@ -514,6 +593,34 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
      * 企业名称
      */
     private String customerName;
+
+    /**
+     * 批量操作的idList
+     * @return
+     */
+    private List<Integer> idList;
+
+    /**
+     * 根据此字段区分是来自哪个页面的请求
+     * @return
+     */
+    private Integer whichPage;
+
+    public Integer getWhichPage() {
+        return whichPage;
+    }
+
+    public void setWhichPage(Integer whichPage) {
+        this.whichPage = whichPage;
+    }
+
+    public List<Integer> getIdList() {
+        return idList;
+    }
+
+    public void setIdList(List<Integer> idList) {
+        this.idList = idList;
+    }
 
     public Integer getCarrierAgreeId() {
         return carrierAgreeId;
@@ -1195,11 +1302,11 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
         this.balNoticeInterval = balNoticeInterval;
     }
 
-    public Date getBalNoticeTime() {
+    public Time getBalNoticeTime() {
         return balNoticeTime;
     }
 
-    public void setBalNoticeTime(Date balNoticeTime) {
+    public void setBalNoticeTime(Time balNoticeTime) {
         this.balNoticeTime = balNoticeTime;
     }
 

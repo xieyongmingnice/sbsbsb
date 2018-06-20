@@ -23,6 +23,34 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
 
+  <resultMap id="VOResultMap" type="com.xunyu.operator.vo.out.SpGatewayConfigVO">
+    <id column="sp_gateway_config_id" jdbcType="INTEGER" property="spGatewayConfigId" />
+    <result column="carrier_agree_id" jdbcType="INTEGER" property="carrierAgreeId" />
+    <result column="gateway_out_config_id" jdbcType="INTEGER" property="gatewayOutConfigId" />
+    <result column="config_id" jdbcType="INTEGER" property="configId" />
+    <result column="gateway_access_code" jdbcType="VARCHAR" property="gatewayAccessCode" />
+    <result column="binary_msg_len_limit" jdbcType="INTEGER" property="binaryMsgLenLimit" />
+    <result column="sp_msg_len_limit" jdbcType="INTEGER" property="spMsgLenLimit" />
+    <result column="fixed_sign_location" jdbcType="INTEGER" property="fixedSignLocation" />
+    <result column="long_msg_extra_num" jdbcType="INTEGER" property="longMsgExtraNum" />
+    <result column="is_ascll_supported" jdbcType="INTEGER" property="isAscllSupported" />
+    <result column="ascll_len_limit" jdbcType="INTEGER" property="ascllLenLimit" />
+    <result column="ascll_sign_len" jdbcType="INTEGER" property="ascllSignLen" />
+    <result column="is_send_without_sign" jdbcType="INTEGER" property="isSendWithoutSign" />
+    <result column="content_without_sign" jdbcType="VARCHAR" property="contentWithoutSign" />
+    <result column="min_sale_cost" jdbcType="DECIMAL" property="minSaleCost" />
+    <result column="actual_sale_price" jdbcType="DECIMAL" property="actualSalePrice" />
+    <result column="sale_commission_prop" jdbcType="DECIMAL" property="saleCommissionProp" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+
+    <result column="agree_name" jdbcType="VARCHAR" property="agreeName" />
+    <result column="channel_name" jdbcType="VARCHAR" property="channelName" />
+    <result column="fixed_sign_location_str" jdbcType="VARCHAR" property="fixedSignLocationStr" />
+    <result column="is_ascll_supported_str" jdbcType="VARCHAR" property="isAscllSupportedStr" />
+    <result column="is_send_without_sign_str" jdbcType="VARCHAR" property="isSendWithoutSignStr" />
+  </resultMap>
+
   <sql id="Base_Column_List">
     sp_gateway_config_id, carrier_agree_id, gateway_out_config_id, config_id, gateway_access_code,
     binary_msg_len_limit, sp_msg_len_limit, fixed_sign_location, long_msg_extra_num, 
@@ -30,15 +58,59 @@
     min_sale_cost, actual_sale_price, sale_commission_prop, isabled, create_time
   </sql>
 
-  
-  
-  
-  <!-- 删除 -->
-  <update id="deleteSpGatewayConfig" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel">
+  <!-- 根据GatewayConfigId删除 -->
+  <update id="deleteSpGatewayConfigByGatewayConfigId" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel">
     update tbl_sp_gateway_config
     set isabled = 0
     where gateway_out_config_id = #{gatewayOutConfigId,jdbcType=INTEGER}
   </update>
+
+  <!-- 根据spGatewayConfigId 集合 删除 -->
+  <update id="deleteSpGatewayConfigByPK" parameterType="java.util.List">
+    update tbl_sp_gateway_config
+    set isabled = 0
+    where sp_gateway_config_id IN
+    <foreach collection="list" index="index" item="item"
+             separator="," open="(" close=")">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+  </update>
+
+  <!-- 启用 恢复-->
+  <update id="startUsing" parameterType="java.util.List">
+    update tbl_sp_gateway_config
+    set isabled = 1
+    where gateway_out_config_id IN
+    <foreach collection="list" index="index" item="item"
+             separator="," open="(" close=")">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <!-- 停用 作废-->
+  <update id="stopUsing" parameterType="java.util.List">
+    update tbl_sp_gateway_config
+    set isabled = 0
+    where gateway_out_config_id IN
+    <foreach collection="list" index="index" item="item"
+             separator="," open="(" close=")">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+  </update>
+
+  <!-- 根据gateway_out_config_id查询网关分流配置 -->
+  <select id="selectByGatewayOutConfigId" resultMap="VOResultMap" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel">
+    select
+      s.sp_gateway_config_id,s.gateway_out_config_id,s.config_id,a.agree_name ,c.channel_name,s.gateway_access_code,s.sp_msg_len_limit,
+      CASE s.fixed_sign_location WHEN 1 then '最后' WHEN 2 then '最前' END as fixed_sign_location_str,
+      s.long_msg_extra_num,
+      CASE s.is_ascll_supported WHEN 1 then '支持' WHEN 0 then '不支持' END as is_ascll_supported_str,
+      s.ascll_len_limit,s.ascll_sign_len,
+      CASE s.is_send_without_sign WHEN 1 then '启用' WHEN 0 then '不启用' END as is_send_without_sign_str
+    from tbl_sp_gateway_config s
+    left join tbl_carrier_agree a on a.carrier_agree_id = s.carrier_agree_id
+    left join tbl_gateway_access_config c on s.config_id = c.config_id
+    where s.gateway_out_config_id = #{gatewayOutConfigId,jdbcType=INTEGER} and s.isabled = 1
+  </select>
   <!--新增-->
   <insert id="insertSpGatewayConfig" parameterType="com.xunyu.operator.pojo.out.SpGatewayConfig">
     insert into tbl_sp_gateway_config

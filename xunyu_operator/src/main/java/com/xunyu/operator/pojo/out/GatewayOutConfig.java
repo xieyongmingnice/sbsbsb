@@ -2,6 +2,7 @@ package com.xunyu.operator.pojo.out;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -17,7 +18,7 @@ public class GatewayOutConfig implements Serializable{
     private Integer gatewayOutConfigId;
 
     /**
-     *   运营商类型
+     *   运营商类型 1：移动 2：联通 3：电信
      */
     private Integer carrierType;
 
@@ -42,7 +43,7 @@ public class GatewayOutConfig implements Serializable{
     private String enterpriseCode;
 
     /**
-     *   接入类型
+     *   接入类型  1:网关直连  2：网关分流
      */
     private Integer accessType;
 
@@ -131,7 +132,7 @@ public class GatewayOutConfig implements Serializable{
     private Integer replyFlowThreshold;
 
     /**
-     *   是否启用，1：是，0：否，默认1
+     *   是否启用，1：是，0：否，废弃：2 默认1
      */
     private Integer isUsed;
 
@@ -368,7 +369,7 @@ public class GatewayOutConfig implements Serializable{
     /**
      *   余额提醒时间
      */
-    private Date balNoticeTime;
+    private Time balNoticeTime;
 
     /**
      *   是否启用HTTP接口，1：是，0：否，默认0
@@ -2176,28 +2177,11 @@ public class GatewayOutConfig implements Serializable{
         this.balNoticeInterval = balNoticeInterval;
     }
 
-    /**
-     * This method returns the value of the database column tbl_gateway_out_config.bal_notice_time
-     *
-     * @return the value of tbl_gateway_out_config.bal_notice_time
-     */
-    public Date getBalNoticeTime() {
+    public Time getBalNoticeTime() {
         return balNoticeTime;
     }
 
-    /**
-     */
-    public GatewayOutConfig withBalNoticeTime(Date balNoticeTime) {
-        this.setBalNoticeTime(balNoticeTime);
-        return this;
-    }
-
-    /**
-     * This method sets the value of the database column tbl_gateway_out_config.bal_notice_time
-     *
-     * @param balNoticeTime the value for tbl_gateway_out_config.bal_notice_time
-     */
-    public void setBalNoticeTime(Date balNoticeTime) {
+    public void setBalNoticeTime(Time balNoticeTime) {
         this.balNoticeTime = balNoticeTime;
     }
 

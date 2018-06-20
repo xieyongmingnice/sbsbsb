@@ -2,7 +2,9 @@ package com.xunyu.operator.dao.out;
 
 import com.commons.core.dao.impl.BaseDao;
 import com.xunyu.model.operator.out.GatewayOutConfigModel;
+import com.xunyu.model.operator.out.RechargeRecordModel;
 import com.xunyu.operator.vo.out.GatewayOutConfigListVO;
+import com.xunyu.operator.vo.out.GatewayOutConfigVO;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
@@ -60,6 +62,69 @@ public class GatewayOutConfigDaoImpl extends BaseDao {
      */
     public int deleteGatewayOutConfig(GatewayOutConfigModel model){
         return update("com.xunyu.operator.pojo.out.GatewayOutConfig.deleteGatewayOutConfig",model);
+    }
+
+    /**
+     * 编辑网关接出配置
+     * @param model
+     * @return 影响条数
+     */
+    public int updateGatewayOutConfig(GatewayOutConfigModel model){
+        return update("com.xunyu.operator.pojo.out.GatewayOutConfig.updateGatewayOutConfig",model);
+    }
+
+    /**
+     * 充值
+     * @param model
+     * @return 影响条数
+     */
+    public int recharge(RechargeRecordModel model){
+        return update("com.xunyu.operator.pojo.out.GatewayOutConfig.recharge",model);
+    }
+
+    /**
+     * 启用
+     * @param idList
+     * @return
+     */
+    public int startUsing(List<Integer> idList){
+        return update("com.xunyu.operator.pojo.out.GatewayOutConfig.startUsing",idList);
+    }
+
+    /**
+     * 停用
+     * @param idList
+     * @return
+     */
+    public int stopUsing(List<Integer> idList){
+        return update("com.xunyu.operator.pojo.out.GatewayOutConfig.stopUsing",idList);
+    }
+
+    /**
+     * 恢复
+     * @param idList
+     * @return
+     */
+    public int recover(List<Integer> idList){
+        return update("com.xunyu.operator.pojo.out.GatewayOutConfig.recover",idList);
+    }
+
+    /**
+     * 废弃
+     * @param idList
+     * @return
+     */
+    public int abandon(List<Integer> idList){
+        return update("com.xunyu.operator.pojo.out.GatewayOutConfig.abandon",idList);
+    }
+
+    /**
+     *
+     * @param model 参数类
+     * @return
+     */
+    public GatewayOutConfigVO viewDetail(GatewayOutConfigModel model){
+        return selectOne("com.xunyu.operator.pojo.out.GatewayOutConfig.viewDetail",model);
     }
 
     public GatewayOutConfigDaoImpl(SqlSessionFactory sqlSessionFactory) {
