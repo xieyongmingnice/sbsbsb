@@ -102,7 +102,7 @@ public class SysPayStateController {
                     //异步添加日志
                     SysLogsUtil su = SysLogsUtil.getInstance();
                     su.addSysLogs(logService, us, "支付配置状态"
-                            , "添加", request, "成功修改支付配置状态，状态为："+cen.toString(), crmService, 1);
+                            , "修改", request, "成功修改支付配置状态，状态为："+cen.toString(), crmService, 1);
                 }
             }else{
                 res.setCode("413");
@@ -113,9 +113,8 @@ public class SysPayStateController {
             //异步添加日志
             SysLogsUtil su = SysLogsUtil.getInstance();
             su.addSysLogs(logService, us, "修改支付配置状态值："+cen.toString()
-                    , "添加", request, e.getMessage(), crmService, 2);
+                    , "修改", request, e.getMessage(), crmService, 2);
         }
-
         return res;
     }
 
@@ -139,7 +138,6 @@ public class SysPayStateController {
             res.setCode("200");
             res.setRes(s);
             res.setMessage("success");
-
         }catch (Exception e){
             ExceptionCatch.exceptionCatch(res,log,e);
         }
@@ -161,7 +159,6 @@ public class SysPayStateController {
         }else if(state == 4){
             typeContent = "全部关闭";
         }
-
         return typeContent;
     }
 
