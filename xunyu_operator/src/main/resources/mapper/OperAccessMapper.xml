@@ -22,7 +22,6 @@
         <result column="whether_extend" property="whetherExtend"></result>
         <result column="isable" property="isable"></result>
         <result column="create_time" property="createTime"></result>
-        <result column="del_state" property="delState"></result>
     </resultMap>
     <resultMap id="oper_Zuhe_ResultMap" type="com.xunyu.operator.pojo.access.OperAccessCoreConfig">
         <id column="config_id" property="configId"></id>
@@ -44,7 +43,7 @@
         <result column="whether_extend" property="whetherExtend"></result>
         <result column="isable" property="isable"></result>
         <result column="create_time" property="createTime"></result>
-        <result column="del_state" property="delState"></result>
+
         <association property="operExtendConfig" column="ex_config_id" javaType="com.xunyu.operator.pojo.access.OperExtendConfig">
             <id column="extend_id" property="extendId"></id>
             <result column="charg_user" property="chargUser"></result>
@@ -114,14 +113,14 @@
     <select id="countOperAccessCoreConfig" parameterType="map" resultType="int">
         select count(1) from tbl_gateway_access_config ac
         left join tbl_gateway_mark m on ac.config_id = m.m_config_id
-        where del_state = 1 <include refid = "oper_where" />
+        where <include refid = "oper_where" />
     </select>
 
     <select id="listOperAccessCoreConfig" parameterType="map" resultMap="oper_ResultMap">
         select <include refid = "oper_access_cloumn" />
         from tbl_gateway_access_config ac
         left join tbl_gateway_mark m on ac.config_id = m.m_config_id
-        where del_state = 1
+        where
         <include refid = "oper_where" />
         order by ac.config_id desc
         limit #{startRow},#{endRow}
@@ -130,10 +129,10 @@
     <sql id = "oper_where">
         <choose>
             <when test="isable != null">
-               and ac.isable = #{isable}
+                ac.isable = #{isable}
             </when>
             <otherwise>
-                <![CDATA[ and ac.isable != 3 ]]>
+                <![CDATA[  ac.isable in (1,2) ]]>
             </otherwise>
         </choose>
         <if test = 'agreeType != null'>
@@ -143,7 +142,7 @@
            and ac.config_id = #{configId}
         </if>
         <if test='channelName != null and channelName !=""'>
-            and ac.channel_name = like  concat(#{channelName},"%")
+            and ac.channel_name like  concat(#{channelName},"%")
         </if>
         <if test='serviceIp != null and serviceIp !=""'>
             and ac.service_ip = #{serviceIp}
@@ -183,7 +182,7 @@
             <if test="whetherExtend != null">whether_extend,</if>
             <if test="isable != null">isable,</if>
             <if test="createTime != null">create_time,</if>
-            <if test="delState != null">del_state,</if>
+
         </trim>
         VALUES
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -206,7 +205,7 @@
             <if test="whetherExtend != null">#{whetherExtend},</if>
             <if test="isable != null">#{isable},</if>
             <if test="createTime != null">#{createTime},</if>
-            <if test="delState != null">#{delState},</if>
+
         </trim>
     </insert>
 
@@ -267,9 +266,6 @@
             <if test='createTime != null'>
                 <![CDATA[	create_time = #{createTime}, ]]>
             </if>
-            <if test='delState != null'>
-                <![CDATA[	del_state = #{delState}, ]]>
-            </if>
         </set>
         <where>
             <if test = 'configId != null'>
@@ -289,14 +285,4 @@
         </foreach>
     </update>
 
-    <update id = "delOperAccessConfigDelState" parameterType="map">
-        update tbl_gateway_access_config set
-        del_state = #{delState}
-        where
-        config_id
-        in
-        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-    </update>
 </mapper>

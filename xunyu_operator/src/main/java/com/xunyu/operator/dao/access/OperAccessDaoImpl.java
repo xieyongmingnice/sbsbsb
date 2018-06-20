@@ -98,14 +98,6 @@ public class OperAccessDaoImpl extends BaseDao<OperAccessCoreConfig,Long> {
         return super.update("com.xunyu.operator.pojo.access.OperAccessCoreConfig.delOperAccessCoreConfig",map);
     }
 
-    /**
-     * 删除 、恢复
-     * @param
-     */
-    public int delOperAccessConfigDelState(Map<String,Object> map){
-        return super.update("com.xunyu.operator.pojo.access.OperAccessCoreConfig.delOperAccessConfigDelState",map);
-    }
-
     public OperAccessDaoImpl(SqlSessionFactory sqlSessionFactory) {
         super(sqlSessionFactory);
     }

@@ -6,7 +6,6 @@ import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.log4j.Logger;
-
 import java.io.FileNotFoundException;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;

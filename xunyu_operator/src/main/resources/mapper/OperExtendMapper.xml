@@ -67,16 +67,36 @@
     <update id="updateOperExtend" parameterType="com.xunyu.operator.pojo.access.OperExtendConfig">
         update tbl_gateway_extend
         <set>
-            <![CDATA[	charg_user = #{chargUser}, ]]>
-            <![CDATA[	charg_type = #{chargType}, ]]>
-            <![CDATA[	local_port = #{localPort}, ]]>
-            <![CDATA[	code_format = #{codeFormat}, ]]>
-            <![CDATA[	unsigna_format = #{unsignaFormat}, ]]>
-            <![CDATA[	ascll_support = #{ascllSupport}, ]]>
-            <![CDATA[	ascll_length = #{ascllLength}, ]]>
-            <![CDATA[	len_msg_code = #{lenMsgCode}, ]]>
-            <![CDATA[	max_length = #{maxLength}, ]]>
-            <![CDATA[	is_def = #{isDef}, ]]>
+            <if test = 'chargUser != null and chargUser !=""'>
+                <![CDATA[	charg_user = #{chargUser}, ]]>
+            </if>
+            <if test = "chargType != null">
+                <![CDATA[	charg_type = #{chargType}, ]]>
+            </if>
+            <if test = 'localPort != null and localPort !=""'>
+                <![CDATA[	local_port = #{localPort}, ]]>
+            </if>
+            <if test = "codeFormat != null">
+                <![CDATA[	code_format = #{codeFormat}, ]]>
+            </if>
+            <if test = "unsignaFormat != null">
+                <![CDATA[	unsigna_format = #{unsignaFormat}, ]]>
+            </if>
+            <if test = "ascllSupport != null">
+                <![CDATA[	ascll_support = #{ascllSupport}, ]]>
+            </if>
+            <if test = "ascllLength != null">
+                <![CDATA[	ascll_length = #{ascllLength}, ]]>
+            </if>
+            <if test = "lenMsgCode != null">
+                <![CDATA[	len_msg_code = #{lenMsgCode}, ]]>
+            </if>
+            <if test = "maxLength != null">
+                <![CDATA[	max_length = #{maxLength}, ]]>
+            </if>
+            <if test = "isDef != null">
+                <![CDATA[	is_def = #{isDef}, ]]>
+            </if>
         </set>
         <where>
             <if test='configId != null'>

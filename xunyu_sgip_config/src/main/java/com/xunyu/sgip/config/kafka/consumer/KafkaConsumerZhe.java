@@ -3,7 +3,7 @@ package com.xunyu.sgip.config.kafka.consumer;
 import com.xunyu.sgip.config.utils.GetProperties;
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.TopicPartition;
-
+import org.apache.log4j.Logger;
 import java.io.FileNotFoundException;
 import java.util.*;
 
@@ -12,6 +12,7 @@ import java.util.*;
  * @date 2018/6/8 11:13
  **/
 public class KafkaConsumerZhe {
+    private static Logger log = Logger.getLogger(KafkaConsumerZhe.class);
     private Properties properties = null;
     /**
      * 自动提交offset
@@ -25,8 +26,7 @@ public class KafkaConsumerZhe {
         while (true) {
             ConsumerRecords<String, byte[]> records = consumer.poll(100);
             for (ConsumerRecord<String, byte[]> record : records)
-                //System.err.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
-                System.err.println("offset="+record.offset()+" key="+record.key()
+                log.info("offset="+record.offset()+" key="+record.key()
                         +" value="+record.value()+" partiton="+record.partition());
         }
     }

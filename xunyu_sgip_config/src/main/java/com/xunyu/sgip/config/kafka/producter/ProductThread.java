@@ -22,7 +22,7 @@ public class ProductThread implements Runnable {
                 //System.err.println("消息发送失败:"+e.getMessage());
                 log.info("消息发送失败:"+e.getMessage());
             } else {
-                System.err.println("分区=" + recordMetadata.partition() + "偏移量=" + recordMetadata.offset());
+                log.info("分区=" + recordMetadata.partition() + "偏移量=" + recordMetadata.offset());
             }
         });
     }
