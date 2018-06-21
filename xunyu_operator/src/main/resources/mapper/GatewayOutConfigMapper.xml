@@ -89,7 +89,7 @@
     <id column="gateway_out_config_id" jdbcType="INTEGER" property="gatewayOutConfigId" />
     <result column="agree_name" jdbcType="INTEGER" property="agreeTypeStr" />
     <result column="channel_name" jdbcType="VARCHAR" property="channelName" />
-    <result column="customer_type" jdbcType="INTEGER" property="customerType" />
+    <result column="customer_type_str" jdbcType="INTEGER" property="customerTypeStr" />
     <result column="enterprise_ip" jdbcType="INTEGER" property="enterpriseIp" />
     <result column="enter_contact" jdbcType="INTEGER" property="enterContact" />
     <result column="customer_name" jdbcType="INTEGER" property="customerName" />
@@ -212,7 +212,9 @@
   <!-- 查询列表 -->
   <select id="selectConfigList" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel" resultMap="ListResultMap">
     select
-      o.gateway_out_config_id,a.agree_name,c.channel_name,o.customer_type,o.enterprise_ip,cus.enter_contact,
+      o.gateway_out_config_id,a.agree_name,c.channel_name,
+      case o.customer_type when 1 then '预付费' when 2 then '后付费' end as customer_type_str,
+      o.enterprise_ip,cus.enter_contact,
       cus.customer_name,o.sp_access_code,o.remainder_msg_num,o.is_used,o.isabled,
       case o.is_used when 1 then '有效' when 0 then '无效' when 2 then '无效' end as is_used_str
     from tbl_gateway_out_config o

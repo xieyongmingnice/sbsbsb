@@ -30,7 +30,7 @@ public class GatewayOutConfigListVO implements Serializable{
     /**
      * 用户类型str
      */
-    private String customerType;
+    private String customerTypeStr;
 
     /**
      * 企业IP
@@ -113,12 +113,12 @@ public class GatewayOutConfigListVO implements Serializable{
         this.channelName = channelName;
     }
 
-    public String getCustomerType() {
-        return customerType;
+    public String getCustomerTypeStr() {
+        return customerTypeStr;
     }
 
-    public void setCustomerType(String customerType) {
-        this.customerType = customerType;
+    public void setCustomerTypeStr(String customerTypeStr) {
+        this.customerTypeStr = customerTypeStr;
     }
 
     public String getEnterpriseIp() {

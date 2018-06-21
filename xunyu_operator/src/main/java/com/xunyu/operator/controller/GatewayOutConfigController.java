@@ -27,7 +27,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -74,7 +73,6 @@ public class GatewayOutConfigController {
      * @param model 参数
      */
     @RequestMapping(value = "/firstComeInDetail")
-    @ResponseBody
     public Result<GatewayOutConfigVO> firstComeInDetail(GatewayOutConfigModel model){
         User user = redisUtil.getCurrUser(model.getSessionId());
         Result<GatewayOutConfigVO> result = checkLogin(new Result(),user);
@@ -110,7 +108,6 @@ public class GatewayOutConfigController {
      * @return 结果
      */
     @RequestMapping(value = "/firstComeInList")
-    @ResponseBody
     public Result<GatewayOutConfigListVO> firstComeInListPage(GatewayOutConfigModel model){
         User user = redisUtil.getCurrUser(model.getSessionId());
         Result<GatewayOutConfigListVO> result = checkLogin(new Result(),user);
@@ -145,7 +142,6 @@ public class GatewayOutConfigController {
      * @return 结果
      */
     @RequestMapping(value = "/addConfigStraight")
-    @ResponseBody
     public Result addConfigStraight(@Validated(GatewayOutConfigGroup.class) GatewayOutConfigModel model, BindingResult bindingResult){
         Result checkBlank = checkBlank(bindingResult);
         if (checkBlank != null){
@@ -193,7 +189,6 @@ public class GatewayOutConfigController {
      * @return 结果
      */
     @RequestMapping(value = "/addConfigShunt")
-    @ResponseBody
     public Result addConfigShunt(@Validated(GatewayOutConfigShuntGroup.class) GatewayOutConfigModel model, BindingResult bindingResult){
         Result checkBlank = checkBlank(bindingResult);
         if (checkBlank != null){
@@ -232,7 +227,6 @@ public class GatewayOutConfigController {
      * @return 结果
      */
     @RequestMapping(value = "/getConfigList")
-    @ResponseBody
     public Result<List<GatewayOutConfigListVO>> getGatewayOutListConfig(GatewayOutConfigModel model){
         User user = redisUtil.getCurrUser(model.getSessionId());
         Result result = checkLogin(new Result(),user);
@@ -266,7 +260,6 @@ public class GatewayOutConfigController {
      * @return 结果
      */
     @RequestMapping(value = "/deleteConfig")
-    @ResponseBody
     public Result<String> deleteGatewayOutConfig(GatewayOutConfigModel model){
         User user = redisUtil.getCurrUser(model.getSessionId());
         Result result = checkLogin(new Result(),user);
@@ -290,7 +283,6 @@ public class GatewayOutConfigController {
      * @return 结果
      */
     @RequestMapping(value = "/updateConfigStraight")
-    @ResponseBody
     public Result<String> updateGatewayOutConfigStraight(@Validated(GatewayOutConfigGroup.class) GatewayOutConfigModel model, BindingResult bindingResult){
         Result checkBlank = checkBlank(bindingResult);
         if (checkBlank != null){
@@ -318,7 +310,6 @@ public class GatewayOutConfigController {
      * @return 结果
      */
     @RequestMapping(value = "/updateConfigShunt")
-    @ResponseBody
     public Result<String> updateGatewayOutConfigShunt(@Validated(GatewayOutConfigShuntGroup.class) GatewayOutConfigModel model, BindingResult bindingResult){
         Result checkBlank = checkBlank(bindingResult);
         if (checkBlank != null){
@@ -346,7 +337,6 @@ public class GatewayOutConfigController {
      * @return 结果
      */
     @RequestMapping(value = "/recharge")
-    @ResponseBody
     public Result<String> recharge(@Valid RechargeRecordModel model, BindingResult bindingResult){
         Result checkBlank = checkBlank(bindingResult);
         if (checkBlank != null){
@@ -377,7 +367,6 @@ public class GatewayOutConfigController {
      * @return 结果
      */
     @RequestMapping(value = "/startUsing")
-    @ResponseBody
     public Result<String> startUsing(GatewayOutConfigModel model){
         User user = redisUtil.getCurrUser(model.getSessionId());
         Result result = checkLogin(new Result(),user);
@@ -407,7 +396,6 @@ public class GatewayOutConfigController {
      * @return 结果
      */
     @RequestMapping(value = "/stopUsing")
-    @ResponseBody
     public Result<String> stopUsing(GatewayOutConfigModel model){
         User user = redisUtil.getCurrUser(model.getSessionId());
         Result result = checkLogin(new Result(),user);
@@ -437,7 +425,6 @@ public class GatewayOutConfigController {
      * @return
      */
     @RequestMapping(value = "/recover")
-    @ResponseBody
     public Result<String> recover(GatewayOutConfigModel model){
         User user = redisUtil.getCurrUser(model.getSessionId());
         Result result = checkLogin(new Result(),user);
@@ -467,7 +454,6 @@ public class GatewayOutConfigController {
      * @return
      */
     @RequestMapping(value = "/abandon")
-    @ResponseBody
     public Result<String> abandon(GatewayOutConfigModel model){
         User user = redisUtil.getCurrUser(model.getSessionId());
         Result result = checkLogin(new Result(),user);
@@ -497,7 +483,6 @@ public class GatewayOutConfigController {
      * @return 结果集
      */
     @RequestMapping(value = "/viewDetail")
-    @ResponseBody
     public Result<GatewayOutConfigVO> viewDetail(GatewayOutConfigModel model){
         User user = redisUtil.getCurrUser(model.getSessionId());
         Result result = checkLogin(new Result(),user);
@@ -537,7 +522,6 @@ public class GatewayOutConfigController {
      * @return 结果集
      */
     @RequestMapping(value = "/addGatewayConfig")
-    @ResponseBody
     public Result<String> addGatewayConfig(@Validated(SpConfigGroup.class) GatewayOutConfigModel model, BindingResult bindingResult){
         Result checkBlank = checkBlank(bindingResult);
         if (checkBlank != null){
@@ -571,7 +555,6 @@ public class GatewayOutConfigController {
      * @return 结果集
      */
     @RequestMapping(value = "/deleteGatewayConfig")
-    @ResponseBody
     public Result<String> deleteGatewayConfig(GatewayOutConfigModel model){
         User user = redisUtil.getCurrUser(model.getSessionId());
         Result result = checkLogin(new Result(),user);
@@ -600,7 +583,6 @@ public class GatewayOutConfigController {
      * @return 结果集
      */
     @RequestMapping(value = "/clearGatewayConfig")
-    @ResponseBody
     public Result<String> clearGatewayConfig(GatewayOutConfigModel model){
         User user = redisUtil.getCurrUser(model.getSessionId());
         Result result = checkLogin(new Result(),user);

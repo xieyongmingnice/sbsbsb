@@ -134,7 +134,7 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     private Integer moGatewayId;
 
     /**
-     *   报告消息ID模式
+     *   报告消息ID模式 1：默认，2：通报告ID一样
      */
     @NotNull(message = "报告消息ID模式不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer reportMsgType;
@@ -287,7 +287,7 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     private Integer isUseKeywordIncpt;
 
     /**
-     *   SP长短信组包方式
+     *   SP长短信组包方式,1:按目的号码组包，2:正常，3:不组包
      */
     @NotNull(message = "SP长短信组包方式不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class, GatewayOutConfigShuntGroup.class})
     private Integer longMsgPackType;
@@ -582,6 +582,7 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      * 接入码
      */
+    @NotBlank(message = "网关节点的接入码不可为空，请重新填写后提交",groups = {GatewayOutConfigGroup.class,SpConfigGroup.class})
     private String accessCode;
 
     /**

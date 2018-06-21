@@ -16,7 +16,7 @@ public class SpGatewayConfig implements Serializable {
     private Integer spGatewayConfigId;
 
     /**
-     *   运营商类型
+     *   协议类型
      */
     private Integer carrierAgreeId;
 
