@@ -2,6 +2,7 @@ package com.xunyu.operator.controller;
 
 import com.commons.core.message.Result;
 import com.commons.core.message.ResultMessage;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.xunyu.config.redis.RedisUtil;
 import com.xunyu.model.operator.out.GatewayOutConfigModel;
@@ -10,6 +11,7 @@ import com.xunyu.model.operator.out.group.GatewayOutConfigGroup;
 import com.xunyu.model.operator.out.group.GatewayOutConfigShuntGroup;
 import com.xunyu.model.operator.out.group.SpConfigGroup;
 import com.xunyu.model.user.User;
+import com.xunyu.operator.constants.GatewayConfigConstant;
 import com.xunyu.operator.pojo.access.OperAccessCoreConfig;
 import com.xunyu.operator.pojo.out.CarrierAgree;
 import com.xunyu.operator.pojo.out.Customer;
@@ -17,8 +19,10 @@ import com.xunyu.operator.service.access.OperAccessService;
 import com.xunyu.operator.service.out.CarrierAgreeService;
 import com.xunyu.operator.service.out.CustomerService;
 import com.xunyu.operator.service.out.GatewayOutConfigService;
+import com.xunyu.operator.utils.beaccopier.BeanCopierUtil;
 import com.xunyu.operator.vo.out.GatewayOutConfigListVO;
 import com.xunyu.operator.vo.out.GatewayOutConfigVO;
+import com.xunyu.operator.vo.out.OperAccessCoreConfigVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,9 +87,17 @@ public class GatewayOutConfigController {
         Map map = Maps.newHashMap();
         map.put("startRow", 0);
         map.put("endRow", Long.MAX_VALUE);
-        List<OperAccessCoreConfig> operAccessCoreConfigList = operAccessService.listOperAccessCoreConfig(map) ;
+        List<OperAccessCoreConfig> operAccessCoreConfigList = operAccessService.listOperAccessCoreConfig(map);
         if (operAccessCoreConfigList != null && operAccessCoreConfigList.size() > 0){
-            config.setOperAccessCoreConfigList(operAccessCoreConfigList);
+            List<OperAccessCoreConfigVO> operAccessCoreConfigVOList = Lists.newArrayList();
+            //beanCopy
+            for (OperAccessCoreConfig operAccessCoreConfig:operAccessCoreConfigList){
+                OperAccessCoreConfigVO vo = new OperAccessCoreConfigVO();
+                BeanCopierUtil.copyProperties(operAccessCoreConfig,vo);
+                appendStrings(vo);
+                operAccessCoreConfigVOList.add(vo);
+            }
+            config.setAccessConfigVOList(operAccessCoreConfigVOList);
         }
         List<Customer> customerList = customerService.selectCustomerList();
         if (customerList != null && customerList.size() > 0) {
@@ -499,7 +511,15 @@ public class GatewayOutConfigController {
             map.put("endRow", Long.MAX_VALUE);
             List<OperAccessCoreConfig> operAccessCoreConfigList = operAccessService.listOperAccessCoreConfig(map) ;
             if (operAccessCoreConfigList != null && operAccessCoreConfigList.size() > 0){
-                vo.setOperAccessCoreConfigList(operAccessCoreConfigList);
+                List<OperAccessCoreConfigVO> operAccessCoreConfigVOList = Lists.newArrayList();
+                //beanCopy
+                for (OperAccessCoreConfig operAccessCoreConfig:operAccessCoreConfigList){
+                    OperAccessCoreConfigVO accessCoreConfigVO = new OperAccessCoreConfigVO();
+                    BeanCopierUtil.copyProperties(operAccessCoreConfig,accessCoreConfigVO);
+                    appendStrings(accessCoreConfigVO);
+                    operAccessCoreConfigVOList.add(accessCoreConfigVO);
+                }
+                vo.setAccessConfigVOList(operAccessCoreConfigVOList);
             }
             List<Customer> customerList = customerService.selectCustomerList();
             if (customerList != null && customerList.size() > 0) {
@@ -605,6 +625,39 @@ public class GatewayOutConfigController {
         return result;
     }
 
+    /**
+     * 根据configId查询接入配置
+     * @param model 参数类
+     * @return 结果集
+     */
+    @RequestMapping(value = "/selectAccessConfig")
+    public Result<OperAccessCoreConfigVO> selectAccessConfig(GatewayOutConfigModel model){
+        User user = redisUtil.getCurrUser(model.getSessionId());
+        Result result = checkLogin(new Result(),user);
+        if (result.getMessage() != null){
+            return result;
+        }
+        if (model.getConfigId() == null || model.getConfigId() == 0){
+            result.setCode(ResultMessage.Code.PRAMA_LOSS);
+            result.setMessage(ResultMessage.Message.PRAMA_LOSS+"：configId");
+            return result;
+        }
+        Map<String,Object> map = Maps.newHashMap();
+        map.put("configId",model.getConfigId());
+        OperAccessCoreConfig config = operAccessService.getOperAccessCoreConfig(map);
+        if (config != null){
+            OperAccessCoreConfigVO vo = new OperAccessCoreConfigVO();
+            BeanCopierUtil.copyProperties(config,vo);
+            appendStrings(vo);
+            result.setCode(ResultMessage.Code.SUCCESS);
+            result.setMessage(ResultMessage.Message.SUCCESS);
+            result.setRes(vo);
+        }else {
+            result.setCode(ResultMessage.Code.FAILED);
+            result.setCode(ResultMessage.Message.FAILED);
+        }
+        return result;
+    }
 
     /**
      * 检查是否登录或会话是否过期
@@ -615,7 +668,7 @@ public class GatewayOutConfigController {
     private Result checkLogin(Result result,User user){
         if(user == null){
             result.setCode(ResultMessage.Code.NOT_FOUND);
-            result.setMessage(ResultMessage.Message.UN_LOGIN);
+            result.setMessage(ResultMessage.Message.UN_LOGIN_2);
         }
         return result;
     }
@@ -639,4 +692,38 @@ public class GatewayOutConfigController {
         return null;
     }
 
+    /**
+     *
+     */
+    private OperAccessCoreConfigVO appendStrings(OperAccessCoreConfigVO vo){
+        String carrier = "";
+        if (vo.getAgreeType()== GatewayConfigConstant.Carrier.CMPP){
+            carrier = GatewayConfigConstant.CarrierName.CMPP;
+        }if (vo.getAgreeType()== GatewayConfigConstant.Carrier.SGIP){
+            carrier = GatewayConfigConstant.CarrierName.SGIP;
+        }if (vo.getAgreeType()== GatewayConfigConstant.Carrier.SMGP){
+            carrier = GatewayConfigConstant.CarrierName.SMGP;
+        }
+
+        String isabled = "";
+        if (vo.getIsable() == 1){
+            isabled = "有效";
+        }if (vo.getIsable() == 2){
+            isabled = "停用";
+        }if (vo.getIsable() == 3){
+            isabled = "停用";
+        }if (vo.getIsable() == 4){
+            isabled = "停用";
+        }
+        StringBuilder sb = new StringBuilder("");
+        sb.append("(");
+        sb.append(carrier);
+        sb.append(")");
+        sb.append(vo.getChannelName());
+        sb.append("(");
+        sb.append(isabled);
+        sb.append(")");
+        vo.setNameStr(sb.toString());
+        return vo;
+    }
 }

@@ -14,6 +14,8 @@ public interface ResultMessage {
 
         String UN_LOGIN = "用户未登录，请先登录";
 
+        String UN_LOGIN_2 = "当前会话失效，请跳转到登录页";
+
         String SUCCESS = "操作成功";
 
         String ERROR = "服务器异常";

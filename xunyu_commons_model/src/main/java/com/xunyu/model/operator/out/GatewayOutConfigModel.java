@@ -1,10 +1,11 @@
 package com.xunyu.model.operator.out;
 
 import com.xunyu.model.operator.out.group.GatewayOutConfigGroup;
-import com.xunyu.model.operator.out.group.SpConfigGroup;
 import com.xunyu.model.operator.out.group.GatewayOutConfigShuntGroup;
+import com.xunyu.model.operator.out.group.SpConfigGroup;
 import com.xunyu.model.user.UserModel;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -225,11 +226,14 @@ public class GatewayOutConfigModel extends UserModel implements Serializable {
     /**
      *   启用时间
      */
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date useTime;
 
     /**
      *   失效时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date invalidTime;
 
     /**

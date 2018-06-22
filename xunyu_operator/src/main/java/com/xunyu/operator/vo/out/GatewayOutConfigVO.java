@@ -502,9 +502,9 @@ public class GatewayOutConfigVO implements Serializable {
     private List<Customer> customerList;
 
     /**
-     * 网关节点列表
+     * 网关节点vo列表
      */
-    private List<OperAccessCoreConfig> operAccessCoreConfigList;
+    private List<OperAccessCoreConfigVO> accessConfigVOList;
 
     /**
      * 协议列表
@@ -516,6 +516,14 @@ public class GatewayOutConfigVO implements Serializable {
      */
     private List<SpGatewayConfigVO> spGatewayConfigVOList;
 
+
+    public List<OperAccessCoreConfigVO> getAccessConfigVOList() {
+        return accessConfigVOList;
+    }
+
+    public void setAccessConfigVOList(List<OperAccessCoreConfigVO> accessConfigVOList) {
+        this.accessConfigVOList = accessConfigVOList;
+    }
 
     public Integer getCarrierAgreeId() {
         return carrierAgreeId;
@@ -1293,13 +1301,7 @@ public class GatewayOutConfigVO implements Serializable {
         this.customerList = customerList;
     }
 
-    public List<OperAccessCoreConfig> getOperAccessCoreConfigList() {
-        return operAccessCoreConfigList;
-    }
 
-    public void setOperAccessCoreConfigList(List<OperAccessCoreConfig> operAccessCoreConfigList) {
-        this.operAccessCoreConfigList = operAccessCoreConfigList;
-    }
 
     public List<CarrierAgree> getCarrierAgreeList() {
         return carrierAgreeList;

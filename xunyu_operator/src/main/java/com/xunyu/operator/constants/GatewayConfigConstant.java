@@ -7,6 +7,42 @@ package com.xunyu.operator.constants;
  */
 public interface GatewayConfigConstant {
 
+
+    /**
+     * 运营商
+     */
+    interface Carrier{
+        /**
+         * 移动
+         */
+        int CMPP = 1;
+        /**
+         * 联通
+         */
+        int SGIP = 2;
+        /**
+         * 电信
+         */
+        int SMGP = 3;
+    }
+
+    /**
+     * 运营商
+     */
+    interface CarrierName{
+        /**
+         * 移动
+         */
+        String CMPP = "移动";
+        /**
+         * 联通
+         */
+        String SGIP = "联通";
+        /**
+         * 电信
+         */
+        String SMGP = "电信";
+    }
     /**
      * 启用状态
      */
@@ -39,5 +75,8 @@ public interface GatewayConfigConstant {
          */
         int GATEWAY_SHUNT = 2;
     }
+
+
+
 
 }
