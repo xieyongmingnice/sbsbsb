@@ -2,8 +2,11 @@ eureka:
   enabled: true
   client:
     serviceUrl:
-      #defaultZone: http://localhost:8001/eureka/
-      defaultZone: http://47.104.190.174:8001/eureka/
+      defaultZone: http://localhost:8001/eureka/
+      #defaultZone: http://47.104.190.174:8001/eureka/
+  instance:
+    prefer-ip-address: true  #地址使用该属性配置的IP
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
 
 spring:
   application:
@@ -26,9 +29,12 @@ spring:
     stream:
       kafka:
         binder:
-           brokers: 47.104.190.174:9092,47.104.190.41:9092  #ip地址根据实际kafka集群地址
-           zkNodes: 47.104.190.174:9181,47.104.190.41:9181  #zookeeper
-
+          #本地
+          brokers: 47.104.190.174:8092,47.104.190.41:8092  #ip地址根据实际kafka集群地址
+          zkNodes: 47.104.190.174:8181,47.104.190.41:8181  #zookeeper
+          #测试环境
+          #brokers: 172.31.253.14:8092,172.31.253.13:8092  #ip地址根据实际kafka集群地址
+          #zkNodes: 172.31.253.14:8181,172.31.253.13:8181  #zookeeper
 server:
   port: 8006
 

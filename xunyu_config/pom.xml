@@ -99,7 +99,7 @@
 
         <!--zipkin依赖-->
         <!--此依赖会自动引入spring-cloud-sleuth-stream并且引入zipkin的依赖包-->
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-sleuth</artifactId>
         </dependency>
@@ -110,7 +110,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-stream-binder-kafka</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!--boot四神器之 actuator
             对应用系统进行配置查看、相关功能统计
