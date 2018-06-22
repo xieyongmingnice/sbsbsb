@@ -48,8 +48,8 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: 192.168.3.5:9092  #ip地址根据实际kafka集群地址
-          zkNodes: 192.168.3.5:2181  #zookeeper
+          brokers: 47.104.190.174:8092,47.104.190.41:8092  #ip地址根据实际kafka集群地址
+          zkNodes: 47.104.190.174:8181,47.104.190.41:8181  #zookeeper
   http:
     multipart:
       max-file-size: 30MB

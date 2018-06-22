@@ -14,7 +14,6 @@
         <module>xunyu-eureka</module>
         <module>xunyu_cmpp</module>
         <module>xunyu_shiro</module>
-        <module>xunyu_department</module>
         <module>xunyu_crm</module>
         <module>xunyu_system</module>
         <module>xunyu_smgp</module>
