@@ -1,6 +1,5 @@
 package com.xunyu.operator.vo.out;
 
-import com.xunyu.operator.pojo.access.OperAccessCoreConfig;
 import com.xunyu.operator.pojo.out.CarrierAgree;
 import com.xunyu.operator.pojo.out.Customer;
 
@@ -516,6 +515,30 @@ public class GatewayOutConfigVO implements Serializable {
      */
     private List<SpGatewayConfigVO> spGatewayConfigVOList;
 
+    /**
+     * 启用时间 字符串
+     */
+    private String useTimeStr;
+    /**
+     * 失效时间 字符串
+     */
+    private String invalidTimeStr;
+
+    public String getUseTimeStr() {
+        return useTimeStr;
+    }
+
+    public void setUseTimeStr(String useTimeStr) {
+        this.useTimeStr = useTimeStr;
+    }
+
+    public String getInvalidTimeStr() {
+        return invalidTimeStr;
+    }
+
+    public void setInvalidTimeStr(String invalidTimeStr) {
+        this.invalidTimeStr = invalidTimeStr;
+    }
 
     public List<OperAccessCoreConfigVO> getAccessConfigVOList() {
         return accessConfigVOList;

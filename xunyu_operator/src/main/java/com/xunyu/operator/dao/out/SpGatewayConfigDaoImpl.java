@@ -27,11 +27,11 @@ public class SpGatewayConfigDaoImpl extends BaseDao{
 
     /**
      * 根据gatewayOutConfigId删除sp网关接出配置
-     * @param model
+     * @param idList
      * @return
      */
-    public int deleteSpGatewayConfig(GatewayOutConfigModel model){
-        return update("com.xunyu.operator.pojo.out.SpGatewayConfig.deleteSpGatewayConfigByGatewayConfigId",model);
+    public int deleteSpGatewayConfig(List<Integer> idList){
+        return update("com.xunyu.operator.pojo.out.SpGatewayConfig.deleteSpGatewayConfigByGatewayConfigId",idList);
     }
 
     /**

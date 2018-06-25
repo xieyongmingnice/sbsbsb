@@ -57,11 +57,11 @@ public class GatewayOutConfigDaoImpl extends BaseDao {
 
     /**
      * 删除
-     * @param model
+     * @param idList
      * @return
      */
-    public int deleteGatewayOutConfig(GatewayOutConfigModel model){
-        return update("com.xunyu.operator.pojo.out.GatewayOutConfig.deleteGatewayOutConfig",model);
+    public int deleteGatewayOutConfig(List<Integer> idList){
+        return update("com.xunyu.operator.pojo.out.GatewayOutConfig.deleteGatewayOutConfig",idList);
     }
 
     /**

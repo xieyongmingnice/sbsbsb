@@ -44,10 +44,10 @@ public interface GatewayOutConfigService {
 
     /**
      * 删除网关接出配置
-     * @param model
+     * @param idList
      * @return 影响条数
      */
-    int deleteGatewayOutConfig(GatewayOutConfigModel model);
+    int deleteGatewayOutConfig(List<Integer> idList);
 
 
     /**
@@ -112,5 +112,5 @@ public interface GatewayOutConfigService {
     /**
      * 清除网关配置（全部删除）
      */
-    int clearGatewayConfig(GatewayOutConfigModel model);
+    int clearGatewayConfig(List<Integer> idList);
 }

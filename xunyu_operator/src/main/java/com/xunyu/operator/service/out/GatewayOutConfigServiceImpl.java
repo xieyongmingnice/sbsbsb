@@ -88,14 +88,14 @@ public class GatewayOutConfigServiceImpl implements GatewayOutConfigService {
 
     /**
      * 删除网关接出配置
-     * @param model
+     * @param idList
      * @return 影响条数
      */
     @Override
     @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
-    public int deleteGatewayOutConfig(GatewayOutConfigModel model) {
-        int result_1 = gatewayOutConfigDao.deleteGatewayOutConfig(model);
-        int result_2 = spGatewayConfigDao.deleteSpGatewayConfig(model);
+    public int deleteGatewayOutConfig(List<Integer> idList) {
+        int result_1 = gatewayOutConfigDao.deleteGatewayOutConfig(idList);
+        int result_2 = spGatewayConfigDao.deleteSpGatewayConfig(idList);
         if(result_1 <= 0 || result_2 <= 0){
             throw new GatewayOutConfigExcption();
         }
@@ -236,7 +236,7 @@ public class GatewayOutConfigServiceImpl implements GatewayOutConfigService {
      * 清除网关配置（全部删除）
      */
     @Override
-    public int clearGatewayConfig(GatewayOutConfigModel model) {
-        return spGatewayConfigDao.deleteSpGatewayConfig(model);
+    public int clearGatewayConfig(List<Integer> idList) {
+        return spGatewayConfigDao.deleteSpGatewayConfig(idList);
     }
 }

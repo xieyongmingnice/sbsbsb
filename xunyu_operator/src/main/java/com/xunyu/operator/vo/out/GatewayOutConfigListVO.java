@@ -3,6 +3,7 @@ package com.xunyu.operator.vo.out;
 import com.xunyu.operator.pojo.access.OperAccessCoreConfig;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -38,6 +39,11 @@ public class GatewayOutConfigListVO implements Serializable{
     private String enterpriseIp;
 
     /**
+     * 企业代码
+     */
+    private String enterpriseCode;
+
+    /**
      * 企业联系人
      */
     private String enterContact;
@@ -56,6 +62,11 @@ public class GatewayOutConfigListVO implements Serializable{
      *   短信剩余条数
      */
     private Integer remainderMsgNum;
+
+    /**
+     * 费率
+     */
+    private BigDecimal rate;
 
     /**
      *   是否启用，1：是，0：否，默认1
@@ -80,6 +91,22 @@ public class GatewayOutConfigListVO implements Serializable{
      * 网关节点列表
      */
     private List<OperAccessCoreConfig> operAccessCoreConfigList;
+
+    public BigDecimal getRate() {
+        return rate;
+    }
+
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
+    }
+
+    public String getEnterpriseCode() {
+        return enterpriseCode;
+    }
+
+    public void setEnterpriseCode(String enterpriseCode) {
+        this.enterpriseCode = enterpriseCode;
+    }
 
     public String getIsUsedStr() {
         return isUsedStr;

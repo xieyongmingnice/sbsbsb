@@ -278,7 +278,13 @@ public class GatewayOutConfigController {
         if (result.getMessage() != null){
             return result;
         }
-        int success = gatewayOutConfigService.deleteGatewayOutConfig(model);
+        List<Integer> idList = model.getIdList();
+        if (idList == null || idList.size() <=0){
+            result.setCode(ResultMessage.Code.PRAMA_LOSS);
+            result.setMessage(ResultMessage.Message.PRAMA_LOSS+"：主键列idList");
+            return result;
+        }
+        int success = gatewayOutConfigService.deleteGatewayOutConfig(idList);
         if (success > 0){
             result.setCode(ResultMessage.Code.SUCCESS);
             result.setMessage(ResultMessage.Message.SUCCESS);
@@ -529,6 +535,14 @@ public class GatewayOutConfigController {
             if (carrierAgreeList != null && carrierAgreeList.size() > 0){
                 vo.setCarrierAgreeList(carrierAgreeList);
             }
+            String useTimeStr = vo.getUseTimeStr();
+            String invalidTimeStr =vo.getInvalidTimeStr();
+            if (useTimeStr!=null && useTimeStr.endsWith(".0")){
+                vo.setUseTimeStr(useTimeStr.substring(0,useTimeStr.length()-2));
+            }
+            if (invalidTimeStr!=null && invalidTimeStr.endsWith(".0")){
+                vo.setInvalidTimeStr(invalidTimeStr.substring(0,invalidTimeStr.length()-2));
+            }
         }else {
             result.setCode(ResultMessage.Code.FAILED);
             result.setCode(ResultMessage.Message.FAILED);
@@ -609,12 +623,12 @@ public class GatewayOutConfigController {
         if (result.getMessage() != null){
             return result;
         }
-        if (model.getGatewayOutConfigId() == null || model.getGatewayOutConfigId() == 0){
+        if (model.getIdList()==null || model.getIdList().size()<=0){
             result.setCode(ResultMessage.Code.PRAMA_LOSS);
-            result.setMessage(ResultMessage.Message.PRAMA_LOSS+"：gatewayOutConfigId");
+            result.setMessage(ResultMessage.Message.PRAMA_LOSS+"：主键列idList");
             return result;
         }
-        int success = gatewayOutConfigService.clearGatewayConfig(model);
+        int success = gatewayOutConfigService.clearGatewayConfig(model.getIdList());
         if (success>0){
             result.setCode(ResultMessage.Code.SUCCESS);
             result.setMessage(ResultMessage.Message.SUCCESS);

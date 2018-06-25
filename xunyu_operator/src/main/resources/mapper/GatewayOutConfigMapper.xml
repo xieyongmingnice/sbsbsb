@@ -90,6 +90,7 @@
     <result column="agree_name" jdbcType="INTEGER" property="agreeTypeStr" />
     <result column="channel_name" jdbcType="VARCHAR" property="channelName" />
     <result column="customer_type_str" jdbcType="INTEGER" property="customerTypeStr" />
+    <result column="enterprise_code" jdbcType="VARCHAR" property="enterpriseCode" />
     <result column="enterprise_ip" jdbcType="INTEGER" property="enterpriseIp" />
     <result column="enter_contact" jdbcType="INTEGER" property="enterContact" />
     <result column="customer_name" jdbcType="INTEGER" property="customerName" />
@@ -183,6 +184,8 @@
         <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
         <result column="isabled" jdbcType="INTEGER" property="isabled" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="use_time_str" jdbcType="VARCHAR" property="useTimeStr" />
+        <result column="invalid_time_str" jdbcType="VARCHAR" property="invalidTimeStr" />
     </resultMap>
 
   <sql id="Base_Column_List">
@@ -201,7 +204,8 @@
     change_overtime_prop, change_overtime_start_time, change_overtime_end_time, is_use_audit_keyword, 
     user_send_limit, is_use_num_shunt, is_use_balance_notice, bal_notice_num, bal_notice_content, 
     bal_notice_interval, bal_notice_time, is_use_http, http_bind_ip, is_use_push, http_reply_address, 
-    http_report_address, http_report_reply_address, operator_id, isabled, create_time
+    http_report_address, http_report_reply_address, operator_id, isabled, create_time,
+    use_time as use_time_str,invalid_time as invalid_time_str
   </sql>
 
   <!-- 通过企业代码查询记录条数 -->
@@ -212,7 +216,7 @@
   <!-- 查询列表 -->
   <select id="selectConfigList" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel" resultMap="ListResultMap">
     select
-      o.gateway_out_config_id,a.agree_name,c.channel_name,
+      o.gateway_out_config_id,a.agree_name,c.channel_name,o.enterprise_code,o.rate,
       case o.customer_type when 1 then '预付费' when 2 then '后付费' end as customer_type_str,
       o.enterprise_ip,cus.enter_contact,
       cus.customer_name,o.sp_access_code,o.remainder_msg_num,o.is_used,o.isabled,
@@ -247,13 +251,15 @@
     <if test="customerName != null and customerName != ''">
       and cus.customer_name like concat('%',#{customerName,jdbcType=VARCHAR},'%')
     </if>
-    <if test="carrierType != null and carrierType == 0 ">
+    <if test="carrierType != null and carrierType != 0 ">
         and o.carrier_type = #{carrierType,jdbcType=INTEGER}
     </if>
     <if test="isUsed != null ">
         and o.is_used = #{isUsed,jdbcType=INTEGER}
     </if>
+      ORDER by o.create_time desc
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+
     <!--&lt;if test="operatorId != null and operatorId != 0"&gt;-->
       <!---->
     <!--&lt;/if&gt;-->
@@ -292,7 +298,7 @@
     <if test="customerName != null and customerName != ''">
       and cus.customer_name like concat('%',#{customerName,jdbcType=VARCHAR},'%')
     </if>
-    <if test="carrierType != null and carrierType == 0 ">
+    <if test="carrierType != null and carrierType != 0 ">
       and o.carrier_type = #{carrierType,jdbcType=INTEGER}
     </if>
     <if test="isUsed != null ">
@@ -301,10 +307,14 @@
   </select>
 
    <!-- 删除 -->
-   <update id="deleteGatewayOutConfig" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel">
+   <update id="deleteGatewayOutConfig" parameterType="java.util.List">
      update tbl_gateway_out_config
      set isabled = 0
-     where gateway_out_config_id = #{gatewayOutConfigId,jdbcType=INTEGER}
+     where gateway_out_config_id in
+       <foreach collection="list" index="index" item="item"
+                separator="," open="(" close=")">
+           #{item,jdbcType=INTEGER}
+       </foreach>
    </update>
 
 
