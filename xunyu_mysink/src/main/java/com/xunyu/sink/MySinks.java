@@ -45,7 +45,7 @@ public class MySinks extends AbstractSink implements Configurable {
             String body = new String(event.getBody());
             StringBuffer res = new StringBuffer();
             String currTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-            res.append(currTime).append(":").append(body).append("\r\n");
+            res.append(currTime).append("#").append(body).append("\r\n");
             File file = new File(fileName);
             try {
                 fos = new FileOutputStream(file, true);
