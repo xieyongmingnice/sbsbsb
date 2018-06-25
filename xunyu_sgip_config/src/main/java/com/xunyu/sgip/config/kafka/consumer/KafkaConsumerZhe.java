@@ -134,8 +134,32 @@ public class KafkaConsumerZhe {
         return props;
     }
 
-    public static void main(String[] args) {
+    /**
+     * 开启单例模式
+     * 匿名内部类
+     */
+    private static class SGIPClientSingle {
+        private static KafkaConsumerZhe SINGLE = new KafkaConsumerZhe();
+    }
+
+    /**
+     * 构造函数私有化
+     */
+    private KafkaConsumerZhe() {
         GetProperties.getInstance();
+    }
+
+    /**
+     * 获取客户端对象
+     *
+     * @return
+     */
+    public static KafkaConsumerZhe getClientSingle() {
+        return SGIPClientSingle.SINGLE;
+    }
+
+    public static void main(String[] args) {
+       /* GetProperties.getInstance();
         KafkaConsumerZhe kk = new KafkaConsumerZhe();
         ArrayList<String> topics = new ArrayList<>();
         try {
@@ -147,6 +171,6 @@ public class KafkaConsumerZhe {
         }catch (Exception e){
             e.printStackTrace();
         }
-        System.exit(0);
+        System.exit(0);*/
     }
 }

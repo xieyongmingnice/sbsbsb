@@ -102,6 +102,24 @@ public class KafkaProducerZhe {
         return props;
     }
 
+    /**
+     * 做单例模式
+     * 1、构造函数私有化
+     * 2、构建私有内部类
+     * 3、返回私有静态对象
+     */
+    public KafkaProducerZhe() {
+        GetProperties.getInstance();
+    }
+
+    private static class SetSGIPServerSingle {
+        private static KafkaProducerZhe serverSingle = new KafkaProducerZhe();
+    }
+
+    public static KafkaProducerZhe getServerSingle() {
+        return SetSGIPServerSingle.serverSingle;
+    }
+
     public static void main(String[] args) {
         int index = 0;
         while (true) {
@@ -121,4 +139,6 @@ public class KafkaProducerZhe {
         }
         System.exit(0);*/
     }
+
+
 }

@@ -16,11 +16,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class SGIPServer {
 
-    /*public static void main(String[] args) {
-
-        SGIPServer.getServerSingle().SGIPSer(SGIPUtils.port);
-    }*/
-
     public void SGIPSer(int port) {
 
         EventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -35,7 +30,7 @@ public class SGIPServer {
 
                         @Override
                         protected void initChannel(Channel ch) throws Exception {
-                            ch.pipeline().addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS));
+                            ch.pipeline().addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS));//心跳
                             ch.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingDecoder());
                             ch.pipeline().addLast(MarshallingCodeCFactory.buildMarshallingEncoder());
                             ch.pipeline().addLast(new DecodeAndEncoder());

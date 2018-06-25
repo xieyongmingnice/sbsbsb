@@ -2,8 +2,8 @@ eureka:
   enabled: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:8001/eureka/
-      #defaultZone: http://47.104.190.174:8001/eureka/
+      #defaultZone: http://localhost:8001/eureka/
+      defaultZone: http://47.104.190.174:8001/eureka/
   instance:
     prefer-ip-address: true  #地址使用该属性配置的IP
     instance-id: ${spring.cloud.client.ipAddress}:${server.port}
@@ -15,14 +15,15 @@ spring:
   sleuth:
     enabled: false
   sampler:
-    percentage: 0.1
+    percentage: 1
   datasource:
-    name: xunyu_db
+    name: zipkin
+    type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://rm-m5e03vwf88v7vufn9ho.mysql.rds.aliyuncs.com:3306/xunyu_db?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    url: jdbc:mysql://rm-m5e03vwf88v7vufn9ho.mysql.rds.aliyuncs.com:3306/zipkin?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: xunyu_db
     password: XunYu@DEV-DB
-    #schema[0]: classpath:/zipkin.sql
+    #schema[0]: classpath:zipkin.sql
     initialize: true
     continue-on-error: true
   cloud:
@@ -30,11 +31,11 @@ spring:
       kafka:
         binder:
           #本地
-          brokers: 47.104.190.174:8092,47.104.190.41:8092  #ip地址根据实际kafka集群地址
-          zkNodes: 47.104.190.174:8181,47.104.190.41:8181  #zookeeper
+          #brokers: 47.104.190.174:8092,47.104.190.41:8092  #ip地址根据实际kafka集群地址
+          #zkNodes: 47.104.190.174:8181,47.104.190.41:8181  #zookeeper
           #测试环境
-          #brokers: 172.31.253.14:8092,172.31.253.13:8092  #ip地址根据实际kafka集群地址
-          #zkNodes: 172.31.253.14:8181,172.31.253.13:8181  #zookeeper
+          brokers: 172.31.253.14:8092,172.31.253.13:8092  #ip地址根据实际kafka集群地址
+          zkNodes: 172.31.253.14:8181,172.31.253.13:8181  #zookeeper
 server:
   port: 8006
 
