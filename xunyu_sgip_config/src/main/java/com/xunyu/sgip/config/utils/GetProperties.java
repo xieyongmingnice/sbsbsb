@@ -1,7 +1,6 @@
 package com.xunyu.sgip.config.utils;
 
 import org.springframework.core.io.support.PropertiesLoaderUtils;
-
 import java.io.*;
 import java.util.Enumeration;
 import java.util.Properties;

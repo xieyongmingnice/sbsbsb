@@ -18,16 +18,21 @@ public class SGIPServer {
 
     public void SGIPSer(int port) {
 
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup bossGroup = new NioEventLoopGroup(1);//处理接收请求
+        EventLoopGroup workerGroup = new NioEventLoopGroup();   //默认是 CPU 核心数乘以2
 
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
+                    // 保持连接数
                     .option(ChannelOption.SO_BACKLOG, 1024)
+                    //通过NoDelay禁用Nagle,使消息立即发出去，不用等待到一定的数据量才发出去
+                    .option(ChannelOption.TCP_NODELAY, true)
+                    //保持长连接状态
+                    .childOption(ChannelOption.SO_KEEPALIVE, true)
+                    // 处理新连接
                     .childHandler(new ChannelInitializer<Channel>() {
-
                         @Override
                         protected void initChannel(Channel ch) throws Exception {
                             ch.pipeline().addLast(new IdleStateHandler(5, 0, 0, TimeUnit.SECONDS));//心跳
@@ -36,16 +41,12 @@ public class SGIPServer {
                             ch.pipeline().addLast(new DecodeAndEncoder());
                             ch.pipeline().addLast(new SGIPServerHandler());
                         }
-
-
                     });
             //绑定端口、同步等待
             ChannelFuture futrue = b.bind(port).sync();
             System.out.println("启动监听，等待链接。。。" + futrue.isSuccess() + "监听端口号：" + port);
-
             //等待服务监听端口关闭
             futrue.channel().closeFuture().sync();
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

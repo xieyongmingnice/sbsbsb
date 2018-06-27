@@ -31,13 +31,15 @@ public class SGIPClient {
          * 6、同步等待
          */
         final HashedWheelTimer timer = new HashedWheelTimer();
-        EventLoopGroup group = new NioEventLoopGroup();
-
+        EventLoopGroup group = new NioEventLoopGroup(1);//单线程模型,基于Reactor
         try {
             Bootstrap b = new Bootstrap();
             b.group(group);
             b.channel(NioSocketChannel.class);
+            //通过NoDelay禁用Nagle,使消息立即发出去，不用等待到一定的数据量才发出去
             b.option(ChannelOption.TCP_NODELAY, true);
+            //保持长连接状态
+            b.option(ChannelOption.SO_KEEPALIVE, true);
             final ConnectionWatchdog watchdog = getConnDog(b, timer, port, host, true);
             b.handler(new ChannelInitializer<Channel>() {
 
