@@ -39,7 +39,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Value("${spring.redis.redisPassWord}")
     private String redisPassWord;
 
-    @Bean("jedisPoolConfig")  
+    @Bean(name = "jedisPoolConfig")
     public JedisPoolConfig jedisPoolConfig() {  
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();  
         jedisPoolConfig.setMaxIdle(maxIdle);  
