@@ -311,7 +311,7 @@ public class GatewayOutConfigController {
         if (result.getMessage() != null){
             return result;
         }
-        int success = gatewayOutConfigService.updateGatewayOutConfig(model);
+        int success = gatewayOutConfigService.updateGatewayOutConfigStraight(model);
         if (success > 0){
             result.setCode(ResultMessage.Code.SUCCESS);
             result.setMessage(ResultMessage.Message.SUCCESS);
@@ -338,7 +338,7 @@ public class GatewayOutConfigController {
         if (result.getMessage() != null){
             return result;
         }
-        int success = gatewayOutConfigService.updateGatewayOutConfig(model);
+        int success = gatewayOutConfigService.updateGatewayOutConfigShunt(model);
         if (success > 0){
             result.setCode(ResultMessage.Code.SUCCESS);
             result.setMessage(ResultMessage.Message.SUCCESS);

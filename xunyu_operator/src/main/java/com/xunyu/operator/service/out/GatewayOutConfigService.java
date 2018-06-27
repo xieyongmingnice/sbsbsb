@@ -55,7 +55,14 @@ public interface GatewayOutConfigService {
      * @param model
      * @return 影响条数
      */
-    int updateGatewayOutConfig(GatewayOutConfigModel model);
+    int updateGatewayOutConfigShunt(GatewayOutConfigModel model);
+
+    /**
+     * 编辑网关接出配置（网关直连）
+     * @param model
+     * @return 影响条数
+     */
+    int updateGatewayOutConfigStraight(GatewayOutConfigModel model);
 
     /**
      * 充值

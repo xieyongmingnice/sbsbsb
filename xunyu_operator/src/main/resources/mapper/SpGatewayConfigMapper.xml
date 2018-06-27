@@ -105,14 +105,13 @@
   <select id="selectByGatewayOutConfigId" resultMap="VOResultMap" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel">
     select
       s.sp_gateway_config_id, s.carrier_agree_id, s.gateway_out_config_id, s.config_id, s.gateway_access_code,
-      s.binary_msg_len_limit, s.sp_msg_len_limit, s.fixed_sign_location, s.long_msg_extra_num,
+      s.binary_msg_len_limit, s.sp_msg_len_limit, s.fixed_sign_location,
       s.is_ascll_supported, s.ascll_len_limit, s.ascll_sign_len, s.is_send_without_sign, s.content_without_sign,
       s.min_sale_cost, s.actual_sale_price, s.sale_commission_prop, s.isabled, s.create_time,
       a.agree_name ,c.channel_name,
       CASE s.fixed_sign_location WHEN 1 then '最后' WHEN 2 then '最前' END as fixed_sign_location_str,
       s.long_msg_extra_num,
       CASE s.is_ascll_supported WHEN 1 then '支持' WHEN 0 then '不支持' END as is_ascll_supported_str,
-      s.ascll_len_limit,s.ascll_sign_len,
       CASE s.is_send_without_sign WHEN 1 then '启用' WHEN 0 then '不启用' END as is_send_without_sign_str
     from tbl_sp_gateway_config s
     left join tbl_carrier_agree a on a.carrier_agree_id = s.carrier_agree_id
@@ -238,5 +237,64 @@
       </if>
     </trim>
   </insert>
+
+  <!-- 编辑 -->
+  <update id="updateSpGatewayConfig" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel">
+      update  tbl_sp_gateway_config
+      <set>
+        <if test="carrierAgreeId != null">
+          carrier_agree_id =#{carrierAgreeId,jdbcType=INTEGER},
+        </if>
+        <if test="gatewayOutConfigId != null">
+          gateway_out_config_id = #{gatewayOutConfigId,jdbcType=INTEGER},
+        </if>
+        <if test="configId != null">
+          config_id =#{configId,jdbcType=INTEGER},
+        </if>
+        <if test="gatewayAccessCode != null">
+          gateway_access_code = #{gatewayAccessCode,jdbcType=VARCHAR},
+        </if>
+        <if test="binaryMsgLenLimit != null">
+          binary_msg_len_limit =#{binaryMsgLenLimit,jdbcType=INTEGER},
+        </if>
+        <if test="spMsgLenLimit != null">
+          sp_msg_len_limit = #{spMsgLenLimit,jdbcType=INTEGER},
+        </if>
+        <if test="fixedSignLocation != null">
+          fixed_sign_location = #{fixedSignLocation,jdbcType=INTEGER},
+        </if>
+        <if test="longMsgExtraNum != null">
+          long_msg_extra_num = #{longMsgExtraNum,jdbcType=INTEGER},
+        </if>
+        <if test="isAscllSupported != null">
+          is_ascll_supported = #{isAscllSupported,jdbcType=INTEGER},
+        </if>
+        <if test="ascllLenLimit != null">
+          ascll_len_limit = #{ascllLenLimit,jdbcType=INTEGER},
+        </if>
+        <if test="ascllSignLen != null">
+          ascll_sign_len = #{ascllSignLen,jdbcType=INTEGER},
+        </if>
+        <if test="isSendWithoutSign != null">
+          is_send_without_sign = #{isSendWithoutSign,jdbcType=INTEGER},
+        </if>
+        <if test="contentWithoutSign != null">
+          content_without_sign = #{contentWithoutSign,jdbcType=VARCHAR},
+        </if>
+        <if test="minSaleCost != null">
+          min_sale_cost  = #{minSaleCost,jdbcType=DECIMAL},
+        </if>
+        <if test="actualSalePrice != null">
+          actual_sale_price = #{actualSalePrice,jdbcType=DECIMAL},
+        </if>
+        <if test="saleCommissionProp != null">
+          sale_commission_prop = #{saleCommissionProp,jdbcType=DECIMAL},
+        </if>
+        <if test="createTime != null">
+          create_time = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
+      where gateway_out_config_id = #{gatewayOutConfigId,jdbcType=INTEGER} and isabled = 1
+  </update>
 
 </mapper>

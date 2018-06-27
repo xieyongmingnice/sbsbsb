@@ -216,11 +216,12 @@
   <!-- 查询列表 -->
   <select id="selectConfigList" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel" resultMap="ListResultMap">
     select
-      o.gateway_out_config_id,a.agree_name,c.channel_name,o.enterprise_code,o.rate,
+      o.gateway_out_config_id,a.agree_name,o.enterprise_code,o.rate,
       case o.customer_type when 1 then '预付费' when 2 then '后付费' end as customer_type_str,
       o.enterprise_ip,cus.enter_contact,
       cus.customer_name,o.sp_access_code,o.remainder_msg_num,o.is_used,o.isabled,
-      case o.is_used when 1 then '有效' when 0 then '无效' when 2 then '无效' end as is_used_str
+      case o.is_used when 1 then '有效' when 0 then '无效' when 2 then '无效' end as is_used_str,
+      case o.carrier_type when 9 then '网关直连' else c.channel_name end as channel_name
     from tbl_gateway_out_config o
     LEFT JOIN tbl_sp_gateway_config s on s.gateway_out_config_id = o.gateway_out_config_id
     LEFT JOIN tbl_gateway_access_config c on s.config_id = c.config_id
@@ -257,6 +258,7 @@
     <if test="isUsed != null ">
         and o.is_used = #{isUsed,jdbcType=INTEGER}
     </if>
+      group by o.gateway_out_config_id
       ORDER by o.create_time desc
     limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
 
@@ -267,7 +269,7 @@
 
   <!-- 查询列表记录总条数 -->
   <select id="selectConfigListCount" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel" resultType="java.lang.Integer">
-    select count(1)
+    select count(DISTINCT o.gateway_out_config_id)
     from tbl_gateway_out_config o
     LEFT JOIN tbl_sp_gateway_config s on s.gateway_out_config_id = o.gateway_out_config_id
     LEFT JOIN tbl_gateway_access_config c on s.config_id = c.config_id
@@ -618,12 +620,6 @@
             </if>
             <if test="operatorId != null">
                 operator_id = #{operatorId,jdbcType=INTEGER},
-            </if>
-            <if test="isabled != null">
-                isabled = #{isabled,jdbcType=INTEGER},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
         </set>
         where gateway_out_config_id = #{gatewayOutConfigId,jdbcType=INTEGER}

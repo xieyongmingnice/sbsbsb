@@ -104,13 +104,30 @@ public class GatewayOutConfigServiceImpl implements GatewayOutConfigService {
     }
 
     /**
-     * 编辑网关接出配置
+     * 编辑网关接出配置（网关分流）
      * @param model
      * @return 影响条数
      */
     @Override
-    public int updateGatewayOutConfig(GatewayOutConfigModel model) {
+    public int updateGatewayOutConfigShunt(GatewayOutConfigModel model) {
         return gatewayOutConfigDao.updateGatewayOutConfig(model);
+    }
+
+    /**
+     * 编辑网关接出配置（网关直连）
+     * @param model
+     * @return 影响条数
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRED)
+    public int updateGatewayOutConfigStraight(GatewayOutConfigModel model) {
+        int result_1 = gatewayOutConfigDao.updateGatewayOutConfig(model);
+        int result_2 = spGatewayConfigDao.updateSpGatewayConfig(model);
+        int result = result_1 > 0 && result_2 >0 ? 1 : 0;
+        if(result_1 <= 0 || result_2 <= 0){
+            throw new GatewayOutConfigExcption();
+        }
+        return result;
     }
 
     /**

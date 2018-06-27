@@ -35,6 +35,15 @@ public class SpGatewayConfigDaoImpl extends BaseDao{
     }
 
     /**
+     * 编辑
+     * @param model
+     * @return
+     */
+    public int updateSpGatewayConfig(GatewayOutConfigModel model){
+        return update("com.xunyu.operator.pojo.out.SpGatewayConfig.updateSpGatewayConfig",model);
+    }
+
+    /**
      * 启用 、 恢复
      * @param idList
      * @return
