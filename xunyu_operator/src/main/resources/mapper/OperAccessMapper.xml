@@ -122,6 +122,7 @@
         then
         (
           select count(1) from tbl_sp_gateway_config sc where ac.config_id = sc.config_id
+          and isable = 1
         ) else 0 end
         ) as spAccessNum
         from tbl_gateway_access_config ac
