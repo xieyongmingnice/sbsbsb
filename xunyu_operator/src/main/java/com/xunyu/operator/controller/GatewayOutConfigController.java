@@ -87,6 +87,7 @@ public class GatewayOutConfigController {
         Map map = Maps.newHashMap();
         map.put("startRow", 0);
         map.put("endRow", Long.MAX_VALUE);
+        map.put("agreeType",model.getCarrierType());
         List<OperAccessCoreConfig> operAccessCoreConfigList = operAccessService.listOperAccessCoreConfig(map);
         if (operAccessCoreConfigList != null && operAccessCoreConfigList.size() > 0){
             List<OperAccessCoreConfigVO> operAccessCoreConfigVOList = Lists.newArrayList();
@@ -515,6 +516,7 @@ public class GatewayOutConfigController {
             Map map = Maps.newHashMap();
             map.put("startRow", 0);
             map.put("endRow", Long.MAX_VALUE);
+            map.put("agreeType",model.getCarrierType());
             List<OperAccessCoreConfig> operAccessCoreConfigList = operAccessService.listOperAccessCoreConfig(map) ;
             if (operAccessCoreConfigList != null && operAccessCoreConfigList.size() > 0){
                 List<OperAccessCoreConfigVO> operAccessCoreConfigVOList = Lists.newArrayList();

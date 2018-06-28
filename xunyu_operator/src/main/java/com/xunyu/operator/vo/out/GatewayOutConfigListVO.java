@@ -74,6 +74,10 @@ public class GatewayOutConfigListVO implements Serializable{
     private Integer isUsed;
 
     /**
+     * 运营商类型
+     */
+    private Integer carrierType;
+    /**
      * 归属业务
      */
     private String operatorName;
@@ -91,6 +95,15 @@ public class GatewayOutConfigListVO implements Serializable{
      * 网关节点列表
      */
     private List<OperAccessCoreConfig> operAccessCoreConfigList;
+
+
+    public Integer getCarrierType() {
+        return carrierType;
+    }
+
+    public void setCarrierType(Integer carrierType) {
+        this.carrierType = carrierType;
+    }
 
     public BigDecimal getRate() {
         return rate;

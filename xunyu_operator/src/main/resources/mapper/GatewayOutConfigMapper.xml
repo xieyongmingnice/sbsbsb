@@ -96,6 +96,7 @@
     <result column="customer_name" jdbcType="INTEGER" property="customerName" />
     <result column="sp_access_code" jdbcType="INTEGER" property="spAccessCode" />
     <result column="remainder_msg_num" jdbcType="INTEGER" property="remainderMsgNum" />
+    <result column="carrier_type" jdbcType="INTEGER" property="carrierType" />
     <result column="is_used" jdbcType="INTEGER" property="isUsed" />
     <result column="isabled" jdbcType="INTEGER" property="isabled" />
     <result column="is_used_str" jdbcType="VARCHAR" property="isUsedStr" />
@@ -216,12 +217,12 @@
   <!-- 查询列表 -->
   <select id="selectConfigList" parameterType="com.xunyu.model.operator.out.GatewayOutConfigModel" resultMap="ListResultMap">
     select
-      o.gateway_out_config_id,a.agree_name,o.enterprise_code,o.rate,
+      o.gateway_out_config_id,a.agree_name,o.enterprise_code,o.rate,o.carrier_type,
       case o.customer_type when 1 then '预付费' when 2 then '后付费' end as customer_type_str,
       o.enterprise_ip,cus.enter_contact,
       cus.customer_name,o.sp_access_code,o.remainder_msg_num,o.is_used,o.isabled,
       case o.is_used when 1 then '有效' when 0 then '无效' when 2 then '无效' end as is_used_str,
-      case o.carrier_type when 9 then '网关直连' else c.channel_name end as channel_name
+      case o.carrier_type when 9 then '网关分流' else c.channel_name end as channel_name
     from tbl_gateway_out_config o
     LEFT JOIN tbl_sp_gateway_config s on s.gateway_out_config_id = o.gateway_out_config_id
     LEFT JOIN tbl_gateway_access_config c on s.config_id = c.config_id
