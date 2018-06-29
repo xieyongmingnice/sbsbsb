@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.xunyu_tactics.pojo.CarrierNumConfig">
+  <resultMap id="BaseResultMap" type="com.xunyu.xunyu_tactics.pojo.CarrierNumConfig">
+    <id column="carrier_num_config_id" jdbcType="INTEGER" property="carrierNumConfigId" />
+    <result column="carrier_type" jdbcType="INTEGER" property="carrierType" />
+    <result column="num_prefix" jdbcType="INTEGER" property="numPrefix" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    carrier_num_config_id, carrier_type, num_prefix, isabled, create_time
+  </sql>
+
+  <!-- 删除 -->
+  <update id="deleteNums">
+    update tbl_carrier_num_config set isabled = 0
+  </update>
+
+  <!-- 查询 -->
+  <select id="selectNums" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from tbl_carrier_num_config where isabled = 1
+    order by create_time desc
+  </select>
+
+  <!-- 插入 -->
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into tbl_carrier_num_config
+    (carrier_type, num_prefix, isabled)
+     values
+     <foreach collection ="list" item="cnc" index= "index" separator =",">
+         (#{cnc.carrierType}, #{cnc.numPrefix},#{cnc.isabled})
+     </foreach >
+  </insert>
+</mapper>

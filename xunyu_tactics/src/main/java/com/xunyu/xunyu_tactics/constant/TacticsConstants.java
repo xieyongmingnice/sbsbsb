@@ -7,6 +7,25 @@ package com.xunyu.xunyu_tactics.constant;
  */
 public interface TacticsConstants {
 
+
+    /**
+     * 运营商type
+     */
+    interface CarrierType{
+        /**
+         * 移动
+         */
+        int CHINA_MOBILE = 1;
+        /**
+         * 联通
+         */
+        int CHINA_UNICOM = 2;
+        /**
+         * 电信
+         */
+        int CHINA_TELECOM = 3;
+    }
+
     /**
      * 系统红名单来源
      */
