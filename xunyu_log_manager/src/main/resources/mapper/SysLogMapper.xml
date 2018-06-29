@@ -84,9 +84,12 @@
     </insert>
 
     <delete id = "delSysLogs" parameterType="list">
+        delete from tbl_sys_logs
+    </delete>
+    <!--<delete id = "delSysLogs" parameterType="list">
         delete from tbl_sys_logs where logs_id in
         <foreach collection="list" item="logsId" separator="," open="(" close=")">
             #{logsId}
         </foreach>
-    </delete>
+    </delete>-->
 </mapper>

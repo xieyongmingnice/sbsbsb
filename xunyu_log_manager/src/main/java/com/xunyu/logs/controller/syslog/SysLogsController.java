@@ -106,7 +106,7 @@ public class SysLogsController {
     }
 
     /**
-     * 批量删除
+     * 批量删除（清空）
      */
     @RequestMapping(value = "delSysLogs",method = RequestMethod.POST)
     public Result<SysLogs> delSysLogsData(SysLogs sl) throws Exception {

@@ -1,7 +1,5 @@
 package com.xunyu.logs.service.syslog;
 
-import com.commons.core.util.RandomUtils;
-import com.commons.core.util.StringUtils2;
 import com.xunyu.logs.dao.syslog.SysLogsDaoImpl;
 import com.xunyu.model.log.syslog.SysLogs;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +49,9 @@ public class SysLogsServiceImpl implements SysLogsService {
     @Override
     public int delSysLogs(String ids) {
         int n = 0;
-        if(StringUtils2.isNotEmpty(ids)){
-            List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
+        /*if(StringUtils2.isNotEmpty(ids)){
+
             String[] idsStr = ids.split(",");
 
             for (int i = 0; i < idsStr.length; i++) {
@@ -62,8 +61,12 @@ public class SysLogsServiceImpl implements SysLogsService {
                     continue;
                 }
             }
+            //批量删除
             n = sysLogsDaoImpl.delSysLogs(list);
-        }
+        }else{*/
+            //清空
+            n = sysLogsDaoImpl.delSysLogs(list);
+      //  }
         return n;
     }
 }
