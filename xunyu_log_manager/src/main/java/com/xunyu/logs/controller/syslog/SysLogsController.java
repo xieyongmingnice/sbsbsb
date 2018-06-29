@@ -117,14 +117,9 @@ public class SysLogsController {
             res.setMessage("当前会话失效，请跳转到登录页");
             return res;
         }
-        if(StringUtils2.isNotEmpty(sl.getLogsIds())){
-           logsService.delSysLogs(sl.getLogsIds());
-           res.setMessage("success");
-           res.setCode("200");
-        }else{
-            res.setCode("413");
-            res.setMessage("logsIds不能为空");
-        }
+        logsService.delSysLogs(sl.getLogsIds());
+        res.setMessage("success");
+        res.setCode("200");
         return res;
     }
 }
