@@ -47,34 +47,46 @@ public class CarrierNumConfigController {
         List<Integer> chinaUnicomNums = model.getChinaUnicomNums();
         List<Integer> chinaTelecomNums = model.getChinaTelecomNums();
         List<CarrierNumConfig> configList = Lists.newArrayList();
-        for (Integer num : chinaMobileNums){
-            CarrierNumConfig cnc = new CarrierNumConfig();
-            cnc.setNumPrefix(num);
-            cnc.setIsabled(1);
-            cnc.setCarrierType(TacticsConstants.CarrierType.CHINA_MOBILE);
-            configList.add(cnc);
+        if(chinaMobileNums != null) {
+            for (Integer num : chinaMobileNums) {
+                CarrierNumConfig cnc = new CarrierNumConfig();
+                cnc.setNumPrefix(num);
+                cnc.setIsabled(1);
+                cnc.setCarrierType(TacticsConstants.CarrierType.CHINA_MOBILE);
+                configList.add(cnc);
+            }
         }
-        for (Integer num : chinaUnicomNums){
-            CarrierNumConfig cnc = new CarrierNumConfig();
-            cnc.setNumPrefix(num);
-            cnc.setIsabled(1);
-            cnc.setCarrierType(TacticsConstants.CarrierType.CHINA_UNICOM);
-            configList.add(cnc);
+        if(chinaUnicomNums != null) {
+            for (Integer num : chinaUnicomNums) {
+                CarrierNumConfig cnc = new CarrierNumConfig();
+                cnc.setNumPrefix(num);
+                cnc.setIsabled(1);
+                cnc.setCarrierType(TacticsConstants.CarrierType.CHINA_UNICOM);
+                configList.add(cnc);
+            }
         }
-        for (Integer num : chinaTelecomNums){
-            CarrierNumConfig cnc = new CarrierNumConfig();
-            cnc.setNumPrefix(num);
-            cnc.setIsabled(1);
-            cnc.setCarrierType(TacticsConstants.CarrierType.CHINA_TELECOM);
-            configList.add(cnc);
+        if(chinaTelecomNums != null ) {
+            for (Integer num : chinaTelecomNums) {
+                CarrierNumConfig cnc = new CarrierNumConfig();
+                cnc.setNumPrefix(num);
+                cnc.setIsabled(1);
+                cnc.setCarrierType(TacticsConstants.CarrierType.CHINA_TELECOM);
+                configList.add(cnc);
+            }
         }
         Set<CarrierNumConfig> set = new TreeSet<>(Comparator.comparing(CarrierNumConfig::getNumPrefix));
         set.addAll(configList);
         List<CarrierNumConfig> list = Lists.newArrayList(set);
         //删除之前的数据
         //批量插入新数据
-        int insert = carrierNumConfigService.batchInsert(list);
-        if (insert>0){
+        int insert = 0;
+        int delete = 0;
+        if (list != null && list.size()>0) {
+            insert = carrierNumConfigService.batchInsert(list);
+        }else {
+            delete = carrierNumConfigService.deleteNums();
+        }
+        if (insert>0 || delete>0){
             result.setMessage(ResultMessage.Message.SUCCESS);
             result.setCode(ResultMessage.Code.SUCCESS);
         }else {
@@ -101,8 +113,8 @@ public class CarrierNumConfigController {
             result.setCode(ResultMessage.Code.SUCCESS);
             result.setRes(list);
         }else {
-            result.setMessage(ResultMessage.Message.FAILED);
-            result.setCode(ResultMessage.Code.FAILED);
+            result.setMessage(ResultMessage.Message.NO_VALUE);
+            result.setCode(ResultMessage.Code.NOT_FOUND);
         }
         return  result;
     }
