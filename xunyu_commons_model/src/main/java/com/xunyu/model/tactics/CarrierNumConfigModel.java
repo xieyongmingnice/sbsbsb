@@ -14,10 +14,19 @@ public class CarrierNumConfigModel extends UserModel implements Serializable {
 
     private static final long serialVersionUID = -964288819035154484L;
 
+    /**
+     * 移动号段列表
+     */
     private List<Integer> chinaMobileNums;
 
+    /**
+     * 联通号段列表
+     */
     private List<Integer> chinaUnicomNums;
 
+    /**
+     * 电信号段列表
+     */
     private List<Integer> chinaTelecomNums;
 
     public List<Integer> getChinaMobileNums() {

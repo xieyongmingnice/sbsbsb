@@ -257,7 +257,12 @@
         and o.carrier_type = #{carrierType,jdbcType=INTEGER}
     </if>
     <if test="isUsed != null ">
-        and o.is_used = #{isUsed,jdbcType=INTEGER}
+        <if test="isUsed == 3">
+            and o.is_used in (0,2)
+        </if>
+        <if test="isUsed != 3">
+            and o.is_used = #{isUsed,jdbcType=INTEGER}
+        </if>
     </if>
       group by o.gateway_out_config_id
       ORDER by o.create_time desc
@@ -305,7 +310,13 @@
       and o.carrier_type = #{carrierType,jdbcType=INTEGER}
     </if>
     <if test="isUsed != null ">
-      and o.is_used = #{isUsed,jdbcType=INTEGER}
+        <!--作废接出配置 页面 查询条件[是否有效]选择[无效]时 传3-->
+        <if test="isUsed == 3">
+            and o.is_used in (0,2)
+        </if>
+        <if test="isUsed != 3">
+            and o.is_used = #{isUsed,jdbcType=INTEGER}
+        </if>
     </if>
   </select>
 
