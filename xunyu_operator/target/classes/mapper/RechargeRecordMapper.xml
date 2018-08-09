@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.operator.pojo.out.RechargeRecord">
+  <resultMap id="BaseResultMap" type="com.xunyu.operator.pojo.out.RechargeRecord">
+    <id column="recharge_record_id" jdbcType="INTEGER" property="rechargeRecordId" />
+    <result column="enterprise_code" jdbcType="VARCHAR" property="enterpriseCode" />
+    <result column="sp_access_code" jdbcType="VARCHAR" property="spAccessCode" />
+    <result column="service_type" jdbcType="INTEGER" property="serviceType" />
+    <result column="oper_type" jdbcType="INTEGER" property="operType" />
+    <result column="pay_type" jdbcType="INTEGER" property="payType" />
+    <result column="recharge_msg_rate" jdbcType="DECIMAL" property="rechargeMsgRate" />
+    <result column="recharge_msg_num" jdbcType="INTEGER" property="rechargeMsgNum" />
+    <result column="recharge_money" jdbcType="DECIMAL" property="rechargeMoney" />
+    <result column="remainder_msg_num" jdbcType="INTEGER" property="remainderMsgNum" />
+    <result column="recharge_remark" jdbcType="VARCHAR" property="rechargeRemark" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    recharge_record_id, enterprise_code, sp_access_code, service_type, oper_type, pay_type, 
+    recharge_msg_rate, recharge_msg_num, recharge_money, remainder_msg_num, recharge_remark, 
+    operator_id, isabled, create_time
+  </sql>
+
+  <!-- 新增记录 -->
+  <insert id="insertRechargeRecord" parameterType="com.xunyu.operator.pojo.out.RechargeRecord">
+    insert into tbl_recharge_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rechargeRecordId != null">
+        recharge_record_id,
+      </if>
+      <if test="enterpriseCode != null">
+        enterprise_code,
+      </if>
+      <if test="spAccessCode != null">
+        sp_access_code,
+      </if>
+      <if test="serviceType != null">
+        service_type,
+      </if>
+      <if test="operType != null">
+        oper_type,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="rechargeMsgRate != null">
+        recharge_msg_rate,
+      </if>
+      <if test="rechargeMsgNum != null">
+        recharge_msg_num,
+      </if>
+      <if test="rechargeMoney != null">
+        recharge_money,
+      </if>
+      <if test="remainderMsgNum != null">
+        remainder_msg_num,
+      </if>
+      <if test="rechargeRemark != null">
+        recharge_remark,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="isabled != null">
+        isabled,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rechargeRecordId != null">
+        #{rechargeRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseCode != null">
+        #{enterpriseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="spAccessCode != null">
+        #{spAccessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceType != null">
+        #{serviceType,jdbcType=INTEGER},
+      </if>
+      <if test="operType != null">
+        #{operType,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="rechargeMsgRate != null">
+        #{rechargeMsgRate,jdbcType=DECIMAL},
+      </if>
+      <if test="rechargeMsgNum != null">
+        #{rechargeMsgNum,jdbcType=INTEGER},
+      </if>
+      <if test="rechargeMoney != null">
+        #{rechargeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="remainderMsgNum != null">
+        #{remainderMsgNum,jdbcType=INTEGER},
+      </if>
+      <if test="rechargeRemark != null">
+        #{rechargeRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="isabled != null">
+        #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

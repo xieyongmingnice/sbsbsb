@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.shiro.pojo.permission.Permissions">
+
+    <resultMap id="per_ResultMap" type="com.xunyu.shiro.pojo.permission.Permissions">
+        <id column="permission_id" property="permissionId"></id>
+        <result column="permission_name" property="permissionName"></result>
+        <result column="permission_group_id" property="permissionGroupId"></result>
+        <result column="permission_domain" property="permissionDomain"></result>
+        <result column="permission_type" property="permissionType"></result>
+        <result column="permission_uri" property="permissionUri"></result>
+        <result column="remark" property="remark"></result>
+        <result column="isabled" property="isabled"></result>
+        <result column="create_time" property="permissionCreateTime"></result>
+    </resultMap>
+
+    <sql id="per_column">
+      permission_id,permission_name,permission_group_id
+      ,permission_domain,permission_type,permission_uri
+      ,remark,isabled,create_time
+    </sql>
+
+    <select id  ="permissionsList" parameterType="map" resultMap="per_ResultMap">
+
+        select <include refid = "per_column"/>
+        from tbl_permissions
+    </select>
+
+    <insert id = "addPermission" parameterType="com.xunyu.shiro.pojo.permission.Permissions"
+            useGeneratedKeys="true" keyColumn="permission_id" keyProperty="permissionId">
+        insert into tbl_permissions
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="permissionId != null">permission_id,</if>
+            <if test='permissionName != null and permissionName != ""'>permission_name,</if>
+            <if test='permissionGroupId != null'>permission_group_id,</if>
+            <if test='permissionType != null'>permission_type,</if>
+            <if test='permissionDomain != null and permissionDomain != ""'>permission_domain,</if>
+            <if test='permissionUri != null and permissionUri != ""'>permission_uri,</if>
+            <if test='isabled != null'>isabled,</if>
+            <if test='remark != null and remark != ""'>remark,</if>
+            <if test='permissionCreateTime != null'>create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="permissionId != null">#{permissionId},</if>
+            <if test='permissionName != null and permissionName != ""'>#{permissionName},</if>
+            <if test='permissionGroupId != null'>#{permissionGroupId},</if>
+            <if test='permissionType != null'>#{permissionType},</if>
+            <if test='permissionDomain != null and permissionDomain != ""'>#{permissionDomain},</if>
+            <if test='permissionUri != null and permissionUri != ""'>#{permissionUri},</if>
+            <if test='isabled != null'>#{isabled},</if>
+            <if test='remark != null and remark != ""'>#{remark},</if>
+            <if test='permissionCreateTime != null'>#{permissionCreateTime},</if>
+        </trim>
+    </insert>
+
+    <insert id = "addRolesPer" parameterType="com.xunyu.shiro.pojo.permission.RolesPermissionsR"
+            useGeneratedKeys="true" keyColumn="roles_permission_r_id" keyProperty="rolesPermissionRId">
+        insert into tbl_roles_permissions_r
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rolesPermissionRId != null">roles_permission_r_id,</if>
+            <if test='roleId != null'>role_id,</if>
+            <if test='permissionId != null'>permission_id,</if>
+
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rolesPermissionRId != null">#{rolesPermissionRId},</if>
+            <if test='roleId != null'>#{roleId},</if>
+            <if test='permissionId != null'>#{permissionId},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePermission" parameterType="com.xunyu.shiro.pojo.permission.Permissions">
+        update tbl_permissions
+        <set>
+            <if test='permissionName != null and permissionName != ""'>
+                <![CDATA[	role_name = #{permissionName}, ]]>
+            </if>
+            <if test='permissionGroupId != null'>
+                <![CDATA[	permission_group_id = #{permissionGroupId}, ]]>
+            </if>
+            <if test='permissionType != null'>
+                <![CDATA[	permission_type = #{permissionType}, ]]>
+            </if>
+            <if test='permissionDomain != null and permissionDomain != ""'>
+                <![CDATA[	permission_domain = #{permissionDomain}, ]]>
+            </if>
+            <if test='permissionUri != null and permissionUri != ""'>
+                <![CDATA[	permission_uri = #{permissionUri}, ]]>
+            </if>
+            <if test='isabled != null'>
+                <![CDATA[	isabled = #{isabled}, ]]>
+            </if>
+            <if test='remark != null and remark != ""'>
+                <![CDATA[	remark = #{remark}, ]]>
+            </if>
+            <if test='permissionCreateTime != null'>
+                <![CDATA[	create_time = #{permissionCreateTime}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="permissionId != null">
+                permission_id = #{permissionId}
+            </if>
+        </where>
+    </update>
+
+    <update id = "delPerminssion" parameterType="map">
+        update tbl_permissions set
+        isabled = #{isabled}
+        where permission_id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+</mapper>

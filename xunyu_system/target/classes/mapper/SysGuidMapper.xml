@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.system.pojo.guide.SysGuide">
+
+    <resultMap id="guid_ResultMap" type="com.xunyu.system.pojo.guide.SysGuide">
+        <id column="guide_id" property="guideId"></id>
+        <result column="isabled" property="isabled"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="guide_name" property="guideName"></result>
+        <result column="guide_path" property="guidePath"></result>
+        <result column="file_type" property="fileType"></result>
+    </resultMap>
+
+    <sql id = "guid_column">
+        guide_id,isabled,create_time,guide_name,guide_path,file_type
+    </sql>
+
+    <select id = "sysGuideList" parameterType="map" resultMap="guid_ResultMap">
+        select
+            <include refid = "guid_column" />
+        from tbl_sys_basic_guide
+        where isabled = 1 <include refid = "guid_where" />
+        order by guide_id desc
+    </select>
+
+    <sql id = "guid_where">
+        <if test = "guideId != null">
+            and guide_id = #{guideId}
+        </if>
+    </sql>
+
+    <insert id = "addSysGuide" parameterType="com.xunyu.system.pojo.guide.SysGuide"
+            useGeneratedKeys="true" keyColumn="guide_id" keyProperty="guideId">
+        insert into tbl_sys_basic_guide
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="guideId != null">guide_id,</if>
+            <if test='isabled != null'>isabled,</if>
+            <if test='createTime != null'>create_time,</if>
+            <if test='guideName != null and guideName != ""'>guide_name,</if>
+            <if test='guidePath != null and guidePath != ""'>guide_path,</if>
+            <if test='fileType != null and fileType !=""'>file_type,</if>
+
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="guideId != null">#{guideId},</if>
+            <if test='isabled != null'>#{isabled},</if>
+            <if test='createTime != null'>#{createTime},</if>
+            <if test='guideName != null and guideName != ""'>#{guideName},</if>
+            <if test='guidePath != null and guidePath != ""'>#{guidePath},</if>
+            <if test='fileType != null and fileType !=""'>#{fileType},</if>
+        </trim>
+    </insert>
+
+    <!--批量更新状态-->
+    <update id = "delSysGuide" parameterType="map">
+        update tbl_sys_basic_guide set
+        isabled = #{isabled}
+        where guide_id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

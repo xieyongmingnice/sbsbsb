@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.crm.pojo.cusserver.CustomerOrder">
+
+    <resultMap id="order_ResultMap" type="com.xunyu.crm.pojo.cusserver.CustomerOrder">
+        <id column="order_id" property="orderId"></id>
+        <result column="customer_id" property="customerId"></result>
+        <result column="service_id" property="serviceId"></result>
+        <result column="order_state" property="orderState"></result>
+        <result column="order_time" property="orderTime"></result>
+    </resultMap>
+
+    <insert id = "saveCustomerOrder" parameterType="com.xunyu.crm.pojo.cusserver.CustomerOrder"
+            useGeneratedKeys="true" keyColumn="order_id" keyProperty="orderId">
+
+        insert into tbl_customer_service
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">order_id,</if>
+            <if test='customerId != null'>customer_id,</if>
+            <if test='serviceId != null'>service_id,</if>
+            <if test='orderState != null'>order_state,</if>
+            <if test='orderTime != null'>order_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">#{orderId},</if>
+            <if test='customerId != null'>#{customerId},</if>
+            <if test='serviceId != null'>#{serviceId},</if>
+            <if test='orderState != null'>#{orderState},</if>
+            <if test='orderTime != null'>#{orderTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateCustomerOrder" parameterType="com.xunyu.crm.pojo.cusserver.CustomerOrder">
+        update delCustomerOrder
+        <set>
+            <if test='customerId != null'>
+                <![CDATA[	customer_id = #{customerId}, ]]>
+            </if>
+            <if test='serviceId != null'>
+                <![CDATA[	service_id = #{serviceId}, ]]>
+            </if>
+            <if test='orderState != null'>
+                <![CDATA[	order_state = #{orderState}, ]]>
+            </if>
+            <if test='orderTime != null'>
+                <![CDATA[	order_time = #{orderTime}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="orderId != null">
+                order_id = #{orderId}
+            </if>
+        </where>
+    </update>
+
+    <update id = "delCustomerOrder" parameterType="map">
+        update delCustomerOrder set
+        isabled = #{isabled}
+        where
+        order_id
+        in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

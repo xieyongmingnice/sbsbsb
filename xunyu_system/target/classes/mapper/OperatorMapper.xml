@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.system.pojo.operator.Operator">
+
+    <resultMap id="oper_ResultMap" type="com.xunyu.system.pojo.operator.Operator">
+        <id column="oper_id" property="operId"></id>
+        <result column="isabled" property="isabled"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="oper_type" property="operType"></result>
+        <result column="oper_name" property="operName"></result>
+        <result column="oper_charge" property="operCharge"></result>
+        <result column="oper_telphone" property="operTelphone"></result>
+        <result column="oper_remark" property="operRemark"></result>
+    </resultMap>
+
+    <sql id = "oper_column">
+        oper_id,isabled,create_time,oper_type,oper_name,oper_charge,oper_telphone
+        ,oper_remark
+    </sql>
+
+    <select id = "OperatorCount" parameterType="map" resultType="int">
+        select count(1) from tbl_operator
+        where isabled = 1 <include refid = "oper_where" />
+    </select>
+
+    <select id = "OperatorList" parameterType="map" resultMap="oper_ResultMap">
+
+        select
+            <include refid = "oper_column" />
+        from tbl_operator
+        where isabled = 1 <include refid = "oper_where" />
+        order by oper_id desc
+        limit #{startRow},#{endRow}
+    </select>
+
+    <sql id = "oper_where">
+        <if test = "operId != null">
+            and oper_id = #{operId}
+        </if>
+        <if test = 'operName != null and operName !=""'>
+            and oper_name like concat(#{operName},"%")
+        </if>
+    </sql>
+
+    <select id="getOperatorDetail" parameterType="map" resultMap="oper_ResultMap">
+        select
+          <include refid = "oper_column" />
+        from tbl_operator
+        where isabled = 1 and oper_id = #{operId}
+    </select>
+
+    <insert id = "addOperator" parameterType="com.xunyu.system.pojo.operator.Operator"
+            useGeneratedKeys="true" keyColumn="oper_id" keyProperty="operId">
+        insert into tbl_operator
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="operId != null">oper_id,</if>
+            <if test='isabled != null'>isabled,</if>
+            <if test='createTime != null'>create_time,</if>
+            <if test='operType != null and operType != ""'>oper_type,</if>
+            <if test='operName != null and operName !=""'>oper_name,</if>
+            <if test='operCharge != null and operCharge !=""'>oper_charge,</if>
+            <if test='operTelphone != null and operTelphone != ""'>oper_telphone,</if>
+            <if test='operRemark != null and operRemark != ""'>oper_remark,</if>
+
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="operId != null">#{operId},</if>
+            <if test='isabled != null'>#{isabled},</if>
+            <if test='createTime != null'>#{createTime},</if>
+            <if test='operType != null and operType != ""'>#{operType},</if>
+            <if test='operName != null and operName !=""'>#{operName},</if>
+            <if test='operCharge != null and operCharge !=""'>#{operCharge},</if>
+            <if test='operTelphone != null and operTelphone != ""'>#{operTelphone},</if>
+            <if test='operRemark != null and operRemark != ""'>#{operRemark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateOPerator" parameterType="com.xunyu.system.pojo.operator.Operator">
+        update tbl_operator
+        <set>
+            <if test='isabled != null'>
+                <![CDATA[ isabled = #{isabled},  ]]>
+            </if>
+            <if test='createTime != null'>
+                <![CDATA[ create_time = #{createTime}, ]]>
+            </if>
+            <if test='operType != null and operType != ""'>
+                <![CDATA[ oper_type = #{operType}, ]]>
+            </if>
+            <if test='operName != null and operName !=""'>
+                <![CDATA[ oper_name = #{operName}, ]]>
+            </if>
+            <if test='operCharge != null and operCharge !=""'>
+                <![CDATA[ oper_charge = #{operCharge}, ]]>
+            </if>
+            <if test='operTelphone != null and operTelphone != ""'>
+                <![CDATA[ oper_telphone = #{operTelphone}, ]]>
+            </if>
+            <if test='operRemark != null and operRemark != ""'>
+                <![CDATA[ oper_remark = #{operRemark}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="operId != null">
+                <![CDATA[ oper_id = #{operId} ]]>
+            </if>
+        </where>
+    </update>
+
+    <!--批量更新状态-->
+    <update id = "delOperatorById" parameterType="map">
+        update tbl_operator set
+        isabled = #{isabled}
+        where oper_id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

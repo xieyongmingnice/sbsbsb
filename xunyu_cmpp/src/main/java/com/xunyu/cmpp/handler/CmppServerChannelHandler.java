@@ -79,7 +79,7 @@ public class CmppServerChannelHandler extends ChannelInboundHandlerAdapter {
                     CmppConnectResponseMessage responseMessage = new CmppConnectResponseMessage( message.getHeader().getSequenceId());
                     responseMessage.setStatus(0);
                     responseMessage.setVersion((short) 0X30);
-                    ctx.channel().writeAndFlush(null);
+                    ctx.channel().writeAndFlush("qqqqqq");
                 } else {
                     logger.error("connect failed");
                 }

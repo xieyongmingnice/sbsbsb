@@ -1,0 +1,15 @@
+server:
+  port: 8011
+  tomcat:
+      accept-count: 1000  #承受并发量
+      max-threads: 1000
+      max-connections: 2000
+
+spring:
+  application:
+    name: xunyu-drools
+  profiles:
+    #active: pro #加载xunyu_profiles项目中 的application-core.yml文件  #生产
+#    active: test #加载xunyu_profiles项目中 的application-test.yml文件  #测试
+    active: dev #加载xunyu_profiles项目中 的application-dev.yml文件    #本地开发
+

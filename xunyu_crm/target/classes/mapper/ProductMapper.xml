@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.crm.pojo.proserver.ProductServere">
+
+    <resultMap id="product_ResultMap" type="com.xunyu.crm.pojo.proserver.ProductServere">
+        <id column="service_id" property="serviceId"></id>
+        <result column="service_name" property="serviceName"></result>
+        <result column="service_pay_type" property="servicePayType"></result>
+        <result column="remark" property="remark"></result>
+        <result column="isabled" property="isabled"></result>
+        <result column="create_time" property="createTime"></result>
+    </resultMap>
+
+    <insert id = "saveProduct" parameterType="com.xunyu.crm.pojo.proserver.ProductServere"
+            useGeneratedKeys="true" keyColumn="service_id" keyProperty="serviceId">
+
+        insert into tbl_services
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="serviceId != null">service_id,</if>
+            <if test='serviceName != null and serviceName !=""'>service_name,</if>
+            <if test='servicePayType != null'>service_pay_type,</if>
+            <if test='remark != null and remark != ""'>remark,</if>
+            <if test='isabled != null'>isabled,</if>
+            <if test='createTime != null'>create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="serviceId != null">#{serviceId},</if>
+            <if test='serviceName != null and serviceName !=""'>#{serviceName},</if>
+            <if test='servicePayType != null'>#{servicePayType},</if>
+            <if test='remark != null and remark != ""'>#{remark},</if>
+            <if test='isabled != null'>#{isabled},</if>
+            <if test='createTime != null'>#{create_time},</if>
+        </trim>
+    </insert>
+
+    <update id="updateProduct" parameterType="com.xunyu.crm.pojo.proserver.ProductServere">
+        update tbl_services
+        <set>
+            <if test='serviceName != null and serviceName != ""'>
+                <![CDATA[	service_name = #{serviceName}, ]]>
+            </if>
+            <if test='servicePayType != null'>
+                <![CDATA[	service_pay_type = #{servicePayType}, ]]>
+            </if>
+            <if test='remark != null and remark != ""'>
+                <![CDATA[	remark = #{remark}, ]]>
+            </if>
+            <if test='isabled != null and isabled != ""'>
+                <![CDATA[	isabled = #{isabled}, ]]>
+            </if>
+            <if test='createTime != null'>
+                <![CDATA[	create_time = #{createTime}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="serviceId != null">
+                service_id = #{serviceId}
+            </if>
+        </where>
+    </update>
+
+    <update id = "delProduct" parameterType="map">
+        update tbl_services set
+        isabled = #{isabled}
+        where
+        service_id
+        in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

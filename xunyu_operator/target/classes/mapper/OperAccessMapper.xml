@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.operator.pojo.access.OperAccessCoreConfig">
+
+    <resultMap id="oper_ResultMap" type="com.xunyu.operator.pojo.access.OperAccessCoreConfig">
+        <id column="config_id" property="configId"></id>
+        <result column="operator_name" property="operatorName"></result>
+        <result column="channel_code" property="channelCode"></result>
+        <result column="channel_name" property="channelName"></result>
+        <result column="agree_type" property="agreeType"></result>
+        <result column="children_agree_type" property="childrenAgreeType"></result>
+        <result column="service_ip" property="serviceIp"></result>
+        <result column="service_port" property="servicePort"></result>
+        <result column="enterprise_code" property="enterpriseCode"></result>
+        <result column="enter_account" property="enterAccount"></result>
+        <result column="enter_pwd" property="enterPwd"></result>
+        <result column="node_code" property="nodeCode"></result>
+        <result column="access_code" property="accessCode"></result>
+        <result column="service_code" property="serviceCode"></result>
+        <result column="ordinary_msg_num" property="ordinaryMsgNum"></result>
+        <result column="extend_num" property="extendNum"></result>
+        <result column="whether_extend" property="whetherExtend"></result>
+        <result column="isable" property="isable"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="spAccessNum" property="spAccessNum"></result>
+    </resultMap>
+    <resultMap id="oper_Zuhe_ResultMap" type="com.xunyu.operator.pojo.access.OperAccessCoreConfig">
+        <id column="config_id" property="configId"></id>
+        <result column="operator_name" property="operatorName"></result>
+        <result column="channel_code" property="channelCode"></result>
+        <result column="channel_name" property="channelName"></result>
+        <result column="agree_type" property="agreeType"></result>
+        <result column="children_agree_type" property="childrenAgreeType"></result>
+        <result column="service_ip" property="serviceIp"></result>
+        <result column="service_port" property="servicePort"></result>
+        <result column="enterprise_code" property="enterpriseCode"></result>
+        <result column="enter_account" property="enterAccount"></result>
+        <result column="enter_pwd" property="enterPwd"></result>
+        <result column="node_code" property="nodeCode"></result>
+        <result column="access_code" property="accessCode"></result>
+        <result column="service_code" property="serviceCode"></result>
+        <result column="ordinary_msg_num" property="ordinaryMsgNum"></result>
+        <result column="extend_num" property="extendNum"></result>
+        <result column="whether_extend" property="whetherExtend"></result>
+        <result column="isable" property="isable"></result>
+        <result column="create_time" property="createTime"></result>
+        <association property="operExtendConfig" column="ex_config_id" javaType="com.xunyu.operator.pojo.access.OperExtendConfig">
+            <id column="extend_id" property="extendId"></id>
+            <result column="charg_user" property="chargUser"></result>
+            <result column="charg_type" property="chargType"></result>
+            <result column="local_port" property="localPort"></result>
+            <result column="code_format" property="codeFormat"></result>
+            <result column="unsigna_format" property="unsignaFormat"></result>
+            <result column="ascll_support" property="ascllSupport"></result>
+            <result column="ascll_length" property="ascllLength"></result>
+            <result column="len_msg_code" property="lenMsgCode"></result>
+            <result column="max_length" property="maxLength"></result>
+            <result column="is_def" property="isDef"></result>
+        </association>
+        <association property="operAttributeConfig" column="a_config_id" javaType="com.xunyu.operator.pojo.access.OperAttributeConfig">
+            <id column="attr_id" property="attrId"></id>
+            <result column="a_config_id" property="aConfigId"></result>
+            <result column="attr_priority" property="attrPriority"></result>
+            <result column="attr_limit" property="attrLimit"></result>
+            <result column="attr_threshold" property="attrThreshold"></result>
+            <result column="msg_number" property="msgNumber"></result>
+            <result column="channel_state" property="channelState"></result>
+            <result column="max_conn" property="maxConn"></result>
+            <result column="wite_res" property="witeRes"></result>
+            <result column="wite_time" property="witeTime"></result>
+            <result column="push_login_user" property="pushLoginUser"></result>
+        </association>
+        <association property="operMarkConfig" column="m_config_id" javaType="com.xunyu.operator.pojo.access.OperMarkConfig">
+            <id column="mark_id" property="markId"></id>
+            <result column="gateway_text" property="gatewayText"></result>
+            <result column="purchase_price" property="purchasePrice"></result>
+            <result column="sales_cost" property="salesCost"></result>
+            <result column="gateway_number" property="gatewayNumber"></result>
+        </association>
+    </resultMap>
+
+    <sql id = "oper_access_cloumn">
+        config_id,operator_name,channel_code,channel_name,agree_type,children_agree_type
+        ,service_ip,service_port,enterprise_code,enter_account,enter_pwd,node_code
+        ,access_code,service_code,ordinary_msg_num,extend_num,whether_extend,isable
+        ,create_time
+    </sql>
+    <sql id = "extend_access_cloumn">
+        extend_id,charg_user,charg_type,local_port,code_format,unsigna_format
+        ,ascll_support,ascll_length,len_msg_code,max_length,is_def
+    </sql>
+    <sql id = "mark_access_cloumn">
+        mark_id,gateway_text,purchase_price,sales_cost,gateway_number
+    </sql>
+    <sql id = "attr_access_cloumn">
+        attr_id,attr_priority,attr_limit,attr_threshold,msg_number,channel_state
+        ,max_conn,wite_res,wite_time,push_login_user
+    </sql>
+
+    <select id = "getOperAccessCoreConfig" parameterType="map" resultMap="oper_Zuhe_ResultMap">
+        select
+        <include refid = "oper_access_cloumn" />,
+        <include refid = "extend_access_cloumn" />,
+        <include refid = "mark_access_cloumn" />,
+        <include refid = "attr_access_cloumn" />
+        from tbl_gateway_access_config ac
+        left join tbl_gateway_extend e on ac.config_id = e.ex_config_id
+        left join tbl_gateway_attribute a on ac.config_id = a.a_config_id
+        left join tbl_gateway_mark m on ac.config_id = m.m_config_id
+        where ac.config_id = #{configId}
+    </select>
+
+    <select id="countOperAccessCoreConfig" parameterType="map" resultType="int">
+        select count(1) from tbl_gateway_access_config ac
+        left join tbl_gateway_mark m on ac.config_id = m.m_config_id
+        where <include refid = "oper_where" />
+    </select>
+
+    <select id="listOperAccessCoreConfig" parameterType="map" resultMap="oper_ResultMap">
+        select <include refid = "oper_access_cloumn" />,
+        (case when access_code is not null
+        then
+        (
+          select count(1) from tbl_sp_gateway_config sc where ac.config_id = sc.config_id
+          and isable = 1
+        ) else 0 end
+        ) as spAccessNum
+        from tbl_gateway_access_config ac
+        left join tbl_gateway_mark m on ac.config_id = m.m_config_id
+        where
+        <include refid = "oper_where" />
+        order by ac.config_id desc
+        limit #{startRow},#{endRow}
+    </select>
+
+    <sql id = "oper_where">
+        <choose>
+            <when test="isable != null">
+                ac.isable = #{isable}
+            </when>
+            <otherwise>
+                <![CDATA[  ac.isable in (1,2) ]]>
+            </otherwise>
+        </choose>
+        <if test = 'agreeType != null'>
+            and ac.agree_type = #{agreeType}
+        </if>
+        <if test="configId != null">
+           and ac.config_id = #{configId}
+        </if>
+        <if test='channelName != null and channelName !=""'>
+            and ac.channel_name like  concat(#{channelName},"%")
+        </if>
+        <if test='serviceIp != null and serviceIp !=""'>
+            and ac.service_ip = #{serviceIp}
+        </if>
+        <if test='enterpriseCode != null and enterpriseCode !=""'>
+            and ac.enterprise_code = #{enterpriseCode}
+        </if>
+        <if test='accessCode != null and accessCode !=""'>
+            and ac.access_code = #{accessCode}
+        </if>
+        <if test = 'gatewayNumber != null and gatewayNumber !=""'>
+             and m.gateway_number like  concat("%",concat(#{gatewayNumber},"%"))
+        </if>
+    </sql>
+
+    <insert id = "saveOperAccess" parameterType="com.xunyu.operator.pojo.access.OperAccessCoreConfig"
+            useGeneratedKeys="true" keyColumn="config_id" keyProperty="configId">
+
+        insert into tbl_gateway_access_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="configId != null">config_id,</if>
+            <if test="operatorName != null">operator_name,</if>
+            <if test='channelCode != null and channelCode != ""'>channel_code,</if>
+            <if test='channelName != null and channelName != ""'>channel_name,</if>
+            <if test="agreeType != null">agree_type,</if>
+            <if test='childrenAgreeType != null and childrenAgreeType != ""'>children_agree_type,</if>
+            <if test='serviceIp != null and serviceIp != ""'>service_ip,</if>
+            <if test='servicePort != null and servicePort != ""'>service_port,</if>
+            <if test='enterpriseCode != null and enterpriseCode != ""'>enterprise_code,</if>
+            <if test='enterAccount != null and enterAccount != ""'>enter_account,</if>
+            <if test='enterPwd != null and enterPwd != ""'>enter_pwd,</if>
+            <if test='nodeCode != null and nodeCode != ""'>node_code,</if>
+            <if test='accessCode != null and accessCode != ""'>access_code,</if>
+            <if test='serviceCode != null and serviceCode != ""'>service_code,</if>
+            <if test='ordinaryMsgNum != null'>ordinary_msg_num,</if>
+            <if test="extendNum != null">extend_num,</if>
+            <if test="whetherExtend != null">whether_extend,</if>
+            <if test="isable != null">isable,</if>
+            <if test="createTime != null">create_time,</if>
+
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="configId != null">#{configId},</if>
+            <if test="operatorName != null">#{operatorName},</if>
+            <if test='channelCode != null and channelCode != ""'>#{channelCode},</if>
+            <if test='channelName != null and channelName != ""'>#{channelName},</if>
+            <if test="agreeType != null">#{agreeType},</if>
+            <if test='childrenAgreeType != null and childrenAgreeType != ""'>#{childrenAgreeType},</if>
+            <if test='serviceIp != null and serviceIp != ""'>#{serviceIp},</if>
+            <if test='servicePort != null and servicePort != ""'>#{servicePort},</if>
+            <if test='enterpriseCode != null and enterpriseCode != ""'>#{enterpriseCode},</if>
+            <if test='enterAccount != null and enterAccount != ""'>#{enterAccount},</if>
+            <if test='enterPwd != null and enterPwd != ""'>#{enterPwd},</if>
+            <if test='nodeCode != null and nodeCode != ""'>#{nodeCode},</if>
+            <if test='accessCode != null and accessCode != ""'>#{accessCode},</if>
+            <if test='serviceCode != null and serviceCode != ""'>#{serviceCode},</if>
+            <if test='ordinaryMsgNum != null'>#{ordinaryMsgNum},</if>
+            <if test="extendNum != null">#{extendNum},</if>
+            <if test="whetherExtend != null">#{whetherExtend},</if>
+            <if test="isable != null">#{isable},</if>
+            <if test="createTime != null">#{createTime},</if>
+
+        </trim>
+    </insert>
+
+    <update id="updateOperAccess" parameterType="com.xunyu.operator.pojo.access.OperAccessCoreConfig">
+        update tbl_gateway_access_config
+        <set>
+            <if test='operatorName != null'>
+                <![CDATA[	operator_name = #{operatorName}, ]]>
+            </if>
+            <if test='channelCode != null and channelCode != ""'>
+                <![CDATA[	channel_code = #{channelCode}, ]]>
+            </if>
+            <if test='channelName != null and channelName != ""'>
+                <![CDATA[	channel_name = #{channelName}, ]]>
+            </if>
+            <if test='agreeType != null'>
+                <![CDATA[	agree_type = #{agreeType}, ]]>
+            </if>
+            <if test='childrenAgreeType != null and childrenAgreeType != ""'>
+                <![CDATA[	children_agree_type = #{childrenAgreeType}, ]]>
+            </if>
+            <if test='serviceIp != null and serviceIp != ""'>
+                <![CDATA[	service_ip = #{serviceIp}, ]]>
+            </if>
+            <if test='servicePort != null and servicePort != ""'>
+                <![CDATA[	service_port = #{servicePort}, ]]>
+            </if>
+            <if test='enterpriseCode != null and enterpriseCode != ""'>
+                <![CDATA[	enterprise_code = #{enterpriseCode}, ]]>
+            </if>
+            <if test='enterAccount != null and enterAccount != ""'>
+                <![CDATA[	enter_account = #{enterAccount}, ]]>
+            </if>
+            <if test='enterPwd != null and enterPwd != ""'>
+                <![CDATA[	enter_pwd = #{enterPwd}, ]]>
+            </if>
+            <if test='nodeCode != null and nodeCode != ""'>
+                <![CDATA[	node_code = #{nodeCode}, ]]>
+            </if>
+            <if test='accessCode != null and accessCode != ""'>
+                <![CDATA[	access_code = #{accessCode}, ]]>
+            </if>
+            <if test='serviceCode != null and serviceCode != ""'>
+                <![CDATA[	service_code = #{serviceCode}, ]]>
+            </if>
+            <if test='ordinaryMsgNum != null'>
+                <![CDATA[	ordinary_msg_num = #{ordinaryMsgNum}, ]]>
+            </if>
+            <if test='extendNum != null'>
+                <![CDATA[	extend_num = #{extendNum}, ]]>
+            </if>
+            <if test='whetherExtend != null'>
+                <![CDATA[	whether_extend = #{whetherExtend}, ]]>
+            </if>
+            <if test='isable != null and isable != ""'>
+                <![CDATA[	isable = #{isable}, ]]>
+            </if>
+            <if test='createTime != null'>
+                <![CDATA[	create_time = #{createTime}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test = 'configId != null'>
+                config_id = #{configId}
+            </if>
+        </where>
+    </update>
+
+    <update id = "delOperAccessCoreConfig" parameterType="map">
+        update tbl_gateway_access_config set
+        isable = #{isabled}
+        where
+        config_id
+        in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+</mapper>

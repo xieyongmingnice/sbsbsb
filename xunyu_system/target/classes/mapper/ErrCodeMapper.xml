@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.system.pojo.errcode.ErrorCode">
+
+    <resultMap id="err_ResultMap" type="com.xunyu.system.pojo.errcode.ErrorCode">
+        <id column="err_id" property="errId"></id>
+        <result column="isabled" property="isabled"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="agree_type" property="agreeType"></result>
+        <result column="err_type" property="errType"></result>
+        <result column="err_code" property="errCode"></result>
+        <result column="err_text" property="errText"></result>
+        <result column="err_content" property="errContent"></result>
+    </resultMap>
+
+    <sql id = "err_column">
+        err_id,isabled,create_time,agree_type,err_type,err_code,err_text
+        ,err_content
+    </sql>
+
+    <select id="getErrCodeConfigDetail" parameterType="map" resultMap="err_ResultMap">
+        select
+        <include refid = "err_column" />
+        from tbl_err_code_config
+        where isabled = 1 and err_id = #{errId}
+    </select>
+
+    <select id = "errCodeConfigCount" parameterType="map" resultType="int">
+        select count(1) from tbl_err_code_config
+        where isabled = 1 <include refid = "err_where" />
+    </select>
+
+    <select id = "errCodeConfigList" parameterType="map" resultMap="err_ResultMap">
+
+        select
+            <include refid = "err_column" />
+        from tbl_err_code_config
+        where isabled = 1 <include refid = "err_where" />
+        order by err_id desc
+        limit #{startRow},#{endRow}
+    </select>
+
+    <sql id = "err_where">
+        <if test = "errId != null">
+            and err_id = #{errId}
+        </if>
+        <if test = 'agreeType != null'>
+            and agree_type = #{agreeType}
+        </if>
+        <if test = 'errType != null'>
+            and err_type = #{errType}
+        </if>
+        <if test = 'errCode != null and errCode!= ""'>
+            and err_code = #{errCode}
+        </if>
+        <if test = 'errText != null and errText!= ""'>
+            and err_text = #{errText}
+        </if>
+    </sql>
+
+    <insert id = "addErrCodeConfig" parameterType="com.xunyu.system.pojo.errcode.ErrorCode"
+            useGeneratedKeys="true" keyColumn="err_id" keyProperty="errId">
+        insert into tbl_err_code_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="errId != null">err_id,</if>
+            <if test='isabled != null'>isabled,</if>
+            <if test='createTime != null'>create_time,</if>
+            <if test='agreeType != null'>agree_type,</if>
+            <if test='errType != null'>err_type,</if>
+            <if test='errCode != null and errCode !=""'>err_code,</if>
+            <if test='errText != null and errText != ""'>err_text,</if>
+            <if test='errContent != null and errContent != ""'>err_content,</if>
+
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="errId != null">#{errId},</if>
+            <if test='isabled != null'>#{isabled},</if>
+            <if test='createTime != null'>#{createTime},</if>
+            <if test='agreeType != null'>#{agreeType},</if>
+            <if test='errType != null'>#{errType},</if>
+            <if test='errCode != null and errCode !=""'>#{errCode},</if>
+            <if test='errText != null and errText != ""'>#{errText},</if>
+            <if test='errContent != null and errContent != ""'>#{errContent},</if>
+        </trim>
+    </insert>
+
+    <update id="updateErrCodeConfig" parameterType="com.xunyu.system.pojo.errcode.ErrorCode">
+        update tbl_err_code_config
+        <set>
+            <if test='isabled != null'>
+                <![CDATA[ isabled = #{isabled},  ]]>
+            </if>
+            <if test='createTime != null'>
+                <![CDATA[ create_time = #{createTime}, ]]>
+            </if>
+            <if test='agreeType != null'>
+                <![CDATA[ agree_type = #{agreeType}, ]]>
+            </if>
+            <if test='errType != null'>
+                <![CDATA[ err_type = #{errType}, ]]>
+            </if>
+            <if test='errCode != null and errCode !=""'>
+                <![CDATA[ err_code = #{errCode}, ]]>
+            </if>
+            <if test='errText != null and errText != ""'>
+                <![CDATA[ err_text = #{errText}, ]]>
+            </if>
+            <if test='errContent != null and errContent != ""'>
+                <![CDATA[ err_content = #{errContent}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="errId != null">
+                <![CDATA[ err_id = #{errId} ]]>
+            </if>
+        </where>
+    </update>
+
+    <!--批量更新状态-->
+    <update id = "delErrCodeConfig" parameterType="map">
+        update tbl_err_code_config set
+        isabled = #{isabled}
+        where err_id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

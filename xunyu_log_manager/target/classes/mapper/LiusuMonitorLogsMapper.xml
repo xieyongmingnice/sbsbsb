@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.model.log.liusu.LiusuMonitorLogs">
+
+    <resultMap id="liusu_ResultMap" type="com.xunyu.model.log.liusu.LiusuMonitorLogs">
+        <id column="liusu_id" property="liusuId"></id>
+        <result column="node_status" property="nodeStatus"></result>
+        <result column="node_code" property="nodeCode"></result>
+        <result column="node_name" property="nodeName"></result>
+        <result column="node_agree" property="nodeAgree"></result>
+        <result column="node_num" property="nodeNum"></result>
+        <result column="sulv" property="sulv"></result>
+        <result column="storage_num" property="storageNum"></result>
+        <result column="total_num" property="totalNum"></result>
+        <result column="gateway_name" property="gatewayName"></result>
+        <result column="enterprise_node" property="enterpriseNode"></result>
+        <result column="enterprise_name" property="enterpriseName"></result>
+        <result column="create_time" property="createTime"></result>
+    </resultMap>
+
+    <sql id = "liusu_column">
+        liusu_id,node_status,node_code,node_name,node_agree,node_num,sulv
+        ,storage_num,total_num,gateway_name,enterprise_node,enterprise_name,create_time
+    </sql>
+
+    <select id = "countLiusuMonitorLogs" parameterType="map" resultType="int">
+        select count(1) from tbl_liusu_monitor_logs where 1=1 <include refid = "liusu_where" />
+    </select>
+
+    <select id = "listLiusuMonitorLogs" resultMap="liusu_ResultMap" parameterType="map">
+        select <include refid = "liusu_column" /> from tbl_liusu_monitor_logs
+        where 1=1
+        <include refid = "liusu_where" />
+        order by liusu_id desc
+        limit #{startRow},#{endRow}
+    </select>
+
+    <sql id = "liusu_where">
+        <if test = 'nodeStatus != null and nodeStatus !=""'>
+            and node_status = #{nodeStatus}
+        </if>
+        <if test = 'nodeCode != null and nodeCode !=""'>
+            and node_code = #{nodeCode}
+        </if>
+        <if test = 'gatewayName != null and gatewayName!= ""'>
+            and gateway_name = #{gatewayName}
+        </if>
+        <if test = 'enterpriseNode != null and enterpriseNode !=""'>
+            and enterprise_node = #{enterpriseNode}
+        </if>
+        <if test = 'enterpriseName != null and enterpriseName !=""'>
+            and enterprise_name = #{enterpriseName}
+        </if>
+    </sql>
+
+    <delete id = "delLiusuMonitorLogs" parameterType="list">
+        delete from tbl_liusu_monitor_logs where liusu_id in
+        <foreach collection="list" item="items" separator="," open="(" close=")">
+            #{items}
+        </foreach>
+    </delete>
+</mapper>

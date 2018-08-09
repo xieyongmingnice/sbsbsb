@@ -1,0 +1,34 @@
+2018-06-20 11:01:09,931 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-06-20 11:06:09,937 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-06-20 11:11:09,939 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-06-20 11:16:09,941 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-06-20 11:21:09,943 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-06-20 11:26:09,944 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-06-20 11:28:13,930 INFO [org.apache.juli.logging.DirectJDKLog:179] Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-06-20 11:28:13,931 INFO [org.springframework.web.servlet.FrameworkServlet:489] FrameworkServlet 'dispatcherServlet': initialization started
+2018-06-20 11:28:13,990 INFO [org.springframework.web.servlet.FrameworkServlet:508] FrameworkServlet 'dispatcherServlet': initialization completed in 58 ms
+2018-06-20 11:28:14,044 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/shiro/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2018-06-20 11:28:14,045 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/crm/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2018-06-20 11:28:14,045 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/sys/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2018-06-20 11:28:14,045 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/zipkin/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2018-06-20 11:28:14,046 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/tactics/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2018-06-20 11:28:14,046 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/log/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2018-06-20 11:28:14,046 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/oper/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2018-06-20 11:28:14,046 INFO [org.springframework.web.servlet.handler.AbstractUrlHandlerMapping:362] Mapped URL path [/xunyu-operator/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2018-06-20 11:28:14,129 INFO [org.springframework.context.support.AbstractApplicationContext:583] Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@382a60ab: startup date [Wed Jun 20 11:28:14 CST 2018]; parent: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@62ea3440
+2018-06-20 11:28:14,214 INFO [org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor:155] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-06-20 11:28:14,504 INFO [com.netflix.config.ChainedDynamicProperty$ChainLink:115] Flipping property: xunyu-operator.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2018-06-20 11:28:14,526 INFO [com.netflix.util.concurrent.ShutdownEnabledTimer:58] Shutdown hook installed for: NFLoadBalancer-PingTimer-xunyu-operator
+2018-06-20 11:28:14,554 INFO [com.netflix.loadbalancer.BaseLoadBalancer:192] Client: xunyu-operator instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=xunyu-operator,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2018-06-20 11:28:14,562 INFO [com.netflix.loadbalancer.DynamicServerListLoadBalancer:214] Using serverListUpdater PollingServerListUpdater
+2018-06-20 11:28:14,611 INFO [com.netflix.config.ChainedDynamicProperty$ChainLink:115] Flipping property: xunyu-operator.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2018-06-20 11:28:14,614 INFO [com.netflix.loadbalancer.DynamicServerListLoadBalancer:150] DynamicServerListLoadBalancer for client xunyu-operator initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=xunyu-operator,current list of Servers=[192.168.3.10:8015],Load balancer stats=Zone stats: {defaultzone=[Zone:defaultzone;	Instance count:1;	Active connections count: 0;	Circuit breaker tripped count: 0;	Active connections per server: 0.0;]
+},Server stats: [[Server:192.168.3.10:8015;	Zone:defaultZone;	Total Requests:0;	Successive connection failure:0;	Total blackout seconds:0;	Last connection made:Thu Jan 01 08:00:00 CST 1970;	First connection made: Thu Jan 01 08:00:00 CST 1970;	Active Connections:0;	total failure count in last (1000) msecs:0;	average resp time:0.0;	90 percentile resp time:0.0;	95 percentile resp time:0.0;	min resp time:0.0;	max resp time:0.0;	stddev resp time:0.0]
+]}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@fc2ef13
+2018-06-20 11:28:15,571 INFO [com.netflix.config.ChainedDynamicProperty$ChainLink:115] Flipping property: xunyu-operator.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2018-06-20 11:31:09,946 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-06-20 11:36:09,949 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-06-20 11:41:09,951 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-06-20 11:46:09,952 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-06-20 11:51:09,954 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration
+2018-06-20 11:56:09,955 INFO [com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver:43] Resolving eureka endpoints via configuration

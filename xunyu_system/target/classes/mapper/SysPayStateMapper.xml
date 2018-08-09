@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.system.pojo.syspay.SysPayState">
+
+    <resultMap id="state_ResultMap" type="com.xunyu.system.pojo.syspay.SysPayState">
+        <id column="pay_state_id" property="payStateId"></id>
+        <result column="pay_state" property="payState"></result>
+        <result column="userid" property="userId"></result>
+    </resultMap>
+
+    <sql id = "state_column">
+        pay_state_id,pay_state,userid
+    </sql>
+
+    <select id="getSysPayStateDetail" parameterType="map" resultMap="state_ResultMap">
+        select
+          <include refid = "state_column" />
+        from tbl_pay_state
+        where userid = #{userId}
+    </select>
+
+    <insert id = "addSysPayState" parameterType="com.xunyu.system.pojo.syspay.SysPayState"
+            useGeneratedKeys="true" keyColumn="pay_state_id" keyProperty="payStateId">
+        insert into tbl_pay_state
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payStateId != null">pay_state_id,</if>
+            <if test='payState != null'>pay_state,</if>
+            <if test='userId != null'>userid,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payStateId != null">#{payStateId},</if>
+            <if test='payState != null'>#{payState},</if>
+            <if test='userId != null'>#{userId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateSysPayState" parameterType="com.xunyu.system.pojo.syspay.SysPayState">
+        update tbl_pay_state
+        <set>
+            <if test='payState != null'>
+                <![CDATA[ pay_state = #{payState},  ]]>
+            </if>
+        </set>
+        <where>
+            <if test="userId != null">
+                <![CDATA[ userid = #{userId} ]]>
+            </if>
+        </where>
+    </update>
+
+</mapper>

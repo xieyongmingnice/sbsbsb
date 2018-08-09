@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.system.pojo.syspay.SysPay">
+
+    <resultMap id="sysPay_ResultMap" type="com.xunyu.system.pojo.syspay.SysPay">
+        <id column="pay_id" property="payId"></id>
+        <result column="isabled" property="isabled"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="pay_name" property="payName"></result>
+        <result column="merchant_name" property="merchantName"></result>
+        <result column="pay_account" property="payAccount"></result>
+        <result column="pay_pid" property="payPid"></result>
+        <result column="pay_key" property="payKey"></result>
+        <result column="pay_text" property="payText"></result>
+        <result column="userid" property="userId"></result>
+        <result column="pay_type" property="payType"></result>
+    </resultMap>
+
+    <sql id = "sysPay_column">
+        pay_id,isabled,create_time,pay_name,merchant_name,pay_account,pay_pid
+        ,pay_key,pay_text,userid,pay_type
+    </sql>
+    <select id="getSysPayDetail" parameterType="map" resultMap="sysPay_ResultMap">
+        select
+          <include refid = "sysPay_column" />
+        from tbl_pay_config
+        where isabled = 1
+        <if test = "userId != null">and userid = #{userId}</if>
+        <if test = "payType != null">and pay_type = #{payType}</if>
+
+    </select>
+
+    <insert id = "addSysPay" parameterType="com.xunyu.system.pojo.syspay.SysPay"
+            useGeneratedKeys="true" keyColumn="pay_id" keyProperty="payId">
+        insert into tbl_pay_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payId != null">pay_id,</if>
+            <if test='isabled != null'>isabled,</if>
+            <if test='createTime != null'>create_time,</if>
+            <if test='payName != null and payName != ""'>pay_name,</if>
+            <if test='merchantName != null and merchantName !=""'>merchant_name,</if>
+            <if test='payAccount != null and payAccount !=""'>pay_account,</if>
+            <if test='payPid != null and payPid != ""'>pay_pid,</if>
+            <if test='payKey != null and payKey != ""'>pay_key,</if>
+            <if test='payText != null and payText != ""'>pay_text,</if>
+            <if test='userId != null'>userid,</if>
+            <if test='payType != null'>pay_type,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payId != null">#{payId},</if>
+            <if test='isabled != null'>#{isabled},</if>
+            <if test='createTime != null'>#{createTime},</if>
+            <if test='payName != null and payName != ""'>#{payName},</if>
+            <if test='merchantName != null and merchantName !=""'>#{merchantName},</if>
+            <if test='payAccount != null and payAccount !=""'>#{payAccount},</if>
+            <if test='payPid != null and payPid != ""'>#{payPid},</if>
+            <if test='payKey != null and payKey != ""'>#{payKey},</if>
+            <if test='payText != null and payText != ""'>#{payText},</if>
+            <if test='userId != null'>#{userId},</if>
+            <if test='payType != null'>#{payType},</if>
+        </trim>
+    </insert>
+
+    <update id="updateSysPay" parameterType="com.xunyu.system.pojo.syspay.SysPay">
+        update tbl_pay_config
+        <set>
+            <if test='isabled != null'>
+                <![CDATA[ isabled = #{isabled},  ]]>
+            </if>
+            <if test='createTime != null'>
+                <![CDATA[ create_time = #{createTime}, ]]>
+            </if>
+            <if test='payName != null and payName != ""'>
+                <![CDATA[ pay_name = #{payName}, ]]>
+            </if>
+            <if test='merchantName != null and merchantName !=""'>
+                <![CDATA[ merchant_name = #{merchantName}, ]]>
+            </if>
+            <if test='payAccount != null and payAccount !=""'>
+                <![CDATA[ pay_account = #{payAccount}, ]]>
+            </if>
+            <if test='payPid != null and payPid != ""'>
+                <![CDATA[ pay_pid = #{payPid}, ]]>
+            </if>
+            <if test='payKey != null and payKey != ""'>
+                <![CDATA[ pay_key = #{payKey}, ]]>
+            </if>
+            <if test='payText != null and payText != ""'>
+                <![CDATA[ pay_text = #{payText}, ]]>
+            </if>
+            <if test='userId != null'>
+                <![CDATA[ userid = #{userId}, ]]>
+            </if>
+            <if test='payType != null'>
+                <![CDATA[ pay_type = #{payType}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="payId != null">
+                <![CDATA[ pay_id = #{payId} ]]>
+            </if>
+        </where>
+    </update>
+
+
+</mapper>

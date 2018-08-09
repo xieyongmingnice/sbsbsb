@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xunyu.crm.pojo.department.Users">
+  <resultMap id="BaseResultMap" type="com.xunyu.crm.pojo.department.Users">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <resultMap id="ResultVOMap" type="com.xunyu.crm.vo.UsersVO">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="isabled" jdbcType="INTEGER" property="isabled" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="user_type_str" jdbcType="VARCHAR" property="userTypeStr" />
+  </resultMap>
+
+  <sql id="Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    user_id, account, password, user_type, isabled, create_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="com.xunyu.model.department.UsersModel" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    select
+    <include refid="Base_Column_List" />
+    from tbl_users
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    delete from tbl_users
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xunyu.crm.pojo.department.Users">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    insert into tbl_users (user_id, account, password,
+    user_type, isabled, create_time
+    )
+    values (#{user_id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{user_type,jdbcType=INTEGER}, #{isabled,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xunyu.crm.pojo.department.Users">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    insert into tbl_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="user_type != null">
+        user_type,
+      </if>
+      <if test="isabled != null">
+        isabled,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="user_type != null">
+        #{user_type,jdbcType=INTEGER},
+      </if>
+      <if test="isabled != null">
+        #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update tbl_users
+    <set>
+      <if test="record.user_id != null">
+        user_id = #{record.user_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.account != null">
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.user_type != null">
+        user_type = #{record.user_type,jdbcType=INTEGER},
+      </if>
+      <if test="record.isabled != null">
+        isabled = #{record.isabled,jdbcType=INTEGER},
+      </if>
+      <if test="record.create_time != null">
+        create_time = #{record.create_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update tbl_users
+    set user_id = #{record.user_id,jdbcType=INTEGER},
+    account = #{record.account,jdbcType=VARCHAR},
+    password = #{record.password,jdbcType=VARCHAR},
+    user_type = #{record.user_type,jdbcType=INTEGER},
+    isabled = #{record.isabled,jdbcType=INTEGER},
+    create_time = #{record.create_time,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xunyu.crm.pojo.department.Users">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update tbl_users
+    <set>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="user_type != null">
+        user_type = #{user_type,jdbcType=INTEGER},
+      </if>
+      <if test="isabled != null">
+        isabled = #{isabled,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xunyu.crm.pojo.department.Users">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update tbl_users
+    set account = #{account,jdbcType=VARCHAR},
+    password = #{password,jdbcType=VARCHAR},
+    user_type = #{user_type,jdbcType=INTEGER},
+    isabled = #{isabled,jdbcType=INTEGER},
+    create_time = #{create_time,jdbcType=TIMESTAMP}
+    where user_id = #{user_id,jdbcType=INTEGER}
+  </update>
+  <!-- 以下为自定义方法 -->
+
+  <!-- 通过部门查询员工 -->
+  <select id="selectUserListByDepartmentId" parameterType="com.xunyu.model.department.DepartmentModel" resultMap="ResultVOMap">
+    select u.user_id,u.account,u.user_type,u.create_time,u.isabled,
+    case when u.user_type = 1 then '员工'
+    when u.user_type = 2 then '用户'
+    end as user_type_str
+    from tbl_department_user_r r
+    left join tbl_users u
+    on r.user_id = u.user_id
+    left join tbl_department d
+    on r.department_id = d.department_id
+    where u.isabled = 1 and u.user_type = 1
+    and d.isabled = 1
+    <if test="departmentId != null">
+      and r.department_id = #{departmentId,jdbcType=VARCHAR}
+    </if>
+    order by u.create_time desc
+    limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+  </select>
+
+  <!--增加员工-->
+  <insert id="addUser" parameterType="com.xunyu.model.department.UsersModel">
+    insert into tbl_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      isabled,
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      1,
+      1,
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <!--修改员工信息-->
+  <update id="updateUserInfo" parameterType="com.xunyu.model.department.UsersModel">
+    <!--
+      WARNING - @mbg.generated  This element was generated on Wed Apr 25 10:23:06 CST 2018. by MyBatis Generator, do not modify.
+    -->
+    update tbl_users
+    <set>
+        account = #{account,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        isabled = 1,
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+    and user_type = 1
+    and isabled = 1
+  </update>
+
+  <!--删除员工-->
+  <update id="deleteUser" parameterType="com.xunyu.model.department.UsersModel">
+    update tbl_users
+    set isabled = 0
+    where isabled = 1 and
+    <if test="userId != null">
+      user_type = 1 and user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="userId == null">
+      1 = 0
+    </if>
+    limit 1
+  </update>
+
+  <!-- 查询员工信息列表 -->
+  <select id="selectUserList" parameterType="com.xunyu.model.department.UsersModel" resultMap="ResultVOMap">
+    select
+    user_id,account,create_time,user_type,isabled,
+    case when user_type = 1 then '员工'
+    when user_type = 2 then '用户'
+    end as user_type_str
+    from tbl_users
+    where isabled = 1 and user_type = 1
+    <if test="userId != null and userId != 0">
+      and user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="account != null and account != '' ">
+      and account like concat('%',#{account,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="password != null and password != '' ">
+      and password = #{password,jdbcType=VARCHAR}
+    </if>
+    order by create_time desc
+    limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+  </select>
+
+  <!-- 批量删除员工 -->
+  <update id="batchDeleteUser" parameterType="java.util.List">
+    update tbl_users
+    set  isabled = 0
+    where user_type = 1
+    and isabled = 1
+    and user_id in
+    <foreach collection="list" index="index" item="item"
+             separator="," open="(" close=")">
+      #{item,jdbcType=INTEGER}
+    </foreach>
+  </update>
+
+  <!-- 通过account来查询员工列表 -->
+  <select id="selectUserByAccount" resultMap="BaseResultMap" parameterType="com.xunyu.model.department.UsersModel">
+    select *
+    from tbl_users
+    where isabled = 1
+    <if test="account != null and account != '' ">
+      and account = #{account,jdbcType=VARCHAR}
+    </if>
+    order by create_time desc
+  </select>
+
+  <!-- 通过员工分组查询员工列表 -->
+  <select id="selectUserListByUserGroupId" parameterType="com.xunyu.model.department.UserGroupModel" resultMap="ResultVOMap">
+    select u.user_id,u.account,u.create_time,
+    case when u.user_type = 1 then '员工'
+    when u.user_type = 2 then '用户'
+    end as user_type_str
+    from tbl_group_user_r r
+    left join tbl_users u
+    on u.user_id = r.user_id
+    left join tbl_user_group g
+    on g.user_group_id = r.user_group_id
+    where u.isabled = 1 and u.user_type = 1
+    and g.isabled = 1
+    <if test="userGroupId != null">
+      and r.user_group_id = #{userGroupId,jdbcType=INTEGER}
+    </if>
+    order by u.create_time desc
+    limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectTotalRows" resultType="java.lang.Integer" parameterType="com.xunyu.model.user.UserModel">
+    select count(1)
+    from tbl_users
+    where isabled = 1 and user_type = 1
+    <if test="userId != null and userId != 0">
+      and user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="account != null and account != '' ">
+      and account like concat('%',#{account,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+
+
+  <!-- 查询总条数 分组-->
+  <select id="selectTotalRowsByGroupId" resultType="java.lang.Integer" parameterType="com.xunyu.model.user.UserModel">
+    select count(u.user_id)
+    from tbl_group_user_r r
+    left join tbl_users u
+    on u.user_id = r.user_id
+    left join tbl_user_group g
+    on g.user_group_id = r.user_group_id
+    where u.isabled = 1 and u.user_type = 1
+    and g.isabled = 1
+    <if test="userGroupId != null">
+      and r.user_group_id = #{userGroupId,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <!-- 查询总条数 部门-->
+  <select id="selectTotalRowsByDepartmentId" resultType="java.lang.Integer" parameterType="com.xunyu.model.user.UserModel">
+    select count(u.user_id)
+    from tbl_department_user_r r
+    left join tbl_users u
+    on r.user_id = u.user_id
+    left join tbl_department d
+    on r.department_id = d.department_id
+    where u.isabled = 1 and u.user_type = 1
+    and d.isabled = 1
+    <if test="departmentId != null">
+      and r.department_id = #{departmentId,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+</mapper>

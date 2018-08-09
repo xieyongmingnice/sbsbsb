@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: xunyu-system
+  profiles:
+    #active: pro #加载xunyu_profiles项目中 的application-core.yml文件  #生产
+    #active: test #加载xunyu_profiles项目中 的application-test.yml文件  #测试
+    active: dev #加载xunyu_profiles项目中 的application-dev.yml文件    #本地开发
+
+server:
+  port: 8005
+  tomcat:
+    accept-count: 1000  #承受并发量
+    max-threads: 1000
+    max-connections: 2000
+
+logging:
+  config: classpath:logback-medicare.xml
+  #file: D:/Test/crm/crm.txt  #本地输出日志文件地址
+  file: /opt/upload/msg-xunyu-all/catalina.base_IS_UNDEFINED/system.txt #计时、服务重启会被覆盖

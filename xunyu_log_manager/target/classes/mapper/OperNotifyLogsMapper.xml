@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.model.log.operation.OperNotifyLogs">
+
+    <resultMap id="oper_ResultMap" type="com.xunyu.model.log.operation.OperNotifyLogs">
+        <id column="notify_id" property="notifyId"></id>
+        <result column="oper_time" property="operTime"></result>
+        <result column="node_type" property="nodeType"></result>
+        <result column="notify_code" property="notifyCode"></result>
+        <result column="notify_status" property="notifyStatus"></result>
+        <result column="handle_status" property="handleStatus"></result>
+        <result column="oper_user" property="operUser"></result>
+    </resultMap>
+
+    <sql id = "oper_column">
+        notify_id,oper_time,node_type,notify_code,notify_status,handle_status,oper_user
+    </sql>
+
+    <select id = "countOperNotifyLogs" parameterType="map" resultType="int">
+        select count(1) from tbl_oper_notify_logs where 1=1 <include refid = "oper_where" />
+    </select>
+
+    <select id = "listOperNotifyLogs" resultMap="oper_ResultMap" parameterType="map">
+        select <include refid = "oper_column" /> from tbl_oper_notify_logs
+        where 1=1
+        <include refid = "oper_where" />
+        order by notify_id desc
+        limit #{startRow},#{endRow}
+    </select>
+
+    <sql id = "oper_where">
+        <if test = 'beginTime != null and endTime != null'>
+            and oper_time between #{beginTime} and #{endTime}
+        </if>
+        <if test = 'nodeType != null and nodeType !=""'>
+            and node_type = #{nodeType}
+        </if>
+        <if test = 'notifyCode != null and notifyCode !=""'>
+            and notify_code = #{notifyCode}
+        </if>
+        <if test = 'notifyStatus != null and notifyStatus!= ""'>
+            and notify_status = #{notifyStatus}
+        </if>
+        <if test = 'operUser != null and operUser !=""'>
+            and oper_user = #{operUser}
+        </if>
+        <if test = 'handleStatus != null and handleStatus !=""'>
+            and handle_status = #{handleStatus}
+        </if>
+    </sql>
+
+    <delete id = "delOperNotifyLogs" parameterType="list">
+        delete from tbl_oper_notify_logs where notify_id in
+        <foreach collection="list" item="items" separator="," open="(" close=")">
+            #{items}
+        </foreach>
+    </delete>
+</mapper>

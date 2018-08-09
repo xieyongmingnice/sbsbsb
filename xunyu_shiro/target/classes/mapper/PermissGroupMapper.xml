@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xunyu.shiro.pojo.permission.PermissionGroup">
+
+    <resultMap id="per_ResultMap" type="com.xunyu.shiro.pojo.permission.PermissionGroup">
+        <id column="permission_group_id" property="permissionGroupId"></id>
+        <result column="permission_group_name" property="permissionGroupName"></result>
+        <result column="remark" property="remark"></result>
+        <result column="isabled" property="isabled"></result>
+        <result column="create_time" property="permisGroupCreateTime"></result>
+    </resultMap>
+
+    <sql id="per_column">
+      permission_group_id,permission_group_name,remark,isabled,create_time
+    </sql>
+
+    <select id="permissGroupList" parameterType="map" resultMap="per_ResultMap">
+
+        select <include refid = "per_column" />
+        from tbl_permission_group where isabled = 1
+        <include refid = "per_where" />
+    </select>
+
+    <select id = "getPermissGroup" parameterType="map" resultMap="per_ResultMap">
+        select <include refid = "per_column" />
+        from tbl_permission_group where isabled = 1
+        <include refid = "per_where" />
+    </select>
+
+    <sql id = "per_where">
+        <if test = "permissionGroupId != null">
+           and permission_group_id = #{permissionGroupId}
+        </if>
+    </sql>
+
+    <insert id = "addPermissGroup" parameterType="com.xunyu.shiro.pojo.permission.PermissionGroup"
+            useGeneratedKeys="true" keyColumn="permission_group_id" keyProperty="permissionGroupId">
+        insert into tbl_permission_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="permissionGroupId != null">permission_group_id,</if>
+            <if test='permissionGroupName != null and permissionGroupName != ""'>permission_group_name,</if>
+            <if test='isabled != null'>isabled,</if>
+            <if test='remark != null and remark != ""'>remark,</if>
+            <if test='permisGroupCreateTime != null'>create_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="permissionGroupId != null">#{permissionGroupId},</if>
+            <if test='permissionGroupName != null and permissionGroupName != ""'>#{permissionGroupName},</if>
+            <if test='isabled != null'>#{isabled},</if>
+            <if test='remark != null and remark != ""'>#{remark},</if>
+            <if test='permisGroupCreateTime != null'>#{permisGroupCreateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePermissionGroup" parameterType="com.xunyu.shiro.pojo.permission.PermissionGroup">
+        update tbl_permission_group
+        <set>
+            <if test='permissionGroupName != null and permissionGroupName != ""'>
+                <![CDATA[	permission_group_name = #{permissionGroupName}, ]]>
+            </if>
+            <if test='isabled != null'>
+                <![CDATA[	isabled = #{isabled}, ]]>
+            </if>
+            <if test='remark != null and remark != ""'>
+                <![CDATA[	remark = #{remark}, ]]>
+            </if>
+            <if test='permisGroupCreateTime != null'>
+                <![CDATA[	create_time = #{permisGroupCreateTime}, ]]>
+            </if>
+        </set>
+        <where>
+            <if test="permissionGroupId != null">
+                permission_group_id = #{permissionGroupId}
+            </if>
+        </where>
+    </update>
+
+</mapper>
